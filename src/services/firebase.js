@@ -19,7 +19,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getDatabase } from 'firebase/database';
-import { getAnalytics } from 'firebase/analytics';
 
 /**
  * CONFIGURAȚIA FIREBASE
@@ -121,27 +120,27 @@ export const db = getFirestore(app);
 export const realtimeDB = getDatabase(app);
 
 /**
- * Analytics Service (OPTIONAL)
- * 
- * Ce e: Tracking tool pentru user behavior
- * Responsabil pentru: Track events (quiz completed, user signed up, etc)
- * 
- * Utilitate: Analytics dashboard în Firebase Console
- * - Vedem metrics cum ar fi: "cati useri au terminat quiz azi?"
- * - "care e tema cea mai populara?"
- * 
- * NOTA: Analytics e optional - nu blochează app dacă nu e activ
- * Și nu afectează performance semnificativ
- */
-export const analytics = getAnalytics(app);
-
-/**
  * DEFAULT EXPORT
  * 
  * Exportăm app object ca default, în caz că o altă parte a codului
  * are nevoie de referința directă la app (rare, dar bun să avem)
  */
 export default app;
+
+/**
+ * NOTA DESPRE ANALYTICS (DISABLED):
+ * 
+ * Analytics a fost dezactivat deoarece:
+ * 1. Necesită configurație suplimentară în Firebase Console
+ * 2. Nu e esențial pentru MVP
+ * 3. Cauza erori "404 App not found"
+ * 
+ * Later (Faza 3+), putem re-activa Analytics cu:
+ * import { getAnalytics } from 'firebase/analytics';
+ * export const analytics = getAnalytics(app);
+ * 
+ * Pentru acum, focusul e pe core features: Auth, Firestore, Realtime DB
+ */
 
 /**
  * EXEMPLU DE FLUX COMPLET - Cum se conectează totul:

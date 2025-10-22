@@ -1,0 +1,872 @@
+[
+  {
+    "id": "q001",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "În ce an a început Primul Război Mondial?",
+    "answers": [
+      { "text": "1914", "correct": true },
+      { "text": "1912", "correct": false },
+      { "text": "1916", "correct": false },
+      { "text": "1918", "correct": false }
+    ],
+    "explanation": "Primul Război Mondial a început pe 28 iulie 1914, când Austro-Ungaria a declarat război Serbiei, după asasinarea Arhiducelui Franz Ferdinand pe 28 iunie 1914.",
+    "category": "Cauze și început",
+    "order": 1
+  },
+  {
+    "id": "q002",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Cine a fost asasinat la Sarajevo, declanșând Primul Război Mondial?",
+    "answers": [
+      { "text": "Arhiducele Franz Ferdinand", "correct": true },
+      { "text": "Împăratul Wilhelm al II-lea", "correct": false },
+      { "text": "Țarul Nicolae al II-lea", "correct": false },
+      { "text": "Regele George al V-lea", "correct": false }
+    ],
+    "explanation": "Arhiducele Franz Ferdinand, moștenitorul tronului Austro-Ungariei, a fost asasinat de Gavrilo Princip, un naționalist sârb, la Sarajevo pe 28 iunie 1914.",
+    "category": "Evenimente majore",
+    "order": 2
+  },
+  {
+    "id": "q003",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Care a fost principalul motiv structural al izbucnirii Primului Război Mondial?",
+    "answers": [
+      { "text": "Sistemul de alianțe militare și rivalitățile imperialiste", "correct": true },
+      { "text": "Invazia Germaniei în Belgia", "correct": false },
+      { "text": "Rivalitatea religioasă dintre catolici și ortodocși", "correct": false },
+      { "text": "Criza economică din 1907", "correct": false }
+    ],
+    "explanation": "Sistemul de alianțe (Triple Alianță vs. Triple Înțelegere) și competiția pentru colonii și influență au creat tensiuni insustenabile. Asasinatul de la Sarajevo a fost doar scânteia care a aprins praful de pușcă.",
+    "category": "Cauze și început",
+    "order": 3
+  },
+  {
+    "id": "q004",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce tratat a încheiat oficial Primul Război Mondial și a impus reparații severe Germaniei?",
+    "answers": [
+      { "text": "Tratatul de la Versailles", "correct": true },
+      { "text": "Tratatul de la Brest-Litovsk", "correct": false },
+      { "text": "Tratatul de la Trianon", "correct": false },
+      { "text": "Tratatul de la Saint-Germain", "correct": false }
+    ],
+    "explanation": "Tratatul de la Versailles (1919) a pus capăt războiului cu Germania. A impus reparații de 132 miliarde de mărci de aur, pierderea teritoriilor și clauza 'vinovăției de război'. Aceste condiții au alimentat resentimentul care a dus la al Doilea Război Mondial.",
+    "category": "Încheiere și consecințe",
+    "order": 4
+  },
+  {
+    "id": "q005",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a părăsit Primul Război Mondial în 1917 din cauza Revoluției Ruse?",
+    "answers": [
+      { "text": "Rusia", "correct": true },
+      { "text": "Germania", "correct": false },
+      { "text": "Italia", "correct": false },
+      { "text": "Austro-Ungaria", "correct": false }
+    ],
+    "explanation": "După Revoluția din Octombrie 1917, bolșevicii conduși de Lenin au semnat Tratatul de la Brest-Litovsk cu Germania, retrăgând Rusia din război pentru a se concentra pe războiul civil intern.",
+    "category": "Evenimente majore",
+    "order": 5
+  },
+  {
+    "id": "q006",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce tactică militară a fost dominantă pe Frontul de Vest în Primul Război Mondial?",
+    "answers": [
+      { "text": "Războiul de tranșee", "correct": true },
+      { "text": "Blitzkrieg", "correct": false },
+      { "text": "Războiul de gherilă", "correct": false },
+      { "text": "Războiul naval clasic", "correct": false }
+    ],
+    "explanation": "Pe Frontul de Vest, armatele au fost blocate în tranșee paralele pe sute de kilometri, ducând la lupte de uzură cu pierderi uriașe și progrese minime. Blitzkrieg va apărea abia în al Doilea Război Mondial.",
+    "category": "Tactici și tehnologie",
+    "order": 6
+  },
+  {
+    "id": "q007",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a intrat în război în 1917 după afacerea cu telegrama Zimmermann?",
+    "answers": [
+      { "text": "Statele Unite ale Americii", "correct": true },
+      { "text": "Japonia", "correct": false },
+      { "text": "Italia", "correct": false },
+      { "text": "România", "correct": false }
+    ],
+    "explanation": "Germania a propus Mexicului, prin telegrama Zimmermann, o alianță împotriva SUA. Când SUA a interceptat mesajul, a declarat război Germaniei în aprilie 1917, schimbând echilibrul puterii.",
+    "category": "Evenimente majore",
+    "order": 7
+  },
+  {
+    "id": "q008",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce armă a fost folosită pentru prima dată la scară largă în Primul Război Mondial?",
+    "answers": [
+      { "text": "Gazul otrăvitor", "correct": true },
+      { "text": "Avionul de luptă", "correct": false },
+      { "text": "Tancul", "correct": false },
+      { "text": "Submarinul", "correct": false }
+    ],
+    "explanation": "Deși toate aceste arme au fost introduse în WWI, gazul clor a fost folosit masiv prima dată de germani la Ypres în 1915. Tancurile și avioanele au apărut mai târziu și în număr limitat.",
+    "category": "Tactici și tehnologie",
+    "order": 8
+  },
+  {
+    "id": "q009",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce țară a fost cunoscută ca 'cel de-al Treilea Imperiu' în timpul Primului Război Mondial?",
+    "answers": [
+      { "text": "Germania", "correct": true },
+      { "text": "Austro-Ungaria", "correct": false },
+      { "text": "Imperiul Otoman", "correct": false },
+      { "text": "Rusia", "correct": false }
+    ],
+    "explanation": "Germania era adesea numită 'al Treilea Reich' (Deutsches Reich), după Sfântul Imperiu Roman și Imperiul German fondat în 1871. Termenul a fost popularizat mai târziu de naziști, dar era în uz și în WWI.",
+    "category": "Puteri și alianțe",
+    "order": 9
+  },
+  {
+    "id": "q010",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce alianță a inclus Marea Britanie, Franța și Rusia în Primul Război Mondial?",
+    "answers": [
+      { "text": "Antanta (Triple Înțelegere)", "correct": true },
+      { "text": "Puterile Centrale", "correct": false },
+      { "text": "Liga Națiunilor", "correct": false },
+      { "text": "Uniunea Europeană", "correct": false }
+    ],
+    "explanation": "Antanta, sau Triple Înțelegere, a fost alianța dintre Marea Britanie, Franța și Rusia. A fost opusă Puterilor Centrale: Germania, Austro-Ungaria și Imperiul Otoman.",
+    "category": "Puteri și alianțe",
+    "order": 10
+  },
+    {
+    "id": "q011",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost cunoscută ca 'Puterea Centrală' alături de Germania și Austro-Ungaria?",
+    "answers": [
+      { "text": "Imperiul Otoman", "correct": true },
+      { "text": "Italia", "correct": false },
+      { "text": "Japonia", "correct": false },
+      { "text": "Bulgaria", "correct": false }
+    ],
+    "explanation": "Imperiul Otoman s-a alăturat Puterilor Centrale în 1914. Deși Bulgaria a intrat și ea în război de partea acestora în 1915, întrebarea se referă la cea mai cunoscută putere centrală alături de Germania și Austro-Ungaria.",
+    "category": "Puteri și alianțe",
+    "order": 11
+  },
+  {
+    "id": "q012",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce bătălie din 1916 este considerată cea mai sângeroasă din Primul Război Mondial?",
+    "answers": [
+      { "text": "Bătălia de la Verdun", "correct": true },
+      { "text": "Bătălia de la Somme", "correct": false },
+      { "text": "Bătălia de la Marne", "correct": false },
+      { "text": "Bătălia de la Tannenberg", "correct": false }
+    ],
+    "explanation": "Bătălia de la Verdun (februarie–decembrie 1916) a fost un simbol al războiului de uzură, cu peste 700.000 de morți și răniți. Deși Bătălia de la Somme a avut și ea pierderi uriașe, Verdun este adesea considerată cea mai sângeroasă din perspectiva intensității și simbolismului.",
+    "category": "Evenimente majore",
+    "order": 12
+  },
+  {
+    "id": "q013",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a intrat în război de partea Antantei în 1916?",
+    "answers": [
+      { "text": "România", "correct": true },
+      { "text": "Bulgaria", "correct": false },
+      { "text": "Olanda", "correct": false },
+      { "text": "Spania", "correct": false }
+    ],
+    "explanation": "România a intrat în război în august 1916, sperând să obțină Transilvania de la Austro-Ungaria. Campania s-a încheiat cu ocupația temporară a țării de către Puterile Centrale.",
+    "category": "Evenimente majore",
+    "order": 13
+  },
+  {
+    "id": "q014",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce a fost 'Planul Schlieffen'?",
+    "answers": [
+      { "text": "Strategia Germaniei de a învinge Franța rapid înainte de a se întoarce împotriva Rusiei", "correct": true },
+      { "text": "Un plan al Franței pentru invazia Germaniei", "correct": false },
+      { "text": "O alianță secretă între Marea Britanie și Rusia", "correct": false },
+      { "text": "Un tratat de neutralitate cu Belgia", "correct": false }
+    ],
+    "explanation": "Planul Schlieffen prevedea o invazie rapidă a Franței prin Belgia pentru a o învinge în 6 săptămâni, apoi a muta trupele împotriva Rusiei, care mobiliza lent. Planul a eșuat la Prima Bătălie de la Marne (1914), ducând la războiul de tranșee.",
+    "category": "Tactici și tehnologie",
+    "order": 14
+  },
+  {
+    "id": "q015",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce rol a avut Marea Britanie în blocada navală a Germaniei?",
+    "answers": [
+      { "text": "A izolat Germania economic, provocând foamete în 1918", "correct": true },
+      { "text": "A permis Germaniei să importe alimente din America", "correct": false },
+      { "text": "A fost respinsă de SUA ca act de război neuman", "correct": false },
+      { "text": "A fost întreruptă de submarinele americane", "correct": false }
+    ],
+    "explanation": "Marea Britanie a impus o blocadă navală strictă asupra Germaniei încă din 1914. Aceasta a redus drastic importurile de alimente și materii prime, contribuind la foametea din 1917–1918 și la nemulțumirea civilă care a slăbit spatele intern al Germaniei.",
+    "category": "Tactici și tehnologie",
+    "order": 15
+  },
+  {
+    "id": "q016",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce armă a fost folosită pentru prima dată de britanici la Bătălia de la Somme?",
+    "answers": [
+      { "text": "Tancul", "correct": true },
+      { "text": "Avionul de recunoaștere", "correct": false },
+      { "text": "Gazul lăcrămogen", "correct": false },
+      { "text": "Pușca mitralieră", "correct": false }
+    ],
+    "explanation": "Tancul Mark I a fost folosit pentru prima dată de britanici la Somme în septembrie 1916. Deși multe s-au defectat, a marcat începutul unei noi ere în războiul mecanizat.",
+    "category": "Tactici și tehnologie",
+    "order": 16
+  },
+  {
+    "id": "q017",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Ziua Focului' (1 iulie 1916)?",
+    "answers": [
+      { "text": "Prima zi a Bătăliei de la Somme, cu cele mai mari pierderi într-o singură zi pentru armata britanică", "correct": true },
+      { "text": "Declanșarea ofensivei germane la Verdun", "correct": false },
+      { "text": "Data intrării SUA în război", "correct": false },
+      { "text": "Semnarea armistițiului cu Bulgaria", "correct": false }
+    ],
+    "explanation": "Pe 1 iulie 1916, armata britanică a suferit peste 57.000 de pierderi (20.000 morți) în prima zi a Bătăliei de la Somme — cea mai sângeroasă zi din istoria sa militară.",
+    "category": "Evenimente majore",
+    "order": 17
+  },
+  {
+    "id": "q018",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce prevedea Tratatul de la Brest-Litovsk?",
+    "answers": [
+      { "text": "Retragerea Rusiei din război și cedarea unor teritorii Germaniei", "correct": true },
+      { "text": "Formarea Uniunii Sovietice", "correct": false },
+      { "text": "Încheierea războiului cu Austro-Ungaria", "correct": false },
+      { "text": "Neutralitatea Poloniei", "correct": false }
+    ],
+    "explanation": "Semnat în martie 1918 între Germania și noul guvern bolșevic, tratatul a forțat Rusia să cedeze Ucraina, Finlanda, statele baltice și alte teritorii. A fost anulat după înfrângerea Germaniei în noiembrie 1918.",
+    "category": "Încheiere și consecințe",
+    "order": 18
+  },
+  {
+    "id": "q019",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Cine a fost liderul Germaniei în timpul Primului Război Mondial?",
+    "answers": [
+      { "text": "Împăratul Wilhelm al II-lea", "correct": true },
+      { "text": "Adolf Hitler", "correct": false },
+      { "text": "Otto von Bismarck", "correct": false },
+      { "text": "Paul von Hindenburg", "correct": false }
+    ],
+    "explanation": "Wilhelm al II-lea a fost împăratul Germaniei (Kaiser) până în noiembrie 1918, când a abdicat în urma Revoluției Germane. Hindenburg a fost un general influent, dar nu șef de stat.",
+    "category": "Personalități",
+    "order": 19
+  },
+  {
+    "id": "q020",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Pacea cu pâine și lapte'?",
+    "answers": [
+      { "text": "Un termen informal pentru armistițiul local de Crăciun 1914", "correct": true },
+      { "text": "Un tratat secret între Franța și Germania", "correct": false },
+      { "text": "O campanie de ajutor umanitar pentru copii", "correct": false },
+      { "text": "Un acord pentru schimbul de prizonieri", "correct": false }
+    ],
+    "explanation": "Deși nu este un termen oficial istoric, 'Pacea cu pâine și lapte' este uneori folosit poetic pentru a descrie fraternizarea spontană de Crăciun 1914, când soldați germani și aliați au ieșit din tranșee, au cântat împreună și au schimbat cadouri. Evenimentul a fost interzis ulterior de comandanți.",
+    "category": "Evenimente majore",
+    "order": 20
+  },
+  {
+    "id": "q021",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a rămas neutră în Primul Război Mondial, deși era aliată cu Germania?",
+    "answers": [
+      { "text": "Italia", "correct": true },
+      { "text": "Spania", "correct": false },
+      { "text": "Olanda", "correct": false },
+      { "text": "Norvegia", "correct": false }
+    ],
+    "explanation": "Italia făcea parte din Triple Alianță cu Germania și Austro-Ungaria, dar a rămas neutră în 1914, invocând că alianța era defensivă. În 1915, s-a alăturat Antantei prin Pactul de la Londra.",
+    "category": "Puteri și alianțe",
+    "order": 21
+  },
+  {
+    "id": "q022",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Ofensiva de primăvară' din 1918?",
+    "answers": [
+      { "text": "Ultima ofensivă majoră a Germaniei pentru a câștiga războiul înainte de sosirea trupelor americane", "correct": true },
+      { "text": "Invazia Franței de către SUA", "correct": false },
+      { "text": "Retragerea Rusiei din război", "correct": false },
+      { "text": "Atacul britanic la Somme", "correct": false }
+    ],
+    "explanation": "Lansată în martie 1918 după ieșirea Rusiei din război, Ofensiva de primăvară a fost un efort disperat al Germaniei de a învinge pe Frontul de Vest înainte ca armata americană să devină decisivă. Inițial a avut succes, dar a eșuat din cauza epuizării și contraofensivelor aliate.",
+    "category": "Evenimente majore",
+    "order": 22
+  },
+  {
+    "id": "q023",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce președinte american a propus 'Cele paisprezece puncte' ca bază pentru pace?",
+    "answers": [
+      { "text": "Woodrow Wilson", "correct": true },
+      { "text": "Theodore Roosevelt", "correct": false },
+      { "text": "Franklin D. Roosevelt", "correct": false },
+      { "text": "Warren G. Harding", "correct": false }
+    ],
+    "explanation": "Woodrow Wilson, președintele SUA, a prezentat 'Cele paisprezece puncte' în ianuarie 1918 ca principii pentru o pace durabilă, inclusiv autodeterminarea popoarelor și crearea Ligii Națiunilor.",
+    "category": "Personalități",
+    "order": 23
+  },
+  {
+    "id": "q024",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce rol a avut 'Conferința de la Zimmerwald' în contextul Primului Război Mondial?",
+    "answers": [
+      { "text": "A fost o întâlnire a socialiștilor internaționali care s-au opus războiului", "correct": true },
+      { "text": "A decis intrarea SUA în război", "correct": false },
+      { "text": "A organizat blocada navală a Germaniei", "correct": false },
+      { "text": "A semnat armistițiul final", "correct": false }
+    ],
+    "explanation": "Conferința de la Zimmerwald (1915) a adunat socialiști din țări beligerante care condamnau războiul ca imperialist. Printre participanți s-au numărat Lenin și alte figuri revoluționare. A marcat sciziunea dintre social-democrați și comuniști.",
+    "category": "Încheiere și consecințe",
+    "order": 24
+  },
+  {
+    "id": "q025",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "De ce a eșuat Planul Schlieffen?",
+    "answers": [
+      { "text": "Franța și Marea Britanie au oprit avansul german la Prima Bătălie de la Marne", "correct": true },
+      { "text": "Germania a fost atacată de Rusia prea devreme", "correct": false },
+      { "text": "Belgia a acceptat trecerea trupelor germane", "correct": false },
+      { "text": "SUA a intervenit imediat", "correct": false }
+    ],
+    "explanation": "Planul Schlieffen presupunea o victorie rapidă asupra Franței în 6 săptămâni. Dar armata franceză, sprijinită de Corpul Expediționar Britanic, a oprit ofensiva germană la Marne (septembrie 1914), forțând războiul de tranșee.",
+    "category": "Tactici și tehnologie",
+    "order": 25
+  },
+  {
+    "id": "q026",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a suferit revoluția care a dus la căderea monarhiei în 1917?",
+    "answers": [
+      { "text": "Rusia", "correct": true },
+      { "text": "Germania", "correct": false },
+      { "text": "Austro-Ungaria", "correct": false },
+      { "text": "Franța", "correct": false }
+    ],
+    "explanation": "Revoluția din Februarie 1917 a pus capăt dinastiei Romanov și monarhiei ruse. Revoluția din Octombrie a adus la putere bolșevicii conduși de Lenin.",
+    "category": "Evenimente majore",
+    "order": 26
+  },
+  {
+    "id": "q027",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Ziua Armistițiului'?",
+    "answers": [
+      { "text": "11 noiembrie 1918, când a intrat în vigoare încetarea focului", "correct": true },
+      { "text": "Data semnării Tratatului de la Versailles", "correct": false },
+      { "text": "Crăciunul de la tranșee din 1914", "correct": false },
+      { "text": "Intrarea SUA în război", "correct": false }
+    ],
+    "explanation": "Armistițiul a fost semnat la 11 noiembrie 1918 la ora 11:00 (a 11-a oră a celei de-a 11-a zile din a 11-a lună). Deși nu era un tratat de pace, a marcat sfârșitul efectiv al luptelor.",
+    "category": "Încheiere și consecințe",
+    "order": 27
+  },
+  {
+    "id": "q028",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce prevedea 'Clauza 231' din Tratatul de la Versailles?",
+    "answers": [
+      { "text": "Germania accepta responsabilitatea exclusivă pentru declanșarea războiului", "correct": true },
+      { "text": "Austria trebuia să plătească reparații", "correct": false },
+      { "text": "Se interzicea folosirea submarinelor", "correct": false },
+      { "text": "Se crea Liga Națiunilor", "correct": false }
+    ],
+    "explanation": "Clauza 231, cunoscută ca 'Clauza vinovăției de război', a fost baza legală pentru impunerea reparațiilor masive asupra Germaniei. A fost profund resimțită de populația germană ca o umilință națională.",
+    "category": "Încheiere și consecințe",
+    "order": 28
+  },
+  {
+    "id": "q029",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost cunoscută pentru utilizarea intensivă a submarinelor U-boat?",
+    "answers": [
+      { "text": "Germania", "correct": true },
+      { "text": "Marea Britanie", "correct": false },
+      { "text": "SUA", "correct": false },
+      { "text": "Franța", "correct": false }
+    ],
+    "explanation": "Germania a folosit submarinele U-boat pentru a distruge nave comerciale și militare aliate, inclusiv americane. Torpedarea vasului Lusitania în 1915 a contribuit la intrarea SUA în război.",
+    "category": "Tactici și tehnologie",
+    "order": 29
+  },
+  {
+    "id": "q030",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Frontul de Est' în Primul Război Mondial?",
+    "answers": [
+      { "text": "Linia de luptă între Germania/Austro-Ungaria și Rusia", "correct": true },
+      { "text": "Conflictul naval în Marea Baltică", "correct": false },
+      { "text": "Luptele din Balcani împotriva Serbiei", "correct": false },
+      { "text": "Campania din Africa de Nord", "correct": false }
+    ],
+    "explanation": "Frontul de Est s-a întins de la Marea Baltică până la Marea Neagră. A fost mai mobil decât Frontul de Vest, cu ofensive mari și retrageri. S-a încheiat cu Tratatul de la Brest-Litovsk în 1918.",
+    "category": "Evenimente majore",
+    "order": 30
+  },
+  {
+    "id": "q031",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost cunoscută pentru campania de la Gallipoli în 1915?",
+    "answers": [
+      { "text": "Imperiul Otoman", "correct": true },
+      { "text": "Italia", "correct": false },
+      { "text": "Franța", "correct": false },
+      { "text": "Austro-Ungaria", "correct": false }
+    ],
+    "explanation": "Campania de la Gallipoli (1915) a fost un eșec al aliaților (britanici, francezi, ANZAC) împotriva Imperiului Otoman. A fost condusă de Mustafa Kemal (viitorul Atatürk), care a devenit erou național.",
+    "category": "Evenimente majore",
+    "order": 31
+  },
+  {
+    "id": "q032",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Liga Națiunilor' propusă de Woodrow Wilson?",
+    "answers": [
+      { "text": "O organizație internațională pentru menținerea păcii", "correct": true },
+      { "text": "O alianță militară anti-germană", "correct": false },
+      { "text": "Un tratat comercial european", "correct": false },
+      { "text": "O federație a coloniilor", "correct": false }
+    ],
+    "explanation": "Liga Națiunilor a fost creată în 1920 ca parte a Tratatului de la Versailles, pe baza Punctului 14 al lui Wilson. Scopul ei era prevenirea războaielor prin diplomație. SUA nu a aderat, iar Liga a eșuat în prevenirea celui de-al Doilea Război Mondial.",
+    "category": "Încheiere și consecințe",
+    "order": 32
+  },
+  {
+    "id": "q033",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost împărțită după Primul Război Mondial și nu și-a recăpătat independența decât după 1989?",
+    "answers": [
+      { "text": "Polonia", "correct": true },
+      { "text": "Cehoslovacia", "correct": false },
+      { "text": "Ungaria", "correct": false },
+      { "text": "Finlanda", "correct": false }
+    ],
+    "explanation": "Polonia a fost împărțită între Rusia, Prusia și Austro-Ungaria în secolul al XVIII-lea. A fost reînființată ca stat independent în 1918, dar a fost din nou ocupată în 1939 și apoi sub influență sovietică până în 1989.",
+    "category": "Încheiere și consecințe",
+    "order": 33
+  },
+  {
+    "id": "q034",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce a fost 'Revolta Arabă' din 1916?",
+    "answers": [
+      { "text": "O insurecție sprijinită de britanici împotriva Imperiului Otoman", "correct": true },
+      { "text": "Un război civil în Egipt", "correct": false },
+      { "text": "O revoltă a palestinienilor împotriva Franței", "correct": false },
+      { "text": "O alianță între Arabia și Germania", "correct": false }
+    ],
+    "explanation": "Revolta Arabă a fost condusă de Șeriful Hussein din Mecca, cu sprijin britanic (inclusiv T.E. Lawrence – 'Lawrence al Arabiei'). Scopul era obținerea independenței arabe de la otomani, dar promisiunile britanice s-au dovedit contradictorii (Declarația Balfour etc.).",
+    "category": "Evenimente majore",
+    "order": 34
+  },
+  {
+    "id": "q035",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce rol a avut Franța în Primul Război Mondial?",
+    "answers": [
+      { "text": "A fost principalul teatru de război pe Frontul de Vest", "correct": true },
+      { "text": "A rămas neutră până în 1917", "correct": false },
+      { "text": "A condus ofensiva navală în Pacific", "correct": false },
+      { "text": "A semnat pacea separată cu Germania în 1916", "correct": false }
+    ],
+    "explanation": "Franța a fost ținta principală a ofensivei germane inițiale și a suferit cele mai mari pierderi proporționale. Frontul de Vest a trecut prin teritoriul francez, iar bătălii precum Verdun și Somme au avut loc pe sol francez.",
+    "category": "Puteri și alianțe",
+    "order": 35
+  },
+  {
+    "id": "q036",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce a fost 'Ziua Armistițiului' marcată ca?",
+    "answers": [
+      { "text": "Ziua Comemorării (Remembrance Day)", "correct": true },
+      { "text": "Ziua Independenței Americane", "correct": false },
+      { "text": "Ziua Victoriei în Europa", "correct": false },
+      { "text": "Ziua Națională a Franței", "correct": false }
+    ],
+    "explanation": "11 noiembrie este comemorat în multe țări ca Ziua Comemorării (Remembrance Day sau Armistice Day), în memoria celor căzuți în războaie. În România, este Ziua Națională, dar nu este legată de WWI.",
+    "category": "Încheiere și consecințe",
+    "order": 36
+  },
+  {
+    "id": "q037",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Declarația Balfour' din 1917?",
+    "answers": [
+      { "text": "Sprijinul britanic pentru un 'cămin național evreiesc' în Palestina", "correct": true },
+      { "text": "Recunoașterea independenței arabe", "correct": false },
+      { "text": "Un tratat secret cu Germania", "correct": false },
+      { "text": "O promisiune de pace cu Turcia", "correct": false }
+    ],
+    "explanation": "Declarația Balfour, emisă de ministrul britanic Arthur Balfour, a promis sprijin pentru înființarea unui cămin național evreiesc în Palestina, aflată sub control otoman. A intrat în conflict cu promisiunile făcute arabilor și a dus la tensiuni durabile în regiune.",
+    "category": "Încheiere și consecințe",
+    "order": 37
+  },
+  {
+    "id": "q038",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce a fost 'Pacea de la București' din 1918?",
+    "answers": [
+      { "text": "Tratatul prin care România a ieșit temporar din război", "correct": true },
+      { "text": "Alianța României cu Antanta", "correct": false },
+      { "text": "Semnarea armistițiului cu Bulgaria", "correct": false },
+      { "text": "Recunoașterea independenței României", "correct": false }
+    ],
+    "explanation": "Pacea de la București (mai 1918) a fost un tratat forțat de Puterile Centrale asupra României, care fusese ocupată. România a cedat teritorii și resurse, dar a denunțat tratatul în noiembrie 1918 și a reintrat în război de partea aliaților.",
+    "category": "Evenimente majore",
+    "order": 38
+  },
+  {
+    "id": "q039",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost cunoscută ca 'cel mai mic aliat' al Antantei?",
+    "answers": [
+      { "text": "Serbia", "correct": true },
+      { "text": "Belgia", "correct": false },
+      { "text": "Portugalia", "correct": false },
+      { "text": "Grecia", "correct": false }
+    ],
+    "explanation": "Serbia, deși mică, a rezistat inițial invaziei austro-ungare și a fost considerată simbol al rezistenței. Asasinatul de la Sarajevo a avut loc pe teritoriul său, iar suferința sa a mobilizat opiniile publice occidentale.",
+    "category": "Puteri și alianțe",
+    "order": 39
+  },
+  {
+    "id": "q040",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Războiul de uzură'?",
+    "answers": [
+      { "text": "O strategie de epuizare a resurselor și moralului inamicului", "correct": true },
+      { "text": "Un război rapid de manevră", "correct": false },
+      { "text": "Un conflict naval exclusiv", "correct": false },
+      { "text": "O tactică de gherilă în munți", "correct": false }
+    ],
+    "explanation": "Războiul de uzură a caracterizat Frontul de Vest, unde niciuna dintre părți nu putea obține victorie decisivă. Luptele continue, bombardamentele și condițiile din tranșee au avut ca scop epuizarea inamicului, nu câștigarea terenului.",
+    "category": "Tactici și tehnologie",
+    "order": 40
+  },
+  {
+    "id": "q041",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce țară a fost cunoscută pentru neutralitatea sa în Primul Război Mondial?",
+    "answers": [
+      {
+        "text": "Elveția",
+        "correct": true
+      },
+      {
+        "text": "Italia",
+        "correct": false
+      },
+      {
+        "text": "Belgia",
+        "correct": false
+      },
+      {
+        "text": "Serbia",
+        "correct": false
+      }
+    ],
+    "explanation": "Elveția a rămas neutră pe tot parcursul Primului Război Mondial, conform tradiției sale de neutralitate. Alte țări neutre au fost Spania, Olanda și Danemarca.",
+    "category": "Puteri și alianțe",
+    "order": 41
+  },
+  {
+    "id": "q042",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Pactul de la Londra' din 1915?",
+    "answers": [
+      {
+        "text": "Un acord secret prin care Italia primea teritorii pentru a intra în război de partea Antantei",
+        "correct": true
+      },
+      {
+        "text": "Un tratat de pace între Germania și Franța",
+        "correct": false
+      },
+      {
+        "text": "O alianță navală britanico-americană",
+        "correct": false
+      },
+      {
+        "text": "Un plan pentru împărțirea Imperiului Otoman",
+        "correct": false
+      }
+    ],
+    "explanation": "Prin Pactul de la Londra, Antanta i-a promis Italiei teritorii precum Tirolul de Sud, Istria și Dalmatia dacă se alătură războiului împotriva Puterilor Centrale. Italia a intrat în război în mai 1915.",
+    "category": "Evenimente majore",
+    "order": 42
+  },
+  {
+    "id": "q043",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce a fost 'Ziua Comemorării' inițial numită?",
+    "answers": [
+      {
+        "text": "Armistice Day",
+        "correct": true
+      },
+      {
+        "text": "Victory Day",
+        "correct": false
+      },
+      {
+        "text": "Peace Day",
+        "correct": false
+      },
+      {
+        "text": "War Memorial Day",
+        "correct": false
+      }
+    ],
+    "explanation": "Inițial numită 'Armistice Day', Ziua Comemorării marchează încetarea focului din 11 noiembrie 1918. În multe țări, numele a fost păstrat sau adaptat (ex: Veterans Day în SUA).",
+    "category": "Încheiere și consecințe",
+    "order": 43
+  },
+  {
+    "id": "q044",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce a fost 'Criza din iulie 1914'?",
+    "answers": [
+      {
+        "text": "Seria de ultimatumuri și mobilizări care au dus la izbucnirea războiului",
+        "correct": true
+      },
+      {
+        "text": "O revoltă în armata rusă",
+        "correct": false
+      },
+      {
+        "text": "Un atac naval al Germaniei asupra Marii Britanii",
+        "correct": false
+      },
+      {
+        "text": "Semnarea unui tratat de alianță între Franța și Italia",
+        "correct": false
+      }
+    ],
+    "explanation": "După asasinatul de la Sarajevo, Austro-Ungaria a emis un ultimatum dur Serbiei (23 iulie). Refuzul parțial al Serbiei a dus la declarația de război (28 iulie), urmată de mobilizări în lanț: Rusia → Germania → Franța → Marea Britanie.",
+    "category": "Cauze și început",
+    "order": 44
+  },
+  {
+    "id": "q045",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce rol a avut Serbia în declanșarea Primului Război Mondial?",
+    "answers": [
+      {
+        "text": "Asasinatul de la Sarajevo a avut loc pe teritoriul său și a fost folosit ca pretext de război",
+        "correct": true
+      },
+      {
+        "text": "A atacat prima Austro-Ungaria",
+        "correct": false
+      },
+      {
+        "text": "A semnat un pact secret cu Germania",
+        "correct": false
+      },
+      {
+        "text": "A blocat accesul la Marea Neagră",
+        "correct": false
+      }
+    ],
+    "explanation": "Deși Serbia nu a organizat asasinatul, Gavrilo Princip făcea parte din 'Mâna Neagră', un grup naționalist sârb. Austro-Ungaria a acuzat guvernul sârb de complicitate, folosind evenimentul ca pretext pentru război.",
+    "category": "Cauze și început",
+    "order": 45
+  },
+  {
+    "id": "q046",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Ce a fost 'Mâna Neagră'?",
+    "answers": [
+      {
+        "text": "O organizație naționalistă sârbă implicată în asasinatul lui Franz Ferdinand",
+        "correct": true
+      },
+      {
+        "text": "Un regiment militar german",
+        "correct": false
+      },
+      {
+        "text": "O societate secretă britanică",
+        "correct": false
+      },
+      {
+        "text": "Un plan de invazie al Franței",
+        "correct": false
+      }
+    ],
+    "explanation": "Mâna Neagră (sau 'Unirea sau Moartea') era o societate secretă naționalistă sârbă care visa la unificarea tuturor slavilor de sud. A sprijinit asasinatul lui Franz Ferdinand ca mijloc de a slăbi Austro-Ungaria.",
+    "category": "Evenimente majore",
+    "order": 46
+  },
+  {
+    "id": "q047",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Ofensiva Hundred Days'?",
+    "answers": [
+      {
+        "text": "Seria de victorii ale aliaților care a dus la înfrângerea Germaniei în 1918",
+        "correct": true
+      },
+      {
+        "text": "Retragerea Rusiei din război",
+        "correct": false
+      },
+      {
+        "text": "Invazia Germaniei în Belgia",
+        "correct": false
+      },
+      {
+        "text": "Campania navală împotriva submarinelor",
+        "correct": false
+      }
+    ],
+    "explanation": "Ofensiva Hundred Days (august–noiembrie 1918) a fost o serie de atacuri coordonate ale aliaților, sprijinite de trupele americane proaspete. A rupt liniile germane și a forțat armistițiul.",
+    "category": "Evenimente majore",
+    "order": 47
+  },
+  {
+    "id": "q048",
+    "themeId": "wwi",
+    "difficulty": "hard",
+    "question": "Ce a fost 'Pacea de la Buftea'?",
+    "answers": [
+      {
+        "text": "Un armistițiu semnat de România cu Puterile Centrale în decembrie 1917",
+        "correct": true
+      },
+      {
+        "text": "Tratatul de pace cu Bulgaria",
+        "correct": false
+      },
+      {
+        "text": "Un acord cu Franța pentru reînarmare",
+        "correct": false
+      },
+      {
+        "text": "Semnarea alianței cu Antanta",
+        "correct": false
+      }
+    ],
+    "explanation": "Armistițiul de la Buftea (decembrie 1917) a fost un acord temporar între România și Puterile Centrale, înainte de semnarea Păcii de la București (1918). A fost impus după ocuparea unei mari părți a teritoriului românesc.",
+    "category": "Evenimente majore",
+    "order": 48
+  },
+  {
+    "id": "q049",
+    "themeId": "wwi",
+    "difficulty": "easy",
+    "question": "Câte imperii majore s-au prăbușit la finalul Primului Război Mondial?",
+    "answers": [
+      {
+        "text": "Patru",
+        "correct": true
+      },
+      {
+        "text": "Două",
+        "correct": false
+      },
+      {
+        "text": "Trei",
+        "correct": false
+      },
+      {
+        "text": "Cinci",
+        "correct": false
+      }
+    ],
+    "explanation": "Patru imperii s-au prăbușit: Germania, Austro-Ungaria, Rusia și Imperiul Otoman. Toate au fost înlocuite de state-națiune sau regimuri revoluționare.",
+    "category": "Încheiere și consecințe",
+    "order": 49
+  },
+  {
+    "id": "q050",
+    "themeId": "wwi",
+    "difficulty": "medium",
+    "question": "Ce a fost 'Ziua Focului de Crăciun'?",
+    "answers": [
+      {
+        "text": "O fraternizare spontană între soldați inamici în decembrie 1914",
+        "correct": true
+      },
+      {
+        "text": "O ofensivă majoră germană",
+        "correct": false
+      },
+      {
+        "text": "Semnarea unui armistițiu temporar oficial",
+        "correct": false
+      },
+      {
+        "text": "O campanie de recrutare în Marea Britanie",
+        "correct": false
+      }
+    ],
+    "explanation": "În Crăciunul din 1914, soldați germani și aliați au ieșit din tranșee, au cântat împreună, jucat fotbal și schimbat cadouri. A fost un moment unic de umanitate, dar comandanții au interzis ulterior astfel de acțiuni.",
+    "category": "Evenimente majore",
+    "order": 50
+  }
+]

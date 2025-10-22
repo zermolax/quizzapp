@@ -1,0 +1,1260 @@
+[
+  {
+    "id": "q001",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care era forma de guvernare în Atena antică?",
+    "answers": [
+      {
+        "text": "Democrație",
+        "correct": true
+      },
+      {
+        "text": "Monarhie",
+        "correct": false
+      },
+      {
+        "text": "Oligarhie",
+        "correct": false
+      },
+      {
+        "text": "Tiranide",
+        "correct": false
+      }
+    ],
+    "explanation": "Atena antică este considerată leagănul democrației occidentale. Cetățenii (bărbații liberi) participau direct la luarea deciziilor în Adunarea Populară (Ekklesia). Deși nu era democrație perfectă, a fost inovatoare pentru epoca respectivă.",
+    "category": "Politică și guvernare",
+    "order": 1
+  },
+
+  {
+    "id": "q002",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Cine a fost zeul suprem în mitologia greacă?",
+    "answers": [
+      {
+        "text": "Zeus",
+        "correct": true
+      },
+      {
+        "text": "Poseidon",
+        "correct": false
+      },
+      {
+        "text": "Hades",
+        "correct": false
+      },
+      {
+        "text": "Apollo",
+        "correct": false
+      }
+    ],
+    "explanation": "Zeus era regele zeilor olimpieni, zeul cerului și tunetului. Locuia pe Muntele Olimp și guverna atât zeii cât și muritorii. Simbolurile sale erau fulgerul și acvila.",
+    "category": "Mitologie și religie",
+    "order": 2
+  },
+
+  {
+    "id": "q003",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "În ce oraș se desfășurau primele Jocuri Olimpice antice?",
+    "answers": [
+      {
+        "text": "Olympia",
+        "correct": true
+      },
+      {
+        "text": "Atena",
+        "correct": false
+      },
+      {
+        "text": "Sparta",
+        "correct": false
+      },
+      {
+        "text": "Delfi",
+        "correct": false
+      }
+    ],
+    "explanation": "Jocurile Olimpice antice au început în 776 î.Hr. la Olympia, ca parte a unui festival religios dedicat lui Zeus. Se desfășurau la fiecare patru ani și includeau competiții sportive și ceremonii religioase.",
+    "category": "Sport și competiții",
+    "order": 3
+  },
+
+  {
+    "id": "q004",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Cum se numea fortăreața ridicată pe dealul din centrul Atenei?",
+    "answers": [
+      {
+        "text": "Acropole",
+        "correct": true
+      },
+      {
+        "text": "Agora",
+        "correct": false
+      },
+      {
+        "text": "Parthenon",
+        "correct": false
+      },
+      {
+        "text": "Propilee",
+        "correct": false
+      }
+    ],
+    "explanation": "Acropola Atenei era o citadelă ridicată pe un deal stâncos, gazduind cele mai importante temple, inclusiv Parthenonul. Cuvântul 'acropole' înseamnă literal 'oraș înalt' în greacă.",
+    "category": "Arhitectură și monumente",
+    "order": 4
+  },
+
+  {
+    "id": "q005",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cine a fost filosoful care l-a învățat pe Alexandru cel Mare?",
+    "answers": [
+      {
+        "text": "Aristotel",
+        "correct": true
+      },
+      {
+        "text": "Platon",
+        "correct": false
+      },
+      {
+        "text": "Socrate",
+        "correct": false
+      },
+      {
+        "text": "Pitagora",
+        "correct": false
+      }
+    ],
+    "explanation": "Aristotel a fost tutorele lui Alexandru cel Mare din Macedonia între 343-336 î.Hr. Învățăturile sale despre filozofie, etică și științe l-au influențat profund pe viitorul cuceritor, care va răspândi cultura elenă în întreg Orientul.",
+    "category": "Filozofie și educație",
+    "order": 5
+  },
+
+  {
+    "id": "q006",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care oraș-stat grec era cunoscut pentru armata sa puternică și disciplina militară?",
+    "answers": [
+      {
+        "text": "Sparta",
+        "correct": true
+      },
+      {
+        "text": "Atena",
+        "correct": false
+      },
+      {
+        "text": "Corint",
+        "correct": false
+      },
+      {
+        "text": "Teba",
+        "correct": false
+      }
+    ],
+    "explanation": "Sparta era un oraș-stat militar unde copiii erau antrenați de la 7 ani în artele războiului. Societatea spartană era organizată strict în jurul pregătirii militare, iar spartiații erau considerați cei mai temibili războinici din Grecia.",
+    "category": "Orașe-state și societate",
+    "order": 6
+  },
+
+  {
+    "id": "q007",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "În ce an a avut loc bătălia de la Maraton?",
+    "answers": [
+      {
+        "text": "490 î.Hr.",
+        "correct": true
+      },
+      {
+        "text": "480 î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "431 î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "338 î.Hr.",
+        "correct": false
+      }
+    ],
+    "explanation": "Bătălia de la Maraton (490 î.Hr.) a fost prima victorie majoră a grecilor împotriva invaziei persane conduse de Darius I. Atenianul Pheidippides a alergat 42 km până la Atena pentru a anunța victoria, inspirând maratonul modern.",
+    "category": "Războaie și bătălii",
+    "order": 7
+  },
+
+  {
+    "id": "q008",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Cum se numea piața și centrul civic al orașului grecesc?",
+    "answers": [
+      {
+        "text": "Agora",
+        "correct": true
+      },
+      {
+        "text": "Forum",
+        "correct": false
+      },
+      {
+        "text": "Acropole",
+        "correct": false
+      },
+      {
+        "text": "Teatron",
+        "correct": false
+      }
+    ],
+    "explanation": "Agora era piața centrală și inima vieții sociale și politice a orașului grecesc. Aici se întâlneau cetățenii pentru comerț, discuții politice, filozofie și socializare. Cuvântul a dat naștere termenului 'agorafobie'.",
+    "category": "Viață urbană și socială",
+    "order": 8
+  },
+
+  {
+    "id": "q009",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cine a scris 'Iliada' și 'Odiseea'?",
+    "answers": [
+      {
+        "text": "Homer",
+        "correct": true
+      },
+      {
+        "text": "Hesiod",
+        "correct": false
+      },
+      {
+        "text": "Eschil",
+        "correct": false
+      {
+        "text": "Pindar",
+        "correct": false
+      }
+    ],
+    "explanation": "Homer este poetul epic grec căruia i se atribuie cele două capodopere ale literaturii antice. 'Iliada' descrie Războiul Troiei, iar 'Odiseea' călătoria eroului Odiseu spre casă. Aceste poeme au influențat întreaga cultură occidentală.",
+    "category": "Literatură și poezie",
+    "order": 9
+  },
+
+  {
+    "id": "q010",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Care a fost bătălia unde 300 de spartani au luptat împotriva armatei persane?",
+    "answers": [
+      {
+        "text": "Termopile",
+        "correct": true
+      },
+      {
+        "text": "Maraton",
+        "correct": false
+      },
+      {
+        "text": "Salamina",
+        "correct": false
+      },
+      {
+        "text": "Plateea",
+        "correct": false
+      }
+    ],
+    "explanation": "Bătălia de la Termopile (480 î.Hr.) a văzut regele Leonidas și 300 de spartani (plus alți greci) rezistând eroic împotriva armatei masive a lui Xerxes. Deși au fost înfrânți, sacrificiul lor a inspirat Grecia să continue lupta.",
+    "category": "Bătălii legendare",
+    "order": 10
+  },
+
+  {
+    "id": "q011",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care zeiță era protectoarea Atenei și zeița înțelepciunii?",
+    "answers": [
+      {
+        "text": "Atena",
+        "correct": true
+      },
+      {
+        "text": "Hera",
+        "correct": false
+      },
+      {
+        "text": "Artemis",
+        "correct": false
+      },
+      {
+        "text": "Afrodita",
+        "correct": false
+      }
+    ],
+    "explanation": "Atena era zeița înțelepciunii, strategiei militare și artelor. Orașul Atena a fost numit după ea, după ce a câștigat un concurs împotriva lui Poseidon oferind măslinul, cel mai prețios dar pentru cetățeni.",
+    "category": "Mitologie și zeități",
+    "order": 11
+  },
+
+  {
+    "id": "q012",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cum se numea unitatea militară spartană celebră pentru disciplină?",
+    "answers": [
+      {
+        "text": "Falanga",
+        "correct": true
+      },
+      {
+        "text": "Legiunea",
+        "correct": false
+      },
+      {
+        "text": "Cohortă",
+        "correct": false
+      },
+      {
+        "text": "Centuria",
+        "correct": false
+      }
+    ],
+    "explanation": "Falanga era formația militară grecească unde soldații (hopliti) stăteau umăr la umăr cu scuturile suprapuse și sulițele îndreptate. Această formație compactă era extrem de eficientă și necesita disciplină riguroasă.",
+    "category": "Tactici militare",
+    "order": 12
+  },
+
+  {
+    "id": "q013",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care era templul principal dedicat zeiței Atena pe Acropole?",
+    "answers": [
+      {
+        "text": "Parthenonul",
+        "correct": true
+      },
+      {
+        "text": "Erechtheionul",
+        "correct": false
+      },
+      {
+        "text": "Templul lui Zeus",
+        "correct": false
+      },
+      {
+        "text": "Templul lui Apollo",
+        "correct": false
+      }
+    ],
+    "explanation": "Parthenonul este templul doric construit între 447-432 î.Hr., dedicat zeiței Atena Parthenos (Fecioara). Este considerat apogeul arhitecturii grecești clasice și un simbol al democrației ateniene.",
+    "category": "Arhitectură sacră",
+    "order": 13
+  },
+
+  {
+    "id": "q014",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Cine a fost filosoful care a promovat metoda socratică și a fost condamnat să bea cucută?",
+    "answers": [
+      {
+        "text": "Socrate",
+        "correct": true
+      },
+      {
+        "text": "Platon",
+        "correct": false
+      },
+      {
+        "text": "Aristotel",
+        "correct": false
+      },
+      {
+        "text": "Diogene",
+        "correct": false
+      }
+    ],
+    "explanation": "Socrate a fost condamnat la moarte în 399 î.Hr. pentru coruperea tinerilor și nepietate. A refuzat să-și abandoneze principiile și a băut cucuta. Metoda sa de dialog prin întrebări (maieutica) a revoluționat filozofia.",
+    "category": "Filozofi și gânditori",
+    "order": 14
+  },
+
+  {
+    "id": "q015",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care război a durat 27 de ani între Atena și Sparta?",
+    "answers": [
+      {
+        "text": "Războiul Peloponesiac",
+        "correct": true
+      },
+      {
+        "text": "Războaiele Persane",
+        "correct": false
+      },
+      {
+        "text": "Războiul Troiei",
+        "correct": false
+      },
+      {
+        "text": "Războiul Beoțian",
+        "correct": false
+      }
+    ],
+    "explanation": "Războiul Peloponesiac (431-404 î.Hr.) a opus cele două mari puteri grecești: Liga Deleană condusă de Atena și Liga Peloponeziană condusă de Sparta. Sparta a învins, dar războiul a slăbit întreaga Grecie.",
+    "category": "Conflicte majore",
+    "order": 15
+  },
+
+  {
+    "id": "q016",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Cum se numeau soldații greci înarmați cu suliță și scut?",
+    "answers": [
+      {
+        "text": "Hopliți",
+        "correct": true
+      },
+      {
+        "text": "Legionari",
+        "correct": false
+      },
+      {
+        "text": "Centurioni",
+        "correct": false
+      },
+      {
+        "text": "Gladiatori",
+        "correct": false
+      }
+    ],
+    "explanation": "Hoplit derivă din 'hoplon' (scut). Erau cetățeni-soldați care își cumpărau propria armură și luptau în falangă. Acest sistem militar reflecta și egalitatea cetățenilor în polis-ul democratic.",
+    "category": "Armată și război",
+    "order": 16
+  },
+
+  {
+    "id": "q017",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cine a fost matematicianul grec celebru pentru teorema sa despre triunghiuri dreptunghice?",
+    "answers": [
+      {
+        "text": "Pitagora",
+        "correct": true
+      },
+      {
+        "text": "Euclid",
+        "correct": false
+      },
+      {
+        "text": "Arhimede",
+        "correct": false
+      },
+      {
+        "text": "Tales",
+        "correct": false
+      }
+    ],
+    "explanation": "Pitagora (circa 570-495 î.Hr.) a fondat o școală filozofică și matematică. Teorema sa (a² + b² = c²) descrie relația dintre laturile unui triunghi dreptunghic și rămâne fundamentală în geometrie și astăzi.",
+    "category": "Matematică și știință",
+    "order": 17
+  },
+
+  {
+    "id": "q018",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce fel de spectacole se țineau în teatrele grecești antice?",
+    "answers": [
+      {
+        "text": "Tragedii și comedii",
+        "correct": true
+      },
+      {
+        "text": "Lupte de gladiatori",
+        "correct": false
+      },
+      {
+        "text": "Curse de care",
+        "correct": false
+      },
+      {
+        "text": "Baterii navale",
+        "correct": false
+      }
+    ],
+    "explanation": "Teatrul grecesc avea două forme principale: tragedia (piese serioase despre eroi și zei) și comedia (piese satirice). Dramaturgii celebri includ Eschil, Sofocle, Euripide (tragedii) și Aristofan (comedii).",
+    "category": "Teatru și artă dramatică",
+    "order": 18
+  },
+
+  {
+    "id": "q019",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "În ce an a cucerit Alexandru cel Mare Imperiul Persan?",
+    "answers": [
+      {
+        "text": "331 î.Hr. (Bătălia de la Gaugamela)",
+        "correct": true
+      },
+      {
+        "text": "336 î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "323 î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "356 î.Hr.",
+        "correct": false
+      }
+    ],
+    "explanation": "Bătălia decisivă de la Gaugamela (331 î.Hr.) a marcat înfrângerea finală a lui Darius III și cucerirea Imperiului Persan de către Alexandru. Aceasta i-a deschis drumul spre India și a creat unul dintre cele mai mari imperii din istorie.",
+    "category": "Cuceriri și expansiune",
+    "order": 19
+  },
+
+  {
+    "id": "q020",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Unde se afla faimosul oracol al lui Apollo?",
+    "answers": [
+      {
+        "text": "Delfi",
+        "correct": true
+      },
+      {
+        "text": "Olympia",
+        "correct": false
+      },
+      {
+        "text": "Dodona",
+        "correct": false
+      },
+      {
+        "text": "Epidaur",
+        "correct": false
+      }
+    ],
+    "explanation": "Oracolul de la Delfi era cel mai important sanctuar profetic din Grecia antică. Pythia, preoteasa lui Apollo, oferea răspunsuri ambigue la întrebările pelerinilor. Situl era considerat 'buricul pământului' (omphalos).",
+    "category": "Religie și sanctuare",
+    "order": 20
+  },
+
+  {
+    "id": "q021",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care erou mitologic a ucis Medusa?",
+    "answers": [
+      {
+        "text": "Perseu",
+        "correct": true
+      },
+      {
+        "text": "Heracle",
+        "correct": false
+      },
+      {
+        "text": "Teseu",
+        "correct": false
+      },
+      {
+        "text": "Ahile",
+        "correct": false
+      }
+    ],
+    "explanation": "Perseu, fiul lui Zeus, a decapitat pe Medusa, singura Gorgonă muritoare al cărei privire transforma oamenii în piatră. A folosit scutul său ca oglindă pentru a evita privirea ei directă, apoi i-a tăiat capul.",
+    "category": "Eroi și mituri",
+    "order": 21
+  },
+
+  {
+    "id": "q022",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cine a fost istoricul grec care a scris despre Războiul Peloponesiac?",
+    "answers": [
+      {
+        "text": "Tucidide",
+        "correct": true
+      },
+      {
+        "text": "Herodot",
+        "correct": false
+      },
+      {
+        "text": "Xenofon",
+        "correct": false
+      },
+      {
+        "text": "Plutarh",
+        "correct": false
+      }
+    ],
+    "explanation": "Tucidide a scris 'Istoria Războiului Peloponesiac', o cronică detaliată și analitică a conflictului. Este considerat părintele istoriei științifice pentru metodologia sa riguroasă și analiza cauzelor politice și sociale.",
+    "category": "Istorie și istoriografie",
+    "order": 22
+  },
+
+  {
+    "id": "q023",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care era moneda folosită în majoritatea orașelor grecești?",
+    "answers": [
+      {
+        "text": "Drahma",
+        "correct": true
+      },
+      {
+        "text": "Denar",
+        "correct": false
+      },
+      {
+        "text": "Solidus",
+        "correct": false
+      },
+      {
+        "text": "Stater",
+        "correct": false
+      }
+    ],
+    "explanation": "Drahma era principala unitate monetară în Grecia antică, cu valoare și greutate variabilă între orașe. Atenianul folosea drahma de argint, devenită standard datorită purității sale. Numele a rămas până recent moneda Greciei moderne.",
+    "category": "Economie și comerț",
+    "order": 23
+  },
+
+  {
+    "id": "q024",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Cine a fost sculptorul care a creat statuia criselefantină a lui Zeus la Olympia?",
+    "answers": [
+      {
+        "text": "Fidias",
+        "correct": true
+      },
+      {
+        "text": "Praxiteles",
+        "correct": false
+      },
+      {
+        "text": "Policlet",
+        "correct": false
+      },
+      {
+        "text": "Lysippos",
+        "correct": false
+      }
+    ],
+    "explanation": "Fidias a realizat statuia monumentală a lui Zeus (circa 435 î.Hr.), considerată una din Cele Șapte Minuni ale Lumii Antice. Sculptura de 12 metri înălțime era făcută din fildeș și aur (criselefantină) și a fost distrusă în Evul Mediu.",
+    "category": "Sculptură și artă",
+    "order": 24
+  },
+
+  {
+    "id": "q025",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care filosof a fondat Academia, prima instituție de învățământ superior?",
+    "answers": [
+      {
+        "text": "Platon",
+        "correct": true
+      },
+      {
+        "text": "Socrate",
+        "correct": false
+      },
+      {
+        "text": "Aristotel",
+        "correct": false
+      },
+      {
+        "text": "Epicur",
+        "correct": false
+      }
+    ],
+    "explanation": "Platon a fondat Academia în Atena în jurul anului 387 î.Hr. A funcționat aproape 900 de ani și a fost model pentru universitățile moderne. Aristotel a studiat aici înainte de a fonda propriul său Liceu.",
+    "category": "Educație și instituții",
+    "order": 25
+  },
+
+  {
+    "id": "q026",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce sport grecesc combina box-ul cu wrestling-ul?",
+    "answers": [
+      {
+        "text": "Pankration",
+        "correct": true
+      },
+      {
+        "text": "Pentatlon",
+        "correct": false
+      },
+      {
+        "text": "Pygme",
+        "correct": false
+      },
+      {
+        "text": "Pale",
+        "correct": false
+      }
+    ],
+    "explanation": "Pankration era un sport de luptă extrem de dur, permițând aproape orice tehnică (lovire, strangulare, blocaje) cu excepția mușcăturii și zgârierii ochilor. Era considerat cel mai dur sport olimpic și pregătea războinici pentru luptă.",
+    "category": "Sport și atletism",
+    "order": 26
+  },
+
+  {
+    "id": "q027",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cum se numea perioada de expansiune culturală greacă după Alexandru cel Mare?",
+    "answers": [
+      {
+        "text": "Perioada Elenistică",
+        "correct": true
+      },
+      {
+        "text": "Epoca de Aur",
+        "correct": false
+      },
+      {
+        "text": "Perioada Clasică",
+        "correct": false
+      },
+      {
+        "text": "Epoca Arhaică",
+        "correct": false
+      }
+    ],
+    "explanation": "Perioada Elenistică (323-31 î.Hr.) a început după moartea lui Alexandru și s-a caracterizat prin răspândirea culturii grecești în Orient. S-au înființat centre culturale precum Alexandria, iar știința și arta au înflorit.",
+    "category": "Epoci istorice",
+    "order": 27
+  },
+
+  {
+    "id": "q028",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Care regină din Egipt era de origine macedoneană și iubita lui Iulius Cezar?",
+    "answers": [
+      {
+        "text": "Cleopatra VII",
+        "correct": true
+      },
+      {
+        "text": "Nefertiti",
+        "correct": false
+      },
+      {
+        "text": "Hatșepsut",
+        "correct": false
+      },
+      {
+        "text": "Arsinoe",
+        "correct": false
+      }
+    ],
+    "explanation": "Cleopatra VII (69-30 î.Hr.) făcea parte din dinastia Ptolemeilor, descendenți ai generalului lui Alexandru. A avut relații cu Cezar și Marcus Antonius, jucând un rol crucial în politica romană până la înfrângerea de la Actium.",
+    "category": "Personalități elenistice",
+    "order": 28
+  },
+
+  {
+    "id": "q029",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Care erou a avut un călcâi vulnerabil în mitologie?",
+    "answers": [
+      {
+        "text": "Ahile",
+        "correct": true
+      },
+      {
+        "text": "Hector",
+        "correct": false
+      },
+      {
+        "text": "Patrocle",
+        "correct": false
+      },
+      {
+        "text": "Ajax",
+        "correct": false
+      }
+    ],
+    "explanation": "Ahile a fost scufundat de mama sa, Tetis, în râul Styx pentru a deveni invulnerabil, dar călcâiul de care îl ținea a rămas neprotejat. A fost ucis la Troia de o săgeată în călcâi. Expresia 'călcâiul lui Ahile' desemnează un punct slab.",
+    "category": "Mitologie și legende",
+    "order": 29
+  },
+
+  {
+    "id": "q030",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Cine a fost medicul grec considerat 'părintele medicinei'?",
+    "answers": [
+      {
+        "text": "Hipocrate",
+        "correct": true
+      },
+      {
+        "text": "Galen",
+        "correct": false
+      },
+      {
+        "text": "Asclepius",
+        "correct": false
+      },
+      {
+        "text": "Dioscoride",
+        "correct": false
+      }
+    ],
+    "explanation": "Hipocrate din Kos (circa 460-370 î.Hr.) a revoluționat medicina separând-o de superstiție și magie, promovând observația clinică. Jurământul lui Hipocrate este încă folosit de medici ca ghid etic al profesiei.",
+    "category": "Medicină și știință",
+    "order": 30
+  },
+
+  {
+    "id": "q031",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce structură construită de greci avea coloane și servea ca templu?",
+    "answers": [
+      {
+        "text": "Naos",
+        "correct": true
+      },
+      {
+        "text": "Stoa",
+        "correct": false
+      },
+      {
+        "text": "Bouleuterion",
+        "correct": false
+      },
+      {
+        "text": "Prytaneion",
+        "correct": false
+      }
+    ],
+    "explanation": "Naos era camera principală a templului grecesc unde se afla statuia cultului. Templul în sine (cu colonadă) urma ordine arhitecturale: doric (simplu), ionic (elegant cu volute) sau corintic (decorativ cu frunze de acant).",
+    "category": "Arhitectură religioasă",
+    "order": 31
+  },
+
+  {
+    "id": "q032",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Care fost primul istoric grec, numit 'părintele istoriei'?",
+    "answers": [
+      {
+        "text": "Herodot",
+        "correct": true
+      },
+      {
+        "text": "Tucidide",
+        "correct": false
+      },
+      {
+        "text": "Xenofon",
+        "correct": false
+      },
+      {
+        "text": "Polybius",
+        "correct": false
+      }
+    ],
+    "explanation": "Herodot (circa 484-425 î.Hr.) a scris 'Istorii', prima lucrare sistematică de investigare a trecutului, concentrându-se pe Războaiele Greco-Persane. Deși criticat pentru credibilitate, a stabilit fundamentele istoriografiei occidentale.",
+    "category": "Istorie și cronici",
+    "order": 32
+  },
+
+  {
+    "id": "q033",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care dramaturց grec a scris trilogia 'Orestia'?",
+    "answers": [
+      {
+        "text": "Eschil",
+        "correct": true
+      },
+      {
+        "text": "Sofocle",
+        "correct": false
+      },
+      {
+        "text": "Euripide",
+        "correct": false
+      },
+      {
+        "text": "Aristofan",
+        "correct": false
+      }
+    ],
+    "explanation": "Eschil (525-456 î.Hr.) este considerat părintele tragediei grecești. 'Orestia' (Agamemnon, Coefore, Eumenide) este singura trilogie completă păstrată, explorând teme de justiție, răzbunare și reconciliere între ordine divine și umană.",
+    "category": "Dramaturgie și teatru",
+    "order": 33
+  },
+
+  {
+    "id": "q034",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Cum se numeau sclavii de stat din Sparta care lucrau pământul?",
+    "answers": [
+      {
+        "text": "Heloți",
+        "correct": true
+      },
+      {
+        "text": "Perieci",
+        "correct": false
+      },
+      {
+        "text": "Metoici",
+        "correct": false
+      },
+      {
+        "text": "Douli",
+        "correct": false
+      }
+    ],
+    "explanation": "Heloții erau populația subjugată care lucra pământul pentru spartiați. Tratați dur, depășeau numeric pe spartiați cu aproximativ 7:1, ceea ce explică militarismul extrem al Spartei - teama constantă de revolte ale heloților.",
+    "category": "Societate spartană",
+    "order": 34
+  },
+
+  {
+    "id": "q035",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care a fost bătălia navală decisivă din Războaiele Persane?",
+    "answers": [
+      {
+        "text": "Salamina",
+        "correct": true
+      },
+      {
+        "text": "Artemision",
+        "correct": false
+      },
+      {
+        "text": "Mycale",
+        "correct": false
+      },
+      {
+        "text": "Lade",
+        "correct": false
+      }
+    ],
+    "explanation": "Bătălia de la Salamina (480 î.Hr.) a fost victoria navală decisivă a grecilor, conduși de atenianul Temistocle, împotriva flotei persane a lui Xerxes. Victoria a salvat Grecia și a stabilit supremația navală atenian în Egee.",
+    "category": "Bătălii navale",
+    "order": 35
+  },
+
+  {
+    "id": "q036",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Cine a fost regele macedonean care a unificat Grecia înainte de Alexandru?",
+    "answers": [
+      {
+        "text": "Filip al II-lea",
+        "correct": true
+      },
+      {
+        "text": "Filip al V-lea",
+        "correct": false
+      },
+      {
+        "text": "Antigonus",
+        "correct": false
+      },
+      {
+        "text": "Perdicas",
+        "correct": false
+      }
+    ],
+    "explanation": "Filip al II-lea (382-336 î.Hr.) a transformat Macedonia într-o putere militară dominantă și a unificat Grecia prin Liga de la Corint. A introdus falanga macedoneană și a pregătit invazia Persiei, pe care fiul său Alexandru a realizat-o.",
+    "category": "Macedonia și unificare",
+    "order": 36
+  },
+
+  {
+    "id": "q037",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce monstru cu cap de taur locuia în labirintul din Creta?",
+    "answers": [
+      {
+        "text": "Minotaurul",
+        "correct": true
+      },
+      {
+        "text": "Chimera",
+        "correct": false
+      },
+      {
+        "text": "Hydra",
+        "correct": false
+      },
+      {
+        "text": "Cerberos",
+        "correct": false
+      }
+    ],
+    "explanation": "Minotaurul era o creatură mitologică cu corp de om și cap de taur, închis în labirintul construit de Dedal în Creta. Eroul Teseu l-a ucis cu ajutorul Ariadnei, care i-a dat un fir pentru a găsi ieșirea din labirint.",
+    "category": "Mituri și creaturi",
+    "order": 37
+  },
+
+  {
+    "id": "q038",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care poet liric grec este cunoscut pentru odele sale despre victorii olimpice?",
+    "answers": [
+      {
+        "text": "Pindar",
+        "correct": true
+      },
+      {
+        "text": "Sappho",
+        "correct": false
+      },
+      {
+        "text": "Alcaeus",
+        "correct": false
+      },
+      {
+        "text": "Anacreon",
+        "correct": false
+      }
+    ],
+    "explanation": "Pindar (518-438 î.Hr.) a scris Epinicia, ode celebrând victoriile atletice la jocurile pan-elenice. Poezia sa complexă și metaforică combină lauda campionilor cu reflecții filozofice despre virtute, glorie și condiția umană.",
+    "category": "Poezie lirică",
+    "order": 38
+  },
+
+  {
+    "id": "q039",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Care scientist grec a calculat circumferința Pământului cu remarcabilă precizie?",
+    "answers": [
+      {
+        "text": "Eratostene",
+        "correct": true
+      },
+      {
+        "text": "Aristarh",
+        "correct": false
+      },
+      {
+        "text": "Ptolemeu",
+        "correct": false
+      },
+      {
+        "text": "Hipparchus",
+        "correct": false
+      }
+    ],
+    "explanation": "Eratostene (276-194 î.Hr.) a măsurat circumferința Pământului observând diferențele de umbră între Alexandria și Syene la solstițiul de vară. Calculul său (aproximativ 40.000 km) era remarcabil de precis pentru epoca respectivă.",
+    "category": "Astronomie și geografie",
+    "order": 39
+  },
+
+  {
+    "id": "q040",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Ce alianță de orașe-state a condus Atena împotriva Persiei?",
+    "answers": [
+      {
+        "text": "Liga Deleană",
+        "correct": true
+      },
+      {
+        "text": "Liga Peloponeziană",
+        "correct": false
+      },
+      {
+        "text": "Liga Corintului",
+        "correct": false
+      },
+      {
+        "text": "Liga Acheană",
+        "correct": false
+      }
+    ],
+    "explanation": "Liga Deleană (478 î.Hr.) a fost o alianță navală condusă de Atena pentru apărarea împotriva Persiei. Atena a transformat-o treptat într-un imperiu maritim, controlând trezoreria și forțând membrii să rămână, ceea ce a contribuit la Războiul Peloponesiac.",
+    "category": "Alianțe și diplomație",
+    "order": 40
+  },
+
+  {
+    "id": "q041",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce festival religios se sărbătorea la fiecare patru ani în onoarea lui Zeus?",
+    "answers": [
+      {
+        "text": "Jocurile Olimpice",
+        "correct": true
+      },
+      {
+        "text": "Jocurile Pythice",
+        "correct": false
+      },
+      {
+        "text": "Jocurile Isthmice",
+        "correct": false
+      },
+      {
+        "text": "Jocurile Nemeene",
+        "correct": false
+      }
+    ],
+    "explanation": "Jocurile Olimpice erau mai mult decât competiții sportive - erau un festival religios major dedicat lui Zeus. Pe durata jocurilor, toate războaiele se opreau (ekecheiria - tregua sacră), permițând pelerinilor să călătorească în siguranță la Olympia.",
+    "category": "Festivaluri religioase",
+    "order": 41
+  },
+
+  {
+    "id": "q042",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Care matematician a strigat 'Eureka!' când a descoperit principiul plutirii?",
+    "answers": [
+      {
+        "text": "Arhimede",
+        "correct": true
+      },
+      {
+        "text": "Euclid",
+        "correct": false
+      },
+      {
+        "text": "Pitagora",
+        "correct": false
+      },
+      {
+        "text": "Tales",
+        "correct": false
+      }
+    ],
+    "explanation": "Arhimede din Siracuza (287-212 î.Hr.) a descoperit principiul flotabilității în timp ce făcea baie, realizând că un obiect scufundat deplasează o cantitate de apă egală cu propriul volum. A fost unul dintre cei mai mari matematicieni și inventatori ai antichității.",
+    "category": "Invenții și descoperiri",
+    "order": 42
+  },
+
+  {
+    "id": "q043",
+    "themeId": "ancient-greece",
+    "difficulty": "hard",
+    "question": "Cum se numea cetatea-fortăreață a Spartei?",
+    "answers": [
+      {
+        "text": "Sparta nu avea acropole sau ziduri - erau războinicii săi",
+        "correct": true
+      },
+      {
+        "text": "Acropola Spartană",
+        "correct": false
+      },
+      {
+        "text": "Larisa",
+        "correct": false
+      },
+      {
+        "text": "Eurotas",
+        "correct": false
+      }
+    ],
+    "explanation": "Sparta este faimoasă pentru că nu avea ziduri de apărare. Lycurg ar fi spus: 'Un oraș este bine fortificat când este înconjurat de bărbați viteji, nu de cărămizi'. Această filozofie reflectă încrederea totală în puterea militară spartană.",
+    "category": "Particularități spartane",
+    "order": 43
+  },
+
+  {
+    "id": "q044",
+    "themeId": "ancient-greece",
+    "difficulty": "medium",
+    "question": "Ce tip de coloană greacă are capiteluri simple, fără decorațiuni?",
+    "answers": [
+      {
+        "text": "Dorică",
+        "correct": true
+      },
+      {
+        "text": "Ionică",
+        "correct": false
+      },
+      {
+        "text": "Corintică",
+        "correct": false
+      },
+      {
+        "text": "Toscană",
+        "correct": false
+      }
+    ],
+    "explanation": "Ordinul doric este cel mai simplu și mai vechi din arhitectura greacă, cu coloane robuste fără bază și capiteluri simple. Parthenonul folosește ordinul doric. Ordinul ionic are volute, iar corinticul frunze de acant decorative.",
+    "category": "Ordine arhitecturale",
+    "order": 44
+  },
+
+  {
+    "id": "q045",
+    "themeId": "ancient-greece",
+    "difficulty": "easy",
+    "question": "Ce monstru cu 12 capete de șarpe a fost ucis de Heracle?",
+    "answers": [
+      {
+        "text": "Hydra din Lerna",
+        "correct": true
+      },
+      {
+        "text": "Chimera",
+        "correct": false
+      },
+      {
+        "text": "Medusa",
+        "correct": false
+      },
+      {
+        "text": "Cerberos",
+        "correct": false
+      }
+    ],
+    "explanation": "Hydra din Lerna era un monstru acvatic cu mai multe capete (de obicei 9) care regeneau când erau tăiate. Heracle a învins-o cu ajutorul lui Iolaus, care ardea rădăcina fiecărui cap tăiat. Aceasta a fost a doua dintre cele 12 munci ale sale.",
+    "category": "Munci ale lui Heracle",
+    "order": 45
+  }
+]

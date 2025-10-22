@@ -3,8 +3,8 @@
  * 
  * SCOPUL:
  * Landing page a aplicației.
- * - Dacă user e NOT logat: arată LOGIN button
- * - Dacă user e logat: arată LOGOUT button + welcome message
+ * - Dacă user e NOT logat: arată LOGIN form
+ * - Dacă user e logat: arată WELCOME + button pentru a merge la themes
  * 
  * FLOW LOGICĂ:
  * Component se încarcă
@@ -13,12 +13,13 @@
  * ↓
  * Dacă loading = true: arată "Loading..."
  * ↓
- * Dacă user = null: arată "Login button"
+ * Dacă user = null: arată "Login form"
  * ↓
- * Dacă user = object: arată "Welcome, email + Logout button"
+ * Dacă user = object: arată "Welcome + Go to Themes button"
  */
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { 
   signInWithEmailAndPassword,
@@ -36,13 +37,18 @@ import { auth } from '../services/firebase';
 export function Home() {
   
   /**
+   * HOOKS
+   */
+  const navigate = useNavigate();  // Pentru navigare la /themes
+
+  /**
    * STATE LOCAL
    * Stări specifice acestui component (nu au nevoie de AuthContext)
    */
   const [email, setEmail] = useState('');           // Email input value
   const [password, setPassword] = useState('');     // Password input value
   const [error, setError] = useState('');           // Error message
-  const [isSignUp, setIsSignUp] = useState(false);  // Toggle entre Login/Sign Up
+  const [isSignUp, setIsSignUp] = useState(false);  // Toggle între Login/Sign Up
   const [authLoading, setAuthLoading] = useState(false); // Loading state pentru btn
 
   /**
@@ -172,7 +178,7 @@ export function Home() {
    * Condițional rendering:
    * 1. Dacă loading = true: arată spinner
    * 2. Dacă user = null: arată login form
-   * 3. Dacă user = object: arată welcome + logout
+   * 3. Dacă user = object: arată welcome + button pentru themes
    */
 
   // CONDITION 1: LOADING STATE
@@ -314,18 +320,21 @@ export function Home() {
           </p>
         </div>
 
+        {/* BUTTON: GO TO THEMES */}
+        <button
+          onClick={() => navigate('/themes')}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition w-full mb-3"
+        >
+          ▶️ Alege o temă și începe
+        </button>
+
         {/* Logout Button */}
         <button
           onClick={logout}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition"
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg transition w-full"
         >
           Deconectare
         </button>
-
-        {/* Next Step Info */}
-        <p className="text-gray-600 text-sm mt-6">
-          🚀 Next: Theme selection page (coming soon)
-        </p>
 
       </div>
     </div>
@@ -335,30 +344,29 @@ export function Home() {
 export default Home;
 
 /**
- * REZUMAT - CE FACEM AICI:
+ * SCHIMBARE MAJORĂ:
  * 
- * 1. Creez form pentru Login/Sign Up
- * 2. Implementez 4 metode de auth:
- *    - Email/Password Login
- *    - Email/Password Sign Up
- *    - Google Sign In
- *    - Anonymous Sign In
- * 3. Fiecare metodă se conectează la Firebase
- * 4. Dacă reușește, AuthContext se actualizează automat
- * 5. Component se re-render și arată welcome message
+ * Am adăugat:
+ * 1. import { useNavigate } from 'react-router-dom'
+ * 2. const navigate = useNavigate()
+ * 3. Button "Alege o temă și începe" care face navigate('/themes')
  * 
  * FLOW COMPLET:
- * User face click pe Login
+ * User se loghează
  * ↓
- * handleEmailLogin() e apelat
+ * Home arată welcome message + 2 butoane
  * ↓
- * Firebase verifi credentials
+ * User click pe "Alege o temă"
  * ↓
- * onAuthStateChanged() se declanșează
+ * navigate('/themes') se apelează
  * ↓
- * setUser(firebaseUser) în AuthContext
+ * App.jsx Router vede /themes și randează ThemeSelection
  * ↓
- * Component se re-render (user nu mai e null)
+ * User vede 5 tematici în grid
  * ↓
- * Se afișează welcome message
+ * User selectează temă + dificultate
+ * ↓
+ * navigate('/quiz?...) se apelează
+ * ↓
+ * Următorii pași: QuizPlay page
  */

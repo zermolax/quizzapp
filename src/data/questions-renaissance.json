@@ -1,0 +1,632 @@
+[
+  {
+    "id": "rq001",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "În ce secol a început Renașterea în Italia?",
+    "answers": [
+      { "text": "Secolul al XIV-lea", "correct": true },
+      { "text": "Secolul al XII-lea", "correct": false },
+      { "text": "Secolul al XVI-lea", "correct": false },
+      { "text": "Secolul al X-lea", "correct": false }
+    ],
+    "explanation": "Renașterea a început în Florenta în ultimul sfert al secolului al XIV-lea, odată cu patronajul familiei Medici și renașterea artei și literelor.",
+    "category": "Context istoric",
+    "order": 1
+  },
+  {
+    "id": "rq002",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine este autorul celebrei picturi 'Nașterea lui Venus'?",
+    "answers": [
+      { "text": "Sandro Botticelli", "correct": true },
+      { "text": "Leonardo da Vinci", "correct": false },
+      { "text": "Michelangelo Buonarroti", "correct": false },
+      { "text": "Raffaello Sanzio", "correct": false }
+    ],
+    "explanation": "Botticelli a pictat 'Nașterea lui Venus' în jurul anului 1485, simbolizând renașterea interesului pentru mitologia clasică.",
+    "category": "Artă",
+    "order": 2
+  },
+  {
+    "id": "rq003",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Care oraș este considerat 'leagănul Renașterii'?",
+    "answers": [
+      { "text": "Florenta", "correct": true },
+      { "text": "Roma", "correct": false },
+      { "text": "Veneția", "correct": false },
+      { "text": "Milano", "correct": false }
+    ],
+    "explanation": "Florenta, sub patronajul familiei Medici, a devenit centrul cultural și artistic care a lansat mișcarea Renașterii.",
+    "category": "Context istoric",
+    "order": 3
+  },
+  {
+    "id": "rq004",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine a pictat tavanul Capelei Sixtine?",
+    "answers": [
+      { "text": "Michelangelo", "correct": true },
+      { "text": "Leonardo da Vinci", "correct": false },
+      { "text": "Donatello", "correct": false },
+      { "text": "Bramante", "correct": false }
+    ],
+    "explanation": "Michelangelo a realizat frescele tavanului Capelei Sixtine între 1508-1512, comandat de Papa Iuliu al II-lea.",
+    "category": "Artă",
+    "order": 4
+  },
+  {
+    "id": "rq005",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce înseamnă termenul 'umanism' în contextul Renașterii?",
+    "answers": [
+      { "text": "Accent pe valoarea și capacitățile omului", "correct": true },
+      { "text": "Cultul zeilor antici", "correct": false },
+      { "text": "Renunțarea la religie", "correct": false },
+      { "text": "Supunere față de monarh", "correct": false }
+    ],
+    "explanation": "Umanismul renascentist a promovat studiul clasicilor, educația liberă și ideea că omul poate influența propriul destin.",
+    "category": "Filosofie",
+    "order": 5
+  },
+  {
+    "id": "rq006",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Care dintre următorii nu este un 'om universal' al Renașterii?",
+    "answers": [
+      { "text": "Niccolò Machiavelli", "correct": true },
+      { "text": "Leonardo da Vinci", "correct": false },
+      { "text": "Leon Battista Alberti", "correct": false },
+      { "text": "Francis Bacon", "correct": false }
+    ],
+    "explanation": "Machiavelli a fost un gânditor politic, nu un 'om universal' în sensul de artist-inventor-inginer ca Leonardo sau Alberti.",
+    "category": "Personalități",
+    "order": 6
+  },
+  {
+    "id": "rq007",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce familie a patronat artiștii din Florenta timp de secole?",
+    "answers": [
+      { "text": "Medici", "correct": true },
+      { "text": "Borgia", "correct": false },
+      { "text": "Sforza", "correct": false },
+      { "text": "Este", "correct": false }
+    ],
+    "explanation": "Familia Medici, prin bancherul Cosimo și nepotul Lorenzo Magnificul, a finanțat artiști precum Botticelli și Michelangelo.",
+    "category": "Context istoric",
+    "order": 7
+  },
+  {
+    "id": "rq008",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Care operă a lui Dante Alighieri a deschis calea spre limba italiană literară?",
+    "answers": [
+      { "text": "Divina Comedie", "correct": true },
+      { "text": "Canzoniere", "correct": false },
+      { "text": "Decameronul", "correct": false },
+      { "text": "Orlando Furioso", "correct": false }
+    ],
+    "explanation": "Divina Comedie, scrisă în toscană, a demonstrat că limbile vulgare pot exprima idei înalte, nu doar latina.",
+    "category": "Literatură",
+    "order": 8
+  },
+  {
+    "id": "rq009",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Cine a inventat tiparul cu litere mobile în Europa?",
+    "answers": [
+      { "text": "Johannes Gutenberg", "correct": true },
+      { "text": "Leonardo da Vinci", "correct": false },
+      { "text": "Galileo Galilei", "correct": false },
+      { "text": "Aldus Manutius", "correct": false }
+    ],
+    "explanation": "Gutenberg a realizat prima Biblie tipărită cu litere mobile în jurul anului 1455 la Mainz, revoluționând răspândirea cunoștințelor.",
+    "category": "Tehnologie",
+    "order": 9
+  },
+  {
+    "id": "rq010",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Care este subiectul principal al cărții 'Principele' lui Machiavelli?",
+    "answers": [
+      { "text": "Cum obții și păstrezi puterea politică", "correct": true },
+      { "text": "Organizarea armatei", "correct": false },
+      { "text": "Relațiile internaționale", "correct": false },
+      { "text": "Economia statului", "correct": false }
+    ],
+    "explanation": "'Principele' oferă sfaturi practice despre conducere, separând politica de morală, de unde expresia 'scopul scuză mijloacele'.",
+    "category": "Filosofie politică",
+    "order": 10
+  },
+  {
+    "id": "rq011",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce tehnică picturală a fost perfecționată de artistul flamand Jan van Eyck?",
+    "answers": [
+      { "text": "Uleiul pe lemn", "correct": true },
+      { "text": "Fresca", "correct": false },
+      { "text": "Tempera cu ou", "correct": false },
+      { "text": "Acuarela", "correct": false }
+    ],
+    "explanation": "Van Eyck a îmbunătățit tehnica uleiului, obținând străluciri și detalii realiste care au influențat toată pictura nordică.",
+    "category": "Tehnici artistice",
+    "order": 11
+  },
+  {
+    "id": "rq012",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Care ediție a Bibliei a fost prima tipărită integral în limba greacă?",
+    "answers": [
+      { "text": "Editia Complutensiană", "correct": true },
+      { "text": "Biblia lui Erasmus", "correct": false },
+      { "text": "Vulgata", "correct": false },
+      { "text": "Editia Regelui Iacov", "correct": false }
+    ],
+    "explanation": "Editia Complutensiană (1514) a fost pregătită la Alcalá de Henares sub patronajul cardinalului Ximenes, reunind texte grecești și ebraice.",
+    "category": "Tipar și erudiție",
+    "order": 12
+  },
+  {
+    "id": "rq013",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Cine a scris lucrarea 'Despre demnitatea omului', considerată manifestul umanismului?",
+    "answers": [
+      { "text": "Giovanni Pico della Mirandola", "correct": true },
+      { "text": "Petrarca", "correct": false },
+      { "text": "Erasmus din Rotterdam", "correct": false },
+      { "text": "Thomas More", "correct": false }
+    ],
+    "explanation": "Pico susținea că omul este liber să-și aleagă propria natura, fiind creat de Dumnezeu fără limite prestabilite.",
+    "category": "Filosofie",
+    "order": 13
+  },
+  {
+    "id": "rq014",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce oraș a fost capitala culturală a Renașterii nordice în secolul al XVI-lea?",
+    "answers": [
+      { "text": "Antwerp", "correct": true },
+      { "text": "Bruges", "correct": false },
+      { "text": "Amsterdam", "correct": false },
+      { "text": "Lübeck", "correct": false }
+    ],
+    "explanation": "Antwerp a devenit nod comercial și tipografic, atrăgând artiști precum Rubens și Bruegel, fiind numită 'magazia Europei'.",
+    "category": "Context istoric",
+    "order": 14
+  },
+  {
+    "id": "rq015",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cum se numește stilul arhitectural inspirat de antichitate, promovat de Brunelleschi?",
+    "answers": [
+      { "text": "Renaștere", "correct": true },
+      { "text": "Gotic", "correct": false },
+      { "text": "Baroc", "correct": false },
+      { "text": "Romanic", "correct": false }
+    ],
+    "explanation": "Arhitectura Renașterii a reintrodus coloanele, frontoanele și simetria specifică templelor romane, opunându-se goticului.",
+    "category": "Arhitectură",
+    "order": 15
+  },
+  {
+    "id": "rq016",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine a realizat sculptura 'David' în marmură albă?",
+    "answers": [
+      { "text": "Michelangelo", "correct": true },
+      { "text": "Donatello", "correct": false },
+      { "text": "Bernini", "correct": false },
+      { "text": "Cellini", "correct": false }
+    ],
+    "explanation": "Michelangelo a sculptat 'David' între 1501-1504 dintr-un bloc abandonat, simbolizând puterea civică florentină.",
+    "category": "Sculptură",
+    "order": 16
+  },
+  {
+    "id": "rq017",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce invenție a lui Galileo Galilei a permis observarea craterelor lunare?",
+    "answers": [
+      { "text": "Telescopul refractor", "correct": true },
+      { "text": "Microscopul compus", "correct": false },
+      { "text": "Sextantul", "correct": false },
+      { "text": "Camera obscura", "correct": false }
+    ],
+    "explanation": "Galileo și-a îmbunătățit telescopul până la 30x mărire, publicând observațiile în 'Sidereus Nuncius' (1610).",
+    "category": "Știință",
+    "order": 17
+  },
+  {
+    "id": "rq018",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Care este tema principală a 'Decameronului' lui Giovanni Boccaccio?",
+    "answers": [
+      { "text": "Povestiri despre dragoste și vicisitudini sociale", "correct": true },
+      { "text": "Călătorii fantastice", "correct": false },
+      { "text": "Tratate de morală", "correct": false },
+      { "text": "Istoria Florentei", "correct": false }
+    ],
+    "explanation": "Cele 100 de povestiri spuse de tineri refugiați de ciumă satirizează societatea medievală, promovând valorile umaniste.",
+    "category": "Literatură",
+    "order": 18
+  },
+  {
+    "id": "rq019",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Cum se numește instrumentul muzical cu coarde ciupite, popular în Renaștere?",
+    "answers": [
+      { "text": "Lăuta", "correct": true },
+      { "text": "Vioara", "correct": false },
+      { "text": "Clavecín", "correct": false },
+      { "text": "Chitara", "correct": false }
+    ],
+    "explanation": "Lăuta era asociată cu poezia și cântecele de curte, fiind instrumentul simbol al muzicienilor renascentiști.",
+    "category": "Muzică",
+    "order": 19
+  },
+  {
+    "id": "rq020",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce nouă disciplină a introdus Leon Battista Alberti în arhitectură?",
+    "answers": [
+      { "text": "Perspectiva matematică", "correct": true },
+      { "text": "Statica structurilor", "correct": false },
+      { "text": "Hidrologia", "correct": false },
+      { "text": "Acustica teatrelor", "correct": false }
+    ],
+    "explanation": "Alberti a codificat regulile perspectivei în 'De pictura', permițând reprezentări precise ale spațiului.",
+    "category": "Arhitectură",
+    "order": 20
+  },
+  {
+    "id": "rq021",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce papă a autorizat construirea noii Bazilici Sfântul Petru, demolând vechiul edificiu?",
+    "answers": [
+      { "text": "Iuliu al II-lea", "correct": true },
+      { "text": "Alexandru al VI-lea", "correct": false },
+      { "text": "Leone al X-lea", "correct": false },
+      { "text": "Nicolae al V-lea", "correct": false }
+    ],
+    "explanation": "Papa Iuliu al II-lea a pus piatra de temelie în 1506, angajându-i pe Bramante, Michelangelo și Bernini pentru proiect.",
+    "category": "Arhitectură",
+    "order": 21
+  },
+  {
+    "id": "rq022",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Care ediție a Bibliei a fost prima tradusă integral în engleză direct din ebraică și greacă?",
+    "answers": [
+      { "text": "Biblia lui Tyndale", "correct": true },
+      { "text": "Vulgata", "correct": false },
+      { "text": "Great Bible", "correct": false },
+      { "text": "Geneva Bible", "correct": false }
+    ],
+    "explanation": "William Tyndale a tradus Noul Testament în 1526, iar textele sale au stat la baza King James Bible.",
+    "category": "Tipar și reformă",
+    "order": 22
+  },
+  {
+    "id": "rq023",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce oraș a gazduit prima universitate renascentistă din Europa de Nord (1425)?",
+    "answers": [
+      { "text": "Leuven", "correct": true },
+      { "text": "Heidelberg", "correct": false },
+      { "text": "Uppsala", "correct": false },
+      { "text": "Copenhaga", "correct": false }
+    ],
+    "explanation": "Universitatea din Leuven (Belgia) a fost fondată de Papa Martin al V-lea, devenind centru umanist în secolul al XV-lea.",
+    "category": "Educație",
+    "order": 23
+  },
+  {
+    "id": "rq024",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine a pictat 'Școala din Atena', frescă din Camera Segnaturii?",
+    "answers": [
+      { "text": "Raffaello", "correct": true },
+      { "text": "Michelangelo", "correct": false },
+      { "text": "Perugino", "correct": false },
+      { "text": "Pinturicchio", "correct": false }
+    ],
+    "explanation": "Raffaello a pictat fresca între 1509-1511, reunind filozofii antici într-o arhitectură ideală de perspectivă.",
+    "category": "Artă",
+    "order": 24
+  },
+  {
+    "id": "rq025",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Ce navă a fost comandată de Henry al VIII-lea în stil renascentist?",
+    "answers": [
+      { "text": "Mary Rose", "correct": true },
+      { "text": "Golden Hind", "correct": false },
+      { "text": "Victoria", "correct": false },
+      { "text": "Sovereign", "correct": false }
+    ],
+    "explanation": "Mary Rose a fost construită în 1511, ilustrând influența artei italiene asupra ingineriei navale engleze.",
+    "category": "Tehnologie",
+    "order": 25
+  },
+  {
+    "id": "rq026",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce tratat al lui Copernic a pus Soarele în centrul universului?",
+    "answers": [
+      { "text": "De revolutionibus orbium coelestium", "correct": true },
+      { "text": "De hypothesibus motuum", "correct": false },
+      { "text": "Almagest", "correct": false },
+      { "text": "Sidereus Nuncius", "correct": false }
+    ],
+    "explanation": "Publicată în 1543, opera a schimbat cosmologia medievală, declanșând controversa heliocentrică.",
+    "category": "Știință",
+    "order": 26
+  },
+  {
+    "id": "rq027",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce famos spaniol a scris 'La vida de Lazarillo de Tormes'?",
+    "answers": [
+      { "text": "Anonim", "correct": true },
+      { "text": "Miguel de Cervantes", "correct": false },
+      { "text": "Fernando de Rojas", "correct": false },
+      { "text": "Garcilaso de la Vega", "correct": false }
+    ],
+    "explanation": "Romanul picaresc a apărut anonim în 1554, satirizând societatea spaniolă prin aventurile unui șmecher sărac.",
+    "category": "Literatură",
+    "order": 27
+  },
+  {
+    "id": "rq028",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Cine a fost sculptorul primei statui ecvestre din bronz după antichitate?",
+    "answers": [
+      { "text": "Donatello", "correct": true },
+      { "text": "Verrocchio", "correct": false },
+      { "text": "Ghiberti", "correct": false },
+      { "text": "Pollaiuolo", "correct": false }
+    ],
+    "explanation": "Donatello a turnat 'Gattamelata' în 1453 la Padova, reluând tehnica pierdută a bronzului monumental.",
+    "category": "Sculptură",
+    "order": 28
+  },
+  {
+    "id": "rq029",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce papă a excomunicat-o pe regina Elisabeta I în 1570?",
+    "answers": [
+      { "text": "Pius al V-lea", "correct": true },
+      { "text": "Grigore al XIII-lea", "correct": false },
+      { "text": "Sixtus al V-lea", "correct": false },
+      { "text": "Urban al VII-lea", "correct": false }
+    ],
+    "explanation": "Bula 'Regnans in Excelsis' a încurajat catolicii englezi să o răstoarne pe Elisabeta, intensificând tensiunile religioase.",
+    "category": "Politica papală",
+    "order": 29
+  },
+  {
+    "id": "rq030",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce matematician a rezolvat ecuația de gradul trei și a păstrat secretul în Renaștere?",
+    "answers": [
+      { "text": "Scipione del Ferro", "correct": true },
+      { "text": "Girolamo Cardano", "correct": false },
+      { "text": "Niccolò Tartaglia", "correct": false },
+      { "text": "Rafael Bombelli", "correct": false }
+    ],
+    "explanation": "Del Ferro a descoperit soluția în 1515, dezvăluind-o doar unui student; disputa cu Tartaglia a dus la publicarea lui Cardano.",
+    "category": "Matematică",
+    "order": 30
+  },
+  {
+    "id": "rq031",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Care este principala inovație a 'Arcului de Triumf' al lui Alberti în Mantua?",
+    "answers": [
+      { "text": "Utilizarea ordinilor clasice în arc", "correct": true },
+      { "text": "Boltă cu cusps gotice", "correct": false },
+      { "text": "Coloane spirale", "correct": false },
+      { "text": "Pietre rustice gigant", "correct": false }
+    ],
+    "explanation": "Alberti a aplicat pentru prima dată ordinile romane (doric, ionic, corintic) pe un arc de triumf, creând un limbaj clasic renascentist.",
+    "category": "Arhitectură",
+    "order": 31
+  },
+  {
+    "id": "rq032",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce tratat al lui Alberti dedică o întreagă carte proporției clădirilor?",
+    "answers": [
+      { "text": "De re aedificatoria", "correct": true },
+      { "text": "De pictura", "correct": false },
+      { "text": "De statua", "correct": false },
+      { "text": "Despre armonia muzicii", "correct": false }
+    ],
+    "explanation": "Cele 10 cărți ale lui Alberti (1452) sistematizează arhitectura antică, influențându-l pe Palladio și pe arhitecții moderni.",
+    "category": "Teorie arhitecturală",
+    "order": 32
+  },
+  {
+    "id": "rq033",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Ce renumit grădinar a proiectat grădinile de la Villandry (Franța) în spirit renascentist?",
+    "answers": [
+      { "text": "Joachim Carvallo", "correct": true },
+      { "text": "André Le Nôtre", "correct": false },
+      { "text": "Lancelot Brown", "correct": false },
+      { "text": "Bernard Palissy", "correct": false }
+    ],
+    "explanation": "Carvallo a recreat în 1906 planurile renascentiste de grădină cu compartimente simetrice și simboluri ieroglifice.",
+    "category": "Grădinărit",
+    "order": 33
+  },
+  {
+    "id": "rq034",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine a compus 'Missa Papae Marcelli', demonstrând că muzica polifonică poate fi inteligibilă?",
+    "answers": [
+      { "text": "Giovanni Pierluigi da Palestrina", "correct": true },
+      { "text": "Josquin des Prez", "correct": false },
+      { "text": "Orlando di Lasso", "correct": false },
+      { "text": "Tomas Luis de Victoria", "correct": false }
+    ],
+    "explanation": "Palestrina a salvat polifonia de la condamnare la Conciliul de la Trent, arătând că textul sacru rămâne clar.",
+    "category": "Muzică",
+    "order": 34
+  },
+  {
+    "id": "rq035",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce nouă formă literară a inventat Ludovico Ariosto în 'Orlando Furioso'?",
+    "answers": [
+      { "text": "Epopeea romantică", "correct": true },
+      { "text": "Sonetul", "correct": false },
+      { "text": "Pastorala", "correct": false },
+      { "text": "Satira", "correct": false }
+    ],
+    "explanation": "Ariosto combină aventura cavalerescă cu ironia umanistă, creând un poem eroic-comic care a influențat literatura europeană.",
+    "category": "Literatură",
+    "order": 35
+  },
+  {
+    "id": "rq036",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Cine a fost primul tipograf care a folosit caractere italice (cursive)?",
+    "answers": [
+      { "text": "Aldus Manutius", "correct": true },
+      { "text": "Johannes Gutenberg", "correct": false },
+      { "text": "Claude Garamond", "correct": false },
+      { "text": "Christophe Plantin", "correct": false }
+    ],
+    "explanation": "Aldus a introdus italicele în 1501 pentru a economisi spațiu în edițiile de buzunar ale clasicilor.",
+    "category": "Tipar",
+    "order": 36
+  },
+  {
+    "id": "rq037",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce oraș a editat prima hartă geografică tipărită color (1472)?",
+    "answers": [
+      { "text": "Bologna", "correct": true },
+      { "text": "Roma", "correct": false },
+      { "text": "Veneția", "correct": false },
+      { "text": "Florenta", "correct": false }
+    ],
+    "explanation": "Harta 'T-O' a lui Isidore din Sevilia a fost tipărită la Bologna, fiind prima care folosește xilogravură colorată.",
+    "category": "Cartografie",
+    "order": 37
+  },
+  {
+    "id": "rq038",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce matematician a introdus simbolurile '+' și '-' în tipar?",
+    "answers": [
+      { "text": "Johannes Widmann", "correct": true },
+      { "text": "Luca Pacioli", "correct": false },
+      { "text": "Nicolas Chuquet", "correct": false },
+      { "text": "Robert Recorde", "correct": false }
+    ],
+    "explanation": "Widmann a publicat în 1489 la Leipzig prima lucrare care folosește semnele pentru surplus și deficit comercial.",
+    "category": "Matematică",
+    "order": 38
+  },
+  {
+    "id": "rq039",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Cine a pictat 'Primăvara' și 'Nașterea lui Venus' pentru Villa di Castello?",
+    "answers": [
+      { "text": "Sandro Botticelli", "correct": true },
+      { "text": "Domenico Ghirlandaio", "correct": false },
+      { "text": "Filippino Lippi", "correct": false },
+      { "text": "Cosimo Rosselli", "correct": false }
+    ],
+    "explanation": "Cele două capodopere au fost comandate de Lorenzo di Pierfrancesco de' Medici pentru reședința sa de la țară.",
+    "category": "Artă",
+    "order": 39
+  },
+  {
+    "id": "rq040",
+    "themeId": "renaissance",
+    "difficulty": "easy",
+    "question": "Ce renumit atlas a fost editat de Abraham Ortelius în 1570?",
+    "answers": [
+      { "text": "Theatrum Orbis Terrarum", "correct": true },
+      { "text": "Cosmographia", "correct": false },
+      { "text": "Geographia", "correct": false },
+      { "text": "Speculum Orbis", "correct": false }
+    ],
+    "explanation": "Ortelius a adunat hărțile celor mai buni cartografi, creând prima lucrare tipărită intitulată oficial 'atlas'.",
+    "category": "Cartografie",
+    "order": 40
+  },
+  {
+    "id": "rq041",
+    "themeId": "renaissance",
+    "difficulty": "medium",
+    "question": "Ce tratat al lui Tommaso Campanella descrie orașul ideal dominat de știință și religie?",
+    "answers": [
+      { "text": "Civitas Solis", "correct": true },
+      { "text": "Utopia", "correct": false },
+      { "text": "La città felice", "correct": false },
+      { "text": "Arcadia", "correct": false }
+    ],
+    "explanation": "Scris în închisoare (1602), orașul-soare propune o teocrație științifică, anticipând idealurile illuministe.",
+    "category": "Filosofie politică",
+    "order": 41
+  },
+  {
+    "id": "rq042",
+    "themeId": "renaissance",
+    "difficulty": "hard",
+    "question": "Ce inginer a proiectat podul Santa Trinita (1567) cu arc eliptic fără cofraj?",
+    "answers": [
+      { "text": "Bartolomeo Ammannati", "correct": true },
+      { "text": "Giorgio Vasari", "correct": false },
+      { "text": "Antonio da Sangallo", "correct": false },
+      { "text": "Vincenzo Scamozzi", "correct": false }
+    ],
+    "explanation": "Ammannati a folosit o centură de cărămidă și pietre înclinate, creând cel mai elegant arc renascentist peste Arno.",
+    "category": "Inginerie",
+    "order": 42
+  }
+]

@@ -1,71 +1,104 @@
 /**
- * App.jsx
+ * App.jsx - UPDATED cu React Router
  * 
  * SCOPUL:
- * Componenta principală a aplicației.
- * De aici vor pornii rutele (route-uri) în viitor.
+ * Router-ul principal al aplicației.
+ * Definesc rutele (routes) și ce component se randează pentru fiecare rută.
  * 
- * PENTRU MVP:
- * Doar randez Home component
+ * RUTE DEFINTE:
+ * / → Home (login page)
+ * /themes → ThemeSelection
+ * /quiz → QuizPlay (coming soon)
  * 
- * ÎN VIITOR (Faza 2):
- * Voi adăuga React Router aici pentru a naviga între pagini
- * 
- * EXEMPLU VIITOR:
- * 
- * import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
- * import Home from './pages/Home';
- * import ThemeSelection from './pages/ThemeSelection';
- * 
- * export default function App() {
- *   return (
- *     <Router>
- *       <Routes>
- *         <Route path="/" element={<Home />} />
- *         <Route path="/themes" element={<ThemeSelection />} />
- *       </Routes>
- *     </Router>
- *   );
- * }
+ * CONCEPTE:
+ * - <BrowserRouter> = wrapper pentru toată aplicația cu routing
+ * - <Routes> = container pentru rutele
+ * - <Route path="/" element={<Home />} /> = mapare url → component
  */
 
-import Home from './pages/Home'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import Home from './pages/Home';
+import ThemeSelection from './pages/ThemeSelection';
+import QuizPlay from './pages/QuizPlay';
 
 /**
  * COMPONENT: App
  * 
- * Pentru MVP: doar randez Home
- * Home component are logica pentru a afișa:
- * - Login form (dacă nu e logat)
- * - Welcome + logout (dacă e logat)
+ * Acesta e "root router" al app-ului.
+ * Fiecare URL merge la o rută definită aici.
  */
 export default function App() {
+  
+  /**
+   * PROTECTED ROUTE LOGIC
+   * 
+   * Sunt zone ale app-ului care necesită autentificare
+   * (spre exemplu: ThemeSelection - user trebuie logat)
+   * 
+   * FLOW:
+   * 1. User accesează /themes
+   * 2. Verific cu useAuth() dacă e logat
+   * 3. Dacă logat → arăt ThemeSelection
+   * 4. Dacă nu → redirect la Home (login)
+   */
+  const { user, loading } = useAuth();
+
+  // Dacă Firebase încă verifi autentificarea, arăt loading
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <Home />
-    </div>
-  )
+    <Router>
+      <Routes>
+        
+        {/* RUTA 1: Home */}
+        <Route path="/" element={<Home />} />
+        
+        {/* RUTA 2: Theme Selection (Protected) */}
+        <Route
+          path="/themes"
+          element={user ? <ThemeSelection /> : <Navigate to="/" replace />}
+        />
+
+        {/* RUTA 3: Quiz Play (Protected) */}
+        <Route
+          path="/quiz"
+          element={user ? <QuizPlay /> : <Navigate to="/" replace />}
+        />
+
+        {/* RUTA 4: Catch-all (404) */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+
+      </Routes>
+    </Router>
+  );
 }
 
 /**
- * FLOW COMPLET ACUM:
+ * EXPLICAȚIE FLUX COMPLET:
  * 
- * 1. Browser încarcă index.html
- * 2. index.html include <div id="root"></div>
- * 3. main.jsx:
- *    - Importează App
- *    - Wrap-lez cu AuthProvider
- *    - Randez în #root
- * 4. App.jsx: Randez Home
- * 5. Home.jsx:
- *    - Folosește useAuth() pentru a accesa user
- *    - Arată login sau welcome, depinde de auth status
- * 6. User face click pe Login
- * 7. Home apelează signInWithEmailAndPassword()
- * 8. Firebase verifi email/password
- * 9. onAuthStateChanged() se declanșează
- * 10. AuthContext se actualizează
- * 11. Home se re-render și arată welcome message
+ * 1. User accesează http://localhost:5173/
+ * 2. Router verifi ruta: "/" → element={<Home />}
+ * 3. Home se randează (cu login form)
+ * 4. User se loghează
+ * 5. AuthContext se actualizează (user nu mai e null)
+ * 6. Home component arată welcome message + "next" info
+ * 7. User navigheaza la /themes (prin click sau manual)
+ * 8. Router verifi: path="/themes"
+ * 9. Condiția: user ? <ThemeSelection /> : <Navigate to="/" />
+ * 10. Dacă user logat → ThemeSelection se randează
+ * 11. User vede tema grid
+ * 12. User selectează temă + dificultate
+ * 13. ThemeCard apelează navigate("/quiz?themeId=wwi&difficulty=easy")
+ * 14. Router merge la /quiz (QuizPlay page - coming soon)
  * 
- * TOTUL E CONECTAT! 🚀
+ * PROTECTED ROUTES:
+ * Dacă user se deloghează, /themes redirect automat la /
+ * Asta e bun pentru UX - previne accesul la pagini fără user
  */
