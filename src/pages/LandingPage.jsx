@@ -1,26 +1,18 @@
 /**
- * LandingPage.jsx
+ * LandingPage.jsx - UPDATED
  * 
- * SCOPUL:
- * Landing page profesionist pentru quizzfun.app
- * 
- * SECȚIUNI:
- * 1. Hero section
- * 2. Features showcase
- * 3. How it works
- * 4. Stats
- * 5. CTA
- * 6. Footer
+ * Primește prop: onPlayNow
+ * Când user clickează "Joacă acum", apelează onPlayNow()
  */
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
-export function LandingPage() {
+export function LandingPage({ onPlayNow }) {
   
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600">
@@ -38,16 +30,20 @@ export function LandingPage() {
                 >
                   Joacă acum
                 </button>
-              </>
-            ) : (
-              <>
                 <button
-                  onClick={() => navigate('/')}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
+                  onClick={logout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold"
                 >
-                  Login
+                  Deconectare
                 </button>
               </>
+            ) : (
+              <button
+                onClick={onPlayNow || (() => {})}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
+              >
+                Login
+              </button>
             )}
           </div>
         </div>
@@ -63,29 +59,18 @@ export function LandingPage() {
         </p>
         
         <div className="flex gap-4 justify-center mb-12">
-          {user ? (
-            <button
-              onClick={() => navigate('/themes')}
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold text-lg transition"
-            >
-              ▶️ Începe Quiz
-            </button>
-          ) : (
-            <>
-              <button
-                onClick={() => navigate('/')}
-                className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold text-lg transition"
-              >
-                🚀 Încearcă Gratuit
-              </button>
-              <button
-                onClick={() => window.scrollTo(0, document.body.scrollHeight)}
-                className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-bold text-lg transition"
-              >
-                Află Mai Mult
-              </button>
-            </>
-          )}
+          <button
+            onClick={onPlayNow || (() => {})}
+            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold text-lg transition"
+          >
+            ▶️ Începe Quiz
+          </button>
+          <button
+            onClick={() => window.scrollTo(0, document.body.scrollHeight)}
+            className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-bold text-lg transition"
+          >
+            Află Mai Mult
+          </button>
         </div>
 
         {/* Stats */}
@@ -227,21 +212,12 @@ export function LandingPage() {
             100% gratuit • Fără ads • Distractiv • Educational
           </p>
           
-          {user ? (
-            <button
-              onClick={() => navigate('/themes')}
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition"
-            >
-              ▶️ Începe Acum
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate('/')}
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition"
-            >
-              🚀 Joacă Gratuit
-            </button>
-          )}
+          <button
+            onClick={onPlayNow || (() => {})}
+            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition"
+          >
+            ▶️ Începe Acum
+          </button>
         </div>
       </section>
 
@@ -295,20 +271,14 @@ export function LandingPage() {
 export default LandingPage;
 
 /**
- * SECȚIUNI LANDING PAGE:
+ * FLUX FINAL:
  * 
- * 1. Navigation - Simple header cu logo și CTA
- * 2. Hero - Big title + description + CTA buttons
- * 3. Stats - 3 key metrics
- * 4. Features - 6 cards cu benefits
- * 5. How it works - 4 step process
- * 6. Final CTA - Call to action
- * 7. Footer - Links + copyright
+ * 1. User vizită quizzfun.app
+ * 2. Vede LandingPage cu "Joacă acum" button
+ * 3. Click → onPlayNow() din Home.jsx
+ * 4. Home checks: user logat?
+ * 5. NU → Show LoginModal
+ * 6. DA → Navigate to /themes
  * 
- * DESIGN:
- * - Blue gradient theme
- * - Clean, professional
- * - Mobile responsive
- * - Easy to read
- * - Strong CTAs
+ * PERFECT UX! ✅
  */

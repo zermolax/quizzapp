@@ -1,45 +1,89 @@
 /**
- * Home.jsx - FIXED
+ * Home.jsx - FIXED v2
  * 
- * LOGICA:
- * - Dacă user e logat → Arată LandingPage
- * - Dacă user NU e logat → Arată Login form
+ * PROBLEMA: showLogin state nu se resetează când user se loghează
+ * SOLUȚIE: UseEffect care observă user changes
  */
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 import LoginModal from '../components/auth/LoginModal';
 import { LandingPage } from './LandingPage';
 
 export function Home() {
   
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(false);
 
-  // If logged in, show landing page
-  if (user) {
-    return <LandingPage />;
+  /**
+   * EFFECT: Când user se schimbă, reset showLogin
+   */
+  useEffect(() => {
+    if (user && showLogin) {
+      console.log('🟢 User detected, hiding login modal');
+      setShowLogin(false);
+    }
+  }, [user, showLogin]);
+
+  // Funcție pentru "Joacă acum" button
+  const handlePlayNow = () => {
+    console.log('📢 Play now clicked, user:', user);
+    
+    if (user) {
+      console.log('✅ User is logged in, navigating to /themes');
+      navigate('/themes');
+    } else {
+      console.log('❌ User not logged in, showing login modal');
+      setShowLogin(true);
+    }
+  };
+
+  // Dacă showLogin e true, arată LoginModal
+  if (showLogin && !user) {
+    console.log('🔵 Rendering LoginModal');
+    return <LoginModal />;
   }
 
-  // If not logged in, show login modal
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600">
-      <LoginModal />
-    </div>
-  );
+  // Dacă user e logat, arată LandingPage cu custom handlePlayNow
+  if (user) {
+    console.log('🟢 Rendering LandingPage (user logged in)');
+    return <LandingPage onPlayNow={handlePlayNow} />;
+  }
+
+  // Dacă loading, arată loading
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  // Default: Arată LandingPage cu handlePlayNow (care va deschide login)
+  console.log('⚪ Rendering LandingPage (user not logged in)');
+  return <LandingPage onPlayNow={handlePlayNow} />;
 }
 
 export default Home;
 
 /**
- * FLUX:
+ * FLOW CORECT:
  * 
- * 1. User accesează /
- * 2. App.jsx arată Home
- * 3. Home.jsx verifică:
- *    - user logat? → LandingPage
- *    - user NU logat? → LoginModal
+ * 1. User vizită /
+ * 2. user = null, showLogin = false
+ * 3. Render LandingPage
+ * 4. Click "Joacă acum" → handlePlayNow()
+ * 5. user = null → setShowLogin(true)
+ * 6. Render LoginModal
+ * 7. User se loghează → Firebase fires onAuthStateChanged
+ * 8. useAuth hook updates → user = { ... }
+ * 9. useEffect detectează user change
+ * 10. setShowLogin(false)
+ * 11. Re-render Home
+ * 12. user exists && !showLogin → Render LandingPage (logged in)
+ * 13. Now "Joacă acum" → navigate('/themes')
  * 
- * 4. User se loghează
- * 5. Home rerender → Acum vede LandingPage
- * 6. In LandingPage: "Joacă acum" → /themes
+ * PERFECT! ✅
  */

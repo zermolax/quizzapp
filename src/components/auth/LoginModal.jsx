@@ -1,12 +1,14 @@
 /**
- * LoginModal.jsx - WITH GOOGLE AUTH
+ * LoginModal.jsx - WITH DEBUG LOGS
  */
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 export function LoginModal() {
   
+  const navigate = useNavigate();
   const { 
     loginWithEmail, 
     loginWithGoogle,
@@ -25,12 +27,22 @@ export function LoginModal() {
     setError('');
     
     try {
+      console.log('🔵 Login attempt with:', email);
+      
       if (isSignUp) {
         await signUpWithEmail(email, password);
+        console.log('✅ Sign up successful');
       } else {
         await loginWithEmail(email, password);
+        console.log('✅ Login successful');
       }
+      
+      console.log('🟢 About to navigate to /');
+      navigate('/');
+      console.log('🟡 Navigate called (may be async)');
+      
     } catch (err) {
+      console.error('❌ Login error:', err);
       setError(err.message || 'Auth error');
     }
   };
@@ -38,8 +50,16 @@ export function LoginModal() {
   const handleGoogleLogin = async () => {
     setError('');
     try {
+      console.log('🔵 Google login attempt');
       await loginWithGoogle();
+      console.log('✅ Google login successful');
+      
+      console.log('🟢 About to navigate to /');
+      navigate('/');
+      console.log('🟡 Navigate called (may be async)');
+      
     } catch (err) {
+      console.error('❌ Google login error:', err);
       setError(err.message || 'Google auth failed');
     }
   };
@@ -47,8 +67,16 @@ export function LoginModal() {
   const handleAnonymousLogin = async () => {
     setError('');
     try {
+      console.log('🔵 Anonymous login attempt');
       await loginAnonymous();
+      console.log('✅ Anonymous login successful');
+      
+      console.log('🟢 About to navigate to /');
+      navigate('/');
+      console.log('🟡 Navigate called (may be async)');
+      
     } catch (err) {
+      console.error('❌ Anonymous login error:', err);
       setError(err.message || 'Anonymous auth failed');
     }
   };
@@ -127,7 +155,7 @@ export function LoginModal() {
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
 
-        {/* GOOGLE LOGIN - ENABLED */}
+        {/* GOOGLE LOGIN */}
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
