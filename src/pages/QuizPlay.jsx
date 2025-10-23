@@ -1,25 +1,12 @@
 /**
- * QuizPlay.jsx
+ * QuizPlay.jsx - UPDATED cu Firestore Integration
  * 
- * SCOPUL:
- * Pagina principală a jocului quiz.
- * 
- * FLOW EDUCAȚIONAL:
- * 1. Afișez întrebare + 4 răspunsuri (clickable buttons)
- * 2. User click pe răspuns
- * 3. Verific dacă e corect:
- *    - CORECT: Buton devine VERDE ✓
- *    - GREȘIT: Buton devine ROȘU ✗, răspunsul corect devine VERDE
- * 4. Afișez EXPLANATION (2-3 rânduri)
- * 5. PAUZĂ: 3 secunde (timp pentru citire)
- * 6. Automat mergi la următoarea întrebare
- * 7. La final: Rezultat final cu score
- * 
- * TIMING STRATEGY:
- * - 3 secunde: perfect pentru citit explanation (2 rânduri) + digest
- * - Nu prea puțin: user nu se simte grăbit
- * - Nu prea mult: nu se plictisește
- * - Automat: nu trebuie să apese "next" (smooth experience)
+ * NOUTĂȚI:
+ * 1. Import quizService functions
+ * 2. Track answers array (pentru salvare)
+ * 3. Track start time (pentru duration)
+ * 4. La final: saveQuizSession() + updateUserStats()
+ * 5. Display user stats în results screen
  */
 
 import React, { useState, useEffect } from 'react';
@@ -27,6 +14,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
 import themesData from '../data/themes.json';
+import { saveQuizSession, updateUserStats, getUserStats } from '../services/quizService';
 
 /**
  * COMPONENT: QuizPlay
@@ -59,41 +47,40 @@ export function QuizPlay() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
+  
+  // NEW: Track answers array for saving
+  const [answersArray, setAnswersArray] = useState([]);
+  
+  // NEW: Track start time for duration
+  const [startTime, setStartTime] = useState(null);
+  
+  // NEW: User stats display
+  const [userStats, setUserStats] = useState(null);
+  const [savingSession, setSavingSession] = useState(false);
 
   /**
    * EFFECT: Load questions for selected theme
-   * 
-   * FLOW:
-   * 1. Component mount sau themeId/difficulty change
-   * 2. Importez questions din JSON (dynamic import)
-   * 3. Filtrez după difficulty
-   * 4. Set state
    */
   useEffect(() => {
     const loadQuestions = async () => {
       try {
         setLoading(true);
         
-        // Map tema la fișier
-        // Exemplu: themeId "wwi" → "questions-wwi.json"
         const questionFile = `questions-${themeId}.json`;
-        
-        // Dynamic import - incarcă JSON-ul
-        // NOTA: Trebuie ca fișierul să existe în src/data/
         const allQuestions = await import(`../data/${questionFile}`).then(m => m.default);
         
-        // Filtrez după difficulty
         const filteredQuestions = allQuestions.filter(q => q.difficulty === difficulty);
-        
-        // Shuffle întrebări (random order)
         const shuffled = filteredQuestions.sort(() => Math.random() - 0.5);
         
-        setQuestions(shuffled.slice(0, 10)); // Limit la 10 întrebări per quiz (MVP)
+        setQuestions(shuffled.slice(0, 10));
+        
+        // NEW: Set start time when quiz begins
+        setStartTime(Date.now());
+        
         setLoading(false);
         
       } catch (error) {
         console.error('Error loading questions:', error);
-        // Fallback: arăt error message
         setLoading(false);
       }
     };
@@ -106,17 +93,9 @@ export function QuizPlay() {
   /**
    * HANDLER: User selectează răspuns
    * 
-   * FLOW:
-   * 1. User click pe buton (index 0-3)
-   * 2. Setez selectedAnswerIndex
-   * 3. Verific dacă e correct
-   * 4. Setez answered = true (disabledeze butoanele)
-   * 5. Arăt explanation
-   * 6. PAUZĂ: 3 secunde
-   * 7. Automat merge la următoarea întrebare
+   * MODIFIED: Track answer în answersArray
    */
   const handleAnswerClick = (answerIndex) => {
-    // Dacă deja a răspuns, ignore
     if (answered) return;
 
     setSelectedAnswerIndex(answerIndex);
@@ -128,37 +107,105 @@ export function QuizPlay() {
     setAnswered(true);
     setShowExplanation(true);
 
-    // Incrementez score dacă corect
+    // NEW: Add answer to array for saving
+    const answerData = {
+      questionId: currentQuestion.id,
+      question: currentQuestion.question,
+      selectedAnswerIndex: answerIndex,
+      selectedAnswer: currentQuestion.answers[answerIndex].text,
+      correct: isAnswerCorrect,
+      correctAnswer: currentQuestion.answers.find(a => a.correct).text,
+      explanation: currentQuestion.explanation
+    };
+    
+    setAnswersArray([...answersArray, answerData]);
+
+    // Increment score if correct
     if (isAnswerCorrect) {
-      setScore(score + 10); // +10 puncte per întrebare corectă
+      setScore(score + 10);
     }
 
-    // PAUZĂ: 3 secunde
-    // După 3 secunde, automat mergi la următoarea întrebare
+    // PAUZĂ: 3 secunde - schimbat din 3000 la 4000 daca vrei
     setTimeout(() => {
       handleNextQuestion();
-    }, 5000); // 3 secunde - TIMING PERFECT
+    }, 4000);
   };
 
   /**
    * HANDLER: Merge la următoarea întrebare
-   * 
-   * Logică:
-   * - Dacă mai sunt întrebări: merge la următoarea
-   * - Dacă nu mai sunt: quiz finished
    */
   const handleNextQuestion = () => {
     const nextIndex = currentQuestionIndex + 1;
     
     if (nextIndex < questions.length) {
-      // Reset state pentru următoarea întrebare
       setCurrentQuestionIndex(nextIndex);
       setSelectedAnswerIndex(null);
       setAnswered(false);
       setShowExplanation(false);
       setIsCorrect(false);
     } else {
-      // Quiz terminat!
+      // NEW: Quiz terminat - apelezi saveQuizSession
+      handleQuizFinish();
+    }
+  };
+
+  /**
+   * NEW FUNCTION: Handle Quiz Finish
+   * 
+   * FLOW:
+   * 1. Calculate duration
+   * 2. Save session în Firestore
+   * 3. Update user stats
+   * 4. Fetch updated stats
+   * 5. Set quizFinished = true
+   */
+  const handleQuizFinish = async () => {
+    try {
+      setSavingSession(true);
+
+      // Calculate duration
+      const endTime = Date.now();
+      const duration = Math.round((endTime - startTime) / 1000); // seconds
+
+      console.log('Saving quiz session...', {
+        userId: user.uid,
+        themeId,
+        difficulty,
+        score,
+        totalQuestions: questions.length,
+        duration
+      });
+
+      // Save quiz session
+      await saveQuizSession(
+        user.uid,
+        themeId,
+        difficulty,
+        score,
+        questions.length,
+        answersArray,
+        duration
+      );
+
+      // Update user stats
+      await updateUserStats(
+        user.uid,
+        score,
+        questions.length
+      );
+
+      // Fetch updated stats
+      const stats = await getUserStats(user.uid);
+      setUserStats(stats);
+
+      console.log('Session saved and stats updated');
+      setSavingSession(false);
+      setQuizFinished(true);
+
+    } catch (error) {
+      console.error('Error finishing quiz:', error);
+      setSavingSession(false);
+      // Still show results even if save failed
       setQuizFinished(true);
     }
   };
@@ -208,6 +255,8 @@ export function QuizPlay() {
 
   /**
    * RENDER: Quiz finished - Results
+   * 
+   * MODIFIED: Arată user stats dacă disponibile
    */
   if (quizFinished) {
     const percentage = Math.round((score / (questions.length * 10)) * 100);
@@ -217,6 +266,13 @@ export function QuizPlay() {
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-500 to-pink-600">
         <div className="bg-white rounded-lg shadow-2xl p-8 text-center max-w-md">
           
+          {/* Saving indicator */}
+          {savingSession && (
+            <div className="mb-4 bg-blue-100 p-3 rounded text-blue-700">
+              ⏳ Se salvează progresul...
+            </div>
+          )}
+
           {/* Score Display */}
           <h1 className="text-4xl font-bold text-purple-600 mb-2">
             🎉 Quiz Terminat!
@@ -249,7 +305,32 @@ export function QuizPlay() {
             )}
           </div>
 
-          {/* Quiz stats */}
+          {/* NEW: User Stats */}
+          {userStats && (
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg mb-6 text-sm">
+              <p className="font-bold text-blue-900 mb-3">📊 Statistici personale:</p>
+              <div className="grid grid-cols-2 gap-2 text-left">
+                <div>
+                  <p className="text-xs text-gray-600">Quiz-uri jucate</p>
+                  <p className="text-xl font-bold text-blue-600">{userStats.totalQuizzes}</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-600">Scor mediu</p>
+                  <p className="text-xl font-bold text-blue-600">{userStats.averageScore}%</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-600">Cel mai bun scor</p>
+                  <p className="text-xl font-bold text-green-600">{userStats.bestScore}%</p>
+                </div>
+                <div>
+                  <p className="text-xs text-gray-600">Puncte totale</p>
+                  <p className="text-xl font-bold text-purple-600">{userStats.totalPoints}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Quiz info */}
           <div className="bg-gray-50 p-4 rounded-lg mb-6 text-sm">
             <p className="text-gray-600">
               <strong>Temă:</strong> {theme?.name}
@@ -272,7 +353,6 @@ export function QuizPlay() {
           
           <button
             onClick={() => {
-              // Refresh current quiz
               window.location.reload();
             }}
             className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition"
@@ -351,51 +431,46 @@ export function QuizPlay() {
 export default QuizPlay;
 
 /**
- * GAME FLOW COMPLET - TIMELINE:
+ * NOUTĂȚI IMPLEMENTATE:
  * 
- * T=0s: Question appears
- *       - 4 answer buttons visible
- *       - User can click
- *       - Score visible
+ * 1. Import quizService functions
+ * 2. State: answersArray, startTime, userStats, savingSession
+ * 3. handleAnswerClick: Adaug answer la answersArray
+ * 4. handleQuizFinish: 
+ *    - Calculate duration
+ *    - Save session
+ *    - Update stats
+ *    - Fetch stats
+ * 5. Results screen: Arăt userStats
  * 
- * T=0.2s: User clicks answer
- *         - selectedAnswerIndex se setează
- *         - answered = true (buttons disabled)
+ * FLOW COMPLET:
+ * 1. User termină quiz
+ * 2. handleQuizFinish se apelează
+ * 3. Duration se calculează
+ * 4. saveQuizSession() trimite la Firestore
+ * 5. updateUserStats() actualizează stats
+ * 6. getUserStats() citesc stats
+ * 7. Results screen arată stats
  * 
- * T=0.3s: Visual feedback appears
- *         - Clicked button: RED or GREEN
- *         - Correct answer: GREEN (dacă greșit)
- *         - Explanation text appears
+ * FIRESTORE DATA SAVED:
  * 
- * T=0.5s-3.0s: PAUSE for reading
- *              - Explanation visible
- *              - No interaction possible
- *              - Timer running silently
- *              - User reads explanation
+ * Collection: quizSessions
+ * └─ {sessionId}/
+ *    ├── userId: "lXbfRG6eSSXMGKSGD134LohyKWq1"
+ *    ├── themeId: "wwi"
+ *    ├── difficulty: "easy"
+ *    ├── score: 85
+ *    ├── maxScore: 100
+ *    ├── percentage: 85
+ *    ├── answers: [...]
+ *    ├── duration: 120 (secunde)
+ *    └── createdAt: 2024-10-22T10:30:00Z
  * 
- * T=3.0s: Auto-advance
- *         - Reset state
- *         - Next question loads
- *         - Back to T=0s
- * 
- * TIMING ANALYSIS:
- * - 2-3 líneas de explanation ≈ 6-10 seconds to read properly
- * - BUT: User already knows answer (corect/greșit), so reading is faster
- * - 3 seconds = perfect balance:
- *   * Enough to read and digest
- *   * Fast enough to maintain engagement
- *   * Not frustrating
- *   * Not boring
- * 
- * PSYCHOLOGY:
- * - Immediate feedback (0.2s): Satisfying
- * - Explanation (3s): Educational
- * - Auto-advance: No decision fatigue
- * - No "next button": Smooth, game-like feel
- * 
- * EDUCATIONAL VALUE:
- * - Answer validation: Learn immediately if wrong
- * - Explanation: Understand WHY (critical for learning)
- * - Pause: Time to think and digest
- * - Visual feedback: Reinforces learning
+ * Collection: users/{userId}
+ * └─ stats/
+ *    ├── totalQuizzes: 5
+ *    ├── totalPoints: 420
+ *    ├── averageScore: 84
+ *    ├── bestScore: 90
+ *    └── lastQuizDate: 2024-10-22T10:30:00Z
  */

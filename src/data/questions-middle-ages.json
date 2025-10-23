@@ -1,0 +1,1298 @@
+[
+  {
+    "id": "q001",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "În ce an a căzut Imperiul Roman de Vest, marcând începutul Evului Mediu?",
+    "answers": [
+      {
+        "text": "476",
+        "correct": true
+      },
+      {
+        "text": "410",
+        "correct": false
+      },
+      {
+        "text": "500",
+        "correct": false
+      },
+      {
+        "text": "395",
+        "correct": false
+      }
+    ],
+    "explanation": "Căderea Imperiului Roman de Vest în 476, când ultimul împărat Romulus Augustulus a fost detronat de Odoacru, un lider germanic, este considerată convențional începutul Evului Mediu. Acest eveniment a dus la fragmentarea puterii în Europa și apariția regatelor barbare.",
+    "category": "Începutul Evului Mediu",
+    "order": 1
+  },
+  {
+    "id": "q002",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce sistem social și economic a dominat Europa în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Feudalismul",
+        "correct": true
+      },
+      {
+        "text": "Mercantilismul",
+        "correct": false
+      },
+      {
+        "text": "Capitalismul",
+        "correct": false
+      },
+      {
+        "text": "Socialismul",
+        "correct": false
+      }
+    ],
+    "explanation": "Feudalismul implica o ierarhie în care seniorii acordau pământ vasalilor în schimbul serviciului militar și loialității. Acest sistem a oferit stabilitate în absența unui guvern central puternic după căderea Romei.",
+    "category": "Societate și economie",
+    "order": 2
+  },
+  {
+    "id": "q003",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine a fost încoronat Împărat al Romanilor de către Papa Leon al III-lea în anul 800?",
+    "answers": [
+      {
+        "text": "Carol cel Mare",
+        "correct": true
+      },
+      {
+        "text": "Otto cel Mare",
+        "correct": false
+      },
+      {
+        "text": "Henric al IV-lea",
+        "correct": false
+      },
+      {
+        "text": "Frederic Barbarossa",
+        "correct": false
+      }
+    ],
+    "explanation": "Carol cel Mare, rege al francilor, a fost încoronat Împărat al Sfântului Imperiu Roman în 800, revitalizând ideea de imperiu creștin în Europa. Aceasta a marcat o alianță strânsă între Biserică și puterea seculară.",
+    "category": "Imperiul Carolingian",
+    "order": 3
+  },
+  {
+    "id": "q004",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce eveniment din 1066 a dus la cucerirea Angliei de către normanzi?",
+    "answers": [
+      {
+        "text": "Bătălia de la Hastings",
+        "correct": true
+      },
+      {
+        "text": "Bătălia de la Agincourt",
+        "correct": false
+      },
+      {
+        "text": "Bătălia de la Bannockburn",
+        "correct": false
+      },
+      {
+        "text": "Bătălia de la Stamford Bridge",
+        "correct": false
+      }
+    ],
+    "explanation": "În Bătălia de la Hastings, William Cuceritorul l-a învins pe regele Harold al Angliei, ducând la dominația normandă. Acest eveniment a introdus feudalismul normand și a influențat limba și cultura engleză.",
+    "category": "Evenimente majore",
+    "order": 4
+  },
+  {
+    "id": "q005",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Care a fost rolul principal al cavalerilor în societatea medievală?",
+    "answers": [
+      {
+        "text": "Războinici și protectori ai seniorilor",
+        "correct": true
+      },
+      {
+        "text": "Comercianți și negustori",
+        "correct": false
+      },
+      {
+        "text": "Preoți și călugări",
+        "correct": false
+      },
+      {
+        "text": "Țărani și agricultori",
+        "correct": false
+      }
+    ],
+    "explanation": "Cavalerii erau războinici călare care jurau loialitate seniorilor în schimbul pământului. Codul cavaleresc, sau chivalria, promova valori precum curajul și onoarea.",
+    "category": "Societate și economie",
+    "order": 5
+  },
+  {
+    "id": "q006",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce pandemie a ucis aproximativ o treime din populația Europei în secolul al XIV-lea?",
+    "answers": [
+      {
+        "text": "Moartea Neagră",
+        "correct": true
+      },
+      {
+        "text": "Ciuma lui Iustinian",
+        "correct": false
+      },
+      {
+        "text": "Gripa Spaniolă",
+        "correct": false
+      },
+      {
+        "text": "Variola",
+        "correct": false
+      }
+    ],
+    "explanation": "Moartea Neagră, o formă de ciumă bubonică, s-a răspândit între 1347-1351, cauzând moartea a 25-50 de milioane de oameni. A dus la schimbări sociale, economice și la declinul feudalismului.",
+    "category": "Evenimente majore",
+    "order": 6
+  },
+  {
+    "id": "q007",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine a condus prima Cruciadă în 1096?",
+    "answers": [
+      {
+        "text": "Papa Urban al II-lea (inițiator)",
+        "correct": false
+      },
+      {
+        "text": "Godfrey de Bouillon",
+        "correct": true
+      },
+      {
+        "text": "Richard Inimă de Leu",
+        "correct": false
+      },
+      {
+        "text": "Saladin",
+        "correct": false
+      }
+    ],
+    "explanation": "Godfrey de Bouillon a fost unul dintre liderii principali ai primei Cruciade, care a capturat Ierusalimul în 1099. Cruciadele au fost campanii militare creștine pentru recucerirea Țării Sfinte de la musulmani.",
+    "category": "Cruciade",
+    "order": 7
+  },
+  {
+    "id": "q008",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce document din 1215 a limitat puterea regelui englez și a stabilit drepturi de bază?",
+    "answers": [
+      {
+        "text": "Magna Carta",
+        "correct": true
+      },
+      {
+        "text": "Carta Drepturilor",
+        "correct": false
+      },
+      {
+        "text": "Declarația de Independență",
+        "correct": false
+      },
+      {
+        "text": "Codul lui Hammurabi",
+        "correct": false
+      }
+    ],
+    "explanation": "Magna Carta, semnată de Regele Ioan, a garantat drepturi precum judecata de către egali și a limitat taxele arbitrare. Este considerată un precursor al constituțiilor moderne.",
+    "category": "Evenimente majore",
+    "order": 8
+  },
+  {
+    "id": "q009",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Care a fost centrul puterii Bisericii Catolice în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Roma",
+        "correct": true
+      },
+      {
+        "text": "Constantinopol",
+        "correct": false
+      },
+      {
+        "text": "Ierusalim",
+        "correct": false
+      },
+      {
+        "text": "Avignon",
+        "correct": false
+      }
+    ],
+    "explanation": "Roma era sediul Papei, capul Bisericii Catolice, care exercita influență spirituală și temporală asupra Europei. Biserica controla educația, arta și politica.",
+    "category": "Biserica și religie",
+    "order": 9
+  },
+  {
+    "id": "q010",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine erau vikingii și de unde proveneau?",
+    "answers": [
+      {
+        "text": "Războinici scandinavi din Norvegia, Danemarca și Suedia",
+        "correct": true
+      },
+      {
+        "text": "Nomazi din Asia Centrală",
+        "correct": false
+      },
+      {
+        "text": "Mercenari din Imperiul Bizantin",
+        "correct": false
+      },
+      {
+        "text": "Cuceritori din Spania maură",
+        "correct": false
+      }
+    ],
+    "explanation": "Vikingii erau exploratori, comercianți și războinici scandinavi care au raidat Europa între secolele VIII-XI. Au fondat așezări în Anglia, Franța și chiar America de Nord.",
+    "category": "Invazii și migrații",
+    "order": 10
+  },
+  {
+    "id": "q011",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce conflict din secolele XIV-XV a fost cunoscut ca Războiul de 100 de Ani?",
+    "answers": [
+      {
+        "text": "Între Anglia și Franța",
+        "correct": true
+      },
+      {
+        "text": "Între Anglia și Scoția",
+        "correct": false
+      },
+      {
+        "text": "Între Franța și Sfântul Imperiu Roman",
+        "correct": false
+      },
+      {
+        "text": "Între Spania și Portugalia",
+        "correct": false
+      }
+    ],
+    "explanation": "Războiul de 100 de Ani (1337-1453) a fost un conflict prelungit între Anglia și Franța pentru succesiunea tronului francez și teritorii. A dus la inovații militare, precum arcul lung, și la consolidarea naționalismului.",
+    "category": "Războaie și conflicte",
+    "order": 11
+  },
+  {
+    "id": "q012",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce rol a jucat Inchiziția în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Combaterea ereziilor și menținerea ortodoxiei catolice",
+        "correct": true
+      },
+      {
+        "text": "Promovarea științei și educației",
+        "correct": false
+      },
+      {
+        "text": "Organizarea cruciadelor",
+        "correct": false
+      },
+      {
+        "text": "Reforma agrară",
+        "correct": false
+      }
+    ],
+    "explanation": "Inchiziția, înființată în secolul al XIII-lea, investiga și pedepsea ereziile, folosind tortură și execuții. A fost un instrument al Bisericii pentru controlul doctrinar, mai ales împotriva catarilor și valdenzilor.",
+    "category": "Biserica și religie",
+    "order": 12
+  },
+  {
+    "id": "q013",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Cine a fost Ioana d'Arc și ce rol a avut în Războiul de 100 de Ani?",
+    "answers": [
+      {
+        "text": "O țărancă franceză care a condus armate și a inspirat victoria franceză",
+        "correct": true
+      },
+      {
+        "text": "O regină engleză care a negociat pacea",
+        "correct": false
+      },
+      {
+        "text": "O spioană normandă",
+        "correct": false
+      },
+      {
+        "text": "O călugăriță care a scris cronici",
+        "correct": false
+      }
+    ],
+    "explanation": "Ioana d'Arc, ghidată de viziuni divine, a condus forțele franceze la victorii cheie precum Orleans în 1429. A fost capturată, judecată pentru erezie și arsă pe rug, dar mai târziu canonizată.",
+    "category": "Personalități",
+    "order": 13
+  },
+  {
+    "id": "q014",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Schisma Occidentală?",
+    "answers": [
+      {
+        "text": "O divizare în Biserica Catolică cu doi sau trei papi rivali (1378-1417)",
+        "correct": true
+      },
+      {
+        "text": "Separarea Bisericii de Est de cea de Vest în 1054",
+        "correct": false
+      },
+      {
+        "text": "Reforma lui Martin Luther",
+        "correct": false
+      },
+      {
+        "text": "Cruciada a patra",
+        "correct": false
+      }
+    ],
+    "explanation": "Schisma Occidentală a început în 1378 când cardinalii au ales papi rivali la Roma și Avignon, slăbind autoritatea Bisericii. A fost rezolvată la Conciliul de la Konstanz în 1417.",
+    "category": "Biserica și religie",
+    "order": 14
+  },
+  {
+    "id": "q015",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Care a fost impactul principal al Cruciadelor asupra Europei?",
+    "answers": [
+      {
+        "text": "Creșterea comerțului și schimburilor culturale cu Orientul",
+        "correct": true
+      },
+      {
+        "text": "Unificarea completă a Europei sub un singur împărat",
+        "correct": false
+      },
+      {
+        "text": "Eliminarea totală a islamului din Palestina",
+        "correct": false
+      },
+      {
+        "text": "Declinul complet al feudalismului",
+        "correct": false
+      }
+    ],
+    "explanation": "Deși Cruciadele nu au reușit să păstreze Țara Sfântă, au stimulat comerțul cu mirodenii, mătăsuri și idei noi din Orient. Au contribuit la Renaștere prin redescoperirea cunoștințelor antice.",
+    "category": "Cruciade",
+    "order": 15
+  },
+  {
+    "id": "q016",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost sistemul de ghilde în orașele medievale?",
+    "answers": [
+      {
+        "text": "Asociații de meșteșugari și comercianți care reglementau calitatea și prețurile",
+        "correct": true
+      },
+      {
+        "text": "Armate private ale nobililor",
+        "correct": false
+      },
+      {
+        "text": "Școli religioase pentru călugări",
+        "correct": false
+      },
+      {
+        "text": "Tribunale pentru judecarea ereticilor",
+        "correct": false
+      }
+    ],
+    "explanation": "Ghildele controlau accesul la meserii, asigurau standarde și ofereau protecție socială membrilor. Au contribuit la creșterea clasei mijlocii și la urbanizarea Europei.",
+    "category": "Societate și economie",
+    "order": 16
+  },
+  {
+    "id": "q017",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Cine a fost Saladin și ce a realizat în contextul Cruciadelor?",
+    "answers": [
+      {
+        "text": "Lider musulman care a recucerit Ierusalimul în 1187",
+        "correct": true
+      },
+      {
+        "text": "Rege englez care a condus a treia Cruciadă",
+        "correct": false
+      },
+      {
+        "text": "Papă care a inițiat Cruciadele Copiilor",
+        "correct": false
+      },
+      {
+        "text": "Cavaler templier care a apărat Acre",
+        "correct": false
+      }
+    ],
+    "explanation": "Saladin, sultan ayyubid, a unit forțele musulmane și a învins cruciații la Hattin, recucerind Ierusalimul. Era respectat pentru cavalerismul său chiar de inamici.",
+    "category": "Cruciade",
+    "order": 17
+  },
+  {
+    "id": "q018",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Investitura și de ce a cauzat conflict?",
+    "answers": [
+      {
+        "text": "Dreptul de a numi episcopi, disputat între papi și împărați",
+        "correct": true
+      },
+      {
+        "text": "O taxă pe moșteniri nobiliare",
+        "correct": false
+      },
+      {
+        "text": "O ceremonie de încoronare a regilor",
+        "correct": false
+      },
+      {
+        "text": "Un tratat de pace cu mongolii",
+        "correct": false
+      }
+    ],
+    "explanation": "Controversa Investiturii (1075-1122) a opus Papa Grigore al VII-lea și Împăratul Henric al IV-lea, culminând cu umilința de la Canossa. A fost rezolvată prin Concordatul de la Worms, separând puterile spirituale și temporale.",
+    "category": "Biserica și religie",
+    "order": 18
+  },
+  {
+    "id": "q019",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Care a fost rolul mănăstirilor în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Centre de educație, agricultură și păstrare a cunoștințelor antice",
+        "correct": true
+      },
+      {
+        "text": "Fortărețe militare pentru cavaleri",
+        "correct": false
+      },
+      {
+        "text": "Piețe comerciale urbane",
+        "correct": false
+      },
+      {
+        "text": "Tribunale seculare",
+        "correct": false
+      }
+    ],
+    "explanation": "Mănăstirile, precum cele benedictine, copiau manuscrise, predau arte și îmbunătățeau tehnicile agricole. Au preservat cultura clasică în timpul invaziilor barbare.",
+    "category": "Biserica și religie",
+    "order": 19
+  },
+  {
+    "id": "q020",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce eveniment din 1453 a marcat sfârșitul Evului Mediu?",
+    "answers": [
+      {
+        "text": "Căderea Constantinopolului sub otomani",
+        "correct": true
+      },
+      {
+        "text": "Descoperirea Americii de Columb",
+        "correct": false
+      },
+      {
+        "text": "Reforma Protestantă",
+        "correct": false
+      },
+      {
+        "text": "Inventarea tiparului",
+        "correct": false
+      }
+    ],
+    "explanation": "Căderea Constantinopolului în 1453 sub Mehmed al II-lea a sfârșit Imperiul Bizantin și a blocat rute comerciale, stimulând explorările. Este considerat convențional sfârșitul Evului Mediu.",
+    "category": "Sfârșitul Evului Mediu",
+    "order": 20
+  },
+  {
+    "id": "q021",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Care a fost impactul economic al Morții Negre asupra sistemului feudal?",
+    "answers": [
+      {
+        "text": "Scăderea populației a dus la creșterea salariilor și declinul servituții",
+        "correct": true
+      },
+      {
+        "text": "A întărit feudalismul prin dependența crescută de seniori",
+        "correct": false
+      },
+      {
+        "text": "A provocat inflație masivă din cauza aurului acumulat",
+        "correct": false
+      },
+      {
+        "text": "A oprit complet comerțul european",
+        "correct": false
+      }
+    ],
+    "explanation": "Cu o treime din populație moartă, forța de muncă a devenit rară, permițând țăranilor să negocieze condiții mai bune. Acest lucru a accelerat tranziția spre economii monetare și capitalism timpuriu.",
+    "category": "Societate și economie",
+    "order": 21
+  },
+  {
+    "id": "q022",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost Concordatul de la Worms din 1122?",
+    "answers": [
+      {
+        "text": "Un acord care a rezolvat controversa Investiturii, separând numirile seculare și ecleziastice",
+        "correct": true
+      },
+      {
+        "text": "Un tratat de pace după Războiul de 100 de Ani",
+        "correct": false
+      },
+      {
+        "text": "O alianță între papi și împărați împotriva otomanilor",
+        "correct": false
+      },
+      {
+        "text": "O reformă a sistemului de ghilde",
+        "correct": false
+      }
+    ],
+    "explanation": "Concordatul a permis împăratului să acorde simboluri seculare vasalilor bisericești, în timp ce Papa păstra dreptul spiritual. A echilibrat puterile și a redus conflictele dintre Biserică și stat.",
+    "category": "Biserica și religie",
+    "order": 22
+  },
+  {
+    "id": "q023",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Cine a fost Thomas Aquinas și ce contribuție a avut?",
+    "answers": [
+      {
+        "text": "Filosof care a reconciliat teologia creștină cu filosofia aristotelică în Summa Theologica",
+        "correct": true
+      },
+      {
+        "text": "Rege care a unificat Spania",
+        "correct": false
+      },
+      {
+        "text": "Explorator care a ajuns în China",
+        "correct": false
+      },
+      {
+        "text": "Arhitect al catedralelor gotice",
+        "correct": false
+      }
+    ],
+    "explanation": "Aquinas, un teolog dominican, a integrat rațiunea aristotelică cu credința creștină, argumentând că ele se completează. Lucrarea sa a influențat scolastica și gândirea occidentală.",
+    "category": "Personalități",
+    "order": 23
+  },
+  {
+    "id": "q024",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost Reconquista în Peninsula Iberică?",
+    "answers": [
+      {
+        "text": "Campania creștină de recucerire a teritoriilor de la mauri, culminând în 1492",
+        "correct": true
+      },
+      {
+        "text": "Invazia mongolă în Spania",
+        "correct": false
+      },
+      {
+        "text": "Reforma agrară a regilor catolici",
+        "correct": false
+      },
+      {
+        "text": "Alianța cu otomanii împotriva Franței",
+        "correct": false
+      }
+    ],
+    "explanation": "Reconquista a durat secole, începând din secolul al VIII-lea, și s-a încheiat cu căderea Granadei în 1492 sub Ferdinand și Isabella. A dus la unificarea Spaniei și la expulzarea evreilor și musulmanilor.",
+    "category": "Războaie și conflicte",
+    "order": 24
+  },
+  {
+    "id": "q025",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce stil arhitectural a dominat construcțiile de catedrale în Evul Mediu târziu?",
+    "answers": [
+      {
+        "text": "Gotic",
+        "correct": true
+      },
+      {
+        "text": "Romanic",
+        "correct": false
+      },
+      {
+        "text": "Baroc",
+        "correct": false
+      },
+      {
+        "text": "Renascentist",
+        "correct": false
+      }
+    ],
+    "explanation": "Stilul gotic, cu arcade ascuțite, vitralii și contraforturi zburătoare, a permis clădiri înalte precum Notre-Dame. Simboliza aspirația spirituală spre cer.",
+    "category": "Artă și cultură",
+    "order": 25
+  },
+  {
+    "id": "q026",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine erau iobagii în sistemul feudal?",
+    "answers": [
+      {
+        "text": "Țărani legați de pământ care lucrau pentru seniori",
+        "correct": true
+      },
+      {
+        "text": "Nobili cu titluri ereditare",
+        "correct": false
+      },
+      {
+        "text": "Comercianți urbani",
+        "correct": false
+      },
+      {
+        "text": "Călugări mendicanți",
+        "correct": false
+      }
+    ],
+    "explanation": "Iobagii nu erau sclavi, dar nu puteau părăsi pământul fără permisiune și datorau muncă și taxe seniorului. Formau baza societății agrare medievale.",
+    "category": "Societate și economie",
+    "order": 26
+  },
+  {
+    "id": "q027",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce a fost Drumul Mătăsii în context medieval?",
+    "answers": [
+      {
+        "text": "O rețea de rute comerciale conectând Europa cu Asia",
+        "correct": true
+      },
+      {
+        "text": "O cale de pelerinaj spre Ierusalim",
+        "correct": false
+      },
+      {
+        "text": "O rută de migrație a vikingilor",
+        "correct": false
+      },
+      {
+        "text": "O autostradă romană reconstruită",
+        "correct": false
+      }
+    ],
+    "explanation": "Drumul Mătăsii facilita comerțul cu mătăsuri, mirodenii și idei între China, India și Europa. A fost vital pentru economia medievală până la blocarea de otomani.",
+    "category": "Comerț și explorări",
+    "order": 27
+  },
+  {
+    "id": "q028",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine a fost regele Richard Inimă de Leu?",
+    "answers": [
+      {
+        "text": "Lider englez al celei de-a treia Cruciade",
+        "correct": true
+      },
+      {
+        "text": "Fondator al Ordinului Templierilor",
+        "correct": false
+      },
+      {
+        "text": "Împărat al Sfântului Imperiu Roman",
+        "correct": false
+      },
+      {
+        "text": "Rege al Franței în Războiul de 100 de Ani",
+        "correct": false
+      }
+    ],
+    "explanation": "Richard I al Angliei a condus a treia Cruciadă (1189-1192), luptând împotriva lui Saladin. Deși a câștigat victorii, nu a recucerit Ierusalimul.",
+    "category": "Personalități",
+    "order": 28
+  },
+  {
+    "id": "q029",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce erau castelele medievale?",
+    "answers": [
+      {
+        "text": "Fortărețe rezidențiale pentru nobili și apărare",
+        "correct": true
+      },
+      {
+        "text": "Școli pentru cavaleri",
+        "correct": false
+      },
+      {
+        "text": "Piețe publice",
+        "correct": false
+      },
+      {
+        "text": "Mănăstiri fortificate",
+        "correct": false
+      }
+    ],
+    "explanation": "Castelele, cu ziduri, turnuri și șanțuri, serveau ca reședințe pentru lorzi și puncte de apărare împotriva invaziilor. Evoluau din motte-and-bailey la structuri de piatră.",
+    "category": "Artă și cultură",
+    "order": 29
+  },
+  {
+    "id": "q030",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Ordinul Templierilor?",
+    "answers": [
+      {
+        "text": "Un ordin militar monastic care proteja pelerinii în Cruciade",
+        "correct": true
+      },
+      {
+        "text": "O ghildă de constructori de catedrale",
+        "correct": false
+      },
+      {
+        "text": "O sectă eretică condamnată de Inchiziție",
+        "correct": false
+      },
+      {
+        "text": "O alianță comercială hanseatică",
+        "correct": false
+      }
+    ],
+    "explanation": "Templierii, fondați în 1119, au devenit bancheri bogați și războinici. Au fost dizolvați în 1312 de Papa Clement al V-lea sub presiunea regelui Filip al IV-lea al Franței.",
+    "category": "Cruciade",
+    "order": 30
+  },
+  {
+    "id": "q031",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Care a fost rolul universităților în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Centre de învățământ superior, inițial pentru teologie și drept",
+        "correct": true
+      },
+      {
+        "text": "Fortărețe pentru stocarea armelor",
+        "correct": false
+      },
+      {
+        "text": "Piețe pentru comerț internațional",
+        "correct": false
+      },
+      {
+        "text": "Mănăstiri pentru călugărițe",
+        "correct": false
+      }
+    ],
+    "explanation": "Universități precum Bologna (1088) și Oxford au promovat scolastica, studiind texte antice. Au fost independente de Biserică, dar adesea asociate cu ea.",
+    "category": "Artă și cultură",
+    "order": 31
+  },
+  {
+    "id": "q032",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Liga Hanseatică?",
+    "answers": [
+      {
+        "text": "O alianță comercială a orașelor nord-europene",
+        "correct": true
+      },
+      {
+        "text": "O coaliție militară împotriva otomanilor",
+        "correct": false
+      },
+      {
+        "text": "O uniune de ghilde artizanale",
+        "correct": false
+      },
+      {
+        "text": "O federație de state italiene",
+        "correct": false
+      }
+    ],
+    "explanation": "Liga Hanseatică, centrată pe Lübeck, controla comerțul în Marea Baltică și Nordică între secolele XIII-XVII. A promovat interese economice comune și a influențat politica regională.",
+    "category": "Comerț și explorări",
+    "order": 32
+  },
+  {
+    "id": "q033",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Cine a fost Genghis Khan și cum a afectat Europa?",
+    "answers": [
+      {
+        "text": "Fondator al Imperiului Mongol, ale cărui invazii au ajuns în Europa de Est",
+        "correct": true
+      },
+      {
+        "text": "Sultan otoman care a cucerit Constantinopolul",
+        "correct": false
+      },
+      {
+        "text": "Rege maghiar care a oprit vikingii",
+        "correct": false
+      },
+      {
+        "text": "Explorator venețian în China",
+        "correct": false
+      }
+    ],
+    "explanation": "Genghis Khan a unit triburile mongole și a creat cel mai mare imperiu contiguu. Invaziile succesorilor săi în Ungaria și Polonia în anii 1240 au terorizat Europa, dar au facilitat și comerțul.",
+    "category": "Invazii și migrații",
+    "order": 33
+  },
+  {
+    "id": "q034",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost stilul romanesc în arhitectură?",
+    "answers": [
+      {
+        "text": "Stil cu arcade rotunde și ziduri groase, precursor al goticului",
+        "correct": true
+      },
+      {
+        "text": "Stil cu coloane corintice și domuri",
+        "correct": false
+      },
+      {
+        "text": "Stil renascentist cu proporții clasice",
+        "correct": false
+      },
+      {
+        "text": "Stil baroc cu ornamentație excesivă",
+        "correct": false
+      }
+    ],
+    "explanation": "Stilul romanesc, din secolele XI-XII, a fost inspirat de arhitectura romană antică. Biserici precum cea din Cluny aveau bolți în butoi și erau solide, dar întunecate.",
+    "category": "Artă și cultură",
+    "order": 34
+  },
+  {
+    "id": "q035",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Care a fost semnificația Bătăliei de la Tours din 732?",
+    "answers": [
+      {
+        "text": "Victoria francilor sub Carol Martel a oprit expansiunea islamică în Europa",
+        "correct": true
+      },
+      {
+        "text": "Înfrângerea vikingilor de către anglo-saxoni",
+        "correct": false
+      },
+      {
+        "text": "Cucerirea Constantinopolului de cruciați",
+        "correct": false
+      },
+      {
+        "text": "Sfârșitul Războiului Rozelor",
+        "correct": false
+      }
+    ],
+    "explanation": "Carol Martel a învins forțele musulmane conduse de Abd al-Rahman, prevenind avansul mai departe în Franța. Este văzută ca un punct de cotitură care a păstrat creștinismul european.",
+    "category": "Războaie și conflicte",
+    "order": 35
+  },
+  {
+    "id": "q036",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost Avignonezul Papalitate?",
+    "answers": [
+      {
+        "text": "Perioada 1309-1377 când papi au rezidat la Avignon sub influență franceză",
+        "correct": true
+      },
+      {
+        "text": "O schismă estică în Biserica Ortodoxă",
+        "correct": false
+      },
+      {
+        "text": "O reformă monastică benedictină",
+        "correct": false
+      },
+      {
+        "text": "O cruciadă împotriva husiților",
+        "correct": false
+      }
+    ],
+    "explanation": "Mutarea sediului papal la Avignon de Papa Clement al V-lea a fost văzută ca o captivitate babilonică, slăbind prestigiul papal și ducând la Schisma Occidentală.",
+    "category": "Biserica și religie",
+    "order": 36
+  },
+  {
+    "id": "q037",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Cine a fost Marco Polo și ce a descris?",
+    "answers": [
+      {
+        "text": "Explorator venețian care a descris curtea lui Kublai Khan în China",
+        "correct": true
+      },
+      {
+        "text": "Cartograf spaniol care a desenat hărți pentru Columb",
+        "correct": false
+      },
+      {
+        "text": "Misionar franciscan în Africa",
+        "correct": false
+      },
+      {
+        "text": "Comerciant genovez în India",
+        "correct": false
+      }
+    ],
+    "explanation": "Călătoriile lui Marco Polo (1271-1295) au fost detaliate în 'Il Milione', inspirând exploratorii europeni. A descris bogățiile Asiei, stimulând interesul comercial.",
+    "category": "Comerț și explorări",
+    "order": 37
+  },
+  {
+    "id": "q038",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost Războiul Rozelor în Anglia?",
+    "answers": [
+      {
+        "text": "Război civil (1455-1487) între casele Lancaster și York pentru tron",
+        "correct": true
+      },
+      {
+        "text": "Conflict cu Franța pentru Aquitania",
+        "correct": false
+      },
+      {
+        "text": "Revoltă țărănească împotriva taxelor",
+        "correct": false
+      },
+      {
+        "text": "Alianță cu Scoția împotriva vikingilor",
+        "correct": false
+      }
+    ],
+    "explanation": "Războiul Rozelor a slăbit nobilimea și a dus la ascensiunea dinastiei Tudor sub Henric al VII-lea. A fost marcat de bătălii precum Bosworth și intrigi politice.",
+    "category": "Războaie și conflicte",
+    "order": 38
+  },
+  {
+    "id": "q039",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce limbă era folosită în documentele oficiale și bisericești în Evul Mediu?",
+    "answers": [
+      {
+        "text": "Latina",
+        "correct": true
+      },
+      {
+        "text": "Greaca",
+        "correct": false
+      },
+      {
+        "text": "Araba",
+        "correct": false
+      },
+      {
+        "text": "Franceza veche",
+        "correct": false
+      }
+    ],
+    "explanation": "Latina era limba Bisericii, a învățământului și a administrației, permițând comunicare trans-europeană. Limbile vernaculare au început să se impună mai târziu.",
+    "category": "Artă și cultură",
+    "order": 39
+  },
+  {
+    "id": "q040",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Cine erau troubadurii?",
+    "answers": [
+      {
+        "text": "Poeți și muzicieni care cântau despre iubire curtenească",
+        "correct": true
+      },
+      {
+        "text": "Predicatori itineranți",
+        "correct": false
+      },
+      {
+        "text": "Meșteri constructori",
+        "correct": false
+      },
+      {
+        "text": "Mercenari elvețieni",
+        "correct": false
+      }
+    ],
+    "explanation": "Troubadurii din sudul Franței au promovat idealul iubirii curtenești în poezie și cântec. Au influențat literatura europeană medievală.",
+    "category": "Artă și cultură",
+    "order": 40
+  },
+  {
+    "id": "q041",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Cruciada a Patra și de ce a fost controversată?",
+    "answers": [
+      {
+        "text": "A deviat spre cucerirea Constantinopolului în 1204, slăbind Bizanțul",
+        "correct": true
+      },
+      {
+        "text": "A reușit să recucerească Ierusalimul definitiv",
+        "correct": false
+      },
+      {
+        "text": "A fost condusă de copii și a eșuat",
+        "correct": false
+      },
+      {
+        "text": "A unit creștinii și musulmanii împotriva mongolilor",
+        "correct": false
+      }
+    ],
+    "explanation": "Cruciada a Patra, influențată de venețieni, a atacat Constantinopolul creștin în loc de Egipt. A dus la Imperiul Latin efemer și la resentimente între creștini.",
+    "category": "Cruciade",
+    "order": 41
+  },
+  {
+    "id": "q042",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Care a fost rolul femeilor în societatea medievală?",
+    "answers": [
+      {
+        "text": "Limitat în general, dar unele ca Eleanor de Aquitania au avut influență politică",
+        "correct": true
+      },
+      {
+        "text": "Egale cu bărbații în toate drepturile",
+        "correct": false
+      },
+      {
+        "text": "Exclusiv războinice precum amazoanele",
+        "correct": false
+      },
+      {
+        "text": "Doar călugărițe fără proprietăți",
+        "correct": false
+      }
+    ],
+    "explanation": "Femeile gestionau gospodării, dar nobilimea putea moșteni și guverna. Figuri ca Hildegard von Bingen au contribuit la cultură și știință.",
+    "category": "Societate și economie",
+    "order": 42
+  },
+  {
+    "id": "q043",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost Tratatul de la Verdun din 843?",
+    "answers": [
+      {
+        "text": "Împărțirea Imperiului Carolingian între fiii lui Ludovic cel Pios",
+        "correct": true
+      },
+      {
+        "text": "Pacea după Bătălia de la Hastings",
+        "correct": false
+      },
+      {
+        "text": "Alianța împotriva vikingilor",
+        "correct": false
+      },
+      {
+        "text": "Sfârșitul Schismei Occidentale",
+        "correct": false
+      }
+    ],
+    "explanation": "Tratatul a divizat imperiul în trei părți, ducând la formarea Franței, Germaniei și Italiei moderne. A marcat declinul unității carolingiene.",
+    "category": "Imperiul Carolingian",
+    "order": 43
+  },
+  {
+    "id": "q044",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Cine a fost Roger Bacon și ce a promovat?",
+    "answers": [
+      {
+        "text": "Filosof franciscan care a susținut metoda experimentală în știință",
+        "correct": true
+      },
+      {
+        "text": "Rege normand al Siciliei",
+        "correct": false
+      },
+      {
+        "text": "Arhiepiscop de Canterbury ucis",
+        "correct": false
+      },
+      {
+        "text": "Compozitor de muzică gregoriană",
+        "correct": false
+      }
+    ],
+    "explanation": "Bacon, în Opus Majus, a anticipat știința modernă prin promovarea observației și experimentului. A influențat Renașterea științifică.",
+    "category": "Personalități",
+    "order": 44
+  },
+  {
+    "id": "q045",
+    "themeId": "middle-ages",
+    "difficulty": "easy",
+    "question": "Ce era un turnir medieval?",
+    "answers": [
+      {
+        "text": "Competiție între cavaleri cu lupte simulate și jocuri",
+        "correct": true
+      },
+      {
+        "text": "Întâlnire diplomatică între regi",
+        "correct": false
+      },
+      {
+        "text": "Festival agricol anual",
+        "correct": false
+      },
+      {
+        "text": "Proces inchizitorial",
+        "correct": false
+      }
+    ],
+    "explanation": "Turnirurile antrenau cavalerii și promovau chivalria. Includeau joute și melee, atrăgând spectatori și servind ca evenimente sociale.",
+    "category": "Societate și economie",
+    "order": 45
+  },
+  {
+    "id": "q046",
+    "themeId": "middle-ages",
+    "difficulty": "medium",
+    "question": "Ce a fost Domesday Book?",
+    "answers": [
+      {
+        "text": "Un recensământ comandat de William Cuceritorul în 1086 pentru taxare",
+        "correct": true
+      },
+      {
+        "text": "O Biblie iluminată medievală",
+        "correct": false
+      },
+      {
+        "text": "O cronică a cruciadelor",
+        "correct": false
+      },
+      {
+        "text": "Un cod legal saxon",
+        "correct": false
+      }
+    ],
+    "explanation": "Domesday Book detalia proprietăți, populație și resurse în Anglia, ajutând administrația normandă. Este o sursă valoroasă pentru istoria medievală.",
+    "category": "Evenimente majore",
+    "order": 46
+  },
+  {
+    "id": "q047",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Care a fost semnificația Conciliului de la Clermont din 1095?",
+    "answers": [
+      {
+        "text": "Papa Urban al II-lea a chemat la prima Cruciadă",
+        "correct": true
+      },
+      {
+        "text": "Reforma gregoriană a fost adoptată",
+        "correct": false
+      },
+      {
+        "text": "Schisma din 1054 a fost rezolvată",
+        "correct": false
+      },
+      {
+        "text": "Inchiziția a fost înființată",
+        "correct": false
+      }
+    ],
+    "explanation": "Discursul Papei Urban la Clermont a mobilizat nobilimea europeană pentru Cruciadă, promițând iertarea păcatelor. A lansat era Cruciadelor.",
+    "category": "Cruciade",
+    "order": 47
+  },
+  {
+    "id": "q048",
+    "themeId": "middle-ages",
+    "difficulty": "hard",
+    "question": "Ce a fost mișcarea husită în Boemia?",
+    "answers": [
+      {
+        "text": "O revoltă proto-protestantă inspirată de Jan Hus împotriva corupției Bisericii",
+        "correct": true
+      },
+      {
+        "text": "O invazie mongolă respinsă",
+        "correct": false
+      },
+      {
+        "text": "O uniune comercială cu Polonia",
+        "correct": false
+      },
+      {
+        "text": "O dinastie regală maghiară",
+        "correct": false
+      }
+    ],
+    "explanation": "Husiții, după arderea lui Hus în 1415, au luptat în războaie (1419-1434) pentru reforme precum comunionul sub ambele specii. Au anticipat Reforma Protestantă.",
+    "category": "Biserica și religie",
+    "order": 48
+  }
+]

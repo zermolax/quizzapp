@@ -1,18 +1,7 @@
 /**
- * ThemeSelection.jsx
+ * ThemeSelection.jsx - UPDATED
  * 
- * SCOPUL:
- * Pagina unde user-ul selectează o temă pentru a juca quiz
- * 
- * FLOW:
- * 1. Component se montează
- * 2. Importez themes din JSON
- * 3. Randez grid cu ThemeCard-uri
- * 4. User face click pe temă + dificultate
- * 5. Navigate la QuizPlay page (cu theme + difficulty params)
- * 
- * IN MVP: Themes sunt din JSON static
- * IN FUTURE: Themes vor veni din Firestore
+ * NOUTATE: Adaug link la Leaderboard
  */
 
 import React from 'react';
@@ -21,38 +10,18 @@ import { useAuth } from '../hooks/useAuth';
 import ThemeCard from '../components/ThemeCard';
 import themesData from '../data/themes.json';
 
-/**
- * COMPONENT: ThemeSelection
- */
 export function ThemeSelection() {
   
-  /**
-   * HOOKS
-   */
-  const navigate = useNavigate();  // Pentru navigare între pagini
-  const { user, logout } = useAuth();  // Pentru info user + logout
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-  /**
-   * HANDLER: User selectează temă + dificultate
-   * 
-   * FLOW:
-   * 1. User face click pe "Easy" din "WWI" card
-   * 2. onSelectTheme("wwi", "easy") se apelează
-   * 3. Navigate la /quiz cu params: themeId=wwi, difficulty=easy
-   * 4. QuizPlay page va folosi acei params
-   */
   const handleSelectTheme = (themeId, difficulty) => {
-    // Navigate cu query params
-    // Format: /quiz?themeId=wwi&difficulty=easy
     navigate(`/quiz?themeId=${themeId}&difficulty=${difficulty}`);
   };
 
-  /**
-   * HANDLER: Logout
-   */
   const handleLogout = async () => {
     await logout();
-    navigate('/');  // Redirect la home (login page)
+    navigate('/');
   };
 
   return (
@@ -60,25 +29,46 @@ export function ThemeSelection() {
       
       {/* HEADER */}
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          
-          <div>
-            <h1 className="text-3xl font-bold text-blue-600">🎓 Storia Quiz</h1>
-            <p className="text-gray-600 text-sm">Alege o temă și testează-ți cunoștințele</p>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            
+            <div>
+              <h1 className="text-3xl font-bold text-blue-600">🎓 Storia Quiz</h1>
+              <p className="text-gray-600 text-sm">Alege o temă și testează-ți cunoștințele</p>
+            </div>
 
-          <div className="flex items-center gap-4">
-            <p className="text-gray-700 text-sm">
-              <strong>Logat ca:</strong> {user?.email || 'Vizitator'}
-            </p>
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition"
-            >
-              Deconectare
-            </button>
-          </div>
+            {/* RIGHT SIDE: Buttons */}
+            <div className="flex items-center gap-3">
+              
+              {/* Leaderboard Button - NEW */}
+              <button
+                onClick={() => navigate('/leaderboard')}
+                className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
+              >
+                🏆 Clasament
+              </button>
 
+              {/* Profile Button */}
+              <button
+                onClick={() => navigate('/profile')}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
+              >
+                👤 Profil
+              </button>
+
+              <p className="text-gray-700 text-sm">
+                <strong>{user?.email || 'Vizitator'}</strong>
+              </p>
+              
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition"
+              >
+                Deconectare
+              </button>
+            </div>
+
+          </div>
         </div>
       </header>
 
@@ -116,7 +106,7 @@ export function ThemeSelection() {
             <li>✅ Selectează nivelul de dificultate (ușor, mediu, greu)</li>
             <li>✅ Răspunde la întrebări și acumulează puncte</li>
             <li>✅ Progresul tău este salvat automat</li>
-            <li>✅ Urci în clasament și câștigi badge-uri</li>
+            <li>✅ Urci în clasament și compară-te cu alții</li>
           </ul>
         </div>
 
@@ -127,21 +117,3 @@ export function ThemeSelection() {
 }
 
 export default ThemeSelection;
-
-/**
- * EXPLICAȚIE FLOW:
- * 
- * 1. Component se montează
- * 2. Importez themesData din JSON
- * 3. .map() peste themes și creez ThemeCard pentru fiecare
- * 4. Pasez theme + onSelectTheme callback la fiecare card
- * 5. User face click pe "Easy" în "WWI" card
- * 6. ThemeCard apelează onSelectTheme("wwi", "easy")
- * 7. handleSelectTheme navigheaza la /quiz?themeId=wwi&difficulty=easy
- * 8. QuizPlay page citește query params și încarcă întrebări
- * 
- * NEXT STEPS:
- * - Add React Router la App.jsx
- * - Creez QuizPlay page
- * - Creez Question component
- */
