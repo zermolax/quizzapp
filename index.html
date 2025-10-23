@@ -1,13 +1,117 @@
 <!doctype html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- VIEWPORT -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>quizz</title>
+    
+    <!-- TITLE & META -->
+    <title>quizzfun.app - Invață Istoria cu Plăcere | Quiz Educațional Gratuit</title>
+    <meta name="description" content="Quiz-uri educaționale gratuite pe teme de istorie. Compită cu alții, urmărește progresul și urcă în clasament. 100% gratuit, fără ads." />
+    <meta name="keywords" content="quiz, educație, istorie, joc educational, competeție, leaderboard, gratuit" />
+    <meta name="author" content="Ghergheluca Eduard" />
+    <meta name="theme-color" content="#3b82f6" />
+    
+    <!-- OPEN GRAPH (Social Media) -->
+    <meta property="og:title" content="quizzfun.app - Invață Istoria cu Plăcere" />
+    <meta property="og:description" content="Quiz-uri educaționale divertisante. Compită cu alții și urcă în clasament. 100% gratuit!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://quizzfun.app" />
+    <meta property="og:image" content="https://quizzfun.app/og-image.png" />
+    <meta property="og:locale" content="ro_RO" />
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="quizzfun.app - Quiz Educațional Gratuit" />
+    <meta name="twitter:description" content="Invață istoria cu plăcere prin quiz-uri interactive. Compită și urcă în clasament!" />
+    <meta name="twitter:image" content="https://quizzfun.app/og-image.png" />
+    
+    <!-- CANONICAL -->
+    <link rel="canonical" href="https://quizzfun.app" />
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- PRECONNECT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- ROBOTS -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- LANGUAGE -->
+    <meta http-equiv="content-language" content="ro" />
+    
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LNMZG0PC6H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LNMZG0PC6H', {
+        'anonymize_ip': true,
+        'allow_google_signals': false,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
+    
+    <!-- SCHEMA.ORG (Structured Data) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "quizzfun.app",
+      "description": "Quiz-uri educaționale gratuite pentru învățare interactivă",
+      "url": "https://quizzfun.app",
+      "applicationCategory": "EducationalApplication",
+      "creator": {
+        "@type": "Person",
+        "name": "Ghergheluca Eduard"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
+
+<!--
+IMPORTANT NOTES:
+
+1. GOOGLE ANALYTICS:
+   - Înlocuiește "G-XXXXXXXXXX" cu Google Analytics ID real
+   - Setup la: https://analytics.google.com
+   - Adaug domeniul quizzfun.app
+
+2. OG IMAGE:
+   - Creează imagine 1200x630px
+   - Salveaza la /public/og-image.png
+   - Folosit pentru social media previews
+
+3. META TAGS:
+   - Title: Max 60 caractere
+   - Description: 150-160 caractere
+   - Keywords: Relevant search terms
+
+4. STRUCTURED DATA:
+   - Schema.org helps search engines understand content
+   - Rich snippets in search results
+
+5. MOBILE FIRST:
+   - Viewport meta tag important
+   - Theme color matches brand
+
+6. PRIVACY:
+   - Analytics anonimizat
+   - No ad personalization (respecta privacy)
+-->
