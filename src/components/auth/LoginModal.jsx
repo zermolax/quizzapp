@@ -1,14 +1,5 @@
 /**
- * LoginModal.jsx
- * 
- * SCOPUL:
- * Component cu form de login
- * 
- * METODE:
- * 1. Email + Password
- * 2. Google OAuth
- * 3. Anonymous
- * 4. Sign Up (email)
+ * LoginModal.jsx - WITH GOOGLE AUTH
  */
 
 import React, { useState } from 'react';
@@ -18,7 +9,7 @@ export function LoginModal() {
   
   const { 
     loginWithEmail, 
-    loginWithGoogle, 
+    loginWithGoogle,
     loginAnonymous,
     signUpWithEmail,
     loading
@@ -29,9 +20,6 @@ export function LoginModal() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  /**
-   * HANDLER: Email Login
-   */
   const handleEmailLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -47,9 +35,6 @@ export function LoginModal() {
     }
   };
 
-  /**
-   * HANDLER: Google Login
-   */
   const handleGoogleLogin = async () => {
     setError('');
     try {
@@ -59,9 +44,6 @@ export function LoginModal() {
     }
   };
 
-  /**
-   * HANDLER: Anonymous Login
-   */
   const handleAnonymousLogin = async () => {
     setError('');
     try {
@@ -71,31 +53,24 @@ export function LoginModal() {
     }
   };
 
-  /**
-   * RENDER: Login Form
-   */
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 flex items-center justify-center p-4">
       
       <div className="bg-white rounded-lg shadow-2xl p-8 w-full max-w-md">
         
-        {/* HEADER */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-blue-600 mb-2">🎓 quizzfun.app</h1>
           <p className="text-gray-600">Invață Istoria cu Plăcere!</p>
         </div>
 
-        {/* ERROR MESSAGE */}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-lg mb-6 text-sm">
             ⚠️ {error}
           </div>
         )}
 
-        {/* EMAIL FORM */}
         <form onSubmit={handleEmailLogin} className="space-y-4 mb-6">
           
-          {/* Email Input */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               📧 Email
@@ -110,7 +85,6 @@ export function LoginModal() {
             />
           </div>
 
-          {/* Password Input */}
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">
               🔒 Parolă
@@ -126,7 +100,6 @@ export function LoginModal() {
             />
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
@@ -135,7 +108,6 @@ export function LoginModal() {
             {loading ? '⏳ Se încarcă...' : isSignUp ? '✍️ Înregistrare' : '🚀 Login'}
           </button>
 
-          {/* Toggle Sign Up */}
           <p className="text-center text-sm text-gray-600">
             {isSignUp ? 'Ai deja cont?' : 'Nu ai cont?'}{' '}
             <button
@@ -149,14 +121,13 @@ export function LoginModal() {
 
         </form>
 
-        {/* DIVIDER */}
         <div className="flex items-center gap-4 mb-6">
           <div className="flex-1 h-px bg-gray-300"></div>
           <span className="text-gray-600 text-sm">sau</span>
           <div className="flex-1 h-px bg-gray-300"></div>
         </div>
 
-        {/* GOOGLE LOGIN */}
+        {/* GOOGLE LOGIN - ENABLED */}
         <button
           onClick={handleGoogleLogin}
           disabled={loading}
@@ -180,7 +151,6 @@ export function LoginModal() {
           {loading ? '⏳ Se încarcă...' : '👤 Vizitator'}
         </button>
 
-        {/* FOOTER */}
         <p className="text-center text-xs text-gray-500 mt-6">
           By logging in, you agree to our <a href="/terms" className="text-blue-600 hover:underline">Terms</a> and <a href="/privacy" className="text-blue-600 hover:underline">Privacy Policy</a>
         </p>
@@ -192,26 +162,3 @@ export function LoginModal() {
 }
 
 export default LoginModal;
-
-/**
- * FEATURES:
- * 
- * 1. EMAIL LOGIN
- *    - Email input
- *    - Password input
- *    - Toggle between Login/Sign Up
- * 
- * 2. GOOGLE OAUTH
- *    - One-click Google login
- * 
- * 3. ANONYMOUS
- *    - Guest access
- * 
- * 4. ERROR HANDLING
- *    - Shows error messages
- *    - Loading state
- * 
- * 5. RESPONSIVE
- *    - Mobile friendly
- *    - Clean design
- */
