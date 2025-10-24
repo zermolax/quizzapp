@@ -25,7 +25,8 @@ export function QuestionCard({
   selectedAnswerIndex,
   answered,
   isCorrect,
-  showExplanation
+  showExplanation,
+  timeLeft = 20
 }) {
 
   /**
@@ -73,9 +74,32 @@ export function QuestionCard({
    */
   const isButtonDisabled = answered;
 
+  /**
+   * HELPER: Get timer color based on time left
+   */
+  const getTimerColor = () => {
+    if (timeLeft > 10) return 'text-green-600';
+    if (timeLeft > 5) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-lg p-8">
-      
+
+      {/* TIMER */}
+      {!answered && (
+        <div className="flex justify-center mb-6">
+          <div className={`text-center ${getTimerColor()}`}>
+            <div className="text-5xl font-bold mb-1">
+              {timeLeft}
+            </div>
+            <div className="text-sm font-semibold uppercase tracking-wide">
+              secunde
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* QUESTION TEXT */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-4">

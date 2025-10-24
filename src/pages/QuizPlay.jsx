@@ -47,16 +47,31 @@ export function QuizPlay() {
   const [isCorrect, setIsCorrect] = useState(false);
   const [showExplanation, setShowExplanation] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
-  
+
   // NEW: Track answers array for saving
   const [answersArray, setAnswersArray] = useState([]);
-  
+
   // NEW: Track start time for duration
   const [startTime, setStartTime] = useState(null);
-  
+
   // NEW: User stats display
   const [userStats, setUserStats] = useState(null);
   const [savingSession, setSavingSession] = useState(false);
+
+  // NEW: Timer state (20 seconds per question)
+  const [timeLeft, setTimeLeft] = useState(20);
+  const [timerActive, setTimerActive] = useState(true);
+
+/**
+ * HELPER: Shuffle answers for a question
+ */
+const shuffleAnswers = (question) => {
+  const shuffledAnswers = [...question.answers].sort(() => Math.random() - 0.5);
+  return {
+    ...question,
+    answers: shuffledAnswers
+  };
+};
 
 /**
  * EFFECT: Load questions from Firestore when theme changes
@@ -87,13 +102,16 @@ useEffect(() => {
         return;
       }
 
-      // Shuffle & take first 10
+      // Shuffle questions & take first 10
       const shuffled = filteredQuestions
         .sort(() => Math.random() - 0.5)
         .slice(0, 10);
 
-      console.log(`✅ Loaded ${shuffled.length} questions`);
-      setQuestions(shuffled);
+      // IMPORTANT: Shuffle answers for each question
+      const questionsWithShuffledAnswers = shuffled.map(q => shuffleAnswers(q));
+
+      console.log(`✅ Loaded ${questionsWithShuffledAnswers.length} questions`);
+      setQuestions(questionsWithShuffledAnswers);
 
       // Set start time when quiz begins
       setStartTime(Date.now());
@@ -111,19 +129,79 @@ useEffect(() => {
   }
 }, [themeId, difficulty]);
 
+/**
+ * EFFECT: Countdown timer for each question
+ */
+useEffect(() => {
+  if (!timerActive || answered || questions.length === 0) {
+    return;
+  }
+
+  const timer = setInterval(() => {
+    setTimeLeft((prevTime) => {
+      if (prevTime <= 1) {
+        // Time's up! Auto-submit as incorrect
+        handleTimeOut();
+        return 0;
+      }
+      return prevTime - 1;
+    });
+  }, 1000);
+
+  return () => clearInterval(timer);
+}, [timerActive, answered, currentQuestionIndex, questions.length]);
+
+/**
+ * HANDLER: Time out - auto-submit as incorrect
+ */
+const handleTimeOut = () => {
+  if (answered) return;
+
+  console.log('⏰ Time out!');
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  // Mark as answered with no selection
+  setAnswered(true);
+  setIsCorrect(false);
+  setShowExplanation(true);
+  setTimerActive(false);
+
+  // Add answer data (timeout = wrong answer)
+  const answerData = {
+    questionId: currentQuestion.id,
+    question: currentQuestion.question,
+    selectedAnswerIndex: null,
+    selectedAnswer: 'TIMEOUT - Nu a răspuns',
+    correct: false,
+    correctAnswer: currentQuestion.answers.find(a => a.correct).text,
+    explanation: currentQuestion.explanation
+  };
+
+  setAnswersArray([...answersArray, answerData]);
+
+  // Move to next question after 4 seconds
+  setTimeout(() => {
+    handleNextQuestion();
+  }, 4000);
+};
+
   /**
    * HANDLER: User selectează răspuns
-   * 
-   * MODIFIED: Track answer în answersArray
+   *
+   * MODIFIED: Track answer în answersArray + Stop timer
    */
   const handleAnswerClick = (answerIndex) => {
     if (answered) return;
 
+    // Stop the timer
+    setTimerActive(false);
+
     setSelectedAnswerIndex(answerIndex);
-    
+
     const currentQuestion = questions[currentQuestionIndex];
     const isAnswerCorrect = currentQuestion.answers[answerIndex].correct;
-    
+
     setIsCorrect(isAnswerCorrect);
     setAnswered(true);
     setShowExplanation(true);
@@ -157,13 +235,17 @@ useEffect(() => {
    */
   const handleNextQuestion = () => {
     const nextIndex = currentQuestionIndex + 1;
-    
+
     if (nextIndex < questions.length) {
       setCurrentQuestionIndex(nextIndex);
       setSelectedAnswerIndex(null);
       setAnswered(false);
       setShowExplanation(false);
       setIsCorrect(false);
+
+      // Reset timer for next question
+      setTimeLeft(20);
+      setTimerActive(true);
     } else {
       // NEW: Quiz terminat - apelezi saveQuizSession
       handleQuizFinish();
@@ -439,6 +521,7 @@ useEffect(() => {
             answered={answered}
             isCorrect={isCorrect}
             showExplanation={showExplanation}
+            timeLeft={timeLeft}
           />
         </div>
 
