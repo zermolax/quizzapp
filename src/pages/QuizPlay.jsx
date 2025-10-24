@@ -13,7 +13,8 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
-import { saveQuizSession, updateUserStats } from '../services/quizService';
+import { saveQuizSession, updateUserStats, getQuestionsByTheme, getUserStats } from '../services/quizService';
+import themesData from '../data/themes.json';
 
 /**
  * COMPONENT: QuizPlay
@@ -65,48 +66,45 @@ useEffect(() => {
     try {
       setLoading(true);
       console.log('📚 Loading questions for theme:', themeId, 'difficulty:', difficulty);
-      
-      // Import function from quizService
-      const { getQuestionsByTheme } = await import('../services/quizService');
-      
+
       // Get ALL questions for theme from Firestore
       const allQuestions = await getQuestionsByTheme(themeId, 100);
-      
+
       if (!allQuestions || allQuestions.length === 0) {
         console.error('❌ No questions found!');
         setLoading(false);
         return;
       }
-      
+
       // Filter by difficulty
       const filteredQuestions = allQuestions.filter(
         q => q.difficulty === difficulty
       );
-      
+
       if (filteredQuestions.length === 0) {
         console.warn('⚠️ No questions for this difficulty');
         setLoading(false);
         return;
       }
-      
+
       // Shuffle & take first 10
       const shuffled = filteredQuestions
         .sort(() => Math.random() - 0.5)
         .slice(0, 10);
-      
+
       console.log(`✅ Loaded ${shuffled.length} questions`);
       setQuestions(shuffled);
-      
+
       // Set start time when quiz begins
       setStartTime(Date.now());
       setLoading(false);
-      
+
     } catch (error) {
       console.error('❌ Error loading questions:', error);
       setLoading(false);
     }
   };
-  
+
   // Load only if we have both theme and difficulty
   if (themeId && difficulty) {
     loadQuestions();

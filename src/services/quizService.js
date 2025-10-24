@@ -24,7 +24,7 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
     console.log('📚 Fetching questions for themeId:', themeId, 'difficulty:', difficulty);
 
     const questionsRef = collection(db, 'questions');
-    
+
     let q;
     if (difficulty) {
       q = query(
@@ -40,7 +40,7 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
     }
 
     const querySnapshot = await getDocs(q);
-    
+
     console.log('📦 Found questions:', querySnapshot.size);
 
     if (querySnapshot.empty) {
@@ -60,6 +60,13 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
     console.error('❌ Error fetching questions:', error);
     throw error;
   }
+}
+
+/**
+ * Alias for backward compatibility
+ */
+export async function getQuestionsByTheme(themeId, limitCount = 100) {
+  return fetchQuestionsByTheme(themeId, null);
 }
 
 /**
@@ -105,22 +112,36 @@ export function shuffleAnswers(question) {
 
 /**
  * Save quiz session
+ * @param {string} userId - User ID
+ * @param {string} themeId - Theme ID
+ * @param {string} difficulty - Difficulty level
+ * @param {number} score - Score achieved
+ * @param {number} totalQuestions - Total questions in quiz
+ * @param {Array} answersArray - Array of answers
+ * @param {number} duration - Duration in seconds
  */
-export async function saveQuizSession(userId, sessionData) {
+export async function saveQuizSession(userId, themeId, difficulty, score, totalQuestions, answersArray, duration) {
   try {
+    const maxScore = totalQuestions * 10;
+    const percentage = Math.round((score / maxScore) * 100);
+
     const sessionsRef = collection(db, 'quizSessions');
     const docRef = await addDoc(sessionsRef, {
-      ...sessionData,
       userId,
+      themeId,
+      difficulty,
+      score,
+      maxScore,
+      percentage,
+      answers: answersArray,
+      duration,
       createdAt: serverTimestamp()
     });
-    
+
     console.log('✅ Quiz session saved:', docRef.id);
-    
-    await updateUserStats(userId, sessionData);
-    
+
     return docRef.id;
-    
+
   } catch (error) {
     console.error('❌ Error saving quiz session:', error);
     throw error;
@@ -129,21 +150,82 @@ export async function saveQuizSession(userId, sessionData) {
 
 /**
  * Update user stats
+ * @param {string} userId - User ID
+ * @param {number} score - Score achieved
+ * @param {number} totalQuestions - Total questions
  */
-export async function updateUserStats(userId, quizData) {
+export async function updateUserStats(userId, score, totalQuestions) {
   try {
+    const maxScore = totalQuestions * 10;
+    const percentage = Math.round((score / maxScore) * 100);
+
     const userRef = doc(db, 'users', userId);
-    
+
     await updateDoc(userRef, {
       'stats.totalQuizzes': increment(1),
-      'stats.totalPoints': increment(quizData.score || 0),
-      'stats.averageScore': quizData.percentage || 0,
-      'stats.bestScore': Math.max(quizData.percentage || 0, 0)
+      'stats.totalPoints': increment(score),
+      'stats.lastQuizDate': serverTimestamp()
     });
-    
+
     console.log('✅ User stats updated');
-    
+
   } catch (error) {
     console.error('❌ Error updating stats:', error);
+  }
+}
+
+/**
+ * Get user stats
+ * @param {string} userId - User ID
+ * @returns {Object} User stats object
+ */
+export async function getUserStats(userId) {
+  try {
+    const userRef = doc(db, 'users', userId);
+    const userDoc = await getDocs(query(collection(db, 'users'), where('__name__', '==', userId)));
+
+    if (userDoc.empty) {
+      return {
+        totalQuizzes: 0,
+        totalPoints: 0,
+        averageScore: 0,
+        bestScore: 0
+      };
+    }
+
+    const userData = userDoc.docs[0].data();
+    const stats = userData.stats || {};
+
+    // Calculate average score from quiz sessions
+    const sessionsRef = collection(db, 'quizSessions');
+    const sessionsQuery = query(sessionsRef, where('userId', '==', userId));
+    const sessionsSnapshot = await getDocs(sessionsQuery);
+
+    let totalPercentage = 0;
+    let maxPercentage = 0;
+
+    sessionsSnapshot.forEach(doc => {
+      const session = doc.data();
+      totalPercentage += session.percentage || 0;
+      maxPercentage = Math.max(maxPercentage, session.percentage || 0);
+    });
+
+    const averageScore = sessionsSnapshot.size > 0 ? Math.round(totalPercentage / sessionsSnapshot.size) : 0;
+
+    return {
+      totalQuizzes: stats.totalQuizzes || 0,
+      totalPoints: stats.totalPoints || 0,
+      averageScore,
+      bestScore: maxPercentage
+    };
+
+  } catch (error) {
+    console.error('❌ Error getting user stats:', error);
+    return {
+      totalQuizzes: 0,
+      totalPoints: 0,
+      averageScore: 0,
+      bestScore: 0
+    };
   }
 }
