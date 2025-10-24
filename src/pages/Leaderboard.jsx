@@ -272,7 +272,6 @@ export function Leaderboard() {
                           {entry.displayName}
                           {entry.isCurrentUser && ' (TU)'}
                         </p>
-                        <p className="text-sm text-gray-600">{entry.email}</p>
                       </div>
                     </div>
                   </div>

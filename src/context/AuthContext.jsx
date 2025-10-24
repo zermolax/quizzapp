@@ -125,25 +125,15 @@ export function AuthProvider({ children }) {
 
   /**
    * FUNCTION 3: Anonymous Login
+   *
+   * NOTE: Anonymous users are NOT saved to Firestore to prevent database bloat.
+   * They only exist in Firebase Auth and are automatically cleaned up after 30 days of inactivity.
+   * Their session data (quiz scores) can be stored in localStorage if needed.
    */
   const loginAnonymous = async () => {
     try {
       const userCredential = await signInAnonymously(auth);
-      const user = userCredential.user;
-      
-      // Create anonymous user document
-      await setDoc(doc(db, 'users', user.uid), {
-        email: 'anonymous@guest.com',
-        displayName: 'Vizitator',
-        createdAt: new Date(),
-        stats: {
-          totalQuizzes: 0,
-          totalPoints: 0,
-          averageScore: 0,
-          bestScore: 0
-        }
-      });
-
+      // No Firestore document created for anonymous users
       return userCredential;
     } catch (error) {
       throw new Error(error.message);
