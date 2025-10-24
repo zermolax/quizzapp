@@ -13,8 +13,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
-import themesData from '../data/themes.json';
-import { saveQuizSession, updateUserStats, getUserStats } from '../services/quizService';
+import { saveQuizSession, updateUserStats } from '../services/quizService';
 
 /**
  * COMPONENT: QuizPlay
@@ -58,37 +57,61 @@ export function QuizPlay() {
   const [userStats, setUserStats] = useState(null);
   const [savingSession, setSavingSession] = useState(false);
 
-  /**
-   * EFFECT: Load questions for selected theme
-   */
-  useEffect(() => {
-    const loadQuestions = async () => {
-      try {
-        setLoading(true);
-        
-        const questionFile = `questions-${themeId}.json`;
-        const allQuestions = await import(`../data/${questionFile}`).then(m => m.default);
-        
-        const filteredQuestions = allQuestions.filter(q => q.difficulty === difficulty);
-        const shuffled = filteredQuestions.sort(() => Math.random() - 0.5);
-        
-        setQuestions(shuffled.slice(0, 10));
-        
-        // NEW: Set start time when quiz begins
-        setStartTime(Date.now());
-        
+/**
+ * EFFECT: Load questions from Firestore when theme changes
+ */
+useEffect(() => {
+  const loadQuestions = async () => {
+    try {
+      setLoading(true);
+      console.log('📚 Loading questions for theme:', themeId, 'difficulty:', difficulty);
+      
+      // Import function from quizService
+      const { getQuestionsByTheme } = await import('../services/quizService');
+      
+      // Get ALL questions for theme from Firestore
+      const allQuestions = await getQuestionsByTheme(themeId, 100);
+      
+      if (!allQuestions || allQuestions.length === 0) {
+        console.error('❌ No questions found!');
         setLoading(false);
-        
-      } catch (error) {
-        console.error('Error loading questions:', error);
-        setLoading(false);
+        return;
       }
-    };
-
-    if (themeId && difficulty) {
-      loadQuestions();
+      
+      // Filter by difficulty
+      const filteredQuestions = allQuestions.filter(
+        q => q.difficulty === difficulty
+      );
+      
+      if (filteredQuestions.length === 0) {
+        console.warn('⚠️ No questions for this difficulty');
+        setLoading(false);
+        return;
+      }
+      
+      // Shuffle & take first 10
+      const shuffled = filteredQuestions
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 10);
+      
+      console.log(`✅ Loaded ${shuffled.length} questions`);
+      setQuestions(shuffled);
+      
+      // Set start time when quiz begins
+      setStartTime(Date.now());
+      setLoading(false);
+      
+    } catch (error) {
+      console.error('❌ Error loading questions:', error);
+      setLoading(false);
     }
-  }, [themeId, difficulty]);
+  };
+  
+  // Load only if we have both theme and difficulty
+  if (themeId && difficulty) {
+    loadQuestions();
+  }
+}, [themeId, difficulty]);
 
   /**
    * HANDLER: User selectează răspuns

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "import": "node importQuestions.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
