@@ -33,7 +33,7 @@ export function ThemeSelection() {
           <div className="flex justify-between items-center">
             
             <div>
-              <h1 className="text-3xl font-bold text-blue-600">🎓 Storia Quiz</h1>
+              <h1 className="text-3xl font-bold text-blue-600">🎓 Quizz Fun</h1>
               <p className="text-gray-600 text-sm">Alege o temă și testează-ți cunoștințele</p>
             </div>
 

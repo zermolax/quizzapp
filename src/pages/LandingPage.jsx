@@ -52,10 +52,10 @@ export function LandingPage({ onPlayNow }) {
       {/* HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white">
         <h1 className="text-6xl font-bold mb-6">
-          Invață Istoria cu Plăcere! 🎉
+          Invață și distrează-te inteligent! 🎉
         </h1>
         <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Quiz-uri educaționale divertisante • Compită cu alții • Urmărește progresul
+          Quiz-uri educaționale bazate pe programa școlară • Concurează cu alții • Înregistrează-te și urmărește-ți progresul
         </p>
         
         <div className="flex gap-4 justify-center mb-12">
@@ -94,7 +94,7 @@ export function LandingPage({ onPlayNow }) {
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
-            De ce quizzfun.app? ✨
+            De ce Quizz Fun?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,7 +103,7 @@ export function LandingPage({ onPlayNow }) {
               <p className="text-4xl mb-3">📚</p>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Conținut Calitativ</h3>
               <p className="text-gray-600">
-                Quiz-uri create de profesori, nu crowd-sourced. Fiecare întrebare cu explicație.
+                Quiz-uri create de profesori. Fiecare răspuns are și explicație.
               </p>
             </div>
 
@@ -112,7 +112,7 @@ export function LandingPage({ onPlayNow }) {
               <p className="text-4xl mb-3">🎮</p>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Distractiv & Educativ</h3>
               <p className="text-gray-600">
-                Gameplay smooth cu feedback instant. Înveți cât joci.
+                Gameplay cu feedback instantaneu. Înveți în timp ce te joci.
               </p>
             </div>
 
@@ -121,7 +121,7 @@ export function LandingPage({ onPlayNow }) {
               <p className="text-4xl mb-3">🏆</p>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Competeție</h3>
               <p className="text-gray-600">
-                Clasament global și per-temă. Urcă în topul utilizatorilor.
+                Clasament global și pentru fiecare temă. Urcă în topul utilizatorilor.
               </p>
             </div>
 
@@ -139,7 +139,7 @@ export function LandingPage({ onPlayNow }) {
               <p className="text-4xl mb-3">📱</p>
               <h3 className="text-xl font-bold text-gray-800 mb-2">Accesibil Peste Tot</h3>
               <p className="text-gray-600">
-                Funcționează perfect pe telefon, tablet, desktop.
+                Funcționează perfect pe telefon, tabletă, calculator.
               </p>
             </div>
 
@@ -169,7 +169,7 @@ export function LandingPage({ onPlayNow }) {
                 1
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">Înregistrare</h3>
-              <p className="text-gray-600">Creează cont în 30 secunde (gratuit!)</p>
+              <p className="text-gray-600">Creează cont în câteva secunde (gratuit!)</p>
             </div>
 
             {/* Step 2 */}
@@ -196,7 +196,7 @@ export function LandingPage({ onPlayNow }) {
                 4
               </div>
               <h3 className="text-lg font-bold text-gray-800 mb-2">Urcă în Clasament</h3>
-              <p className="text-gray-600">Compită și colecționează puncte</p>
+              <p className="text-gray-600">Concurează și colecționează puncte</p>
             </div>
           </div>
         </div>
@@ -206,10 +206,10 @@ export function LandingPage({ onPlayNow }) {
       <section className="bg-gradient-to-r from-blue-600 to-indigo-600 py-20 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-6">
-            Gata să Înveți Istoria? 🚀
+            Gata să înveți jucându-te? 🚀
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            100% gratuit • Fără ads • Distractiv • Educational
+            100% gratuit • Fără reclame • Distractiv • Educational
           </p>
           
           <button

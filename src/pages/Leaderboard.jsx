@@ -191,7 +191,7 @@ export function Leaderboard() {
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Percentilă</p>
+                <p className="text-sm text-gray-600">Procentaj</p>
                 <p className="text-3xl font-bold text-purple-600">
                   Top {userRank.percentile}%
                 </p>
