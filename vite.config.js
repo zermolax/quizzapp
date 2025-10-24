@@ -27,10 +27,7 @@ export default defineConfig({
           'react-router': ['react-router-dom'],
 
           // Firebase chunk (large library)
-          'firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/database'],
-
-          // Stripe chunk (if used)
-          'stripe': ['@stripe/stripe-js']
+          'firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/database']
         }
       }
     },
