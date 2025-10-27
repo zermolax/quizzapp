@@ -145,7 +145,10 @@ export function Leaderboard() {
       {/* HEADER */}
       <header className="max-w-6xl mx-auto mb-8">
         <div className="flex justify-between items-center bg-white rounded-lg shadow p-6">
-          <div>
+          <div
+            onClick={() => navigate('/')}
+            className="cursor-pointer hover:opacity-80 transition"
+          >
             <h1 className="text-4xl font-bold text-blue-600">🏆 Clasament</h1>
             <p className="text-gray-600">Compară-te cu ceilalți utilizatori</p>
           </div>

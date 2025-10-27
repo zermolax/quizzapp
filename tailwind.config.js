@@ -7,6 +7,14 @@ export default {
   ],
   // Safelist dynamic classes used in themes.json
   safelist: [
+    // Theme colors
+    'bg-brand-red',
+    'bg-brand-orange',
+    'bg-brand-yellow',
+    'bg-brand-green',
+    'bg-brand-blue',
+    'bg-brand-purple',
+    // Legacy support for existing code
     'bg-red-500',
     'bg-blue-500',
     'bg-yellow-600',
@@ -16,9 +24,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#3B82F6',
-        success: '#10B981',
-        error: '#EF4444',
+        // New Brand Colors
+        brand: {
+          red: '#E63946',        // Roșu vibrant
+          orange: '#F77F00',     // Portocaliu energic
+          yellow: '#FCBF49',     // Galben solar
+          green: '#06A77D',      // Verde fresh
+          blue: '#1982C4',       // Albastru inteligent
+          purple: '#6A4C93',     // Mov profund
+        },
+        // Neutral Colors
+        neutral: {
+          50: '#F9FAFB',         // Background light
+          100: '#F3F4F6',        // Cards background
+          200: '#E5E7EB',        // Borders
+          500: '#6B7280',        // Text secondary
+          700: '#374151',        // Text primary
+          900: '#111827',        // Headers
+        },
+        // Semantic Colors
+        success: '#06A77D',      // Verde - correct answer
+        error: '#E63946',        // Roșu - wrong answer
+        warning: '#F77F00',      // Portocaliu - time running out
+        info: '#1982C4',         // Albastru - hints, info
+
+        // Legacy support (kept for backward compatibility)
+        primary: '#1982C4',
       }
     },
   },

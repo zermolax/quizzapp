@@ -32,7 +32,10 @@ export function ThemeSelection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
             
-            <div>
+            <div
+              onClick={() => navigate('/')}
+              className="cursor-pointer hover:opacity-80 transition"
+            >
               <h1 className="text-3xl font-bold text-blue-600">🎓 Quizz Fun</h1>
               <p className="text-gray-600 text-sm">Alege o temă și testează-ți cunoștințele</p>
             </div>
