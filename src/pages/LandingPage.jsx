@@ -25,7 +25,7 @@ export function LandingPage({ onPlayNow }) {
             {user ? (
               <>
                 <button
-                  onClick={() => navigate('/themes')}
+                  onClick={() => navigate('/subjects')}
                   className="bg-brand-blue hover:bg-brand-blue/90 text-white px-6 py-2 rounded-lg font-semibold"
                 >
                   Joacă acum
@@ -228,7 +228,7 @@ export function LandingPage({ onPlayNow }) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="font-bold text-white mb-4">🎓 quizzfun.app</h3>
-              <p className="text-sm">Educație prin joc. Învață istoria distractiv.</p>
+              <p className="text-sm">Educație prin joc. Învață istorie, geografie și biologie distractiv.</p>
             </div>
             
             <div>
@@ -272,13 +272,13 @@ export default LandingPage;
 
 /**
  * FLUX FINAL:
- * 
+ *
  * 1. User vizită quizzfun.app
  * 2. Vede LandingPage cu "Joacă acum" button
  * 3. Click → onPlayNow() din Home.jsx
  * 4. Home checks: user logat?
  * 5. NU → Show LoginModal
- * 6. DA → Navigate to /themes
- * 
+ * 6. DA → Navigate to /subjects
+ *
  * PERFECT UX! ✅
  */
