@@ -22,7 +22,6 @@ import {
   limit
 } from 'firebase/firestore';
 import { db } from './firebase';
-import themesData from '../data/themes.json';
 
 /**
  * FUNCTION 1: Get User Profile
@@ -79,7 +78,80 @@ export async function getUserProfile(userId) {
 }
 
 /**
- * FUNCTION 2: Get Progress By Theme
+ * FUNCTION 2: Get Progress By Subject
+ * UPDATED for multi-subject architecture
+ *
+ * Returns stats grouped by subject
+ */
+export async function getProgressBySubject(userId) {
+  try {
+    // Query: Get all quiz sessions for this user
+    const q = query(
+      collection(db, 'quizSessions'),
+      where('userId', '==', userId),
+      orderBy('createdAt', 'desc')
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    // Group by subject
+    const subjectMap = {};
+
+    querySnapshot.docs.forEach((doc) => {
+      const session = doc.data();
+      const { subjectId, percentage, score } = session;
+
+      if (!subjectMap[subjectId]) {
+        subjectMap[subjectId] = {
+          subjectId,
+          sessions: []
+        };
+      }
+
+      subjectMap[subjectId].sessions.push(session);
+    });
+
+    // Convert to array and calculate stats
+    const progressArray = [];
+
+    for (const subjectId in subjectMap) {
+      const sessions = subjectMap[subjectId].sessions;
+
+      // Fetch subject info from Firestore
+      const subjectDocRef = doc(db, 'subjects', subjectId);
+      const subjectDoc = await getDoc(subjectDocRef);
+      const subjectData = subjectDoc.exists() ? subjectDoc.data() : null;
+
+      const totalQuizzes = sessions.length;
+      const totalPoints = sessions.reduce((sum, s) => sum + s.score, 0);
+      const averageScore = Math.round(
+        sessions.reduce((sum, s) => sum + s.percentage, 0) / totalQuizzes
+      );
+      const bestScore = Math.max(...sessions.map(s => s.percentage));
+
+      progressArray.push({
+        subjectId,
+        subjectName: subjectData?.name || 'Unknown',
+        subjectIcon: subjectData?.icon || '📚',
+        subjectColor: subjectData?.color || '#1982C4',
+        totalQuizzes,
+        averageScore,
+        bestScore,
+        totalPoints
+      });
+    }
+
+    // Sort by total quizzes (desc)
+    return progressArray.sort((a, b) => b.totalQuizzes - a.totalQuizzes);
+
+  } catch (error) {
+    console.error('Error getting progress by subject:', error);
+    throw error;
+  }
+}
+
+/**
+ * FUNCTION 3: Get Progress By Theme
  * 
  * PARAMETRI:
  * - userId: ID-ul utilizatorului
@@ -142,25 +214,32 @@ export async function getProgressByTheme(userId) {
     });
     
     // Convert to array and calculate stats
-    const progressArray = Object.values(themeMap).map((themeData) => {
+    const progressArray = [];
+
+    for (const themeId in themeMap) {
+      const themeData = themeMap[themeId];
       const sessions = themeData.sessions;
-      const theme = themesData.find(t => t.id === themeData.themeId);
-      
+
+      // Fetch theme info from Firestore
+      const themeDocRef = doc(db, 'themes', themeId);
+      const themeDoc = await getDoc(themeDocRef);
+      const theme = themeDoc.exists() ? themeDoc.data() : null;
+
       const totalQuizzes = sessions.length;
       const totalPoints = sessions.reduce((sum, s) => sum + s.score, 0);
       const averageScore = Math.round(
         sessions.reduce((sum, s) => sum + s.percentage, 0) / totalQuizzes
       );
       const bestScore = Math.max(...sessions.map(s => s.percentage));
-      
+
       // Stats by difficulty
       const attempts = Object.entries(themeData.difficulties).map(([diff, percentages]) => ({
         difficulty: diff,
         count: percentages.length,
         avgScore: Math.round(percentages.reduce((a, b) => a + b, 0) / percentages.length)
       }));
-      
-      return {
+
+      progressArray.push({
         themeId: themeData.themeId,
         themeName: theme?.name || 'Unknown',
         totalQuizzes,
@@ -171,9 +250,9 @@ export async function getProgressByTheme(userId) {
           const order = { easy: 0, medium: 1, hard: 2 };
           return order[a.difficulty] - order[b.difficulty];
         })
-      };
-    });
-    
+      });
+    }
+
     // Sort by total quizzes (desc)
     return progressArray.sort((a, b) => b.totalQuizzes - a.totalQuizzes);
 
@@ -217,15 +296,29 @@ export async function getQuizHistory(userId, limitCount = 10) {
       orderBy('createdAt', 'desc'),
       limit(limitCount)
     );
-    
+
     const querySnapshot = await getDocs(q);
-    
-    const history = querySnapshot.docs.map((doc) => {
-      const session = doc.data();
-      const theme = themesData.find(t => t.id === session.themeId);
-      
-      return {
-        sessionId: doc.id,
+
+    // Fetch theme names from Firestore
+    const history = [];
+
+    for (const docSnap of querySnapshot.docs) {
+      const session = docSnap.data();
+
+      // Fetch theme info
+      const themeDocRef = doc(db, 'themes', session.themeId);
+      const themeDoc = await getDoc(themeDocRef);
+      const theme = themeDoc.exists() ? themeDoc.data() : null;
+
+      // Fetch subject info
+      const subjectDocRef = doc(db, 'subjects', session.subjectId);
+      const subjectDoc = await getDoc(subjectDocRef);
+      const subject = subjectDoc.exists() ? subjectDoc.data() : null;
+
+      history.push({
+        sessionId: docSnap.id,
+        subjectId: session.subjectId,
+        subjectName: subject?.name || 'Unknown',
         themeId: session.themeId,
         themeName: theme?.name || 'Unknown',
         difficulty: session.difficulty,
@@ -234,9 +327,9 @@ export async function getQuizHistory(userId, limitCount = 10) {
         percentage: session.percentage,
         duration: session.duration,
         createdAt: session.createdAt
-      };
-    });
-    
+      });
+    }
+
     return history;
 
   } catch (error) {

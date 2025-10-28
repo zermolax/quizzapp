@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import {
   getUserProfile,
+  getProgressBySubject,
   getProgressByTheme,
   getQuizHistory,
   formatDate,
@@ -41,6 +42,7 @@ export function Profile() {
    * STATE
    */
   const [userProfile, setUserProfile] = useState(null);
+  const [subjectProgress, setSubjectProgress] = useState([]);
   const [themeProgress, setThemeProgress] = useState([]);
   const [quizHistory, setQuizHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,10 +58,12 @@ export function Profile() {
         setError(null);
 
         const profile = await getUserProfile(user.uid);
+        const subjectProg = await getProgressBySubject(user.uid);
         const progress = await getProgressByTheme(user.uid);
         const history = await getQuizHistory(user.uid, 10);
 
         setUserProfile(profile);
+        setSubjectProgress(subjectProg);
         setThemeProgress(progress);
         setQuizHistory(history);
 
@@ -200,7 +204,47 @@ export function Profile() {
           </div>
         </div>
 
-        {/* SECTION 3: PROGRESS BY THEME */}
+        {/* SECTION 3: PROGRESS BY SUBJECT */}
+        {subjectProgress.length > 0 && (
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">📚 Progres pe Materii</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {subjectProgress.map((subject) => (
+                <div
+                  key={subject.subjectId}
+                  className="p-4 rounded-lg border-l-4"
+                  style={{ borderLeftColor: subject.subjectColor, backgroundColor: `${subject.subjectColor}10` }}
+                >
+                  <div className="flex items-center mb-3">
+                    <span className="text-4xl mr-3">{subject.subjectIcon}</span>
+                    <div>
+                      <h3 className="text-lg font-bold text-neutral-900">{subject.subjectName}</h3>
+                      <p className="text-sm text-neutral-500">{subject.totalQuizzes} quiz-uri</p>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="bg-white p-2 rounded text-center">
+                      <p className="text-xs text-neutral-500">Mediu</p>
+                      <p className="text-lg font-bold" style={{ color: subject.subjectColor }}>{subject.averageScore}%</p>
+                    </div>
+                    <div className="bg-white p-2 rounded text-center">
+                      <p className="text-xs text-neutral-500">Maxim</p>
+                      <p className="text-lg font-bold text-success">{subject.bestScore}%</p>
+                    </div>
+                    <div className="bg-white p-2 rounded text-center">
+                      <p className="text-xs text-neutral-500">Puncte</p>
+                      <p className="text-lg font-bold text-brand-purple">{subject.totalPoints}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* SECTION 4: PROGRESS BY THEME */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-neutral-900 mb-4">📈 Progres pe Teme</h2>
 
@@ -266,7 +310,7 @@ export function Profile() {
           )}
         </div>
 
-        {/* SECTION 4: QUIZ HISTORY */}
+        {/* SECTION 5: QUIZ HISTORY */}
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-neutral-900 mb-4">⏰ Istoric Quiz-uri</h2>
 
@@ -277,6 +321,7 @@ export function Profile() {
               <table className="w-full text-sm">
                 <thead className="bg-neutral-100 border-b-2 border-neutral-200">
                   <tr>
+                    <th className="text-left p-3">Materie</th>
                     <th className="text-left p-3">Temă</th>
                     <th className="text-left p-3">Dificultate</th>
                     <th className="text-center p-3">Scor</th>
@@ -288,6 +333,7 @@ export function Profile() {
                 <tbody>
                   {quizHistory.map((quiz, index) => (
                     <tr key={index} className="border-b hover:bg-neutral-50">
+                      <td className="p-3 text-neutral-500 text-xs">{quiz.subjectName}</td>
                       <td className="p-3 font-semibold text-neutral-900">{quiz.themeName}</td>
                       <td className="p-3">
                         <span className={`
