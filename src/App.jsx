@@ -13,6 +13,7 @@ import { useAuth } from './hooks/useAuth';
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home'));
+const SubjectSelection = lazy(() => import('./pages/SubjectSelection'));
 const ThemeSelection = lazy(() => import('./pages/ThemeSelection'));
 const QuizPlay = lazy(() => import('./pages/QuizPlay'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -40,43 +41,56 @@ export default function App() {
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
 
-          {/* RUTA 1: Home - Shows LandingPage or Login (Home.jsx decides) */}
+          {/* RUTA 1: Home - Landing Page */}
           <Route
             path="/"
             element={<Home />}
           />
 
-          {/* RUTA 2: Theme Selection (Protected) */}
+          {/* RUTA 2: Subjects - Multi-disciplinary routes (Protected) */}
+          {/* Step 1: Select Subject */}
           <Route
-            path="/themes"
+            path="/subjects"
+            element={user ? <SubjectSelection /> : <Navigate to="/" replace />}
+          />
+
+          {/* Step 2: Select Theme within Subject */}
+          <Route
+            path="/subjects/:subjectSlug"
             element={user ? <ThemeSelection /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 3: Quiz Play (Protected) */}
+          {/* Step 3: Play Quiz */}
           <Route
-            path="/quiz"
+            path="/subjects/:subjectSlug/quiz/:themeSlug"
             element={user ? <QuizPlay /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 4: Profile (Protected) */}
+          {/* RUTA 3: Profile (Protected) */}
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 5: Leaderboard (Protected) */}
+          {/* RUTA 4: Leaderboard (Protected) */}
           <Route
             path="/leaderboard"
             element={user ? <Leaderboard /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 6: Privacy Policy (Public) */}
+          {/* RUTA 5: Privacy Policy (Public) */}
           <Route path="/privacy" element={<Privacy />} />
 
-          {/* RUTA 7: Terms of Service (Public) */}
+          {/* RUTA 6: Terms of Service (Public) */}
           <Route path="/terms" element={<Terms />} />
 
-          {/* RUTA 8: Catch-all (404) */}
+          {/* LEGACY REDIRECT: /themes → /subjects */}
+          <Route
+            path="/themes"
+            element={<Navigate to="/subjects" replace />}
+          />
+
+          {/* RUTA 7: Catch-all (404) */}
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>

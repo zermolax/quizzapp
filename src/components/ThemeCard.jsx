@@ -32,13 +32,13 @@ export function ThemeCard({ theme, onSelectTheme }) {
   
   /**
    * HANDLER: Selectare dificultate
-   * 
+   *
    * Când user face click pe "Easy", "Medium", sau "Hard"
    * Trimit tema + dificultatea la parent component
    * Parent-ul va naviga la quiz page
    */
   const handleDifficultyClick = (difficulty) => {
-    onSelectTheme(theme.id, difficulty);
+    onSelectTheme(theme.slug, difficulty);
   };
 
   return (
