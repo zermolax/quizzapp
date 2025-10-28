@@ -70,34 +70,48 @@ export function LandingPage({ onPlayNow }) {
 
       {/* NAVIGATION */}
       <nav className="bg-white shadow-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-brand-blue">🎓 quizzfun.app</h1>
-          <div className="flex gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center gap-2">
+          {/* Logo - responsive */}
+          <h1 className="text-lg sm:text-2xl font-bold text-brand-blue whitespace-nowrap">
+            🎓 <span className="hidden xs:inline">quizzfun</span><span className="hidden sm:inline">.app</span>
+          </h1>
+
+          {/* Navigation buttons - responsive */}
+          <div className="flex gap-1 sm:gap-2 md:gap-4">
             {user ? (
               <>
+                {/* Profil - ascuns pe mobile extra small, iconită pe mobile */}
                 <button
                   onClick={() => navigate('/profile')}
-                  className="text-brand-blue hover:text-brand-blue/80 font-semibold px-4 py-2"
+                  className="text-brand-blue hover:text-brand-blue/80 font-semibold px-2 sm:px-4 py-2 text-sm sm:text-base"
+                  title="Profil"
                 >
-                  Profil
+                  <span className="hidden md:inline">Profil</span>
+                  <span className="md:hidden">👤</span>
                 </button>
+
+                {/* Materii */}
                 <button
                   onClick={scrollToSubjects}
-                  className="bg-brand-blue hover:bg-brand-blue/90 text-white px-6 py-2 rounded-lg font-semibold transition"
+                  className="bg-brand-blue hover:bg-brand-blue/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
                 >
-                  Materii
+                  <span className="hidden sm:inline">Materii</span>
+                  <span className="sm:hidden">📚</span>
                 </button>
+
+                {/* Logout - text scurt pe mobile */}
                 <button
                   onClick={logout}
-                  className="bg-error hover:bg-error/90 text-white px-6 py-2 rounded-lg font-semibold transition"
+                  className="bg-error hover:bg-error/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
                 >
-                  Deconectare
+                  <span className="hidden sm:inline">Deconectare</span>
+                  <span className="sm:hidden">↩️</span>
                 </button>
               </>
             ) : (
               <button
                 onClick={onPlayNow || (() => {})}
-                className="bg-brand-blue hover:bg-brand-blue/90 text-white px-6 py-2 rounded-lg font-semibold transition"
+                className="bg-brand-blue hover:bg-brand-blue/90 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
               >
                 Login
               </button>
@@ -140,7 +154,7 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* SUBJECTS SECTION - NOU! */}
-      <section id="subjects-section" className="bg-white py-20">
+      <section id="subjects-section" className="bg-gradient-to-br from-neutral-100 to-neutral-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-4 text-neutral-900">
             📚 Alege Materia
@@ -203,7 +217,7 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="bg-gradient-to-br from-neutral-50 to-neutral-100 py-20">
+      <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
             De ce Quizz Fun?
@@ -268,7 +282,7 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="bg-white py-20">
+      <section className="bg-neutral-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
             Cum Funcționează? 🎯
