@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, orderBy, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import ThemeCard from '../components/ThemeCard';
 
@@ -48,8 +48,7 @@ export function ThemeSelection() {
         const q = query(
           themesRef,
           where('subjectId', '==', subjectSlug),
-          where('isPublished', '==', true),
-          orderBy('order', 'asc')
+          where('isPublished', '==', true)
         );
 
         const snapshot = await getDocs(q);
@@ -58,7 +57,10 @@ export function ThemeSelection() {
           ...doc.data()
         }));
 
-        setThemes(themesData);
+        // Sort în JavaScript (5-10 themes per subject, nu necesită index Firestore)
+        const sortedThemes = themesData.sort((a, b) => a.order - b.order);
+
+        setThemes(sortedThemes);
 
       } catch (err) {
         console.error('Eroare fetch themes:', err);

@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, orderBy, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
 
 export function SubjectSelection() {
@@ -30,8 +30,7 @@ export function SubjectSelection() {
         const subjectsRef = collection(db, 'subjects');
         const q = query(
           subjectsRef,
-          where('isPublished', '==', true),
-          orderBy('order', 'asc')
+          where('isPublished', '==', true)
         );
 
         const snapshot = await getDocs(q);
@@ -40,7 +39,10 @@ export function SubjectSelection() {
           ...doc.data()
         }));
 
-        setSubjects(subjectsData);
+        // Sort în JavaScript (nu avem nevoie de index Firestore pentru 3 materii)
+        const sortedSubjects = subjectsData.sort((a, b) => a.order - b.order);
+
+        setSubjects(sortedSubjects);
       } catch (err) {
         console.error('Eroare fetch subjects:', err);
         setError('Eroare la încărcarea materiilor. Te rugăm să încerci din nou.');
