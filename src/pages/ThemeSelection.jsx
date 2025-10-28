@@ -25,28 +25,28 @@ export function ThemeSelection() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-brand-blue/10">
+
       {/* HEADER */}
       <header className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            
+
             <div
               onClick={() => navigate('/')}
               className="cursor-pointer hover:opacity-80 transition"
             >
-              <h1 className="text-3xl font-bold text-blue-600">🎓 Quizz Fun</h1>
-              <p className="text-gray-600 text-sm">Alege o temă și testează-ți cunoștințele</p>
+              <h1 className="text-3xl font-bold text-brand-blue">🎓 Quizz Fun</h1>
+              <p className="text-neutral-500 text-sm">Alege o temă și testează-ți cunoștințele</p>
             </div>
 
             {/* RIGHT SIDE: Buttons */}
             <div className="flex items-center gap-3">
-              
+
               {/* Leaderboard Button - NEW */}
               <button
                 onClick={() => navigate('/leaderboard')}
-                className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
+                className="bg-brand-yellow hover:bg-brand-yellow/90 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
               >
                 🏆 Clasament
               </button>
@@ -54,18 +54,18 @@ export function ThemeSelection() {
               {/* Profile Button */}
               <button
                 onClick={() => navigate('/profile')}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
+                className="bg-brand-purple hover:bg-brand-purple/90 text-white px-4 py-2 rounded-lg font-semibold transition flex items-center gap-2"
               >
                 👤 Profil
               </button>
 
-              <p className="text-gray-700 text-sm">
+              <p className="text-neutral-700 text-sm">
                 <strong>{user?.email || 'Vizitator'}</strong>
               </p>
-              
+
               <button
                 onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition"
+                className="bg-error hover:bg-error/90 text-white px-4 py-2 rounded-lg font-semibold transition"
               >
                 Deconectare
               </button>
@@ -77,13 +77,13 @@ export function ThemeSelection() {
 
       {/* MAIN CONTENT */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
+
         {/* TITULO */}
         <div className="mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-2">
+          <h2 className="text-4xl font-bold text-neutral-900 mb-2">
             Tematici Disponibile
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-neutral-500 text-lg">
             {themesData.length} tematici de învățat • Alege dificultatea și începe
           </p>
         </div>
@@ -100,11 +100,11 @@ export function ThemeSelection() {
         </div>
 
         {/* FOOTER INFO */}
-        <div className="mt-16 bg-blue-100 border-l-4 border-blue-500 p-6 rounded">
-          <h3 className="text-lg font-bold text-blue-900 mb-2">
+        <div className="mt-16 bg-info/10 border-l-4 border-info p-6 rounded">
+          <h3 className="text-lg font-bold text-neutral-900 mb-2">
             💡 Cum funcționează?
           </h3>
-          <ul className="text-blue-800 space-y-2 text-sm">
+          <ul className="text-neutral-700 space-y-2 text-sm">
             <li>✅ Alege o temă care te interesează</li>
             <li>✅ Selectează nivelul de dificultate (ușor, mediu, greu)</li>
             <li>✅ Răspunde la întrebări și acumulează puncte</li>

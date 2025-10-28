@@ -94,12 +94,12 @@ export function Leaderboard() {
    */
   const getRowStyle = (entry) => {
     if (entry.isCurrentUser) {
-      return 'bg-yellow-50 border-l-4 border-yellow-500';
+      return 'bg-brand-yellow/10 border-l-4 border-brand-yellow';
     }
     if (entry.rank <= 3) {
-      return 'bg-blue-50 border-l-4 border-blue-500';
+      return 'bg-brand-blue/10 border-l-4 border-brand-blue';
     }
-    return 'border-b hover:bg-gray-50';
+    return 'border-b hover:bg-neutral-50';
   };
 
   /**
@@ -107,10 +107,10 @@ export function Leaderboard() {
    */
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Se încarcă clasament...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-blue mx-auto mb-4"></div>
+          <p className="text-neutral-500">Se încarcă clasament...</p>
         </div>
       </div>
     );
@@ -121,13 +121,13 @@ export function Leaderboard() {
    */
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
         <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">⚠️ Eroare</h2>
-          <p className="text-gray-600 mb-6">{error}</p>
+          <h2 className="text-2xl font-bold text-error mb-4">⚠️ Eroare</h2>
+          <p className="text-neutral-500 mb-6">{error}</p>
           <button
             onClick={() => navigate('/themes')}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
+            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-6 rounded-lg"
           >
             ← Înapoi la Tematici
           </button>
@@ -140,8 +140,8 @@ export function Leaderboard() {
    * RENDER: Leaderboard Page
    */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-brand-blue/10 p-4">
+
       {/* HEADER */}
       <header className="max-w-6xl mx-auto mb-8">
         <div className="flex justify-between items-center bg-white rounded-lg shadow p-6">
@@ -149,19 +149,19 @@ export function Leaderboard() {
             onClick={() => navigate('/')}
             className="cursor-pointer hover:opacity-80 transition"
           >
-            <h1 className="text-4xl font-bold text-blue-600">🏆 Clasament</h1>
-            <p className="text-gray-600">Compară-te cu ceilalți utilizatori</p>
+            <h1 className="text-4xl font-bold text-brand-blue">🏆 Clasament</h1>
+            <p className="text-neutral-500">Compară-te cu ceilalți utilizatori</p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => navigate('/profile')}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold transition"
+              className="bg-brand-purple hover:bg-brand-purple/90 text-white px-4 py-2 rounded-lg font-semibold transition"
             >
               👤 Profil
             </button>
             <button
               onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition"
+              className="bg-error hover:bg-error/90 text-white px-4 py-2 rounded-lg font-semibold transition"
             >
               Deconectare
             </button>
@@ -173,29 +173,29 @@ export function Leaderboard() {
 
         {/* USER RANK CARD */}
         {activeTab === 'global' && userRank && (
-          <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg mb-8 shadow">
+          <div className="bg-gradient-to-r from-brand-yellow/20 to-brand-yellow/10 border-l-4 border-brand-yellow p-6 rounded-lg mb-8 shadow">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
-                <p className="text-sm text-gray-600">Locul tău</p>
-                <p className="text-3xl font-bold text-yellow-600">
+                <p className="text-sm text-neutral-500">Locul tău</p>
+                <p className="text-3xl font-bold text-brand-yellow">
                   #{userRank.rank || 'N/A'}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Din total</p>
-                <p className="text-3xl font-bold text-blue-600">
+                <p className="text-sm text-neutral-500">Din total</p>
+                <p className="text-3xl font-bold text-brand-blue">
                   {userRank.totalUsers}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Puncte</p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-sm text-neutral-500">Puncte</p>
+                <p className="text-3xl font-bold text-success">
                   {userRank.userPoints}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-gray-600">Procentaj</p>
-                <p className="text-3xl font-bold text-purple-600">
+                <p className="text-sm text-neutral-500">Procentaj</p>
+                <p className="text-3xl font-bold text-brand-purple">
                   Top {userRank.percentile}%
                 </p>
               </div>
@@ -211,8 +211,8 @@ export function Leaderboard() {
               onClick={() => setActiveTab('global')}
               className={`px-6 py-2 rounded-lg font-semibold transition ${
                 activeTab === 'global'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                  ? 'bg-brand-blue text-white'
+                  : 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200'
               }`}
             >
               🌍 Global
@@ -225,8 +225,8 @@ export function Leaderboard() {
                 onClick={() => setActiveTab(theme.id)}
                 className={`px-6 py-2 rounded-lg font-semibold transition ${
                   activeTab === theme.id
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                    ? 'bg-brand-blue text-white'
+                    : 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200'
                 }`}
               >
                 {theme.icon} {theme.name.substring(0, 10)}...
@@ -237,9 +237,9 @@ export function Leaderboard() {
 
         {/* LEADERBOARD TABLE */}
         <div className="bg-white rounded-lg shadow overflow-hidden">
-          
+
           {/* Table Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-4">
+          <div className="bg-gradient-to-r from-brand-blue to-brand-blue/90 text-white px-6 py-4">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 text-sm font-bold">
               <div className="md:col-span-1">#</div>
               <div className="md:col-span-4">Utilizator</div>
@@ -253,7 +253,7 @@ export function Leaderboard() {
           {/* Table Body */}
           <div>
             {leaderboard.length === 0 ? (
-              <div className="p-8 text-center text-gray-600">
+              <div className="p-8 text-center text-neutral-500">
                 Nu sunt date în clasament încă.
               </div>
             ) : (
@@ -271,7 +271,7 @@ export function Leaderboard() {
                   <div className="md:col-span-4">
                     <div className="flex items-center gap-3">
                       <div>
-                        <p className="font-bold text-gray-800">
+                        <p className="font-bold text-neutral-900">
                           {entry.displayName}
                           {entry.isCurrentUser && ' (TU)'}
                         </p>
@@ -281,14 +281,14 @@ export function Leaderboard() {
 
                   {/* Points */}
                   <div className="md:col-span-2 text-center">
-                    <p className="text-2xl font-bold text-blue-600">
+                    <p className="text-2xl font-bold text-brand-blue">
                       {entry.totalPoints}
                     </p>
                   </div>
 
                   {/* Quizzes */}
                   <div className="md:col-span-2 text-center">
-                    <p className="text-lg font-semibold text-gray-800">
+                    <p className="text-lg font-semibold text-neutral-900">
                       {entry.totalQuizzes}
                     </p>
                   </div>
@@ -296,9 +296,9 @@ export function Leaderboard() {
                   {/* Average Score */}
                   <div className="md:col-span-2 text-center">
                     <div className="inline-block px-3 py-1 rounded-full text-sm font-bold
-                      ${entry.averageScore >= 80 ? 'bg-green-100 text-green-800' : 
-                        entry.averageScore >= 60 ? 'bg-yellow-100 text-yellow-800' : 
-                        'bg-red-100 text-red-800'
+                      ${entry.averageScore >= 80 ? 'bg-success/10 text-success' :
+                        entry.averageScore >= 60 ? 'bg-warning/10 text-warning' :
+                        'bg-error/10 text-error'
                       }
                     ">
                       {entry.averageScore}%
@@ -307,7 +307,7 @@ export function Leaderboard() {
 
                   {/* Best Score */}
                   <div className="md:col-span-1 text-center">
-                    <p className="text-lg font-bold text-purple-600">
+                    <p className="text-lg font-bold text-brand-purple">
                       {entry.bestScore}%
                     </p>
                   </div>
@@ -321,14 +321,14 @@ export function Leaderboard() {
         <div className="mt-8 flex justify-center gap-4">
           <button
             onClick={() => navigate('/themes')}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition"
+            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg transition"
           >
             ← Înapoi la Tematici
           </button>
-          
+
           <button
             onClick={() => navigate('/profile')}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg transition"
+            className="bg-brand-purple hover:bg-brand-purple/90 text-white font-semibold py-3 px-8 rounded-lg transition"
           >
             👤 Vezi Profil
           </button>

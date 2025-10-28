@@ -43,30 +43,30 @@ export function QuestionCard({
 
     // Nu e răspuns încă
     if (!answered) {
-      return 'bg-gray-200 hover:bg-gray-300 text-black';
+      return 'bg-neutral-200 hover:bg-neutral-100 hover:border-brand-blue text-neutral-900 border-2 border-neutral-200';
     }
 
     // Răspunsul selectat e corect
     if (selectedAnswerIndex === answerIndex && isCorrect) {
-      return 'bg-green-500 text-white';
+      return 'bg-success text-white border-2 border-success';
     }
 
     // Răspunsul selectat e greșit
     if (selectedAnswerIndex === answerIndex && !isCorrect) {
-      return 'bg-red-500 text-white';
+      return 'bg-error text-white border-2 border-error';
     }
 
     // Arăt răspunsul corect dacă user a greșit
     if (answer.correct && !isCorrect) {
-      return 'bg-green-500 text-white';
+      return 'bg-success text-white border-2 border-success';
     }
 
     // Alte răspunsuri după ce e răspuns
     if (answered) {
-      return 'bg-gray-300 text-gray-600';
+      return 'bg-neutral-100 text-neutral-500 border-2 border-neutral-200';
     }
 
-    return 'bg-gray-200 hover:bg-gray-300 text-black';
+    return 'bg-neutral-200 hover:bg-neutral-100 text-neutral-900 border-2 border-neutral-200';
   };
 
   /**
@@ -78,9 +78,9 @@ export function QuestionCard({
    * HELPER: Get timer color based on time left
    */
   const getTimerColor = () => {
-    if (timeLeft > 10) return 'text-green-600';
-    if (timeLeft > 5) return 'text-yellow-600';
-    return 'text-red-600';
+    if (timeLeft > 10) return 'text-success';
+    if (timeLeft > 5) return 'text-warning';
+    return 'text-error';
   };
 
   return (
@@ -102,7 +102,7 @@ export function QuestionCard({
 
       {/* QUESTION TEXT */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <h2 className="text-2xl font-bold text-neutral-900 mb-4">
           {question.question}
         </h2>
         {question.imageUrl && (
@@ -126,8 +126,6 @@ export function QuestionCard({
               ${getButtonStyle(index)}
               ${isButtonDisabled ? 'cursor-default' : 'cursor-pointer'}
               transform hover:scale-105 disabled:hover:scale-100
-              border-2 border-transparent
-              ${selectedAnswerIndex === index && answered ? 'border-2 border-opacity-50' : ''}
             `}
           >
             {/* ANSWER TEXT */}
@@ -156,8 +154,8 @@ export function QuestionCard({
           className={`
             p-6 rounded-lg border-l-4 animate-fadeIn
             ${isCorrect
-              ? 'bg-green-50 border-green-500 text-green-900'
-              : 'bg-red-50 border-red-500 text-red-900'
+              ? 'bg-success/10 border-success text-success'
+              : 'bg-error/10 border-error text-error'
             }
           `}
         >
@@ -169,7 +167,7 @@ export function QuestionCard({
               <p className="font-bold mb-2">
                 {isCorrect ? 'Răspuns Corect!' : 'Răspuns Incorect'}
               </p>
-              <p className="text-sm leading-relaxed">
+              <p className="text-sm leading-relaxed text-neutral-700">
                 {question.explanation}
               </p>
             </div>
@@ -180,7 +178,7 @@ export function QuestionCard({
       {/* TIMER VISUAL (opțional - arată cât timp rămâne) */}
       {answered && (
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-neutral-500">
             ⏳ Se trece la următoarea întrebare în 3 secunde...
           </p>
         </div>

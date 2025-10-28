@@ -15,24 +15,24 @@ export function LandingPage({ onPlayNow }) {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600">
-      
+    <div className="min-h-screen bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-purple">
+
       {/* NAVIGATION */}
       <nav className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-blue-600">🎓 quizzfun.app</h1>
+          <h1 className="text-2xl font-bold text-brand-blue">🎓 quizzfun.app</h1>
           <div className="flex gap-4">
             {user ? (
               <>
                 <button
                   onClick={() => navigate('/themes')}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
+                  className="bg-brand-blue hover:bg-brand-blue/90 text-white px-6 py-2 rounded-lg font-semibold"
                 >
                   Joacă acum
                 </button>
                 <button
                   onClick={logout}
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold"
+                  className="bg-error hover:bg-error/90 text-white px-6 py-2 rounded-lg font-semibold"
                 >
                   Deconectare
                 </button>
@@ -40,7 +40,7 @@ export function LandingPage({ onPlayNow }) {
             ) : (
               <button
                 onClick={onPlayNow || (() => {})}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold"
+                className="bg-brand-blue hover:bg-brand-blue/90 text-white px-6 py-2 rounded-lg font-semibold"
               >
                 Login
               </button>
@@ -61,13 +61,13 @@ export function LandingPage({ onPlayNow }) {
         <div className="flex gap-4 justify-center mb-12">
           <button
             onClick={onPlayNow || (() => {})}
-            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold text-lg transition"
+            className="bg-white text-brand-blue hover:bg-neutral-100 px-8 py-3 rounded-lg font-bold text-lg transition"
           >
             ▶️ Începe Quiz
           </button>
           <button
             onClick={() => window.scrollTo(0, document.body.scrollHeight)}
-            className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-bold text-lg transition"
+            className="border-2 border-white text-white hover:bg-white hover:text-brand-blue px-8 py-3 rounded-lg font-bold text-lg transition"
           >
             Află Mai Mult
           </button>
@@ -93,61 +93,61 @@ export function LandingPage({ onPlayNow }) {
       {/* FEATURES SECTION */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
+          <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
             De ce Quizz Fun?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-blue-50 p-8 rounded-lg border-l-4 border-blue-600">
+            <div className="bg-brand-blue/5 p-8 rounded-lg border-l-4 border-brand-blue">
               <p className="text-4xl mb-3">📚</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Conținut Calitativ</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Conținut Calitativ</h3>
+              <p className="text-neutral-500">
                 Quiz-uri create de profesori. Fiecare răspuns are și explicație.
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-green-50 p-8 rounded-lg border-l-4 border-green-600">
+            <div className="bg-success/5 p-8 rounded-lg border-l-4 border-success">
               <p className="text-4xl mb-3">🎮</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Distractiv & Educativ</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Distractiv & Educativ</h3>
+              <p className="text-neutral-500">
                 Gameplay cu feedback instantaneu. Înveți în timp ce te joci.
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-purple-50 p-8 rounded-lg border-l-4 border-purple-600">
+            <div className="bg-brand-purple/5 p-8 rounded-lg border-l-4 border-brand-purple">
               <p className="text-4xl mb-3">🏆</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Competeție</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Competeție</h3>
+              <p className="text-neutral-500">
                 Clasament global și pentru fiecare temă. Urcă în topul utilizatorilor.
               </p>
             </div>
 
             {/* Feature 4 */}
-            <div className="bg-yellow-50 p-8 rounded-lg border-l-4 border-yellow-600">
+            <div className="bg-brand-yellow/5 p-8 rounded-lg border-l-4 border-brand-yellow">
               <p className="text-4xl mb-3">📊</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Urmărește Progresul</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Urmărește Progresul</h3>
+              <p className="text-neutral-500">
                 Dashboard cu statistici detaliate. Vezi cum evoluezi.
               </p>
             </div>
 
             {/* Feature 5 */}
-            <div className="bg-pink-50 p-8 rounded-lg border-l-4 border-pink-600">
+            <div className="bg-brand-red/5 p-8 rounded-lg border-l-4 border-brand-red">
               <p className="text-4xl mb-3">📱</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Accesibil Peste Tot</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Accesibil Peste Tot</h3>
+              <p className="text-neutral-500">
                 Funcționează perfect pe telefon, tabletă, calculator.
               </p>
             </div>
 
             {/* Feature 6 */}
-            <div className="bg-indigo-50 p-8 rounded-lg border-l-4 border-indigo-600">
+            <div className="bg-brand-orange/5 p-8 rounded-lg border-l-4 border-brand-orange">
               <p className="text-4xl mb-3">🔒</p>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Sigur & Privat</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold text-neutral-900 mb-2">Sigur & Privat</h3>
+              <p className="text-neutral-500">
                 Datele tale sunt protejate. GDPR compliant.
               </p>
             </div>
@@ -156,54 +156,54 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20">
+      <section className="bg-gradient-to-br from-neutral-50 to-neutral-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">
+          <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
             Cum Funcționează? 🎯
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Step 1 */}
             <div className="text-center">
-              <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-brand-blue text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 1
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Înregistrare</h3>
-              <p className="text-gray-600">Creează cont în câteva secunde (gratuit!)</p>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Înregistrare</h3>
+              <p className="text-neutral-500">Creează cont în câteva secunde (gratuit!)</p>
             </div>
 
             {/* Step 2 */}
             <div className="text-center">
-              <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-brand-blue text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 2
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Alege Temă</h3>
-              <p className="text-gray-600">Selectează tema și dificultatea</p>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Alege Temă</h3>
+              <p className="text-neutral-500">Selectează tema și dificultatea</p>
             </div>
 
             {/* Step 3 */}
             <div className="text-center">
-              <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-brand-blue text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 3
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Joacă Quiz</h3>
-              <p className="text-gray-600">Răspunde la 10 întrebări</p>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Joacă Quiz</h3>
+              <p className="text-neutral-500">Răspunde la 10 întrebări</p>
             </div>
 
             {/* Step 4 */}
             <div className="text-center">
-              <div className="bg-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-brand-blue text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                 4
               </div>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Urcă în Clasament</h3>
-              <p className="text-gray-600">Concurează și colecționează puncte</p>
+              <h3 className="text-lg font-bold text-neutral-900 mb-2">Urcă în Clasament</h3>
+              <p className="text-neutral-500">Concurează și colecționează puncte</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA FINAL */}
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 py-20 text-white text-center">
+      <section className="bg-gradient-to-r from-brand-blue to-brand-purple py-20 text-white text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-6">
             Gata să înveți jucându-te? 🚀
@@ -211,10 +211,10 @@ export function LandingPage({ onPlayNow }) {
           <p className="text-xl mb-8 opacity-90">
             100% gratuit • Fără reclame • Distractiv • Educational
           </p>
-          
+
           <button
             onClick={onPlayNow || (() => {})}
-            className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition"
+            className="bg-white text-brand-blue hover:bg-neutral-100 px-8 py-4 rounded-lg font-bold text-lg transition"
           >
             ▶️ Începe Acum
           </button>

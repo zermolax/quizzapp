@@ -325,10 +325,10 @@ const handleTimeOut = () => {
    */
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-600">Se încarcă întrebările...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-blue mx-auto mb-4"></div>
+          <p className="text-neutral-500">Se încarcă întrebările...</p>
         </div>
       </div>
     );
@@ -339,15 +339,15 @@ const handleTimeOut = () => {
    */
   if (questions.length === 0 && !loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
         <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">⚠️ Eroare</h2>
-          <p className="text-gray-600 mb-6">
+          <h2 className="text-2xl font-bold text-error mb-4">⚠️ Eroare</h2>
+          <p className="text-neutral-500 mb-6">
             Întrebările pentru această temă nu au fost încărcate încă.
           </p>
           <button
             onClick={handleBackToThemes}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
+            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-6 rounded-lg"
           >
             ← Înapoi la Tematici
           </button>
@@ -371,20 +371,20 @@ const handleTimeOut = () => {
           
           {/* Saving indicator */}
           {savingSession && (
-            <div className="mb-4 bg-blue-100 p-3 rounded text-blue-700">
+            <div className="mb-4 bg-info/10 p-3 rounded text-info">
               ⏳ Se salvează progresul...
             </div>
           )}
 
           {/* Score Display */}
-          <h1 className="text-4xl font-bold text-purple-600 mb-2">
+          <h1 className="text-4xl font-bold text-brand-purple mb-2">
             🎉 Quiz Terminat!
           </h1>
-          
-          <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-lg mb-6">
-            <p className="text-gray-600 text-sm mb-2">Scor final</p>
-            <p className="text-5xl font-bold text-purple-600">{percentage}%</p>
-            <p className="text-gray-600 text-sm mt-2">
+
+          <div className="bg-gradient-to-r from-brand-purple/10 to-brand-purple/5 p-6 rounded-lg mb-6">
+            <p className="text-neutral-500 text-sm mb-2">Scor final</p>
+            <p className="text-5xl font-bold text-brand-purple">{percentage}%</p>
+            <p className="text-neutral-500 text-sm mt-2">
               {score} / {questions.length * 10} puncte
             </p>
           </div>
@@ -392,17 +392,17 @@ const handleTimeOut = () => {
           {/* Performance message */}
           <div className="mb-6">
             {percentage >= 80 && (
-              <p className="text-lg font-semibold text-green-600">
+              <p className="text-lg font-semibold text-success">
                 🌟 Excelent! Ai înțeles bine această temă!
               </p>
             )}
             {percentage >= 60 && percentage < 80 && (
-              <p className="text-lg font-semibold text-yellow-600">
+              <p className="text-lg font-semibold text-warning">
                 👍 Bun! Poți încerca din nou pentru a îmbunătăți.
               </p>
             )}
             {percentage < 60 && (
-              <p className="text-lg font-semibold text-orange-600">
+              <p className="text-lg font-semibold text-brand-orange">
                 📖 Mai mult de studiat! Revino la teme și recitește.
               </p>
             )}
@@ -410,38 +410,38 @@ const handleTimeOut = () => {
 
           {/* NEW: User Stats */}
           {userStats && (
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg mb-6 text-sm">
-              <p className="font-bold text-blue-900 mb-3">📊 Statistici personale:</p>
+            <div className="bg-gradient-to-r from-brand-blue/5 to-brand-blue/10 p-4 rounded-lg mb-6 text-sm">
+              <p className="font-bold text-neutral-900 mb-3">📊 Statistici personale:</p>
               <div className="grid grid-cols-2 gap-2 text-left">
                 <div>
-                  <p className="text-xs text-gray-600">Quiz-uri jucate</p>
-                  <p className="text-xl font-bold text-blue-600">{userStats.totalQuizzes}</p>
+                  <p className="text-xs text-neutral-500">Quiz-uri jucate</p>
+                  <p className="text-xl font-bold text-brand-blue">{userStats.totalQuizzes}</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Scor mediu</p>
-                  <p className="text-xl font-bold text-blue-600">{userStats.averageScore}%</p>
+                  <p className="text-xs text-neutral-500">Scor mediu</p>
+                  <p className="text-xl font-bold text-brand-blue">{userStats.averageScore}%</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Cel mai bun scor</p>
-                  <p className="text-xl font-bold text-green-600">{userStats.bestScore}%</p>
+                  <p className="text-xs text-neutral-500">Cel mai bun scor</p>
+                  <p className="text-xl font-bold text-success">{userStats.bestScore}%</p>
                 </div>
                 <div>
-                  <p className="text-xs text-gray-600">Puncte totale</p>
-                  <p className="text-xl font-bold text-purple-600">{userStats.totalPoints}</p>
+                  <p className="text-xs text-neutral-500">Puncte totale</p>
+                  <p className="text-xl font-bold text-brand-purple">{userStats.totalPoints}</p>
                 </div>
               </div>
             </div>
           )}
 
           {/* Quiz info */}
-          <div className="bg-gray-50 p-4 rounded-lg mb-6 text-sm">
-            <p className="text-gray-600">
+          <div className="bg-neutral-50 p-4 rounded-lg mb-6 text-sm">
+            <p className="text-neutral-500">
               <strong>Temă:</strong> {theme?.name}
             </p>
-            <p className="text-gray-600">
+            <p className="text-neutral-500">
               <strong>Dificultate:</strong> {difficulty}
             </p>
-            <p className="text-gray-600">
+            <p className="text-neutral-500">
               <strong>Întrebări:</strong> {questions.length}
             </p>
           </div>
@@ -449,16 +449,16 @@ const handleTimeOut = () => {
           {/* Buttons */}
           <button
             onClick={() => navigate('/themes')}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg mb-3 transition"
+            className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-6 rounded-lg mb-3 transition"
           >
             ← Înapoi la Tematici
           </button>
-          
+
           <button
             onClick={() => {
               window.location.reload();
             }}
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+            className="w-full bg-success hover:bg-success/90 text-white font-semibold py-3 px-6 rounded-lg transition"
           >
             🔄 Încearcă din nou
           </button>
@@ -476,18 +476,18 @@ const handleTimeOut = () => {
     const theme = themesData.find(t => t.id === themeId);
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        
+      <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-brand-blue/10 p-4">
+
         {/* HEADER */}
         <header className="max-w-2xl mx-auto mb-6">
           <div className="flex justify-between items-center bg-white rounded-lg shadow p-4">
             <div>
-              <h1 className="text-xl font-bold text-blue-600">{theme?.name}</h1>
-              <p className="text-sm text-gray-600">Dificultate: {difficulty}</p>
+              <h1 className="text-xl font-bold text-brand-blue">{theme?.name}</h1>
+              <p className="text-sm text-neutral-500">Dificultate: {difficulty}</p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-green-600">{score}</p>
-              <p className="text-xs text-gray-600">puncte</p>
+              <p className="text-2xl font-bold text-success">{score}</p>
+              <p className="text-xs text-neutral-500">puncte</p>
             </div>
           </div>
         </header>
@@ -495,16 +495,16 @@ const handleTimeOut = () => {
         {/* PROGRESS BAR */}
         <div className="max-w-2xl mx-auto mb-6">
           <div className="flex justify-between items-center mb-2">
-            <p className="text-sm font-semibold text-gray-700">
+            <p className="text-sm font-semibold text-neutral-700">
               Întrebarea {currentQuestionIndex + 1} / {questions.length}
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-neutral-500">
               {answered ? '✅ Răspuns' : '⏳ Așteapt...'}
             </p>
           </div>
-          <div className="w-full bg-gray-300 rounded-full h-2">
+          <div className="w-full bg-neutral-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className="bg-brand-blue h-2 rounded-full transition-all duration-300"
               style={{
                 width: `${((currentQuestionIndex + 1) / questions.length) * 100}%`
               }}
