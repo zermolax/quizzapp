@@ -126,10 +126,10 @@ export function Leaderboard() {
           <h2 className="text-2xl font-bold text-error mb-4">⚠️ Eroare</h2>
           <p className="text-neutral-500 mb-6">{error}</p>
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate('/subjects')}
             className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-6 rounded-lg"
           >
-            ← Înapoi la Tematici
+            ← Înapoi la Materii
           </button>
         </div>
       </div>
@@ -320,10 +320,10 @@ export function Leaderboard() {
         {/* FOOTER */}
         <div className="mt-8 flex justify-center gap-4">
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate('/subjects')}
             className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg transition"
           >
-            ← Înapoi la Tematici
+            ← Înapoi la Materii
           </button>
 
           <button

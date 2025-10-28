@@ -108,10 +108,10 @@ export function Profile() {
           <h2 className="text-2xl font-bold text-error mb-4">⚠️ Eroare</h2>
           <p className="text-neutral-500 mb-6">{error}</p>
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate('/subjects')}
             className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-6 rounded-lg"
           >
-            ← Înapoi la Tematici
+            ← Înapoi la Materii
           </button>
         </div>
       </div>
@@ -331,14 +331,14 @@ export function Profile() {
         {/* ACTION BUTTONS */}
         <div className="flex justify-center gap-4 mb-8">
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate('/subjects')}
             className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg transition"
           >
-            ← Înapoi la Tematici
+            ← Înapoi la Materii
           </button>
 
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate('/subjects')}
             className="bg-success hover:bg-success/90 text-white font-semibold py-3 px-8 rounded-lg transition"
           >
             ▶️ Joacă Alt Quiz
