@@ -10,11 +10,12 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
 import { saveQuizSession, updateUserStats, getQuestionsByTheme, getUserStats } from '../services/quizService';
-import themesData from '../data/themes.json';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 /**
  * COMPONENT: QuizPlay
@@ -24,15 +25,15 @@ export function QuizPlay() {
   /**
    * HOOKS
    */
+  const { subjectSlug, themeSlug } = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
 
   /**
    * EXTRACT PARAMS FROM URL
-   * URL format: /quiz?themeId=wwi&difficulty=easy
+   * URL format: /subjects/:subjectSlug/quiz/:themeSlug?difficulty=easy
    */
-  const themeId = searchParams.get('themeId');
   const difficulty = searchParams.get('difficulty');
 
   /**
@@ -62,6 +63,10 @@ export function QuizPlay() {
   const [timeLeft, setTimeLeft] = useState(20);
   const [timerActive, setTimerActive] = useState(true);
 
+  // NEW: Theme and subject data from Firestore
+  const [theme, setTheme] = useState(null);
+  const [subject, setSubject] = useState(null);
+
 /**
  * HELPER: Shuffle answers for a question
  */
@@ -74,16 +79,44 @@ const shuffleAnswers = (question) => {
 };
 
 /**
- * EFFECT: Load questions from Firestore when theme changes
+ * EFFECT: Load subject, theme, and questions from Firestore
  */
 useEffect(() => {
-  const loadQuestions = async () => {
+  const loadQuizData = async () => {
     try {
       setLoading(true);
-      console.log('📚 Loading questions for theme:', themeId, 'difficulty:', difficulty);
+      console.log('📚 Loading quiz data for subject:', subjectSlug, 'theme:', themeSlug, 'difficulty:', difficulty);
 
-      // Get ALL questions for theme from Firestore
-      const allQuestions = await getQuestionsByTheme(themeId, 100);
+      // 1. Fetch subject from Firestore
+      const subjectDocRef = doc(db, 'subjects', subjectSlug);
+      const subjectDoc = await getDoc(subjectDocRef);
+
+      if (!subjectDoc.exists()) {
+        console.error('❌ Subject not found!');
+        setLoading(false);
+        return;
+      }
+
+      const subjectData = { id: subjectDoc.id, ...subjectDoc.data() };
+      setSubject(subjectData);
+      console.log('✅ Subject loaded:', subjectData.name);
+
+      // 2. Fetch theme from Firestore
+      const themeDocRef = doc(db, 'themes', themeSlug);
+      const themeDoc = await getDoc(themeDocRef);
+
+      if (!themeDoc.exists()) {
+        console.error('❌ Theme not found!');
+        setLoading(false);
+        return;
+      }
+
+      const themeData = { id: themeDoc.id, ...themeDoc.data() };
+      setTheme(themeData);
+      console.log('✅ Theme loaded:', themeData.name);
+
+      // 3. Get ALL questions for theme from Firestore
+      const allQuestions = await getQuestionsByTheme(subjectSlug, themeSlug, 100);
 
       if (!allQuestions || allQuestions.length === 0) {
         console.error('❌ No questions found!');
@@ -91,7 +124,7 @@ useEffect(() => {
         return;
       }
 
-      // Filter by difficulty
+      // 4. Filter by difficulty
       const filteredQuestions = allQuestions.filter(
         q => q.difficulty === difficulty
       );
@@ -102,7 +135,7 @@ useEffect(() => {
         return;
       }
 
-      // Shuffle questions & take first 10
+      // 5. Shuffle questions & take first 10
       const shuffled = filteredQuestions
         .sort(() => Math.random() - 0.5)
         .slice(0, 10);
@@ -118,16 +151,16 @@ useEffect(() => {
       setLoading(false);
 
     } catch (error) {
-      console.error('❌ Error loading questions:', error);
+      console.error('❌ Error loading quiz data:', error);
       setLoading(false);
     }
   };
 
-  // Load only if we have both theme and difficulty
-  if (themeId && difficulty) {
-    loadQuestions();
+  // Load only if we have subject, theme, and difficulty
+  if (subjectSlug && themeSlug && difficulty) {
+    loadQuizData();
   }
-}, [themeId, difficulty]);
+}, [subjectSlug, themeSlug, difficulty]);
 
 /**
  * EFFECT: Countdown timer for each question
@@ -254,7 +287,7 @@ const handleTimeOut = () => {
 
   /**
    * NEW FUNCTION: Handle Quiz Finish
-   * 
+   *
    * FLOW:
    * 1. Calculate duration
    * 2. Save session în Firestore
@@ -272,17 +305,19 @@ const handleTimeOut = () => {
 
       console.log('Saving quiz session...', {
         userId: user.uid,
-        themeId,
+        subjectId: subjectSlug,
+        themeId: themeSlug,
         difficulty,
         score,
         totalQuestions: questions.length,
         duration
       });
 
-      // Save quiz session
+      // Save quiz session with subjectId
       await saveQuizSession(
         user.uid,
-        themeId,
+        subjectSlug,
+        themeSlug,
         difficulty,
         score,
         questions.length,
@@ -317,7 +352,7 @@ const handleTimeOut = () => {
    * HANDLER: Back to themes
    */
   const handleBackToThemes = () => {
-    navigate('/themes');
+    navigate(`/subjects/${subjectSlug}`);
   };
 
   /**
@@ -358,12 +393,11 @@ const handleTimeOut = () => {
 
   /**
    * RENDER: Quiz finished - Results
-   * 
+   *
    * MODIFIED: Arată user stats dacă disponibile
    */
   if (quizFinished) {
     const percentage = Math.round((score / (questions.length * 10)) * 100);
-    const theme = themesData.find(t => t.id === themeId);
 
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-500 to-pink-600">
@@ -448,7 +482,7 @@ const handleTimeOut = () => {
 
           {/* Buttons */}
           <button
-            onClick={() => navigate('/themes')}
+            onClick={() => navigate(`/subjects/${subjectSlug}`)}
             className="w-full bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-6 rounded-lg mb-3 transition"
           >
             ← Înapoi la Tematici
@@ -473,7 +507,6 @@ const handleTimeOut = () => {
    */
   if (questions.length > 0) {
     const currentQuestion = questions[currentQuestionIndex];
-    const theme = themesData.find(t => t.id === themeId);
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-brand-blue/10 p-4">

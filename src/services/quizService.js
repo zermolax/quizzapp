@@ -63,10 +63,42 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
 }
 
 /**
- * Alias for backward compatibility
+ * Get questions by subject and theme
+ * UPDATED for multi-subject architecture
  */
-export async function getQuestionsByTheme(themeId, limitCount = 100) {
-  return fetchQuestionsByTheme(themeId, null);
+export async function getQuestionsByTheme(subjectId, themeId, limitCount = 100) {
+  try {
+    console.log('📚 Fetching questions for subjectId:', subjectId, 'themeId:', themeId);
+
+    const questionsRef = collection(db, 'questions');
+
+    const q = query(
+      questionsRef,
+      where('subjectId', '==', subjectId),
+      where('themeId', '==', themeId)
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    console.log('📦 Found questions:', querySnapshot.size);
+
+    if (querySnapshot.empty) {
+      console.warn('⚠️ No questions found');
+      return [];
+    }
+
+    const questions = querySnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    console.log('✅ Loaded questions:', questions.length);
+    return questions;
+
+  } catch (error) {
+    console.error('❌ Error fetching questions:', error);
+    throw error;
+  }
 }
 
 /**
@@ -112,7 +144,9 @@ export function shuffleAnswers(question) {
 
 /**
  * Save quiz session
+ * UPDATED for multi-subject architecture
  * @param {string} userId - User ID
+ * @param {string} subjectId - Subject ID
  * @param {string} themeId - Theme ID
  * @param {string} difficulty - Difficulty level
  * @param {number} score - Score achieved
@@ -120,7 +154,7 @@ export function shuffleAnswers(question) {
  * @param {Array} answersArray - Array of answers
  * @param {number} duration - Duration in seconds
  */
-export async function saveQuizSession(userId, themeId, difficulty, score, totalQuestions, answersArray, duration) {
+export async function saveQuizSession(userId, subjectId, themeId, difficulty, score, totalQuestions, answersArray, duration) {
   try {
     const maxScore = totalQuestions * 10;
     const percentage = Math.round((score / maxScore) * 100);
@@ -128,6 +162,7 @@ export async function saveQuizSession(userId, themeId, difficulty, score, totalQ
     const sessionsRef = collection(db, 'quizSessions');
     const docRef = await addDoc(sessionsRef, {
       userId,
+      subjectId,
       themeId,
       difficulty,
       score,
