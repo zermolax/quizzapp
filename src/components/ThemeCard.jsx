@@ -1,94 +1,106 @@
 /**
- * ThemeCard.jsx
- * 
- * SCOPUL:
- * Componentă pentru a afișa o singură temă
- * E ca un "card" într-un grid
- * 
- * CE ARATĂ:
- * - Iconiță temă
- * - Nume temă
- * - Descriere scurtă
- * - Nr. de întrebări
- * - Butoane pentru dificultate
- * 
- * USAGE:
- * <ThemeCard 
- *   theme={themeData} 
- *   onSelectTheme={handleSelectTheme}
- * />
+ * ThemeCard.jsx - REDESIGNED
+ *
+ * ÎMBUNĂTĂȚIRI:
+ * - Paletă de culori închise (maro, albastru, gri, violet)
+ * - Secțiune dificultate cu background alb (mai bună lizibilitate)
+ * - Eliminat câmpul "Subiecte" (inutil)
+ * - Contrast îmbunătățit pentru text
  */
 
 import React from 'react';
 
+// Paletă de culori închise pentru mai bună lizibilitate
+const DARK_COLORS = {
+  0: { bg: '#2C3E50', name: 'Albastru închis' },      // Albastru-gri închis
+  1: { bg: '#34495E', name: 'Gri albăstrui' },        // Gri
+  2: { bg: '#7D3C98', name: 'Mov închis' },           // Mov
+  3: { bg: '#117A65', name: 'Verde închis' },         // Verde-turcoaz
+  4: { bg: '#943126', name: 'Maro-roșu' },            // Maro-roșu
+  5: { bg: '#6E4C1E', name: 'Maro' },                 // Maro
+  6: { bg: '#1B4F72', name: 'Albastru navy' },        // Navy
+  7: { bg: '#512E5F', name: 'Violet închis' },        // Violet
+  8: { bg: '#145A32', name: 'Verde pădure' },         // Verde închis
+  9: { bg: '#78281F', name: 'Roșu închis' }           // Roșu închis
+};
+
 /**
  * COMPONENT: ThemeCard
- * 
+ *
  * Props:
  * - theme: obiectul temei cu: name, description, icon, totalQuestions, etc
  * - onSelectTheme: callback function când user selectează o dificultate
+ * - index: index pentru selectare culoare
  */
-export function ThemeCard({ theme, onSelectTheme }) {
-  
+export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
+
   /**
    * HANDLER: Selectare dificultate
-   *
-   * Când user face click pe "Easy", "Medium", sau "Hard"
-   * Trimit tema + dificultatea la parent component
-   * Parent-ul va naviga la quiz page
    */
   const handleDifficultyClick = (difficulty) => {
     onSelectTheme(theme.slug, difficulty);
   };
 
+  // Selectează culoare bazată pe index
+  const cardColor = DARK_COLORS[index % Object.keys(DARK_COLORS).length];
+
   return (
-    <div className={`${theme.color} rounded-lg shadow-lg p-6 text-white hover:shadow-xl transition transform hover:scale-105 cursor-pointer h-full flex flex-col`}>
-      
-      {/* HEADER: Iconiță + Nume */}
-      <div className="mb-4">
-        <div className="text-4xl mb-3">{theme.icon}</div>
-        <h3 className="text-2xl font-bold">{theme.name}</h3>
-      </div>
+    <div className="rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden h-full flex flex-col bg-white">
 
-      {/* DESCRIPȚIE */}
-      <p className="text-sm opacity-90 mb-4 flex-grow">
-        {theme.description}
-      </p>
+      {/* PARTEA DE SUS: Background colorat închis */}
+      <div
+        className="p-6 text-white"
+        style={{ backgroundColor: cardColor.bg }}
+      >
+        {/* Iconiță + Nume */}
+        <div className="mb-4">
+          <div className="text-5xl mb-3">{theme.icon}</div>
+          <h3 className="text-2xl font-bold">{theme.name}</h3>
+        </div>
 
-      {/* INFO: Număr de întrebări */}
-      <div className="bg-black bg-opacity-20 rounded p-3 mb-4">
-        <p className="text-xs opacity-80">Total întrebări disponibile</p>
-        <p className="text-2xl font-bold">{theme.totalQuestions}</p>
-      </div>
+        {/* Descriere */}
+        <p className="text-sm opacity-90 mb-4">
+          {theme.description}
+        </p>
 
-      {/* BUTOANE: Dificultate */}
-      <div className="space-y-2">
-        <p className="text-xs opacity-75 font-semibold uppercase tracking-wide">Alege dificultatea:</p>
-        <div className="flex gap-2">
-          {['easy', 'medium', 'hard'].map((difficulty) => (
-            <button
-              key={difficulty}
-              onClick={() => handleDifficultyClick(difficulty)}
-              className={`
-                flex-1 py-2 rounded font-semibold text-sm transition
-                ${difficulty === 'easy' && 'bg-green-400 hover:bg-green-300 text-black'}
-                ${difficulty === 'medium' && 'bg-yellow-400 hover:bg-yellow-300 text-black'}
-                ${difficulty === 'hard' && 'bg-red-400 hover:bg-red-300 text-black'}
-              `}
-            >
-              {difficulty === 'easy' && '🟢 Ușor'}
-              {difficulty === 'medium' && '🟡 Mediu'}
-              {difficulty === 'hard' && '🔴 Greu'}
-            </button>
-          ))}
+        {/* Info: Număr de întrebări */}
+        <div className="bg-black bg-opacity-20 rounded-lg p-3 inline-block">
+          <p className="text-xs opacity-80 mb-1">Întrebări disponibile</p>
+          <p className="text-2xl font-bold">{theme.totalQuestions}</p>
         </div>
       </div>
 
-      {/* FOOTER: Info topic-uri (opțional) */}
-      <div className="mt-4 pt-4 border-t border-white border-opacity-20">
-        <p className="text-xs opacity-75">
-          <strong>Subiecte:</strong> {theme.topics.slice(0, 2).join(', ')}...
+      {/* PARTEA DE JOS: Background ALB cu butoane dificultate */}
+      <div className="p-6 bg-white flex-grow">
+        <p className="text-sm font-semibold text-neutral-700 mb-3">
+          🎯 Alege dificultatea:
         </p>
+
+        <div className="space-y-2">
+          {/* Easy */}
+          <button
+            onClick={() => handleDifficultyClick('easy')}
+            className="w-full py-3 px-4 rounded-lg font-semibold text-sm transition border-2 border-success text-success hover:bg-success hover:text-white"
+          >
+            🟢 Ușor
+          </button>
+
+          {/* Medium */}
+          <button
+            onClick={() => handleDifficultyClick('medium')}
+            className="w-full py-3 px-4 rounded-lg font-semibold text-sm transition border-2 border-warning text-warning hover:bg-warning hover:text-white"
+          >
+            🟡 Mediu
+          </button>
+
+          {/* Hard */}
+          <button
+            onClick={() => handleDifficultyClick('hard')}
+            className="w-full py-3 px-4 rounded-lg font-semibold text-sm transition border-2 border-error text-error hover:bg-error hover:text-white"
+          >
+            🔴 Greu
+          </button>
+        </div>
       </div>
 
     </div>
@@ -98,24 +110,23 @@ export function ThemeCard({ theme, onSelectTheme }) {
 export default ThemeCard;
 
 /**
- * EXPLICAȚIE DESIGN:
- * 
- * 1. Card pe background colorat (roșu, albastru, etc)
- * 2. Iconiță mare (emoji) pentru recunoaștere rapidă
- * 3. Nume + descriere clar
- * 4. Info: cât de multe întrebări
- * 5. 3 butoane colorate pentru dificultate:
- *    - Green pentru Easy
- *    - Yellow pentru Medium
- *    - Red pentru Hard
- * 6. Hover effect: card crește și shadow-ul se intensifică
- * 
- * RESPONSIVE:
- * Pe mobile: card se vor stack vertical (datorită grid-ului din ThemeGrid)
- * Pe desktop: grid cu 3 coloane
- * 
- * ACCESSIBILITY:
- * - Text clar și vizibil
- * - Butoane mari pentru click ușor
- * - Culori contrast bun (text alb pe background colorat)
+ * ÎMBUNĂTĂȚIRI DESIGN:
+ *
+ * ✅ Culori închise pentru background (maro, albastru închis, gri, violet)
+ *    - Contrast excelent cu text alb
+ *    - Coeziune vizuală - culori armonioase
+ *    - Lizibilitate îmbunătățită
+ *
+ * ✅ Secțiune dificultate cu background alb
+ *    - Butoane doar cu contur (border)
+ *    - Text colorat care devine alb la hover
+ *    - Lizibilitate perfectă
+ *
+ * ✅ Eliminat câmpul "Subiecte"
+ *    - Nu adăuga valoare
+ *    - Card mai curat
+ *
+ * ✅ Flow vizual clar:
+ *    Partea sus (colorată) = Info temă
+ *    Partea jos (albă) = Acțiune (selectare dificultate)
  */

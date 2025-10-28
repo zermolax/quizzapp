@@ -221,10 +221,11 @@ export function ThemeSelection() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {themes.map((theme) => (
+            {themes.map((theme, index) => (
               <ThemeCard
                 key={theme.id}
                 theme={theme}
+                index={index}
                 onSelectTheme={(themeSlug, difficulty) => handleSelectTheme(themeSlug, difficulty)}
               />
             ))}
