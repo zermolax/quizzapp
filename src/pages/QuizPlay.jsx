@@ -656,9 +656,6 @@ const handleTimeOut = () => {
               >
                 Următoarea întrebare ►
               </button>
-              <p className="text-xs text-neutral-500 mt-2">
-                Sau așteaptă 6 secunde pentru avansare automată
-              </p>
             </div>
           )}
         </div>

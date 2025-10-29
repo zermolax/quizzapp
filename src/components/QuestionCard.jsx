@@ -175,15 +175,6 @@ export function QuestionCard({
         </div>
       )}
 
-      {/* TIMER VISUAL (opțional - arată cât timp rămâne) */}
-      {answered && (
-        <div className="mt-6 text-center">
-          <p className="text-sm text-neutral-500">
-            ⏳ Se trece la următoarea întrebare în 3 secunde...
-          </p>
-        </div>
-      )}
-
     </div>
   );
 }
