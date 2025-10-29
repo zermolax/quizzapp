@@ -14,6 +14,7 @@ import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
 import { saveQuizSession, updateUserStats, getQuestionsByTheme, getUserStats } from '../services/quizService';
+import { checkBadgeAchievements, updateUserStreak } from '../services/badgeService';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 
@@ -335,6 +336,19 @@ const handleTimeOut = () => {
       // Fetch updated stats
       const stats = await getUserStats(user.uid);
       setUserStats(stats);
+
+      // Check and award new badges
+      console.log('🎖️ Checking for badge achievements...');
+      const newBadges = await checkBadgeAchievements(user.uid);
+
+      if (newBadges.length > 0) {
+        console.log('🎉 New badges earned:', newBadges);
+        // TODO: Show toast notification for new badges
+      }
+
+      // Update user streak
+      const currentStreak = await updateUserStreak(user.uid);
+      console.log('🔥 Current streak:', currentStreak, 'days');
 
       console.log('Session saved and stats updated');
       setSavingSession(false);

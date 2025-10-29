@@ -26,6 +26,8 @@ import {
   formatDate,
   formatDuration
 } from '../services/profileService';
+import { getAllBadges, getUserBadges, getCurrentStreak } from '../services/badgeService';
+import { BadgeCard } from '../components/BadgeCard';
 
 /**
  * COMPONENT: Profile
@@ -48,6 +50,11 @@ export function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Badges and streak state
+  const [allBadges, setAllBadges] = useState([]);
+  const [userBadges, setUserBadges] = useState([]);
+  const [currentStreak, setCurrentStreak] = useState(0);
+
   /**
    * EFFECT: Load all profile data
    */
@@ -62,10 +69,18 @@ export function Profile() {
         const progress = await getProgressByTheme(user.uid);
         const history = await getQuizHistory(user.uid, 10);
 
+        // Load badges and streak
+        const badges = await getAllBadges();
+        const earnedBadges = await getUserBadges(user.uid);
+        const streak = await getCurrentStreak(user.uid);
+
         setUserProfile(profile);
         setSubjectProgress(subjectProg);
         setThemeProgress(progress);
         setQuizHistory(history);
+        setAllBadges(badges);
+        setUserBadges(earnedBadges);
+        setCurrentStreak(streak);
 
       } catch (err) {
         console.error('Error loading profile:', err);
@@ -169,7 +184,7 @@ export function Profile() {
         <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
           <h2 className="text-2xl font-bold text-neutral-900 mb-4">📊 Statistici Globale</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {/* Stat 1: Total Quizzes */}
             <div className="bg-gradient-to-br from-brand-blue/5 to-brand-blue/10 p-4 rounded-lg border-l-4 border-brand-blue">
               <p className="text-sm text-neutral-500 mb-2">Quiz-uri jucate</p>
@@ -201,10 +216,52 @@ export function Profile() {
                 {userProfile?.stats.totalPoints || 0}
               </p>
             </div>
+
+            {/* Stat 5: Current Streak */}
+            <div className="bg-gradient-to-br from-orange-500/5 to-orange-500/10 p-4 rounded-lg border-l-4 border-orange-500">
+              <p className="text-sm text-neutral-500 mb-2">Streak curent</p>
+              <p className="text-4xl font-bold text-orange-500 flex items-center gap-2">
+                🔥 {currentStreak}
+              </p>
+              <p className="text-xs text-neutral-500 mt-1">
+                {currentStreak === 1 ? 'zi' : 'zile'}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* SECTION 3: PROGRESS BY SUBJECT */}
+        {/* SECTION 3: BADGES */}
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold text-neutral-900">🎖️ Badge-uri</h2>
+            <div className="text-sm text-neutral-500">
+              {userBadges.length} / {allBadges.length} obținute
+            </div>
+          </div>
+
+          {allBadges.length === 0 ? (
+            <p className="text-neutral-500">Se încarcă badge-urile...</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {allBadges.map((badge) => {
+                // Check if user has earned this badge
+                const earnedBadge = userBadges.find(ub => ub.badgeId === badge.id);
+                const isEarned = !!earnedBadge;
+
+                return (
+                  <BadgeCard
+                    key={badge.id}
+                    badge={badge}
+                    earned={isEarned}
+                    earnedAt={earnedBadge?.earnedAt || null}
+                  />
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* SECTION 4: PROGRESS BY SUBJECT */}
         {subjectProgress.length > 0 && (
           <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
             <h2 className="text-2xl font-bold text-neutral-900 mb-4">📚 Progres pe Materii</h2>
