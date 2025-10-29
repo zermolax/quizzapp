@@ -1,0 +1,219 @@
+{
+  "badges": [
+    {
+      "id": "first-steps",
+      "name": "Primii Pași",
+      "description": "Completează primul quiz",
+      "icon": "CheckOne",
+      "color": "#06A77D",
+      "rarity": "common",
+      "category": "beginner",
+      "requirement": {
+        "type": "totalQuizzes",
+        "value": 1
+      },
+      "points": 10
+    },
+    {
+      "id": "quiz-enthusiast",
+      "name": "Entuziast",
+      "description": "Completează 10 quiz-uri",
+      "icon": "Fire",
+      "color": "#F77F00",
+      "rarity": "common",
+      "category": "quantity",
+      "requirement": {
+        "type": "totalQuizzes",
+        "value": 10
+      },
+      "points": 50
+    },
+    {
+      "id": "quiz-master",
+      "name": "Maestru",
+      "description": "Completează 50 de quiz-uri",
+      "icon": "Crown",
+      "color": "#FCBF49",
+      "rarity": "rare",
+      "category": "quantity",
+      "requirement": {
+        "type": "totalQuizzes",
+        "value": 50
+      },
+      "points": 200
+    },
+    {
+      "id": "century-club",
+      "name": "Club 100",
+      "description": "Completează 100 de quiz-uri",
+      "icon": "Trophy",
+      "color": "#6A4C93",
+      "rarity": "epic",
+      "category": "quantity",
+      "requirement": {
+        "type": "totalQuizzes",
+        "value": 100
+      },
+      "points": 500
+    },
+    {
+      "id": "perfect-score",
+      "name": "Scor Perfect",
+      "description": "Obține 100% la un quiz",
+      "icon": "Star",
+      "color": "#FCBF49",
+      "rarity": "rare",
+      "category": "score",
+      "requirement": {
+        "type": "perfectScore",
+        "value": 1
+      },
+      "points": 100
+    },
+    {
+      "id": "high-achiever",
+      "name": "Performanță Înaltă",
+      "description": "Menține media de 90%+ în 10 quiz-uri",
+      "icon": "DiamondRing",
+      "color": "#1982C4",
+      "rarity": "epic",
+      "category": "score",
+      "requirement": {
+        "type": "averageScore",
+        "value": 90,
+        "minQuizzes": 10
+      },
+      "points": 300
+    },
+    {
+      "id": "streak-3",
+      "name": "Flacără Mică",
+      "description": "Joacă 3 zile consecutive",
+      "icon": "FireTwo",
+      "color": "#F77F00",
+      "rarity": "common",
+      "category": "streak",
+      "requirement": {
+        "type": "streak",
+        "value": 3
+      },
+      "points": 50
+    },
+    {
+      "id": "streak-7",
+      "name": "Săptămână de Foc",
+      "description": "Joacă 7 zile consecutive",
+      "icon": "Fire",
+      "color": "#E63946",
+      "rarity": "rare",
+      "category": "streak",
+      "requirement": {
+        "type": "streak",
+        "value": 7
+      },
+      "points": 150
+    },
+    {
+      "id": "streak-30",
+      "name": "Dedicație Totală",
+      "description": "Joacă 30 de zile consecutive",
+      "icon": "Lightning",
+      "color": "#6A4C93",
+      "rarity": "legendary",
+      "category": "streak",
+      "requirement": {
+        "type": "streak",
+        "value": 30
+      },
+      "points": 1000
+    },
+    {
+      "id": "history-buff",
+      "name": "Istoric Expert",
+      "description": "Completează 20 de quiz-uri la Istorie",
+      "icon": "BookOpen",
+      "color": "#E63946",
+      "rarity": "rare",
+      "category": "subject",
+      "requirement": {
+        "type": "subjectQuizzes",
+        "subjectId": "istorie",
+        "value": 20
+      },
+      "points": 150
+    },
+    {
+      "id": "geography-guru",
+      "name": "Guru Geografie",
+      "description": "Completează 20 de quiz-uri la Geografie",
+      "icon": "World",
+      "color": "#06A77D",
+      "rarity": "rare",
+      "category": "subject",
+      "requirement": {
+        "type": "subjectQuizzes",
+        "subjectId": "geografie",
+        "value": 20
+      },
+      "points": 150
+    },
+    {
+      "id": "biology-master",
+      "name": "Maestru Biologie",
+      "description": "Completează 20 de quiz-uri la Biologie",
+      "icon": "Leaves",
+      "color": "#06A77D",
+      "rarity": "rare",
+      "category": "subject",
+      "requirement": {
+        "type": "subjectQuizzes",
+        "subjectId": "biologie",
+        "value": 20
+      },
+      "points": 150
+    },
+    {
+      "id": "hard-mode-warrior",
+      "name": "Războinic Greu",
+      "description": "Completează 10 quiz-uri pe nivel greu",
+      "icon": "Shield",
+      "color": "#E63946",
+      "rarity": "epic",
+      "category": "difficulty",
+      "requirement": {
+        "type": "difficultyQuizzes",
+        "difficulty": "hard",
+        "value": 10
+      },
+      "points": 250
+    },
+    {
+      "id": "speed-demon",
+      "name": "Demon de Viteză",
+      "description": "Completează un quiz în sub 100 secunde",
+      "icon": "Speed",
+      "color": "#F77F00",
+      "rarity": "rare",
+      "category": "speed",
+      "requirement": {
+        "type": "fastCompletion",
+        "value": 100
+      },
+      "points": 100
+    },
+    {
+      "id": "night-owl",
+      "name": "Bufniță de Noapte",
+      "description": "Completează 5 quiz-uri după ora 23:00",
+      "icon": "Moon",
+      "color": "#6A4C93",
+      "rarity": "rare",
+      "category": "special",
+      "requirement": {
+        "type": "lateNightQuizzes",
+        "value": 5
+      },
+      "points": 100
+    }
+  ]
+}
