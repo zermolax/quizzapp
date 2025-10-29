@@ -13,6 +13,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import QuestionCard from '../components/QuestionCard';
+import { BadgeCard } from '../components/BadgeCard';
 import { saveQuizSession, updateUserStats, getQuestionsByTheme, getUserStats } from '../services/quizService';
 import { checkBadgeAchievements, updateUserStreak } from '../services/badgeService';
 import { doc, getDoc } from 'firebase/firestore';
@@ -60,9 +61,16 @@ export function QuizPlay() {
   const [userStats, setUserStats] = useState(null);
   const [savingSession, setSavingSession] = useState(false);
 
+  // NEW: Badges and streak earned in this session
+  const [newBadgesEarned, setNewBadgesEarned] = useState([]);
+  const [sessionStreak, setSessionStreak] = useState(0);
+
   // NEW: Timer state (20 seconds per question)
   const [timeLeft, setTimeLeft] = useState(20);
   const [timerActive, setTimerActive] = useState(true);
+
+  // NEW: Auto-advance timer ID for cancellation
+  const [autoAdvanceTimer, setAutoAdvanceTimer] = useState(null);
 
   // NEW: Theme and subject data from Firestore
   const [theme, setTheme] = useState(null);
@@ -214,10 +222,11 @@ const handleTimeOut = () => {
 
   setAnswersArray([...answersArray, answerData]);
 
-  // Move to next question after 4 seconds
-  setTimeout(() => {
+  // Move to next question after 4 seconds (unless user clicks skip)
+  const timerId = setTimeout(() => {
     handleNextQuestion();
   }, 4000);
+  setAutoAdvanceTimer(timerId);
 };
 
   /**
@@ -258,16 +267,36 @@ const handleTimeOut = () => {
       setScore(score + 10);
     }
 
-    // PAUZĂ: 3 secunde - schimbat din 3000 la 4000 daca vrei
-    setTimeout(() => {
+    // Auto-advance after 6 seconds (unless user clicks skip)
+    const timerId = setTimeout(() => {
       handleNextQuestion();
-    }, 4000);
+    }, 6000);
+    setAutoAdvanceTimer(timerId);
+  };
+
+  /**
+   * HANDLER: User skips explanation (manual advance)
+   */
+  const handleSkipExplanation = () => {
+    // Clear auto-advance timer
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      setAutoAdvanceTimer(null);
+    }
+    // Immediately go to next question
+    handleNextQuestion();
   };
 
   /**
    * HANDLER: Merge la următoarea întrebare
    */
   const handleNextQuestion = () => {
+    // Clear any pending auto-advance timer
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      setAutoAdvanceTimer(null);
+    }
+
     const nextIndex = currentQuestionIndex + 1;
 
     if (nextIndex < questions.length) {
@@ -343,12 +372,13 @@ const handleTimeOut = () => {
 
       if (newBadges.length > 0) {
         console.log('🎉 New badges earned:', newBadges);
-        // TODO: Show toast notification for new badges
+        setNewBadgesEarned(newBadges);
       }
 
       // Update user streak
       const currentStreak = await updateUserStreak(user.uid);
       console.log('🔥 Current streak:', currentStreak, 'days');
+      setSessionStreak(currentStreak);
 
       console.log('Session saved and stats updated');
       setSavingSession(false);
@@ -481,6 +511,52 @@ const handleTimeOut = () => {
             </div>
           )}
 
+          {/* NEW: Streak Display */}
+          {sessionStreak > 0 && (
+            <div className="bg-gradient-to-r from-orange-500/10 to-orange-500/5 p-4 rounded-lg mb-6 border-l-4 border-orange-500">
+              <div className="flex items-center justify-center gap-3">
+                <div className="text-4xl">🔥</div>
+                <div className="text-left">
+                  <p className="text-sm text-neutral-600">Streak actual</p>
+                  <p className="text-3xl font-bold text-orange-500">
+                    {sessionStreak} {sessionStreak === 1 ? 'zi' : 'zile'}
+                  </p>
+                </div>
+              </div>
+              <p className="text-xs text-neutral-500 mt-2 text-center">
+                {sessionStreak >= 7
+                  ? '🎯 Impresionant! Continui să înveți în fiecare zi!'
+                  : sessionStreak >= 3
+                  ? '👏 Foarte bine! Continuă așa!'
+                  : '💪 Joacă în fiecare zi pentru a-ți crește streak-ul!'}
+              </p>
+            </div>
+          )}
+
+          {/* NEW: Badges Earned */}
+          {newBadgesEarned.length > 0 && (
+            <div className="bg-gradient-to-r from-yellow-500/10 to-yellow-500/5 p-4 rounded-lg mb-6 border-l-4 border-yellow-500">
+              <p className="font-bold text-neutral-900 mb-3 flex items-center justify-center gap-2">
+                <span className="text-2xl">🎖️</span>
+                <span>Badge-uri noi câștigate!</span>
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                {newBadgesEarned.map((badge) => (
+                  <div key={badge.id} className="transform scale-90">
+                    <BadgeCard
+                      badge={badge}
+                      earned={true}
+                      earnedAt={new Date()}
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-neutral-500 mt-3 text-center">
+                ✨ Verifică-ți profilul pentru toate badge-urile tale!
+              </p>
+            </div>
+          )}
+
           {/* Quiz info */}
           <div className="bg-neutral-50 p-4 rounded-lg mb-6 text-sm">
             <p className="text-neutral-500">
@@ -570,6 +646,21 @@ const handleTimeOut = () => {
             showExplanation={showExplanation}
             timeLeft={timeLeft}
           />
+
+          {/* SKIP EXPLANATION BUTTON */}
+          {answered && showExplanation && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={handleSkipExplanation}
+                className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition-all duration-200 hover:scale-105"
+              >
+                Următoarea întrebare ►
+              </button>
+              <p className="text-xs text-neutral-500 mt-2">
+                Sau așteaptă 6 secunde pentru avansare automată
+              </p>
+            </div>
+          )}
         </div>
 
       </div>
