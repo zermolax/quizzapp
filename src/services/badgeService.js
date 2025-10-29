@@ -117,7 +117,10 @@ export async function checkBadgeAchievements(userId) {
       orderBy('createdAt', 'desc')
     );
     const sessionsSnapshot = await getDocs(sessionsQuery);
-    const sessions = sessionsSnapshot.docs.map(doc => doc.data());
+    // Filter out old sessions without subjectId
+    const sessions = sessionsSnapshot.docs
+      .map(doc => doc.data())
+      .filter(s => s.subjectId); // Only include sessions with subjectId
 
     // Get already earned badges
     const earnedBadges = await getUserBadges(userId);

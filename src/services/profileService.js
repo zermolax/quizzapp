@@ -101,6 +101,12 @@ export async function getProgressBySubject(userId) {
       const session = doc.data();
       const { subjectId, percentage, score } = session;
 
+      // Skip sessions without subjectId (old sessions before migration)
+      if (!subjectId) {
+        console.warn('⚠️ Skipping old session without subjectId:', doc.id);
+        return;
+      }
+
       if (!subjectMap[subjectId]) {
         subjectMap[subjectId] = {
           subjectId,
@@ -304,6 +310,12 @@ export async function getQuizHistory(userId, limitCount = 10) {
 
     for (const docSnap of querySnapshot.docs) {
       const session = docSnap.data();
+
+      // Skip sessions without subjectId (old sessions before migration)
+      if (!session.subjectId) {
+        console.warn('⚠️ Skipping old session without subjectId:', docSnap.id);
+        continue;
+      }
 
       // Fetch theme info
       const themeDocRef = doc(db, 'themes', session.themeId);
