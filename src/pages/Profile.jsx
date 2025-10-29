@@ -145,17 +145,31 @@ export function Profile() {
 
       {/* HEADER */}
       <header className="max-w-6xl mx-auto mb-8">
-        <div className="flex justify-between items-center bg-white rounded-lg shadow p-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white rounded-lg shadow p-6 gap-4">
           <div>
             <h1 className="text-4xl font-bold text-brand-blue">👤 Profil</h1>
             <p className="text-neutral-500">Vizualizează progresul și statisticile tale</p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="bg-error hover:bg-error/90 text-white font-semibold py-2 px-6 rounded-lg"
-          >
-            Deconectare
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => navigate('/subjects')}
+              className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
+            >
+              ← Înapoi la Materii
+            </button>
+            <button
+              onClick={() => navigate('/leaderboard')}
+              className="bg-brand-purple hover:bg-brand-purple/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
+            >
+              🏆 Clasament
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-error hover:bg-error/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
+            >
+              Deconectare
+            </button>
+          </div>
         </div>
       </header>
 
@@ -429,23 +443,6 @@ export function Profile() {
               </table>
             </div>
           )}
-        </div>
-
-        {/* ACTION BUTTONS */}
-        <div className="flex justify-center gap-4 mb-8">
-          <button
-            onClick={() => navigate('/subjects')}
-            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg transition"
-          >
-            ← Înapoi la Materii
-          </button>
-
-          <button
-            onClick={() => navigate('/subjects')}
-            className="bg-success hover:bg-success/90 text-white font-semibold py-3 px-8 rounded-lg transition"
-          >
-            ▶️ Joacă Alt Quiz
-          </button>
         </div>
 
       </div>

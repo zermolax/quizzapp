@@ -34,7 +34,7 @@ export function Leaderboard() {
    * HOOKS
    */
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   /**
    * STATE
@@ -80,14 +80,6 @@ export function Leaderboard() {
       loadLeaderboard();
     }
   }, [activeTab, user]);
-
-  /**
-   * HANDLER: Logout
-   */
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-  };
 
   /**
    * HELPER: Get row styling
@@ -144,26 +136,23 @@ export function Leaderboard() {
 
       {/* HEADER */}
       <header className="max-w-6xl mx-auto mb-8">
-        <div className="flex justify-between items-center bg-white rounded-lg shadow p-6">
-          <div
-            onClick={() => navigate('/')}
-            className="cursor-pointer hover:opacity-80 transition"
-          >
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white rounded-lg shadow p-6 gap-4">
+          <div>
             <h1 className="text-4xl font-bold text-brand-blue">🏆 Clasament</h1>
             <p className="text-neutral-500">Compară-te cu ceilalți utilizatori</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => navigate('/profile')}
-              className="bg-brand-purple hover:bg-brand-purple/90 text-white px-4 py-2 rounded-lg font-semibold transition"
+              onClick={() => navigate('/subjects')}
+              className="bg-brand-blue hover:bg-brand-blue/90 text-white px-4 py-2 rounded-lg font-semibold transition text-sm"
             >
-              👤 Profil
+              ← Înapoi la Materii
             </button>
             <button
-              onClick={handleLogout}
-              className="bg-error hover:bg-error/90 text-white px-4 py-2 rounded-lg font-semibold transition"
+              onClick={() => navigate('/profile')}
+              className="bg-brand-purple hover:bg-brand-purple/90 text-white px-4 py-2 rounded-lg font-semibold transition text-sm"
             >
-              Deconectare
+              👤 Profil
             </button>
           </div>
         </div>
@@ -315,23 +304,6 @@ export function Leaderboard() {
               ))
             )}
           </div>
-        </div>
-
-        {/* FOOTER */}
-        <div className="mt-8 flex justify-center gap-4">
-          <button
-            onClick={() => navigate('/subjects')}
-            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-3 px-8 rounded-lg transition"
-          >
-            ← Înapoi la Materii
-          </button>
-
-          <button
-            onClick={() => navigate('/profile')}
-            className="bg-brand-purple hover:bg-brand-purple/90 text-white font-semibold py-3 px-8 rounded-lg transition"
-          >
-            👤 Vezi Profil
-          </button>
         </div>
 
       </div>
