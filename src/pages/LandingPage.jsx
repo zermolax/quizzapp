@@ -66,15 +66,25 @@ export function LandingPage({ onPlayNow }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-purple">
+    <div className="min-h-screen bg-gradient-to-r from-gray-800 via-blue-700 to-gray-900">
 
       {/* NAVIGATION */}
       <nav className="bg-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center gap-2">
           {/* Logo - responsive */}
-          <h1 className="text-lg sm:text-2xl font-bold text-brand-blue whitespace-nowrap">
-            🎓 <span className="hidden xs:inline">quizzfun</span><span className="hidden sm:inline">.app</span>
-          </h1>
+        <h1
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 cursor-pointer text-lg sm:text-2xl font-bold text-brand-blue whitespace-nowrap"
+        >
+          {/* Logo din /public */}
+          <img
+            src="/logo.svg"
+            alt="QuizzFun Logo"
+            className="w-10 h-10 sm:w-8 sm:8"
+          />
+          <span className="hidden sm:inline">quizzfun.app</span>
+        </h1>
+
 
           {/* Navigation buttons - responsive */}
           <div className="flex gap-1 sm:gap-2 md:gap-4">
@@ -87,7 +97,7 @@ export function LandingPage({ onPlayNow }) {
                   title="Profil"
                 >
                   <span className="hidden md:inline">Profil</span>
-                  <span className="md:hidden">👤</span>
+                  <span className="md:hidden">👤 Profil</span>
                 </button>
 
                 {/* Materii */}
@@ -96,7 +106,7 @@ export function LandingPage({ onPlayNow }) {
                   className="bg-brand-blue hover:bg-brand-blue/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
                 >
                   <span className="hidden sm:inline">Materii</span>
-                  <span className="sm:hidden">📚</span>
+                  <span className="sm:hidden">📚 Materii</span>
                 </button>
 
                 {/* Logout - text scurt pe mobile */}
@@ -105,7 +115,7 @@ export function LandingPage({ onPlayNow }) {
                   className="bg-error hover:bg-error/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
                 >
                   <span className="hidden sm:inline">Deconectare</span>
-                  <span className="sm:hidden">↩️</span>
+                  <span className="sm:hidden">🚪 Logout</span>
                 </button>
               </>
             ) : (
@@ -154,7 +164,7 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* SUBJECTS SECTION - NOU! */}
-      <section id="subjects-section" className="bg-gradient-to-br from-neutral-100 to-neutral-50 py-20">
+      <section id="subjects-section" className="py-20 bg-gradient-to-b from-[#8d8dfc] via-[#a8c1fa] to-[#7f76cc]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-4 text-neutral-900">
             📚 Alege Materia
@@ -217,63 +227,63 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="bg-white py-20">
+      <section className="py-20 bg-radial-at-b from-amber-200 via-violet-600 to-sky-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
+          <h2 className="text-4xl font-bold text-center mb-12">
             De ce Quizz Fun?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">📚</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Conținut Calitativ</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">Conținut Calitativ</h3>
+              <p className="opacity-80">
                 Quiz-uri create de profesori, bazate pe programa școlară. Fiecare răspuns are explicație detaliată.
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">🎮</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Distractiv & Educativ</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">Distractiv & Educativ</h3>
+              <p className="opacity-80">
                 Învățare gamificată cu feedback instantaneu. 3 niveluri de dificultate pentru fiecare temă.
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">🏆</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Urmărește Progresul</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">Urmărește Progresul</h3>
+              <p className="opacity-80">
                 Statistici detaliate per materie și temă. Vezi cum evoluezi și unde trebuie să mai studiezi.
               </p>
             </div>
 
             {/* Feature 4 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">⚡</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Rapid & Eficient</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">Rapid & Eficient</h3>
+              <p className="opacity-80">
                 10 întrebări per quiz, 20 secunde per întrebare. Perfect pentru sesiuni scurte de învățare.
               </p>
             </div>
 
             {/* Feature 5 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">📱</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Funcționează Peste Tot</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">Funcționează Peste Tot</h3>
+              <p className="opacity-80">
                 Responsive design - funcționează perfect pe telefon, tabletă și calculator.
               </p>
             </div>
 
             {/* Feature 6 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <div className="bg-white/10 p-6 rounded-xl shadow-lg hover:shadow-xl transition">
               <p className="text-5xl mb-4">🆓</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">100% Gratuit</h3>
-              <p className="text-neutral-600">
+              <h3 className="text-xl font-bold mb-3">100% Gratuit</h3>
+              <p className="opacity-80">
                 Fără costuri ascunse, fără reclame, fără abonamente. Educație gratuită pentru toți.
               </p>
             </div>
