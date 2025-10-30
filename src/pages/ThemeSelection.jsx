@@ -330,6 +330,74 @@ export function ThemeSelection() {
                 onSelectTheme={(themeSlug, difficulty) => handleSelectTheme(themeSlug, difficulty)}
               />
             ))}
+
+            {/* COMING SOON CARD */}
+            <div
+              className="relative flex flex-col cursor-not-allowed"
+              style={{
+                background: 'var(--sand)',
+                border: '5px dashed var(--warm-brown)',
+                padding: '3rem',
+                minHeight: '350px',
+                opacity: 0.6,
+                transition: 'all 0.2s ease',
+                animation: `fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.05 * (themes.length + 1)}s backwards`
+              }}
+            >
+              {/* Coming Soon Label - centered and rotated */}
+              <div
+                className="absolute font-heading font-black uppercase tracking-wider"
+                style={{
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%) rotate(-15deg)',
+                  background: 'var(--neon-orange)',
+                  color: 'var(--off-white)',
+                  padding: '1rem 3rem',
+                  fontSize: '1.5rem',
+                  letterSpacing: '0.1em',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                În curând
+              </div>
+
+              {/* Theme number */}
+              <div
+                className="font-mono font-bold leading-none mb-4"
+                style={{
+                  fontSize: '4rem',
+                  color: 'var(--warm-brown)',
+                  opacity: 0.5
+                }}
+              >
+                {String(themes.length + 1).padStart(2, '0')}
+              </div>
+
+              {/* Title */}
+              <h3
+                className="font-heading font-black mb-4 uppercase tracking-tight leading-tight"
+                style={{
+                  fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+                  color: 'var(--deep-brown)',
+                  opacity: 0.7
+                }}
+              >
+                Alte teme
+              </h3>
+
+              {/* Description */}
+              <p
+                className="font-body mb-auto leading-relaxed"
+                style={{
+                  fontSize: '1rem',
+                  color: 'var(--warm-brown)',
+                  opacity: 0.7
+                }}
+              >
+                Lucrăm la adăugarea de noi teme pasionante pentru această materie. Revino curând!
+              </p>
+            </div>
           </div>
         )}
 
