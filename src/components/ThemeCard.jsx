@@ -1,14 +1,17 @@
 /**
- * ThemeCard.jsx - BRUTAL DESIGN Edition
+ * ThemeCard.jsx - BRUTAL DESIGN Edition with CSS Variables
  *
- * NEW v3 - Bold/Brutal Design:
- * - Thick borders (5px)
+ * NEW v4 - CSS Variables for proper dark mode:
+ * - Uses CSS variables (var(--cream), var(--warm-brown), etc.)
+ * - Thick borders (5px solid var(--warm-brown))
+ * - Padding: 3rem (exactly like prototype)
+ * - Min-height: 350px
  * - Box shadow offset on hover
  * - Theme number with mono font
- * - Questions badge instead of difficulty badge
- * - Three difficulty buttons in footer (Easy, Medium, Hard)
- * - Accent bar at top
- * - Grayscale icon that becomes color on hover
+ * - Questions badge
+ * - Three difficulty buttons in footer
+ * - Vertical accent bar on left (12px width)
+ * - FadeIn animation with delay
  */
 
 import React from 'react';
@@ -26,9 +29,15 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
 
   return (
     <div
-      className="bg-cream dark:bg-deep-brown border-5 border-warm-brown dark:border-off-white p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group relative"
+      className="relative cursor-pointer flex flex-col"
       style={{
+        background: 'var(--cream)',
+        border: '5px solid var(--warm-brown)',
+        padding: '3rem',
+        minHeight: '350px',
+        transition: 'all 0.2s ease',
         boxShadow: `0 0 0 0 ${neonColor}`,
+        animation: `fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.05 * (index + 1)}s backwards`
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.boxShadow = `8px 8px 0 ${neonColor}`;
@@ -36,39 +45,86 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.boxShadow = `0 0 0 0 ${neonColor}`;
-        e.currentTarget.style.borderColor = '';
+        e.currentTarget.style.borderColor = 'var(--warm-brown)';
       }}
     >
-      {/* Top accent bar */}
+      {/* Vertical accent bar on left */}
       <div
-        className="absolute top-0 left-0 right-0 h-2"
-        style={{ backgroundColor: neonColor }}
+        style={{
+          content: '',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '12px',
+          height: '100%',
+          background: neonColor
+        }}
       ></div>
 
       {/* Question count badge (top right) */}
-      <div className="absolute top-6 right-6 sm:top-8 sm:right-8 px-3 py-1.5 bg-deep-brown dark:bg-off-white font-mono text-xs font-bold uppercase tracking-wider text-off-white dark:text-deep-brown">
+      <div
+        className="absolute font-mono font-bold uppercase tracking-wider"
+        style={{
+          top: '2rem',
+          right: '2rem',
+          padding: '0.5rem 1rem',
+          background: 'var(--deep-brown)',
+          color: 'var(--off-white)',
+          fontSize: '0.75rem'
+        }}
+      >
         {theme.totalQuestions} Q
       </div>
 
       {/* Theme number - large mono font */}
-      <div className="font-mono text-6xl sm:text-7xl font-bold text-sand dark:text-sand leading-none mb-4">
+      <div
+        className="font-mono font-bold leading-none mb-4"
+        style={{
+          fontSize: '4rem',
+          color: 'var(--sand)'
+        }}
+      >
         {String(index + 1).padStart(2, '0')}
       </div>
 
       {/* Title */}
-      <h3 className="text-2xl sm:text-3xl font-heading font-black mb-3 uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
+      <h3
+        className="font-heading font-black mb-4 uppercase tracking-tight leading-tight"
+        style={{
+          fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+          color: 'var(--deep-brown)'
+        }}
+      >
         {theme.name}
       </h3>
 
       {/* Description */}
-      <p className="text-sm sm:text-base font-body mb-auto text-deep-brown/70 dark:text-off-white/70 leading-relaxed line-clamp-3">
+      <p
+        className="font-body mb-auto leading-relaxed line-clamp-3"
+        style={{
+          fontSize: '1rem',
+          color: 'var(--warm-brown)'
+        }}
+      >
         {theme.description}
       </p>
 
       {/* Meta - Difficulty Buttons */}
-      <div className="mt-6 pt-4 border-t-3 border-sand dark:border-warm-brown">
-        <p className="text-xs font-mono font-bold uppercase tracking-wider text-deep-brown dark:text-off-white mb-3 opacity-70">
-          Selectează Dificultatea:
+      <div
+        className="mt-8 pt-6"
+        style={{
+          borderTop: '3px solid var(--sand)'
+        }}
+      >
+        <p
+          className="font-mono font-bold uppercase tracking-wider mb-3"
+          style={{
+            fontSize: '0.875rem',
+            color: 'var(--deep-brown)',
+            opacity: 0.7
+          }}
+        >
+          Select\u0103 Dificultatea:
         </p>
 
         {/* Three difficulty buttons */}
@@ -78,7 +134,22 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
               e.stopPropagation();
               handleDifficultyClick('easy');
             }}
-            className="flex-1 py-2 px-1 font-mono text-xs font-bold uppercase border-3 border-sage text-sage hover:bg-sage hover:text-off-white transition-all duration-150 hover:-translate-y-0.5"
+            className="flex-1 font-mono font-bold uppercase transition-all duration-150 hover:-translate-y-0.5"
+            style={{
+              padding: '0.5rem 0.25rem',
+              fontSize: '0.75rem',
+              border: '3px solid var(--sage)',
+              color: 'var(--sage)',
+              background: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--sage)';
+              e.currentTarget.style.color = 'var(--off-white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--sage)';
+            }}
             title="Ușor"
           >
             Easy
@@ -89,7 +160,22 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
               e.stopPropagation();
               handleDifficultyClick('medium');
             }}
-            className="flex-1 py-2 px-1 font-mono text-xs font-bold uppercase border-3 border-neon-orange text-neon-orange hover:bg-neon-orange hover:text-off-white transition-all duration-150 hover:-translate-y-0.5"
+            className="flex-1 font-mono font-bold uppercase transition-all duration-150 hover:-translate-y-0.5"
+            style={{
+              padding: '0.5rem 0.25rem',
+              fontSize: '0.75rem',
+              border: '3px solid var(--neon-orange)',
+              color: 'var(--neon-orange)',
+              background: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--neon-orange)';
+              e.currentTarget.style.color = 'var(--off-white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--neon-orange)';
+            }}
             title="Mediu"
           >
             Medium
@@ -100,7 +186,22 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
               e.stopPropagation();
               handleDifficultyClick('hard');
             }}
-            className="flex-1 py-2 px-1 font-mono text-xs font-bold uppercase border-3 border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-off-white transition-all duration-150 hover:-translate-y-0.5"
+            className="flex-1 font-mono font-bold uppercase transition-all duration-150 hover:-translate-y-0.5"
+            style={{
+              padding: '0.5rem 0.25rem',
+              fontSize: '0.75rem',
+              border: '3px solid var(--neon-pink)',
+              color: 'var(--neon-pink)',
+              background: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--neon-pink)';
+              e.currentTarget.style.color = 'var(--off-white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--neon-pink)';
+            }}
             title="Greu"
           >
             Hard
@@ -115,16 +216,18 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
 export default ThemeCard;
 
 /**
- * BRUTAL DESIGN v3 Features:
+ * BRUTAL DESIGN v4 Features - CSS Variables Edition:
  *
- * ✅ Thick 5px borders with hover neon color
- * ✅ Box shadow offset (8px 8px) on hover
+ * ✅ Uses CSS variables (var(--cream), var(--warm-brown)) for proper dark mode
+ * ✅ Exact styling from prototype: 5px border, 3rem padding, 350px min-height
+ * ✅ Vertical accent bar on left (12px width) instead of top
+ * ✅ Box shadow offset (8px 8px) on hover with neon color
  * ✅ Large theme number with mono font (01, 02, 03...)
  * ✅ Questions badge in top right corner
  * ✅ Three difficulty buttons: Easy (sage), Medium (orange), Hard (pink)
- * ✅ Accent bar at top with cycling neon colors
- * ✅ Dark mode support
- * ✅ Responsive design
+ * ✅ FadeIn animation with staggered delay
+ * ✅ Dark mode support through CSS variables
+ * ✅ Responsive design maintained
  *
- * RESULT: Bold, modern, consistent with landing page design
+ * RESULT: Exactly matches the prototype design with proper dark mode support
  */
