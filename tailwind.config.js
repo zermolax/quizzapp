@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class', // Enable dark mode with class strategy
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -24,6 +25,19 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Bold Design Palette - Modern & Elegant
+        'deep-brown': '#2D2416',
+        'warm-brown': '#4A3D2F',
+        'sand': '#C8B7A6',
+        'cream': '#F5F1E8',
+        'off-white': '#FAFAF8',
+        'sage': '#8B9B7A',
+        'terracotta': '#C07856',
+        'neon-pink': '#FF0080',
+        'neon-cyan': '#00FFFF',
+        'neon-lime': '#CCFF00',
+        'neon-orange': '#FF6B00',
+
         // New Brand Colors
         brand: {
           red: '#E63946',        // Roșu vibrant
@@ -50,7 +64,24 @@ export default {
 
         // Legacy support (kept for backward compatibility)
         primary: '#1982C4',
-      }
+      },
+      fontFamily: {
+        'heading': ['Space Grotesk', 'sans-serif'],
+        'body': ['Inter', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
+      },
+      letterSpacing: {
+        'tighter': '-0.04em',
+        'tight': '-0.02em',
+      },
+      lineHeight: {
+        'tight': '0.95',
+      },
+      boxShadow: {
+        'brutal': '4px 4px 0 currentColor',
+        'brutal-lg': '6px 6px 0 currentColor',
+        'brutal-xl': '8px 8px 0 currentColor',
+      },
     },
   },
   plugins: [],
