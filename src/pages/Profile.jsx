@@ -1,18 +1,12 @@
 /**
- * Profile.jsx
- * 
- * SCOPUL:
- * Pagina profil a utilizatorului
- * Arăta:
- * - User info (email, data înregistrare)
- * - Stats globale (total quizzes, avg score, best score, total points)
- * - Progres per temă (stats pe fiecare temă jucată)
- * - Quiz history (ultimele 10 quiz-uri)
- * 
- * FLOW:
- * 1. Component mount
- * 2. Load user profile, theme progress, quiz history
- * 3. Display all data
+ * Profile.jsx - REDESIGNED with Bold/Brutalist Design
+ *
+ * CHANGES:
+ * - Applied bold design system with CSS variables
+ * - Brutal borders (4-6px), no border-radius
+ * - Space Grotesk headings, JetBrains Mono stats
+ * - Neon accent bars and colors
+ * - Hover effects with translate + box shadow
  */
 
 import React, { useState, useEffect } from 'react';
@@ -33,16 +27,10 @@ import { BadgeCard } from '../components/BadgeCard';
  * COMPONENT: Profile
  */
 export function Profile() {
-  
-  /**
-   * HOOKS
-   */
+
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
-  /**
-   * STATE
-   */
   const [userProfile, setUserProfile] = useState(null);
   const [subjectProgress, setSubjectProgress] = useState([]);
   const [themeProgress, setThemeProgress] = useState([]);
@@ -50,7 +38,6 @@ export function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Badges and streak state
   const [allBadges, setAllBadges] = useState([]);
   const [userBadges, setUserBadges] = useState([]);
   const [currentStreak, setCurrentStreak] = useState(0);
@@ -69,7 +56,6 @@ export function Profile() {
         const progress = await getProgressByTheme(user.uid);
         const history = await getQuizHistory(user.uid, 10);
 
-        // Load badges and streak
         const badges = await getAllBadges();
         const earnedBadges = await getUserBadges(user.uid);
         const streak = await getCurrentStreak(user.uid);
@@ -108,10 +94,31 @@ export function Profile() {
    */
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-blue mx-auto mb-4"></div>
-          <p className="text-neutral-500">Se încarcă profil...</p>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: 'var(--off-white)'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '60px',
+            height: '60px',
+            border: '6px solid var(--sand)',
+            borderTop: '6px solid var(--deep-brown)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 1rem'
+          }}></div>
+          <p style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            color: 'var(--deep-brown)'
+          }}>
+            Se încarcă profil...
+          </p>
         </div>
       </div>
     );
@@ -122,13 +129,63 @@ export function Profile() {
    */
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-neutral-50">
-        <div className="bg-white p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold text-error mb-4">⚠️ Eroare</h2>
-          <p className="text-neutral-500 mb-6">{error}</p>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: 'var(--off-white)',
+        padding: '2rem'
+      }}>
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '3rem',
+          textAlign: 'center',
+          maxWidth: '500px'
+        }}>
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '2rem',
+            fontWeight: 900,
+            color: 'var(--neon-pink)',
+            marginBottom: '1.5rem'
+          }}>
+            ⚠️ Eroare
+          </h2>
+          <p style={{
+            fontSize: '1.125rem',
+            color: 'var(--deep-brown)',
+            marginBottom: '2rem'
+          }}>
+            {error}
+          </p>
           <button
             onClick={() => navigate('/subjects')}
-            className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-6 rounded-lg"
+            style={{
+              background: 'var(--deep-brown)',
+              color: 'var(--off-white)',
+              border: '6px solid var(--deep-brown)',
+              padding: '1rem 2rem',
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontWeight: 900,
+              fontSize: '1rem',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--neon-cyan)';
+              e.currentTarget.style.color = 'var(--deep-brown)';
+              e.currentTarget.style.transform = 'translate(-5px, -5px)';
+              e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--deep-brown)';
+              e.currentTarget.style.color = 'var(--off-white)';
+              e.currentTarget.style.transform = 'translate(0, 0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
           >
             ← Înapoi la Materii
           </button>
@@ -141,53 +198,224 @@ export function Profile() {
    * RENDER: Profile Page
    */
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-brand-blue/10 p-4">
+    <div style={{
+      minHeight: '100vh',
+      background: 'var(--off-white)',
+      padding: '2rem 5%'
+    }}>
 
       {/* HEADER */}
-      <header className="max-w-6xl mx-auto mb-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-white rounded-lg shadow p-6 gap-4">
-          <div>
-            <h1 className="text-4xl font-bold text-brand-blue">👤 Profil</h1>
-            <p className="text-neutral-500">Vizualizează progresul și statisticile tale</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => navigate('/subjects')}
-              className="bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
-            >
-              ← Înapoi la Materii
-            </button>
-            <button
-              onClick={() => navigate('/leaderboard')}
-              className="bg-brand-purple hover:bg-brand-purple/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
-            >
-              🏆 Clasament
-            </button>
-            <button
-              onClick={handleLogout}
-              className="bg-error hover:bg-error/90 text-white font-semibold py-2 px-4 rounded-lg transition text-sm"
-            >
-              Deconectare
-            </button>
+      <header style={{
+        maxWidth: '1400px',
+        margin: '0 auto 3rem'
+      }}>
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2rem',
+          position: 'relative'
+        }}>
+          {/* Accent bar */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: '12px',
+            background: 'var(--neon-cyan)'
+          }}></div>
+
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: '1.5rem'
+          }}>
+            <div>
+              <h1 style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                marginBottom: '0.5rem',
+                textTransform: 'uppercase',
+                letterSpacing: '-0.02em'
+              }}>
+                👤 Profil
+              </h1>
+              <p style={{
+                fontSize: '1.125rem',
+                color: 'var(--warm-brown)'
+              }}>
+                Vizualizează progresul și statisticile tale
+              </p>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+              <button
+                onClick={() => navigate('/subjects')}
+                style={{
+                  background: 'var(--deep-brown)',
+                  color: 'var(--off-white)',
+                  border: '4px solid var(--deep-brown)',
+                  padding: '0.75rem 1.5rem',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--neon-cyan)';
+                  e.currentTarget.style.color = 'var(--deep-brown)';
+                  e.currentTarget.style.transform = 'translate(-3px, -3px)';
+                  e.currentTarget.style.boxShadow = '3px 3px 0 var(--deep-brown)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'var(--deep-brown)';
+                  e.currentTarget.style.color = 'var(--off-white)';
+                  e.currentTarget.style.transform = 'translate(0, 0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                ← Materii
+              </button>
+
+              <button
+                onClick={() => navigate('/leaderboard')}
+                style={{
+                  background: 'var(--neon-orange)',
+                  color: 'var(--deep-brown)',
+                  border: '4px solid var(--neon-orange)',
+                  padding: '0.75rem 1.5rem',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translate(-3px, -3px)';
+                  e.currentTarget.style.boxShadow = '3px 3px 0 var(--deep-brown)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translate(0, 0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                🏆 Clasament
+              </button>
+
+              <button
+                onClick={handleLogout}
+                style={{
+                  background: 'transparent',
+                  color: 'var(--deep-brown)',
+                  border: '4px solid var(--deep-brown)',
+                  padding: '0.75rem 1.5rem',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontWeight: 700,
+                  fontSize: '0.875rem',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'var(--neon-pink)';
+                  e.currentTarget.style.color = 'var(--off-white)';
+                  e.currentTarget.style.borderColor = 'var(--neon-pink)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'transparent';
+                  e.currentTarget.style.color = 'var(--deep-brown)';
+                  e.currentTarget.style.borderColor = 'var(--deep-brown)';
+                }}
+              >
+                Deconectare
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto">
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
         {/* SECTION 1: USER INFO */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">📋 Informații Personale</h2>
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '12px',
+            height: '100%',
+            background: 'var(--neon-lime)'
+          }}></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            color: 'var(--deep-brown)',
+            marginBottom: '1.5rem'
+          }}>
+            📋 Informații Personale
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '2rem'
+          }}>
             <div>
-              <p className="text-sm text-neutral-500">Email</p>
-              <p className="text-xl font-semibold text-neutral-900">{userProfile?.email}</p>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Email
+              </p>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                color: 'var(--deep-brown)'
+              }}>
+                {userProfile?.email}
+              </p>
             </div>
 
             <div>
-              <p className="text-sm text-neutral-500">Membru din</p>
-              <p className="text-xl font-semibold text-neutral-900">
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Membru din
+              </p>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '1.25rem',
+                fontWeight: 600,
+                color: 'var(--deep-brown)'
+              }}>
                 {userProfile?.createdAt ? formatDate(userProfile.createdAt) : 'N/A'}
               </p>
             </div>
@@ -195,49 +423,225 @@ export function Profile() {
         </div>
 
         {/* SECTION 2: GLOBAL STATS */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">📊 Statistici Globale</h2>
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '12px',
+            height: '100%',
+            background: 'var(--neon-pink)'
+          }}></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            color: 'var(--deep-brown)',
+            marginBottom: '1.5rem'
+          }}>
+            📊 Statistici Globale
+          </h2>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+            gap: '1.5rem'
+          }}>
             {/* Stat 1: Total Quizzes */}
-            <div className="bg-gradient-to-br from-brand-blue/5 to-brand-blue/10 p-4 rounded-lg border-l-4 border-brand-blue">
-              <p className="text-sm text-neutral-500 mb-2">Quiz-uri jucate</p>
-              <p className="text-4xl font-bold text-brand-blue">
+            <div style={{
+              background: 'var(--sand)',
+              border: '4px solid var(--warm-brown)',
+              padding: '1.5rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '8px',
+                background: 'var(--neon-cyan)'
+              }}></div>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Quiz-uri jucate
+              </p>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                lineHeight: 1
+              }}>
                 {userProfile?.stats.totalQuizzes || 0}
               </p>
             </div>
 
             {/* Stat 2: Average Score */}
-            <div className="bg-gradient-to-br from-success/5 to-success/10 p-4 rounded-lg border-l-4 border-success">
-              <p className="text-sm text-neutral-500 mb-2">Scor mediu</p>
-              <p className="text-4xl font-bold text-success">
+            <div style={{
+              background: 'var(--sand)',
+              border: '4px solid var(--warm-brown)',
+              padding: '1.5rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '8px',
+                background: 'var(--neon-lime)'
+              }}></div>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Scor mediu
+              </p>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                lineHeight: 1
+              }}>
                 {userProfile?.stats.averageScore || 0}%
               </p>
             </div>
 
             {/* Stat 3: Best Score */}
-            <div className="bg-gradient-to-br from-brand-purple/5 to-brand-purple/10 p-4 rounded-lg border-l-4 border-brand-purple">
-              <p className="text-sm text-neutral-500 mb-2">Cel mai bun scor</p>
-              <p className="text-4xl font-bold text-brand-purple">
+            <div style={{
+              background: 'var(--sand)',
+              border: '4px solid var(--warm-brown)',
+              padding: '1.5rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '8px',
+                background: 'var(--neon-green)'
+              }}></div>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Cel mai bun scor
+              </p>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                lineHeight: 1
+              }}>
                 {userProfile?.stats.bestScore || 0}%
               </p>
             </div>
 
             {/* Stat 4: Total Points */}
-            <div className="bg-gradient-to-br from-brand-yellow/5 to-brand-yellow/10 p-4 rounded-lg border-l-4 border-brand-yellow">
-              <p className="text-sm text-neutral-500 mb-2">Puncte totale</p>
-              <p className="text-4xl font-bold text-brand-yellow">
+            <div style={{
+              background: 'var(--sand)',
+              border: '4px solid var(--warm-brown)',
+              padding: '1.5rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '8px',
+                background: 'var(--neon-orange)'
+              }}></div>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                color: 'var(--warm-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Puncte totale
+              </p>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                lineHeight: 1
+              }}>
                 {userProfile?.stats.totalPoints || 0}
               </p>
             </div>
 
             {/* Stat 5: Current Streak */}
-            <div className="bg-gradient-to-br from-orange-500/5 to-orange-500/10 p-4 rounded-lg border-l-4 border-orange-500">
-              <p className="text-sm text-neutral-500 mb-2">Streak curent</p>
-              <p className="text-4xl font-bold text-orange-500 flex items-center gap-2">
+            <div style={{
+              background: 'var(--neon-orange)',
+              border: '4px solid var(--deep-brown)',
+              padding: '1.5rem',
+              position: 'relative'
+            }}>
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '8px',
+                background: 'var(--deep-brown)'
+              }}></div>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                color: 'var(--deep-brown)',
+                marginBottom: '0.5rem',
+                fontWeight: 700
+              }}>
+                Streak curent
+              </p>
+              <p style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontSize: '3rem',
+                fontWeight: 900,
+                color: 'var(--deep-brown)',
+                lineHeight: 1,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}>
                 🔥 {currentStreak}
               </p>
-              <p className="text-xs text-neutral-500 mt-1">
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.75rem',
+                color: 'var(--deep-brown)',
+                marginTop: '0.5rem'
+              }}>
                 {currentStreak === 1 ? 'zi' : 'zile'}
               </p>
             </div>
@@ -245,20 +649,56 @@ export function Profile() {
         </div>
 
         {/* SECTION 3: BADGES */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold text-neutral-900">🎖️ Badge-uri</h2>
-            <div className="text-sm text-neutral-500">
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '12px',
+            height: '100%',
+            background: 'var(--neon-lime)'
+          }}></div>
+
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '1.5rem'
+          }}>
+            <h2 style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontSize: '1.5rem',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              color: 'var(--deep-brown)'
+            }}>
+              🎖️ Badge-uri
+            </h2>
+            <div style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '1rem',
+              fontWeight: 700,
+              color: 'var(--warm-brown)'
+            }}>
               {userBadges.length} / {allBadges.length} obținute
             </div>
           </div>
 
           {allBadges.length === 0 ? (
-            <p className="text-neutral-500">Se încarcă badge-urile...</p>
+            <p style={{ color: 'var(--warm-brown)' }}>Se încarcă badge-urile...</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '1.5rem'
+            }}>
               {allBadges.map((badge) => {
-                // Check if user has earned this badge
                 const earnedBadge = userBadges.find(ub => ub.badgeId === badge.id);
                 const isEarned = !!earnedBadge;
 
@@ -277,168 +717,608 @@ export function Profile() {
 
         {/* SECTION 4: PROGRESS BY SUBJECT */}
         {subjectProgress.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-4">📚 Progres pe Materii</h2>
+          <div style={{
+            background: 'var(--cream)',
+            border: '6px solid var(--deep-brown)',
+            padding: '2.5rem',
+            marginBottom: '2rem',
+            position: 'relative'
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '12px',
+              height: '100%',
+              background: 'var(--neon-cyan)'
+            }}></div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {subjectProgress.map((subject) => (
-                <div
-                  key={subject.subjectId}
-                  className="p-4 rounded-lg border-l-4"
-                  style={{ borderLeftColor: subject.subjectColor, backgroundColor: `${subject.subjectColor}10` }}
-                >
-                  <div className="flex items-center mb-3">
-                    <span className="text-4xl mr-3">{subject.subjectIcon}</span>
-                    <div>
-                      <h3 className="text-lg font-bold text-neutral-900">{subject.subjectName}</h3>
-                      <p className="text-sm text-neutral-500">{subject.totalQuizzes} quiz-uri</p>
+            <h2 style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontSize: '1.5rem',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              color: 'var(--deep-brown)',
+              marginBottom: '1.5rem'
+            }}>
+              📚 Progres pe Materii
+            </h2>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1.5rem'
+            }}>
+              {subjectProgress.map((subject, index) => {
+                const neonColors = ['var(--neon-pink)', 'var(--neon-cyan)', 'var(--neon-lime)', 'var(--neon-orange)', 'var(--neon-green)'];
+                const neonColor = neonColors[index % neonColors.length];
+
+                return (
+                  <div
+                    key={subject.subjectId}
+                    style={{
+                      background: 'var(--sand)',
+                      border: '5px solid var(--warm-brown)',
+                      padding: '2rem',
+                      position: 'relative'
+                    }}
+                  >
+                    <div style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '10px',
+                      height: '100%',
+                      background: neonColor
+                    }}></div>
+
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      marginBottom: '1.5rem',
+                      gap: '1rem'
+                    }}>
+                      <span style={{ fontSize: '3rem' }}>{subject.subjectIcon}</span>
+                      <div>
+                        <h3 style={{
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          fontSize: '1.25rem',
+                          fontWeight: 900,
+                          color: 'var(--deep-brown)',
+                          marginBottom: '0.25rem'
+                        }}>
+                          {subject.subjectName}
+                        </h3>
+                        <p style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.875rem',
+                          color: 'var(--warm-brown)'
+                        }}>
+                          {subject.totalQuizzes} quiz-uri
+                        </p>
+                      </div>
+                    </div>
+
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(3, 1fr)',
+                      gap: '0.75rem'
+                    }}>
+                      <div style={{
+                        background: 'var(--cream)',
+                        border: '3px solid var(--warm-brown)',
+                        padding: '0.75rem',
+                        textAlign: 'center'
+                      }}>
+                        <p style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.625rem',
+                          textTransform: 'uppercase',
+                          color: 'var(--warm-brown)',
+                          marginBottom: '0.25rem'
+                        }}>
+                          Mediu
+                        </p>
+                        <p style={{
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          fontSize: '1.5rem',
+                          fontWeight: 900,
+                          color: 'var(--deep-brown)'
+                        }}>
+                          {subject.averageScore}%
+                        </p>
+                      </div>
+
+                      <div style={{
+                        background: 'var(--cream)',
+                        border: '3px solid var(--warm-brown)',
+                        padding: '0.75rem',
+                        textAlign: 'center'
+                      }}>
+                        <p style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.625rem',
+                          textTransform: 'uppercase',
+                          color: 'var(--warm-brown)',
+                          marginBottom: '0.25rem'
+                        }}>
+                          Maxim
+                        </p>
+                        <p style={{
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          fontSize: '1.5rem',
+                          fontWeight: 900,
+                          color: 'var(--neon-green)'
+                        }}>
+                          {subject.bestScore}%
+                        </p>
+                      </div>
+
+                      <div style={{
+                        background: 'var(--cream)',
+                        border: '3px solid var(--warm-brown)',
+                        padding: '0.75rem',
+                        textAlign: 'center'
+                      }}>
+                        <p style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.625rem',
+                          textTransform: 'uppercase',
+                          color: 'var(--warm-brown)',
+                          marginBottom: '0.25rem'
+                        }}>
+                          Puncte
+                        </p>
+                        <p style={{
+                          fontFamily: 'Space Grotesk, sans-serif',
+                          fontSize: '1.5rem',
+                          fontWeight: 900,
+                          color: 'var(--deep-brown)'
+                        }}>
+                          {subject.totalPoints}
+                        </p>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Mediu</p>
-                      <p className="text-lg font-bold" style={{ color: subject.subjectColor }}>{subject.averageScore}%</p>
-                    </div>
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Maxim</p>
-                      <p className="text-lg font-bold text-success">{subject.bestScore}%</p>
-                    </div>
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Puncte</p>
-                      <p className="text-lg font-bold text-brand-purple">{subject.totalPoints}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}
 
-        {/* SECTION 4: PROGRESS BY THEME */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">📈 Progres pe Teme</h2>
+        {/* SECTION 5: PROGRESS BY THEME */}
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '12px',
+            height: '100%',
+            background: 'var(--neon-pink)'
+          }}></div>
+
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            color: 'var(--deep-brown)',
+            marginBottom: '1.5rem'
+          }}>
+            📈 Progres pe Teme
+          </h2>
 
           {themeProgress.length === 0 ? (
-            <p className="text-neutral-500">Nu ai jucat niciun quiz încă. Mergi la teme!</p>
+            <p style={{ color: 'var(--warm-brown)' }}>
+              Nu ai jucat niciun quiz încă. Mergi la teme!
+            </p>
           ) : (
-            <div className="space-y-4">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {themeProgress.map((theme) => (
-                <div key={theme.themeId} className="border-l-4 border-brand-blue bg-brand-blue/5 p-4 rounded">
+                <div
+                  key={theme.themeId}
+                  style={{
+                    background: 'var(--sand)',
+                    border: '5px solid var(--warm-brown)',
+                    padding: '2rem',
+                    position: 'relative'
+                  }}
+                >
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '10px',
+                    height: '100%',
+                    background: 'var(--neon-cyan)'
+                  }}></div>
 
-                  {/* Theme Header */}
-                  <div className="flex justify-between items-start mb-3">
+                  <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'start',
+                    marginBottom: '1.5rem',
+                    flexWrap: 'wrap',
+                    gap: '1rem'
+                  }}>
                     <div>
-                      <h3 className="text-lg font-bold text-neutral-900">{theme.themeName}</h3>
-                      <p className="text-sm text-neutral-500">
+                      <h3 style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        fontSize: '1.25rem',
+                        fontWeight: 900,
+                        color: 'var(--deep-brown)',
+                        marginBottom: '0.5rem'
+                      }}>
+                        {theme.themeName}
+                      </h3>
+                      <p style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.875rem',
+                        color: 'var(--warm-brown)'
+                      }}>
                         {theme.totalQuizzes} quiz-uri jucate
                       </p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-brand-blue">{theme.averageScore}%</p>
-                      <p className="text-xs text-neutral-500">Mediu</p>
+
+                    <div style={{ textAlign: 'right' }}>
+                      <p style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        fontSize: '2.5rem',
+                        fontWeight: 900,
+                        color: 'var(--deep-brown)',
+                        lineHeight: 1
+                      }}>
+                        {theme.averageScore}%
+                      </p>
+                      <p style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.75rem',
+                        textTransform: 'uppercase',
+                        color: 'var(--warm-brown)'
+                      }}>
+                        Mediu
+                      </p>
                     </div>
                   </div>
 
-                  {/* Stats Grid */}
-                  <div className="grid grid-cols-3 gap-2 mb-3">
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Mediu</p>
-                      <p className="text-lg font-bold text-brand-blue">{theme.averageScore}%</p>
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '0.75rem',
+                    marginBottom: '1rem'
+                  }}>
+                    <div style={{
+                      background: 'var(--cream)',
+                      border: '3px solid var(--warm-brown)',
+                      padding: '0.75rem',
+                      textAlign: 'center'
+                    }}>
+                      <p style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.625rem',
+                        textTransform: 'uppercase',
+                        color: 'var(--warm-brown)',
+                        marginBottom: '0.25rem'
+                      }}>
+                        Mediu
+                      </p>
+                      <p style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        fontSize: '1.25rem',
+                        fontWeight: 900,
+                        color: 'var(--deep-brown)'
+                      }}>
+                        {theme.averageScore}%
+                      </p>
                     </div>
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Maxim</p>
-                      <p className="text-lg font-bold text-success">{theme.bestScore}%</p>
+
+                    <div style={{
+                      background: 'var(--cream)',
+                      border: '3px solid var(--warm-brown)',
+                      padding: '0.75rem',
+                      textAlign: 'center'
+                    }}>
+                      <p style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.625rem',
+                        textTransform: 'uppercase',
+                        color: 'var(--warm-brown)',
+                        marginBottom: '0.25rem'
+                      }}>
+                        Maxim
+                      </p>
+                      <p style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        fontSize: '1.25rem',
+                        fontWeight: 900,
+                        color: 'var(--neon-green)'
+                      }}>
+                        {theme.bestScore}%
+                      </p>
                     </div>
-                    <div className="bg-white p-2 rounded text-center">
-                      <p className="text-xs text-neutral-500">Puncte</p>
-                      <p className="text-lg font-bold text-brand-purple">{theme.totalPoints}</p>
+
+                    <div style={{
+                      background: 'var(--cream)',
+                      border: '3px solid var(--warm-brown)',
+                      padding: '0.75rem',
+                      textAlign: 'center'
+                    }}>
+                      <p style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        fontSize: '0.625rem',
+                        textTransform: 'uppercase',
+                        color: 'var(--warm-brown)',
+                        marginBottom: '0.25rem'
+                      }}>
+                        Puncte
+                      </p>
+                      <p style={{
+                        fontFamily: 'Space Grotesk, sans-serif',
+                        fontSize: '1.25rem',
+                        fontWeight: 900,
+                        color: 'var(--deep-brown)'
+                      }}>
+                        {theme.totalPoints}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Difficulty Attempts */}
-                  <div className="flex gap-2">
-                    {theme.attempts.map((attempt) => (
-                      <div key={attempt.difficulty} className="text-xs">
-                        <span className={`
-                          inline-block px-2 py-1 rounded font-semibold
-                          ${attempt.difficulty === 'easy' && 'bg-success/20 text-success'}
-                          ${attempt.difficulty === 'medium' && 'bg-warning/20 text-warning'}
-                          ${attempt.difficulty === 'hard' && 'bg-error/20 text-error'}
-                        `}>
-                          {attempt.difficulty === 'easy' && '🟢'}
-                          {attempt.difficulty === 'medium' && '🟡'}
-                          {attempt.difficulty === 'hard' && '🔴'}
-                          {' '}{attempt.count} × {attempt.avgScore}%
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                    {theme.attempts.map((attempt) => {
+                      const diffColors = {
+                        easy: { bg: 'var(--sage)', emoji: '🟢' },
+                        medium: { bg: 'var(--neon-orange)', emoji: '🟡' },
+                        hard: { bg: 'var(--neon-pink)', emoji: '🔴' }
+                      };
+                      const diffColor = diffColors[attempt.difficulty] || diffColors.medium;
 
+                      return (
+                        <div
+                          key={attempt.difficulty}
+                          style={{
+                            background: diffColor.bg,
+                            color: 'var(--deep-brown)',
+                            padding: '0.5rem 1rem',
+                            border: '3px solid var(--deep-brown)',
+                            fontFamily: 'JetBrains Mono, monospace',
+                            fontSize: '0.75rem',
+                            fontWeight: 700
+                          }}
+                        >
+                          {diffColor.emoji} {attempt.count} × {attempt.avgScore}%
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* SECTION 5: QUIZ HISTORY */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">⏰ Istoric Quiz-uri</h2>
+        {/* SECTION 6: QUIZ HISTORY */}
+        <div style={{
+          background: 'var(--cream)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem',
+          position: 'relative'
+        }}>
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '12px',
+            height: '100%',
+            background: 'var(--neon-orange)'
+          }}></div>
+
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.5rem',
+            fontWeight: 900,
+            textTransform: 'uppercase',
+            color: 'var(--deep-brown)',
+            marginBottom: '1.5rem'
+          }}>
+            ⏰ Istoric Quiz-uri
+          </h2>
 
           {quizHistory.length === 0 ? (
-            <p className="text-neutral-500">Nu ai jucat niciun quiz încă.</p>
+            <p style={{ color: 'var(--warm-brown)' }}>
+              Nu ai jucat niciun quiz încă.
+            </p>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-neutral-100 border-b-2 border-neutral-200">
-                  <tr>
-                    <th className="text-left p-3">Materie</th>
-                    <th className="text-left p-3">Temă</th>
-                    <th className="text-left p-3">Dificultate</th>
-                    <th className="text-center p-3">Scor</th>
-                    <th className="text-center p-3">Procent</th>
-                    <th className="text-center p-3">Durată</th>
-                    <th className="text-left p-3">Data</th>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{
+                width: '100%',
+                borderCollapse: 'separate',
+                borderSpacing: 0
+              }}>
+                <thead>
+                  <tr style={{
+                    background: 'var(--deep-brown)',
+                    color: 'var(--off-white)'
+                  }}>
+                    <th style={{
+                      textAlign: 'left',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Materie
+                    </th>
+                    <th style={{
+                      textAlign: 'left',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Temă
+                    </th>
+                    <th style={{
+                      textAlign: 'center',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Dificultate
+                    </th>
+                    <th style={{
+                      textAlign: 'center',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Scor
+                    </th>
+                    <th style={{
+                      textAlign: 'center',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Procent
+                    </th>
+                    <th style={{
+                      textAlign: 'center',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Durată
+                    </th>
+                    <th style={{
+                      textAlign: 'left',
+                      padding: '1rem',
+                      fontFamily: 'Space Grotesk, sans-serif',
+                      fontSize: '0.875rem',
+                      fontWeight: 900,
+                      textTransform: 'uppercase',
+                      border: '3px solid var(--deep-brown)'
+                    }}>
+                      Data
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {quizHistory.map((quiz, index) => (
-                    <tr key={index} className="border-b hover:bg-neutral-50">
-                      <td className="p-3 text-neutral-500 text-xs">{quiz.subjectName}</td>
-                      <td className="p-3 font-semibold text-neutral-900">{quiz.themeName}</td>
-                      <td className="p-3">
-                        <span className={`
-                          inline-block px-2 py-1 rounded text-xs font-semibold
-                          ${quiz.difficulty === 'easy' && 'bg-success/10 text-success'}
-                          ${quiz.difficulty === 'medium' && 'bg-warning/10 text-warning'}
-                          ${quiz.difficulty === 'hard' && 'bg-error/10 text-error'}
-                        `}>
-                          {quiz.difficulty === 'easy' && '🟢 Ușor'}
-                          {quiz.difficulty === 'medium' && '🟡 Mediu'}
-                          {quiz.difficulty === 'hard' && '🔴 Greu'}
-                        </span>
-                      </td>
-                      <td className="p-3 text-center font-bold text-brand-blue">
-                        {quiz.score}/{quiz.maxScore}
-                      </td>
-                      <td className="p-3 text-center">
-                        <span className={`
-                          inline-block px-2 py-1 rounded font-bold
-                          ${quiz.percentage >= 80 && 'bg-success/10 text-success'}
-                          ${quiz.percentage >= 60 && quiz.percentage < 80 && 'bg-warning/10 text-warning'}
-                          ${quiz.percentage < 60 && 'bg-error/10 text-error'}
-                        `}>
-                          {quiz.percentage}%
-                        </span>
-                      </td>
-                      <td className="p-3 text-center text-neutral-500">
-                        {formatDuration(quiz.duration)}
-                      </td>
-                      <td className="p-3 text-neutral-500 text-xs">
-                        {quiz.createdAt ? formatDate(quiz.createdAt) : 'N/A'}
-                      </td>
-                    </tr>
-                  ))}
+                  {quizHistory.map((quiz, index) => {
+                    const diffColors = {
+                      easy: { bg: 'var(--sage)', emoji: '🟢', label: 'Ușor' },
+                      medium: { bg: 'var(--neon-orange)', emoji: '🟡', label: 'Mediu' },
+                      hard: { bg: 'var(--neon-pink)', emoji: '🔴', label: 'Greu' }
+                    };
+                    const diffColor = diffColors[quiz.difficulty] || diffColors.medium;
+
+                    return (
+                      <tr
+                        key={index}
+                        style={{
+                          background: index % 2 === 0 ? 'var(--sand)' : 'var(--cream)',
+                          borderBottom: '2px solid var(--warm-brown)'
+                        }}
+                      >
+                        <td style={{
+                          padding: '1rem',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.75rem',
+                          color: 'var(--warm-brown)'
+                        }}>
+                          {quiz.subjectName}
+                        </td>
+                        <td style={{
+                          padding: '1rem',
+                          fontFamily: 'Inter, sans-serif',
+                          fontSize: '0.875rem',
+                          fontWeight: 600,
+                          color: 'var(--deep-brown)'
+                        }}>
+                          {quiz.themeName}
+                        </td>
+                        <td style={{ padding: '1rem', textAlign: 'center' }}>
+                          <div style={{
+                            background: diffColor.bg,
+                            color: 'var(--deep-brown)',
+                            padding: '0.375rem 0.75rem',
+                            border: '2px solid var(--deep-brown)',
+                            display: 'inline-block',
+                            fontFamily: 'JetBrains Mono, monospace',
+                            fontSize: '0.75rem',
+                            fontWeight: 700
+                          }}>
+                            {diffColor.emoji} {diffColor.label}
+                          </div>
+                        </td>
+                        <td style={{
+                          padding: '1rem',
+                          textAlign: 'center',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '1rem',
+                          fontWeight: 700,
+                          color: 'var(--deep-brown)'
+                        }}>
+                          {quiz.score}/{quiz.maxScore}
+                        </td>
+                        <td style={{ padding: '1rem', textAlign: 'center' }}>
+                          <div style={{
+                            background: quiz.percentage >= 80 ? 'var(--neon-green)' :
+                                       quiz.percentage >= 60 ? 'var(--neon-orange)' :
+                                       'var(--neon-pink)',
+                            color: 'var(--deep-brown)',
+                            padding: '0.375rem 0.75rem',
+                            border: '2px solid var(--deep-brown)',
+                            display: 'inline-block',
+                            fontFamily: 'Space Grotesk, sans-serif',
+                            fontSize: '1rem',
+                            fontWeight: 900
+                          }}>
+                            {quiz.percentage}%
+                          </div>
+                        </td>
+                        <td style={{
+                          padding: '1rem',
+                          textAlign: 'center',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.875rem',
+                          color: 'var(--warm-brown)'
+                        }}>
+                          {formatDuration(quiz.duration)}
+                        </td>
+                        <td style={{
+                          padding: '1rem',
+                          fontFamily: 'JetBrains Mono, monospace',
+                          fontSize: '0.75rem',
+                          color: 'var(--warm-brown)'
+                        }}>
+                          {quiz.createdAt ? formatDate(quiz.createdAt) : 'N/A'}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -446,42 +1326,17 @@ export function Profile() {
         </div>
 
       </div>
+
+      {/* Add keyframes for spin animation */}
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
+
     </div>
   );
 }
 
 export { Profile as default };
-
-/**
- * SECȚIUNI AFIȘATE:
- * 
- * 1. User Info
- *    - Email
- *    - Member since (data înregistrare)
- * 
- * 2. Global Stats (4 cards)
- *    - Total quizzes
- *    - Average score
- *    - Best score
- *    - Total points
- * 
- * 3. Progress by Theme
- *    - Pentru fiecare temă jucată:
- *      * Nume temă
- *      * Total quizzes
- *      * Average score
- *      * Best score
- *      * Total points
- *      * Breakdown by difficulty
- * 
- * 4. Quiz History (Table)
- *    - Ultimele 10 quiz-uri
- *    - Temă, dificultate, scor, procent, durată, dată
- * 
- * FLOW COMPLET:
- * 1. User merge la /profile
- * 2. Component mount
- * 3. Load profile, theme progress, quiz history
- * 4. Display all data beautifully
- * 5. User poate naviga la alte pagini
- */
