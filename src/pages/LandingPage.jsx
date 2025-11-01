@@ -1,10 +1,9 @@
 /**
  * LandingPage.jsx - REDESIGNED for Multi-Subject Architecture
+ * With BOLD Brutalist Design
  *
  * Subjects sunt acum vizibili direct pe landing page
  * Flow: Landing → Click subject → Themes → Quiz (2 clickuri în loc de 3)
- *
- * NEW: Bold design with light/dark mode toggle
  */
 
 import React, { useState, useEffect } from 'react';
@@ -12,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import './LandingPage.css';
 
 export function LandingPage({ onPlayNow }) {
 
@@ -19,33 +19,23 @@ export function LandingPage({ onPlayNow }) {
   const { user, logout } = useAuth();
   const [subjects, setSubjects] = useState([]);
   const [loadingSubjects, setLoadingSubjects] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
 
   /**
-   * Load theme from localStorage
+   * Apply theme to document
    */
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   /**
-   * Toggle dark mode
+   * Toggle theme
    */
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
   };
 
   /**
@@ -95,65 +85,91 @@ export function LandingPage({ onPlayNow }) {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-cream dark:bg-deep-brown transition-colors duration-200">
+  /**
+   * Get subject class name for styling
+   */
+  const getSubjectClassName = (slug) => {
+    const classMap = {
+      'istorie': 'istorie',
+      'geografie': 'geografie',
+      'biologie': 'biologie',
+      'romana': 'romana',
+      'limba-romana': 'romana',
+      'matematica': 'matematica'
+    };
+    return classMap[slug] || 'default';
+  };
 
-      {/* NAVIGATION - BOLD STYLE */}
-      <nav className="bg-cream dark:bg-deep-brown border-b-4 border-deep-brown dark:border-off-white sticky top-0 z-50">
+  /**
+   * Coming soon subjects - hardcoded for now
+   */
+  const comingSoonSubjects = [
+    {
+      id: 'romana-coming-soon',
+      name: 'Limba Română',
+      slug: 'romana',
+      icon: '📖',
+      description: 'Gramatică, literatură și exprimare corectă în limba română.',
+      comingSoon: true
+    },
+    {
+      id: 'matematica-coming-soon',
+      name: 'Matematică',
+      slug: 'matematica',
+      icon: '🔢',
+      description: 'Aritmetică, algebră, geometrie și rezolvare de probleme.',
+      comingSoon: true
+    }
+  ];
+
+  return (
+    <div className="landing-page-wrapper min-h-screen">
+
+      {/* NAVIGATION */}
+      <nav className="landing-nav">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center gap-2">
           {/* Logo - responsive */}
-          <h1
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 cursor-pointer text-lg sm:text-2xl font-heading font-black text-deep-brown dark:text-off-white whitespace-nowrap uppercase tracking-tight"
-          >
-            <span>Quizz<span className="text-neon-pink">Fun</span></span>
-          </h1>
+          <a href="/" className="landing-logo">
+            Quizz<span className="landing-logo-highlight">Fun</span>
+          </a>
 
           {/* Navigation buttons - responsive */}
-          <div className="flex gap-1 sm:gap-2 items-center">
-            {/* Dark Mode Toggle */}
+          <div className="flex gap-2 md:gap-4 items-center">
+            {/* Dark mode toggle */}
             <button
-              onClick={toggleDarkMode}
-              className="w-12 h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-xl"
+              onClick={toggleTheme}
+              className="landing-theme-toggle"
               aria-label="Toggle dark mode"
-              title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
             >
-              <span>{isDarkMode ? '☀️' : '🌙'}</span>
+              <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
             </button>
 
             {user ? (
               <>
-                {/* Profil */}
+                {/* Profil - ascuns pe mobile extra small, iconită pe mobile */}
                 <button
                   onClick={() => navigate('/profile')}
-                  className="hidden md:block bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-4 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
+                  className="landing-btn-login"
                   title="Profil"
                 >
-                  Profil
+                  <span className="hidden md:inline">Profil</span>
+                  <span className="md:hidden">👤</span>
                 </button>
 
-                {/* Materii */}
-                <button
-                  onClick={scrollToSubjects}
-                  className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-3 sm:px-6 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
-                >
-                  <span className="hidden sm:inline">Materii</span>
-                  <span className="sm:hidden">📚</span>
-                </button>
-
-                {/* Logout */}
+                {/* Logout - text scurt pe mobile */}
                 <button
                   onClick={logout}
-                  className="bg-error text-white border-4 border-error px-3 sm:px-6 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-error transition-all duration-150"
+                  className="landing-btn-login"
+                  style={{ background: 'var(--error, #E63946)', borderColor: 'var(--error, #E63946)' }}
                 >
                   <span className="hidden sm:inline">Logout</span>
-                  <span className="sm:hidden">🚪</span>
+                  <span className="sm:hidden">↩️</span>
                 </button>
               </>
             ) : (
               <button
                 onClick={onPlayNow || (() => {})}
-                className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-4 sm:px-6 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
+                className="landing-btn-login"
               >
                 Login
               </button>
@@ -162,356 +178,242 @@ export function LandingPage({ onPlayNow }) {
         </div>
       </nav>
 
-      {/* HERO SECTION - BOLD STYLE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center relative">
-        {/* Background grid pattern */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 3px), repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 3px)'
-          }}></div>
-        </div>
-
-        <div className="relative z-10">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-off-white">
-            Învață <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">Jucându-te</span>
+      {/* HERO SECTION */}
+      <section className="landing-hero">
+        <div className="landing-hero-content">
+          <h1>
+            <span className="landing-hero-title-line">Învață</span>{' '}
+            <span className="landing-hero-highlight">Jucându-te</span>
           </h1>
-          <p className="text-xl sm:text-2xl mb-8 font-body font-semibold max-w-3xl mx-auto text-deep-brown dark:text-off-white leading-relaxed">
+          <p className="landing-hero-subtitle">
             Quiz-uri bold. Cunoștințe reale. Competiție intensă.
           </p>
-
           <button
             onClick={user ? scrollToSubjects : onPlayNow}
-            className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-6 border-deep-brown dark:border-off-white px-10 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150 inline-flex items-center gap-3"
+            className="landing-btn-primary"
           >
-            {user ? 'Start Now' : '🚀 Începe Acum'}
-            <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
+            {user ? 'Alege Materia' : 'Start Now'}
           </button>
 
-          {/* Stats - Bold Style */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-20">
-            <div className="text-center">
-              <p className="text-6xl sm:text-7xl font-mono font-bold text-deep-brown dark:text-off-white" style={{ textShadow: '4px 4px 0 #00FFFF' }}>
-                500+
-              </p>
-              <p className="text-sm sm:text-base font-heading font-bold uppercase tracking-widest mt-2 text-deep-brown dark:text-off-white opacity-80">
-                Questions
-              </p>
+          {/* Stats */}
+          <div className="landing-hero-stats">
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">500+</span>
+              <span className="landing-stat-label">Questions</span>
             </div>
-            <div className="text-center">
-              <p className="text-6xl sm:text-7xl font-mono font-bold text-deep-brown dark:text-off-white" style={{ textShadow: '4px 4px 0 #FF0080' }}>
-                10K+
-              </p>
-              <p className="text-sm sm:text-base font-heading font-bold uppercase tracking-widest mt-2 text-deep-brown dark:text-off-white opacity-80">
-                Players
-              </p>
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">10K+</span>
+              <span className="landing-stat-label">Players</span>
             </div>
-            <div className="text-center">
-              <p className="text-6xl sm:text-7xl font-mono font-bold text-deep-brown dark:text-off-white" style={{ textShadow: '4px 4px 0 #CCFF00' }}>
-                3
-              </p>
-              <p className="text-sm sm:text-base font-heading font-bold uppercase tracking-widest mt-2 text-deep-brown dark:text-off-white opacity-80">
-                Subjects
-              </p>
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">3</span>
+              <span className="landing-stat-label">Subjects</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SUBJECTS SECTION - BOLD STYLE */}
-      <section id="subjects-section" className="py-20 bg-deep-brown dark:bg-off-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <span className="font-mono text-sm font-bold uppercase tracking-widest text-neon-cyan block mb-4">
-              // Discipline Disponibile
-            </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
-              Alege Domeniul Tău
-            </h2>
-            <p className="text-lg sm:text-xl font-body text-off-white/80 dark:text-deep-brown/70">
-              Trei lumi de explorat. Sute de provocări de depășit.
+      {/* SUBJECTS SECTION - NOU! */}
+      <section id="subjects-section" className="landing-subjects">
+        <div className="landing-section-header" style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto 5rem' }}>
+          <span className="landing-section-label">// Discipline Disponibile</span>
+          <h2>Alege Domeniul Tău</h2>
+          <p className="landing-section-description">
+            Trei lumi de explorat. Sute de provocări de depășit.
+          </p>
+        </div>
+
+        {loadingSubjects ? (
+          <div className="flex justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: 'var(--neon-cyan)' }}></div>
+          </div>
+        ) : (
+          <div className="landing-subjects-grid">
+            {/* Real subjects from Firestore */}
+            {subjects.map((subject) => (
+              <div
+                key={subject.id}
+                onClick={() => handleSubjectClick(subject.slug)}
+                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                data-subject={getSubjectClassName(subject.slug)}
+              >
+                <span className="landing-subject-icon">{subject.icon}</span>
+                <h3>{subject.name}</h3>
+                <p className="landing-subject-description">
+                  {subject.description}
+                </p>
+                <div className="landing-subject-meta">
+                  <span className="landing-quiz-count">{subject.totalThemes} Teme</span>
+                  <div className="landing-subject-arrow">→</div>
+                </div>
+              </div>
+            ))}
+
+            {/* Coming soon subjects */}
+            {comingSoonSubjects.map((subject) => (
+              <div
+                key={subject.id}
+                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                data-subject={getSubjectClassName(subject.slug)}
+                style={{ cursor: 'not-allowed', opacity: 0.9 }}
+              >
+                <span className="landing-coming-soon">În Curând</span>
+                <span className="landing-subject-icon">{subject.icon}</span>
+                <h3>{subject.name}</h3>
+                <p className="landing-subject-description">
+                  {subject.description}
+                </p>
+                <div className="landing-subject-meta">
+                  <span className="landing-quiz-count">Coming Soon</span>
+                  <div className="landing-subject-arrow">→</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* FEATURES SECTION */}
+      <section className="landing-features">
+        <div className="landing-section-header" style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+          <span className="landing-section-label" style={{ color: 'var(--deep-brown)' }}>// De Ce QuizzFun?</span>
+          <h2 style={{ color: 'var(--deep-brown)' }}>Game Features</h2>
+        </div>
+
+        <div className="landing-features-grid">
+          {/* Feature 1 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">🎯</span>
+            <h3>Unlimited</h3>
+            <p className="landing-feature-description">
+              Joacă cât vrei, când vrei. Zero limite, maximum impact.
             </p>
           </div>
 
-          {loadingSubjects ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-4 border-neon-cyan"></div>
-            </div>
-          ) : subjects.length === 0 ? (
-            <p className="text-center text-off-white/70 dark:text-deep-brown/70">Nu există materii disponibile momentan.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {subjects.map((subject, index) => {
-                // Assign neon colors to subjects
-                const neonColors = ['#FF0080', '#00FFFF', '#CCFF00'];
-                const neonColor = neonColors[index % neonColors.length];
+          {/* Feature 2 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">📊</span>
+            <h3>Progress</h3>
+            <p className="landing-feature-description">
+              Tracking complet. Vezi-ți evoluția și atingi obiective noi.
+            </p>
+          </div>
 
-                return (
-                  <div
-                    key={subject.id}
-                    onClick={() => handleSubjectClick(subject.slug)}
-                    className="bg-cream dark:bg-deep-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
-                    style={{
-                      boxShadow: `0 0 0 0 ${neonColor}`,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = `8px 8px 0 ${neonColor}`;
-                      e.currentTarget.style.borderColor = neonColor;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = `0 0 0 0 ${neonColor}`;
-                      e.currentTarget.style.borderColor = '';
-                    }}
-                  >
-                    {/* Top accent bar */}
-                    <div
-                      className="h-2 -mx-8 -mt-8 mb-6"
-                      style={{ backgroundColor: neonColor }}
-                    ></div>
+          {/* Feature 3 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">🏆</span>
+            <h3>Rankings</h3>
+            <p className="landing-feature-description">
+              Competiție live. Compară-te cu cei mai buni jucători.
+            </p>
+          </div>
 
-                    {/* Icon */}
-                    <div className="text-7xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">
-                      {subject.icon}
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="text-3xl sm:text-4xl font-heading font-black mb-4 uppercase tracking-tight text-deep-brown dark:text-off-white">
-                      {subject.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-base sm:text-lg font-body mb-auto text-deep-brown/70 dark:text-off-white/70 leading-relaxed">
-                      {subject.description}
-                    </p>
-
-                    {/* Meta */}
-                    <div className="flex justify-between items-center mt-8 pt-6 border-t-3 border-deep-brown dark:border-off-white">
-                      <span className="font-mono text-sm font-bold uppercase text-deep-brown dark:text-off-white">
-                        {subject.totalThemes} Teme
-                      </span>
-                      <div
-                        className="w-16 h-16 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-3xl font-black transition-transform group-hover:translate-x-2 group-hover:-translate-y-2"
-                        style={{
-                          transition: 'all 0.3s ease'
-                        }}
-                      >
-                        →
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* MAI MULTE CARD - NEW! */}
-              <div
-                onClick={() => navigate('/subjects')}
-                className="bg-cream dark:bg-deep-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
-                style={{
-                  boxShadow: `0 0 0 0 #FF6B00`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `8px 8px 0 #FF6B00`;
-                  e.currentTarget.style.borderColor = '#FF6B00';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 0 0 #FF6B00`;
-                  e.currentTarget.style.borderColor = '';
-                }}
-              >
-                {/* Top accent bar */}
-                <div
-                  className="h-2 -mx-8 -mt-8 mb-6"
-                  style={{ backgroundColor: '#FF6B00' }}
-                ></div>
-
-                {/* Icon */}
-                <div className="text-7xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">
-                  ➕
-                </div>
-
-                {/* Title */}
-                <h3 className="text-3xl sm:text-4xl font-heading font-black mb-4 uppercase tracking-tight text-deep-brown dark:text-off-white">
-                  Mai Multe
-                </h3>
-
-                {/* Description */}
-                <p className="text-base sm:text-lg font-body mb-auto text-deep-brown/70 dark:text-off-white/70 leading-relaxed">
-                  Explorează mai multe discipline și descoperă noi provocări educaționale.
-                </p>
-
-                {/* Meta */}
-                <div className="flex justify-between items-center mt-8 pt-6 border-t-3 border-deep-brown dark:border-off-white">
-                  <span className="font-mono text-sm font-bold uppercase text-deep-brown dark:text-off-white">
-                    Descoperă
-                  </span>
-                  <div
-                    className="w-16 h-16 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-3xl font-black transition-transform group-hover:translate-x-2 group-hover:-translate-y-2"
-                    style={{
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    →
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* Feature 4 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">⚡</span>
+            <h3>Instant</h3>
+            <p className="landing-feature-description">
+              Feedback imediat cu explicații detaliate pentru fiecare răspuns.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* FEATURES SECTION - BOLD STYLE */}
-      <section className="py-20 bg-cream dark:bg-deep-brown">
+      {/* HOW IT WORKS */}
+      <section className="bg-neutral-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <span className="font-mono text-sm font-bold uppercase tracking-widest text-neon-pink block mb-4">
-              // De Ce QuizzFun?
-            </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-off-white">
-              Game Features
-            </h2>
-          </div>
+          <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
+            Cum Funcționează? 🎯
+          </h2>
 
-          {/* Features Grid - Brutalist 2x2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 max-w-5xl mx-auto border-6 border-deep-brown dark:border-off-white">
-            {/* Feature 1 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
-              <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">🎯</div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Unlimited</h3>
-              <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
-                Joacă cât vrei, când vrei. Zero limite, maximum impact.
-              </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="bg-brand-blue text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
+                1
+              </div>
+              <h3 className="text-xl font-bold text-neutral-900 mb-3">Alegi Materia</h3>
+              <p className="text-neutral-600">Istorie, Geografie sau Biologie</p>
             </div>
 
-            {/* Feature 2 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
-              <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">📊</div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Progress</h3>
-              <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
-                Tracking complet. Vezi-ți evoluția și atingi obiective noi.
-              </p>
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="bg-brand-blue text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
+                2
+              </div>
+              <h3 className="text-xl font-bold text-neutral-900 mb-3">Selectezi Tema</h3>
+              <p className="text-neutral-600">Alegi tema și dificultatea</p>
             </div>
 
-            {/* Feature 3 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
-              <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">🏆</div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Rankings</h3>
-              <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
-                Competiție live. Compară-te cu cei mai buni jucători.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
-              <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">⚡</div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Instant</h3>
-              <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
-                Feedback imediat cu explicații detaliate pentru fiecare răspuns.
-              </p>
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="bg-brand-blue text-white rounded-full w-20 h-20 flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
+                3
+              </div>
+              <h3 className="text-xl font-bold text-neutral-900 mb-3">Joci Quiz</h3>
+              <p className="text-neutral-600">10 întrebări, colectezi puncte</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA FINAL - BOLD STYLE */}
-      <section className="bg-deep-brown dark:bg-off-white py-20 text-center border-t-6 border-neon-pink">
+      {/* CTA FINAL */}
+      <section className="landing-cta">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
+          <h2>
             Gata să înveți jucându-te? 🚀
           </h2>
-          <p className="text-xl sm:text-2xl mb-10 font-body font-semibold text-off-white/90 dark:text-deep-brown/90">
+          <p className="text-xl mb-10 opacity-90">
             100% gratuit • Fără reclame • Distractiv • Educational
           </p>
 
           <button
             onClick={user ? scrollToSubjects : onPlayNow}
-            className="bg-off-white dark:bg-deep-brown text-deep-brown dark:text-off-white border-6 border-off-white dark:border-deep-brown px-12 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-off-white dark:hover:shadow-deep-brown transition-all duration-150 inline-flex items-center gap-3"
+            className="landing-btn-cta"
           >
-            {user ? '📚 Alege Materia' : '🎯 Începe Acum'}
+            {user ? 'Alege Materia' : 'Începe Acum'}
           </button>
         </div>
       </section>
 
-      {/* FOOTER - BOLD STYLE */}
-      <footer className="bg-deep-brown dark:bg-off-white py-12 border-t-6 border-neon-pink">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+      {/* FOOTER */}
+      <footer className="landing-footer">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-heading font-black text-2xl uppercase text-off-white dark:text-deep-brown mb-4">
-                QUIZZFUN
-              </h3>
-              <p className="text-sm font-body text-off-white/80 dark:text-deep-brown/80">
-                Educație prin joc. Învață istorie, geografie și biologie distractiv.
-              </p>
+              <div className="landing-footer-logo">QUIZZFUN</div>
+              <p className="text-sm mt-4">Educație prin joc. Învață istorie, geografie și biologie distractiv.</p>
             </div>
 
             <div>
-              <h4 className="font-heading font-bold uppercase tracking-wide text-off-white dark:text-deep-brown mb-3">Materii</h4>
-              <ul className="space-y-2 text-sm font-body">
-                <li>
-                  <button
-                    onClick={scrollToSubjects}
-                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
-                  >
-                    Istorie
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={scrollToSubjects}
-                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
-                  >
-                    Geografie
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={scrollToSubjects}
-                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
-                  >
-                    Biologie
-                  </button>
-                </li>
+              <h4 className="font-bold mb-3">Materii</h4>
+              <ul className="landing-footer-links space-y-2 text-sm">
+                <li><button onClick={scrollToSubjects}>Istorie</button></li>
+                <li><button onClick={scrollToSubjects}>Geografie</button></li>
+                <li><button onClick={scrollToSubjects}>Biologie</button></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-heading font-bold uppercase tracking-wide text-off-white dark:text-deep-brown mb-3">Legal</h4>
-              <ul className="space-y-2 text-sm font-body">
-                <li>
-                  <a
-                    href="/privacy"
-                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
-                  >
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/terms"
-                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
-                  >
-                    Terms
-                  </a>
-                </li>
+              <h4 className="font-bold mb-3">Legal</h4>
+              <ul className="landing-footer-links space-y-2 text-sm">
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="/terms">Terms</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-heading font-bold uppercase tracking-wide text-off-white dark:text-deep-brown mb-3">Contact</h4>
-              <p className="text-sm font-body text-off-white/80 dark:text-deep-brown/80">📧 perviat@gmail.com</p>
+              <h4 className="font-bold mb-3">Contact</h4>
+              <p className="text-sm">📧 perviat@gmail.com</p>
             </div>
           </div>
 
-          <hr className="border-3 border-off-white/20 dark:border-deep-brown/20 mb-6" />
+          <hr style={{ borderColor: 'rgba(255, 255, 255, 0.2)', borderWidth: '3px', marginBottom: '3rem', marginTop: '3rem' }} />
 
-          <div className="text-center text-sm font-mono">
-            <p className="text-off-white/70 dark:text-deep-brown/70">
-              © 2025 QuizzFun — All Rights Reserved
-            </p>
+          <div className="landing-footer-copyright text-center">
+            <p>&copy; 2025 QuizzFun — All Rights Reserved</p>
+            <p className="mt-2">Created by <strong>Ghergheluca Eduard</strong></p>
           </div>
-
         </div>
       </footer>
 

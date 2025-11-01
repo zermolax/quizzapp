@@ -1,0 +1,731 @@
+/**
+ * LandingPage.css - Bold Design System
+ * Based on Space Grotesk + Brutalist design principles
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@600;700&display=swap');
+
+:root {
+  --deep-brown: #2D2416;
+  --warm-brown: #4A3D2F;
+  --sand: #C8B7A6;
+  --cream: #F5F1E8;
+  --off-white: #FAFAF8;
+  --sage: #8B9B7A;
+  --terracotta: #C07856;
+  --neon-pink: #FF0080;
+  --neon-cyan: #00FFFF;
+  --neon-lime: #CCFF00;
+  --neon-orange: #FF6B00;
+}
+
+[data-theme="dark"] {
+  --deep-brown: #F5F1E8;
+  --warm-brown: #C8B7A6;
+  --sand: #4A3D2F;
+  --cream: #2D2416;
+  --off-white: #1A1410;
+}
+
+.landing-page-wrapper {
+  font-family: 'Inter', sans-serif;
+  background: var(--cream);
+  color: var(--deep-brown);
+}
+
+/* NAVIGATION */
+.landing-nav {
+  background: var(--cream);
+  border-bottom: 4px solid var(--deep-brown);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.landing-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--deep-brown);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.landing-logo-highlight {
+  color: var(--neon-pink);
+}
+
+.landing-theme-toggle {
+  width: 50px;
+  height: 50px;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border: 4px solid var(--deep-brown);
+  border-radius: 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.landing-theme-toggle:hover {
+  background: var(--neon-cyan);
+  color: var(--deep-brown);
+  transform: rotate(15deg);
+}
+
+.landing-btn-login {
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border: 4px solid var(--deep-brown);
+  padding: 0.75rem 2rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.landing-btn-login:hover {
+  background: var(--neon-pink);
+  border-color: var(--neon-pink);
+  transform: translate(-4px, -4px);
+  box-shadow: 4px 4px 0 var(--deep-brown);
+}
+
+.landing-btn-login:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* HERO SECTION */
+.landing-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 5% 6rem;
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+  /* Full width background */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+}
+
+.landing-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      var(--deep-brown) 2px,
+      var(--deep-brown) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      var(--deep-brown) 2px,
+      var(--deep-brown) 3px
+    );
+  opacity: 0.03;
+  z-index: 0;
+}
+
+.landing-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 1000px;
+}
+
+.landing-hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-size: clamp(3rem, 12vw, 7rem);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.landing-hero-title-line {
+  display: block;
+  line-height: 0.95;
+}
+
+.landing-hero-highlight {
+  display: inline-block;
+  background: var(--neon-pink);
+  color: var(--off-white);
+  padding: 0 0.3em;
+  transform: rotate(-2deg);
+}
+
+.landing-hero-subtitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+  margin-bottom: 3rem;
+  line-height: 1.4;
+}
+
+/* PRIMARY BUTTON - "START NOW" with arrow animation */
+.landing-btn-primary {
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border: 6px solid var(--deep-brown);
+  padding: 1.5rem 4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.landing-btn-primary::after {
+  content: '→';
+  margin-left: 1rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.landing-btn-primary:hover {
+  background: var(--neon-lime);
+  color: var(--deep-brown);
+  border-color: var(--deep-brown);
+  transform: translate(-6px, -6px);
+  box-shadow: 6px 6px 0 var(--deep-brown);
+}
+
+.landing-btn-primary:hover::after {
+  transform: translateX(10px);
+}
+
+.landing-btn-primary:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* HERO STATS */
+.landing-hero-stats {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  margin-top: 5rem;
+  flex-wrap: wrap;
+}
+
+.landing-stat-item {
+  text-align: center;
+}
+
+.landing-stat-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 4rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  color: var(--deep-brown);
+  text-shadow: 4px 4px 0 var(--neon-cyan);
+}
+
+.landing-stat-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+/* SUBJECTS SECTION (discipline) */
+.landing-subjects {
+  padding: 8rem 5%;
+  background: var(--deep-brown);
+  color: var(--off-white);
+}
+
+.landing-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neon-cyan);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.landing-section-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  color: var(--off-white);
+  margin-bottom: 1.5rem;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.landing-section-description {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.landing-subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* SUBJECT CARD */
+.landing-subject-card {
+  background: var(--cream);
+  color: var(--deep-brown);
+  border: 6px solid var(--deep-brown);
+  padding: 3rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+}
+
+.landing-subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.landing-subject-card.istorie::before,
+.landing-subject-card[data-subject="istorie"]::before {
+  background: var(--neon-pink);
+}
+
+.landing-subject-card.geografie::before,
+.landing-subject-card[data-subject="geografie"]::before {
+  background: var(--neon-cyan);
+}
+
+.landing-subject-card.biologie::before,
+.landing-subject-card[data-subject="biologie"]::before {
+  background: var(--neon-lime);
+}
+
+.landing-subject-card.romana::before,
+.landing-subject-card[data-subject="romana"]::before {
+  background: var(--neon-orange);
+}
+
+.landing-subject-card.matematica::before,
+.landing-subject-card[data-subject="matematica"]::before {
+  background: var(--neon-pink);
+}
+
+.landing-subject-card:hover {
+  transform: translate(-8px, -8px);
+}
+
+.landing-subject-card.istorie:hover,
+.landing-subject-card[data-subject="istorie"]:hover {
+  box-shadow: 8px 8px 0 var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+
+.landing-subject-card.geografie:hover,
+.landing-subject-card[data-subject="geografie"]:hover {
+  box-shadow: 8px 8px 0 var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+.landing-subject-card.biologie:hover,
+.landing-subject-card[data-subject="biologie"]:hover {
+  box-shadow: 8px 8px 0 var(--neon-lime);
+  border-color: var(--neon-lime);
+}
+
+.landing-subject-card.romana:hover,
+.landing-subject-card[data-subject="romana"]:hover {
+  box-shadow: 8px 8px 0 var(--neon-orange);
+  border-color: var(--neon-orange);
+}
+
+.landing-subject-card.matematica:hover,
+.landing-subject-card[data-subject="matematica"]:hover {
+  box-shadow: 8px 8px 0 var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+
+.landing-subject-icon {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  display: block;
+  filter: grayscale(1);
+  transition: filter 0.3s ease;
+}
+
+.landing-subject-card:hover .landing-subject-icon {
+  filter: grayscale(0);
+}
+
+.landing-subject-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.landing-subject-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: auto;
+  color: rgba(45, 36, 22, 0.7);
+}
+
+/* META with horizontal line separator */
+.landing-subject-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 3px solid var(--deep-brown);
+}
+
+.landing-quiz-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.landing-subject-arrow {
+  width: 60px;
+  height: 60px;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  border: none;
+}
+
+.landing-subject-card:hover .landing-subject-arrow {
+  transform: translate(8px, -8px) rotate(15deg);
+}
+
+.landing-subject-card.istorie:hover .landing-subject-arrow,
+.landing-subject-card[data-subject="istorie"]:hover .landing-subject-arrow {
+  background: var(--neon-pink);
+  color: var(--deep-brown);
+}
+
+.landing-subject-card.geografie:hover .landing-subject-arrow,
+.landing-subject-card[data-subject="geografie"]:hover .landing-subject-arrow {
+  background: var(--neon-cyan);
+  color: var(--deep-brown);
+}
+
+.landing-subject-card.biologie:hover .landing-subject-arrow,
+.landing-subject-card[data-subject="biologie"]:hover .landing-subject-arrow {
+  background: var(--neon-lime);
+  color: var(--deep-brown);
+}
+
+.landing-subject-card.romana:hover .landing-subject-arrow,
+.landing-subject-card[data-subject="romana"]:hover .landing-subject-arrow {
+  background: var(--neon-orange);
+  color: var(--deep-brown);
+}
+
+.landing-subject-card.matematica:hover .landing-subject-arrow,
+.landing-subject-card[data-subject="matematica"]:hover .landing-subject-arrow {
+  background: var(--neon-pink);
+  color: var(--deep-brown);
+}
+
+/* Coming soon badge */
+.landing-coming-soon {
+  display: inline-block;
+  background: var(--neon-orange);
+  color: var(--deep-brown);
+  padding: 0.5rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+/* FEATURES SECTION with border */
+.landing-features {
+  padding: 8rem 5%;
+  background: var(--cream);
+}
+
+.landing-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  max-width: 1400px;
+  margin: 5rem auto 0;
+  border: 6px solid var(--deep-brown);
+}
+
+.landing-feature-item {
+  padding: 4rem 3rem;
+  border: 3px solid var(--deep-brown);
+  background: var(--cream);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.landing-feature-item:hover {
+  background: var(--deep-brown);
+  color: var(--off-white);
+  z-index: 1;
+}
+
+.landing-feature-icon {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  display: block;
+  filter: grayscale(1);
+  transition: filter 0.3s ease;
+}
+
+.landing-feature-item:hover .landing-feature-icon {
+  filter: grayscale(0);
+}
+
+.landing-feature-item h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.landing-feature-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* CTA SECTION - "Alege Materia" button with border and arrow */
+.landing-cta {
+  background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-brown) 100%);
+  padding: 8rem 5%;
+  text-align: center;
+  color: var(--off-white);
+}
+
+.landing-cta h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  margin-bottom: 1.5rem;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.landing-btn-cta {
+  background: var(--cream);
+  color: var(--deep-brown);
+  border: 6px solid var(--cream);
+  padding: 1.5rem 4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.landing-btn-cta::after {
+  content: '→';
+  margin-left: 1rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.landing-btn-cta:hover {
+  background: var(--neon-cyan);
+  color: var(--deep-brown);
+  border-color: var(--off-white);
+  transform: translate(-6px, -6px);
+  box-shadow: 6px 6px 0 var(--off-white);
+}
+
+.landing-btn-cta:hover::after {
+  transform: translateX(10px);
+}
+
+.landing-btn-cta:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* FOOTER */
+.landing-footer {
+  padding: 4rem 5%;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border-top: 6px solid var(--neon-pink);
+}
+
+.landing-footer-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.landing-footer-links a {
+  color: var(--off-white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.landing-footer-links a:hover {
+  color: var(--neon-cyan);
+}
+
+.landing-footer-copyright {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+/* ANIMATIONS */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.landing-hero-content {
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.landing-subject-card {
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.landing-subject-card:nth-child(1) { animation-delay: 0.1s; }
+.landing-subject-card:nth-child(2) { animation-delay: 0.2s; }
+.landing-subject-card:nth-child(3) { animation-delay: 0.3s; }
+.landing-subject-card:nth-child(4) { animation-delay: 0.4s; }
+.landing-subject-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .landing-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-logo {
+    font-size: 1.5rem;
+  }
+
+  .landing-btn-login {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .landing-hero {
+    padding: 7rem 5% 4rem;
+  }
+
+  .landing-hero-stats {
+    gap: 2rem;
+  }
+
+  .landing-stat-number {
+    font-size: 3rem;
+  }
+
+  .landing-subjects-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .landing-subject-card {
+    padding: 2rem;
+    min-height: auto;
+  }
+
+  .landing-btn-primary,
+  .landing-btn-cta {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+  }
+}
+
+/* FOCUS STYLES */
+*:focus-visible {
+  outline: 4px solid var(--neon-cyan);
+  outline-offset: 4px;
+}
+
+/* SMOOTH SCROLLING */
+html {
+  scroll-behavior: smooth;
+}
