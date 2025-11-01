@@ -1,5 +1,6 @@
 /**
  * LandingPage.jsx - REDESIGNED for Multi-Subject Architecture
+ * With BOLD Brutalist Design
  *
  * Subjects sunt acum vizibili direct pe landing page
  * Flow: Landing → Click subject → Themes → Quiz (2 clickuri în loc de 3)
@@ -10,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import './LandingPage.css';
 
 export function LandingPage({ onPlayNow }) {
 
@@ -17,6 +19,24 @@ export function LandingPage({ onPlayNow }) {
   const { user, logout } = useAuth();
   const [subjects, setSubjects] = useState([]);
   const [loadingSubjects, setLoadingSubjects] = useState(true);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'light';
+  });
+
+  /**
+   * Apply theme to document
+   */
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  /**
+   * Toggle theme
+   */
+  const toggleTheme = () => {
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+  };
 
   /**
    * Fetch subjects from Firestore
@@ -65,53 +85,91 @@ export function LandingPage({ onPlayNow }) {
     }
   };
 
+  /**
+   * Get subject class name for styling
+   */
+  const getSubjectClassName = (slug) => {
+    const classMap = {
+      'istorie': 'istorie',
+      'geografie': 'geografie',
+      'biologie': 'biologie',
+      'romana': 'romana',
+      'limba-romana': 'romana',
+      'matematica': 'matematica'
+    };
+    return classMap[slug] || 'default';
+  };
+
+  /**
+   * Coming soon subjects - hardcoded for now
+   */
+  const comingSoonSubjects = [
+    {
+      id: 'romana-coming-soon',
+      name: 'Limba Română',
+      slug: 'romana',
+      icon: '📖',
+      description: 'Gramatică, literatură și exprimare corectă în limba română.',
+      comingSoon: true
+    },
+    {
+      id: 'matematica-coming-soon',
+      name: 'Matematică',
+      slug: 'matematica',
+      icon: '🔢',
+      description: 'Aritmetică, algebră, geometrie și rezolvare de probleme.',
+      comingSoon: true
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-blue via-brand-blue/90 to-brand-purple">
+    <div className="landing-page-wrapper min-h-screen">
 
       {/* NAVIGATION */}
-      <nav className="bg-white shadow-lg sticky top-0 z-50">
+      <nav className="landing-nav">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4 flex justify-between items-center gap-2">
           {/* Logo - responsive */}
-          <h1 className="text-lg sm:text-2xl font-bold text-brand-blue whitespace-nowrap">
-            🎓 <span className="hidden xs:inline">quizzfun</span><span className="hidden sm:inline">.app</span>
-          </h1>
+          <a href="/" className="landing-logo">
+            Quizz<span className="landing-logo-highlight">Fun</span>
+          </a>
 
           {/* Navigation buttons - responsive */}
-          <div className="flex gap-1 sm:gap-2 md:gap-4">
+          <div className="flex gap-2 md:gap-4 items-center">
+            {/* Dark mode toggle */}
+            <button
+              onClick={toggleTheme}
+              className="landing-theme-toggle"
+              aria-label="Toggle dark mode"
+            >
+              <span>{theme === 'dark' ? '☀️' : '🌙'}</span>
+            </button>
+
             {user ? (
               <>
                 {/* Profil - ascuns pe mobile extra small, iconită pe mobile */}
                 <button
                   onClick={() => navigate('/profile')}
-                  className="text-brand-blue hover:text-brand-blue/80 font-semibold px-2 sm:px-4 py-2 text-sm sm:text-base"
+                  className="landing-btn-login"
                   title="Profil"
                 >
                   <span className="hidden md:inline">Profil</span>
                   <span className="md:hidden">👤</span>
                 </button>
 
-                {/* Materii */}
-                <button
-                  onClick={scrollToSubjects}
-                  className="bg-brand-blue hover:bg-brand-blue/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
-                >
-                  <span className="hidden sm:inline">Materii</span>
-                  <span className="sm:hidden">📚</span>
-                </button>
-
                 {/* Logout - text scurt pe mobile */}
                 <button
                   onClick={logout}
-                  className="bg-error hover:bg-error/90 text-white px-3 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
+                  className="landing-btn-login"
+                  style={{ background: 'var(--error, #E63946)', borderColor: 'var(--error, #E63946)' }}
                 >
-                  <span className="hidden sm:inline">Deconectare</span>
+                  <span className="hidden sm:inline">Logout</span>
                   <span className="sm:hidden">↩️</span>
                 </button>
               </>
             ) : (
               <button
                 onClick={onPlayNow || (() => {})}
-                className="bg-brand-blue hover:bg-brand-blue/90 text-white px-4 sm:px-6 py-2 rounded-lg font-semibold transition text-sm sm:text-base"
+                className="landing-btn-login"
               >
                 Login
               </button>
@@ -121,162 +179,142 @@ export function LandingPage({ onPlayNow }) {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center text-white">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6">
-          Învață jucându-te! 🎓
-        </h1>
-        <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Quiz-uri educaționale pentru Istorie, Geografie și Biologie • Bazate pe programa școlară • 100% gratuit
-        </p>
+      <section className="landing-hero">
+        <div className="landing-hero-content">
+          <h1>
+            <span className="landing-hero-title-line">Învață</span>{' '}
+            <span className="landing-hero-highlight">Jucându-te</span>
+          </h1>
+          <p className="landing-hero-subtitle">
+            Quiz-uri bold. Cunoștințe reale. Competiție intensă.
+          </p>
+          <button
+            onClick={user ? scrollToSubjects : onPlayNow}
+            className="landing-btn-primary"
+          >
+            {user ? 'Alege Materia' : 'Start Now'}
+          </button>
 
-        <button
-          onClick={user ? scrollToSubjects : onPlayNow}
-          className="bg-white text-brand-blue hover:bg-neutral-100 px-10 py-4 rounded-lg font-bold text-xl transition shadow-xl hover:shadow-2xl"
-        >
-          {user ? '🎯 Alege Materia' : '🚀 Începe Acum'}
-        </button>
-
-        {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          <div>
-            <p className="text-5xl font-bold">3</p>
-            <p className="text-lg opacity-90">Materii</p>
-          </div>
-          <div>
-            <p className="text-5xl font-bold">225+</p>
-            <p className="text-lg opacity-90">Întrebări</p>
-          </div>
-          <div>
-            <p className="text-5xl font-bold">∞</p>
-            <p className="text-lg opacity-90">Gratuit Forever</p>
+          {/* Stats */}
+          <div className="landing-hero-stats">
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">500+</span>
+              <span className="landing-stat-label">Questions</span>
+            </div>
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">10K+</span>
+              <span className="landing-stat-label">Players</span>
+            </div>
+            <div className="landing-stat-item">
+              <span className="landing-stat-number">3</span>
+              <span className="landing-stat-label">Subjects</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* SUBJECTS SECTION - NOU! */}
-      <section id="subjects-section" className="bg-gradient-to-br from-neutral-100 to-neutral-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-4 text-neutral-900">
-            📚 Alege Materia
-          </h2>
-          <p className="text-center text-neutral-600 mb-12 max-w-2xl mx-auto">
-            Selectează materia pentru care vrei să rezolvi quiz-uri educaționale
+      <section id="subjects-section" className="landing-subjects">
+        <div className="landing-section-header" style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto 5rem' }}>
+          <span className="landing-section-label">// Discipline Disponibile</span>
+          <h2>Alege Domeniul Tău</h2>
+          <p className="landing-section-description">
+            Trei lumi de explorat. Sute de provocări de depășit.
           </p>
-
-          {loadingSubjects ? (
-            <div className="flex justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-blue"></div>
-            </div>
-          ) : subjects.length === 0 ? (
-            <p className="text-center text-neutral-500">Nu există materii disponibile momentan.</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {subjects.map((subject) => (
-                <div
-                  key={subject.id}
-                  onClick={() => handleSubjectClick(subject.slug)}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border-2 border-transparent hover:border-brand-blue"
-                >
-                  {/* Header with gradient */}
-                  <div
-                    className="p-8 text-center text-white"
-                    style={{
-                      background: `linear-gradient(135deg, ${subject.color} 0%, ${subject.color}dd 100%)`
-                    }}
-                  >
-                    <div className="text-7xl mb-4">{subject.icon}</div>
-                    <h3 className="text-3xl font-bold mb-2">{subject.name}</h3>
-                    <p className="text-sm opacity-90">{subject.description}</p>
-                  </div>
-
-                  {/* Stats */}
-                  <div className="p-6 bg-neutral-50">
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div className="text-center">
-                        <p className="text-2xl font-bold text-brand-blue">{subject.totalThemes}</p>
-                        <p className="text-xs text-neutral-500">Teme</p>
-                      </div>
-                      <div className="text-center">
-                        <p className="text-2xl font-bold text-success">{subject.totalQuestions}</p>
-                        <p className="text-xs text-neutral-500">Întrebări</p>
-                      </div>
-                    </div>
-
-                    <button
-                      className="w-full py-3 px-6 rounded-lg font-bold text-white transition"
-                      style={{ backgroundColor: subject.color }}
-                    >
-                      {user ? 'Începe Quiz →' : 'Login pentru a juca →'}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+
+        {loadingSubjects ? (
+          <div className="flex justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2" style={{ borderColor: 'var(--neon-cyan)' }}></div>
+          </div>
+        ) : (
+          <div className="landing-subjects-grid">
+            {/* Real subjects from Firestore */}
+            {subjects.map((subject) => (
+              <div
+                key={subject.id}
+                onClick={() => handleSubjectClick(subject.slug)}
+                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                data-subject={getSubjectClassName(subject.slug)}
+              >
+                <span className="landing-subject-icon">{subject.icon}</span>
+                <h3>{subject.name}</h3>
+                <p className="landing-subject-description">
+                  {subject.description}
+                </p>
+                <div className="landing-subject-meta">
+                  <span className="landing-quiz-count">{subject.totalThemes} Teme</span>
+                  <div className="landing-subject-arrow">→</div>
+                </div>
+              </div>
+            ))}
+
+            {/* Coming soon subjects */}
+            {comingSoonSubjects.map((subject) => (
+              <div
+                key={subject.id}
+                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                data-subject={getSubjectClassName(subject.slug)}
+                style={{ cursor: 'not-allowed', opacity: 0.9 }}
+              >
+                <span className="landing-coming-soon">În Curând</span>
+                <span className="landing-subject-icon">{subject.icon}</span>
+                <h3>{subject.name}</h3>
+                <p className="landing-subject-description">
+                  {subject.description}
+                </p>
+                <div className="landing-subject-meta">
+                  <span className="landing-quiz-count">Coming Soon</span>
+                  <div className="landing-subject-arrow">→</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-12 text-neutral-900">
-            De ce Quizz Fun?
-          </h2>
+      <section className="landing-features">
+        <div className="landing-section-header" style={{ textAlign: 'center', maxWidth: '900px', margin: '0 auto' }}>
+          <span className="landing-section-label" style={{ color: 'var(--deep-brown)' }}>// De Ce QuizzFun?</span>
+          <h2 style={{ color: 'var(--deep-brown)' }}>Game Features</h2>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Feature 1 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">📚</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Conținut Calitativ</h3>
-              <p className="text-neutral-600">
-                Quiz-uri create de profesori, bazate pe programa școlară. Fiecare răspuns are explicație detaliată.
-              </p>
-            </div>
+        <div className="landing-features-grid">
+          {/* Feature 1 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">🎯</span>
+            <h3>Unlimited</h3>
+            <p className="landing-feature-description">
+              Joacă cât vrei, când vrei. Zero limite, maximum impact.
+            </p>
+          </div>
 
-            {/* Feature 2 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">🎮</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Distractiv & Educativ</h3>
-              <p className="text-neutral-600">
-                Învățare gamificată cu feedback instantaneu. 3 niveluri de dificultate pentru fiecare temă.
-              </p>
-            </div>
+          {/* Feature 2 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">📊</span>
+            <h3>Progress</h3>
+            <p className="landing-feature-description">
+              Tracking complet. Vezi-ți evoluția și atingi obiective noi.
+            </p>
+          </div>
 
-            {/* Feature 3 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">🏆</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Urmărește Progresul</h3>
-              <p className="text-neutral-600">
-                Statistici detaliate per materie și temă. Vezi cum evoluezi și unde trebuie să mai studiezi.
-              </p>
-            </div>
+          {/* Feature 3 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">🏆</span>
+            <h3>Rankings</h3>
+            <p className="landing-feature-description">
+              Competiție live. Compară-te cu cei mai buni jucători.
+            </p>
+          </div>
 
-            {/* Feature 4 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">⚡</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Rapid & Eficient</h3>
-              <p className="text-neutral-600">
-                10 întrebări per quiz, 20 secunde per întrebare. Perfect pentru sesiuni scurte de învățare.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">📱</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">Funcționează Peste Tot</h3>
-              <p className="text-neutral-600">
-                Responsive design - funcționează perfect pe telefon, tabletă și calculator.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
-              <p className="text-5xl mb-4">🆓</p>
-              <h3 className="text-xl font-bold text-neutral-900 mb-3">100% Gratuit</h3>
-              <p className="text-neutral-600">
-                Fără costuri ascunse, fără reclame, fără abonamente. Educație gratuită pentru toți.
-              </p>
-            </div>
+          {/* Feature 4 */}
+          <div className="landing-feature-item">
+            <span className="landing-feature-icon">⚡</span>
+            <h3>Instant</h3>
+            <p className="landing-feature-description">
+              Feedback imediat cu explicații detaliate pentru fiecare răspuns.
+            </p>
           </div>
         </div>
       </section>
@@ -320,9 +358,9 @@ export function LandingPage({ onPlayNow }) {
       </section>
 
       {/* CTA FINAL */}
-      <section className="bg-gradient-to-r from-brand-blue to-brand-purple py-20 text-white text-center">
+      <section className="landing-cta">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2>
             Gata să înveți jucându-te? 🚀
           </h2>
           <p className="text-xl mb-10 opacity-90">
@@ -331,53 +369,51 @@ export function LandingPage({ onPlayNow }) {
 
           <button
             onClick={user ? scrollToSubjects : onPlayNow}
-            className="bg-white text-brand-blue hover:bg-neutral-100 px-12 py-5 rounded-xl font-bold text-xl transition shadow-2xl hover:scale-105"
+            className="landing-btn-cta"
           >
-            {user ? '📚 Alege Materia' : '🎯 Începe Acum'}
+            {user ? 'Alege Materia' : 'Începe Acum'}
           </button>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+      <footer className="landing-footer">
+        <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-white mb-4">🎓 quizzfun.app</h3>
-              <p className="text-sm">Educație prin joc. Învață istorie, geografie și biologie distractiv.</p>
+              <div className="landing-footer-logo">QUIZZFUN</div>
+              <p className="text-sm mt-4">Educație prin joc. Învață istorie, geografie și biologie distractiv.</p>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-3">Materii</h4>
-              <ul className="space-y-2 text-sm">
-                <li><button onClick={scrollToSubjects} className="hover:text-white">Istorie</button></li>
-                <li><button onClick={scrollToSubjects} className="hover:text-white">Geografie</button></li>
-                <li><button onClick={scrollToSubjects} className="hover:text-white">Biologie</button></li>
+              <h4 className="font-bold mb-3">Materii</h4>
+              <ul className="landing-footer-links space-y-2 text-sm">
+                <li><button onClick={scrollToSubjects}>Istorie</button></li>
+                <li><button onClick={scrollToSubjects}>Geografie</button></li>
+                <li><button onClick={scrollToSubjects}>Biologie</button></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-3">Legal</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="/privacy" className="hover:text-white">Privacy Policy</a></li>
-                <li><a href="/terms" className="hover:text-white">Terms of Service</a></li>
+              <h4 className="font-bold mb-3">Legal</h4>
+              <ul className="landing-footer-links space-y-2 text-sm">
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="/terms">Terms</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-bold text-white mb-3">Contact</h4>
+              <h4 className="font-bold mb-3">Contact</h4>
               <p className="text-sm">📧 perviat@gmail.com</p>
             </div>
           </div>
 
-          <hr className="border-gray-700 mb-6" />
+          <hr style={{ borderColor: 'rgba(255, 255, 255, 0.2)', borderWidth: '3px', marginBottom: '3rem', marginTop: '3rem' }} />
 
-          <div className="text-center text-sm">
-            <p>&copy; 2024 quizzfun.app. Created by <strong>Ghergheluca Eduard</strong>.</p>
-            <p className="mt-2">All rights reserved.</p>
+          <div className="landing-footer-copyright text-center">
+            <p>&copy; 2025 QuizzFun — All Rights Reserved</p>
+            <p className="mt-2">Created by <strong>Ghergheluca Eduard</strong></p>
           </div>
-
         </div>
       </footer>
 
