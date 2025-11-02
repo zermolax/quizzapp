@@ -234,7 +234,7 @@ export function LandingPage({ onPlayNow }) {
               <div
                 key={subject.id}
                 onClick={() => handleSubjectClick(subject.slug)}
-                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                className={`landing-subject-card available ${getSubjectClassName(subject.slug)}`}
                 data-subject={getSubjectClassName(subject.slug)}
               >
                 <span className="landing-subject-icon">{subject.icon}</span>

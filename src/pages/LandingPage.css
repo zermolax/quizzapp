@@ -346,14 +346,14 @@
 }
 
 /* UNIFIED HOVER EFFECT: Pink tint + 3D shadow + hide left bar */
-.landing-subject-card:not(.coming-soon):not(.more-card):hover {
+.landing-subject-card.available:hover {
   background: rgba(255, 0, 128, 0.12) !important;
   box-shadow: 8px 8px 0 var(--warm-brown) !important;
   border-color: var(--warm-brown) !important;
   transform: translate(-2px, -2px);
 }
 
-.landing-subject-card:not(.coming-soon):not(.more-card):hover::before {
+.landing-subject-card.available:hover::before {
   opacity: 0;
 }
 
@@ -418,7 +418,7 @@
   border: none;
 }
 
-.landing-subject-card:not(.coming-soon):not(.more-card):hover .landing-subject-arrow {
+.landing-subject-card.available:hover .landing-subject-arrow {
   transform: translate(8px, -8px) rotate(15deg);
 }
 
