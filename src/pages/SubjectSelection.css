@@ -1,0 +1,723 @@
+/**
+ * SubjectSelection.css - All Disciplines Page
+ * Bold brutalist design for subjects overview
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;900&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@600;700&display=swap');
+
+:root {
+  --deep-brown: #2D2416;
+  --warm-brown: #4A3D2F;
+  --sand: #C8B7A6;
+  --cream: #F5F1E8;
+  --off-white: #FAFAF8;
+  --sage: #8B9B7A;
+  --neon-pink: #FF0080;
+  --neon-cyan: #00FFFF;
+  --neon-lime: #CCFF00;
+  --neon-orange: #FF6B00;
+  --neon-purple: #B026FF;
+  --neon-blue: #0066FF;
+}
+
+[data-theme="dark"] {
+  --deep-brown: #F5F1E8;
+  --warm-brown: #C8B7A6;
+  --sand: #4A3D2F;
+  --cream: #2D2416;
+  --off-white: #1A1410;
+}
+
+.subjects-page-wrapper {
+  font-family: 'Inter', sans-serif;
+  background: var(--off-white);
+  color: var(--deep-brown);
+  min-height: 100vh;
+}
+
+/* NAVIGATION */
+.subjects-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 5%;
+  background: var(--off-white);
+  border-bottom: 4px solid var(--deep-brown);
+  z-index: 1000;
+}
+
+.subjects-nav-inner {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subjects-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.subjects-btn-back {
+  background: transparent;
+  border: 3px solid var(--deep-brown);
+  color: var(--deep-brown);
+  padding: 0.5rem 1.5rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.subjects-btn-back:hover {
+  background: var(--deep-brown);
+  color: var(--off-white);
+  transform: translate(-3px, -3px);
+  box-shadow: 3px 3px 0 var(--warm-brown);
+}
+
+.subjects-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--deep-brown);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.subjects-logo span {
+  color: var(--neon-pink);
+}
+
+.subjects-nav-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.subjects-theme-toggle {
+  width: 50px;
+  height: 50px;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border: 4px solid var(--deep-brown);
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.subjects-theme-toggle:hover {
+  background: var(--neon-cyan);
+  color: var(--deep-brown);
+  transform: rotate(15deg);
+}
+
+/* HERO SECTION */
+.subjects-hero {
+  padding: 10rem 5% 4rem;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.subjects-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 50px,
+    rgba(255, 255, 255, 0.03) 50px,
+    rgba(255, 255, 255, 0.03) 51px
+  );
+  z-index: 0;
+}
+
+.subjects-hero-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.subjects-breadcrumb {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.subjects-breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.subjects-breadcrumb a:hover {
+  color: var(--neon-lime);
+}
+
+.subjects-hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neon-lime);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.subjects-hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.subjects-hero-description {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5;
+  max-width: 800px;
+  opacity: 0.9;
+}
+
+.subjects-stats-row {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+
+.subjects-stat-box {
+  background: var(--warm-brown);
+  border: 4px solid var(--off-white);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.subjects-stat-icon {
+  font-size: 2.5rem;
+}
+
+.subjects-stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.subjects-stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--neon-lime);
+  line-height: 1;
+}
+
+.subjects-stat-label {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+  opacity: 0.8;
+}
+
+/* DISCIPLINES SECTION */
+.subjects-disciplines-section {
+  padding: 6rem 5%;
+  background: var(--off-white);
+}
+
+.subjects-section-header {
+  max-width: 1400px;
+  margin: 0 auto 3rem;
+}
+
+.subjects-section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--neon-orange);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.subjects-section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.subjects-section-subtitle {
+  font-size: 1.25rem;
+  color: var(--warm-brown);
+  font-weight: 500;
+}
+
+.subjects-disciplines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* DISCIPLINE CARD */
+.subjects-discipline-card {
+  background: var(--cream);
+  border: 6px solid var(--deep-brown);
+  padding: 3rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+}
+
+.subjects-discipline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}
+
+/* Available cards */
+.subjects-discipline-card.available:hover {
+  transform: translate(-8px, -8px);
+}
+
+.subjects-discipline-card.available.istorie::before {
+  background: var(--neon-pink);
+}
+
+.subjects-discipline-card.available.istorie:hover {
+  box-shadow: 8px 8px 0 var(--neon-pink);
+  border-color: var(--neon-pink);
+}
+
+.subjects-discipline-card.available.geografie::before {
+  background: var(--neon-cyan);
+}
+
+.subjects-discipline-card.available.geografie:hover {
+  box-shadow: 8px 8px 0 var(--neon-cyan);
+  border-color: var(--neon-cyan);
+}
+
+.subjects-discipline-card.available.biologie::before {
+  background: var(--neon-lime);
+}
+
+.subjects-discipline-card.available.biologie:hover {
+  box-shadow: 8px 8px 0 var(--neon-lime);
+  border-color: var(--neon-lime);
+}
+
+.subjects-discipline-card.available.matematica::before {
+  background: var(--neon-blue);
+}
+
+.subjects-discipline-card.available.matematica:hover {
+  box-shadow: 8px 8px 0 var(--neon-blue);
+  border-color: var(--neon-blue);
+}
+
+.subjects-discipline-card.available.fizica::before {
+  background: var(--neon-purple);
+}
+
+.subjects-discipline-card.available.fizica:hover {
+  box-shadow: 8px 8px 0 var(--neon-purple);
+  border-color: var(--neon-purple);
+}
+
+.subjects-discipline-card.available.chimie::before {
+  background: var(--neon-orange);
+}
+
+.subjects-discipline-card.available.chimie:hover {
+  box-shadow: 8px 8px 0 var(--neon-orange);
+  border-color: var(--neon-orange);
+}
+
+/* Coming soon cards */
+.subjects-discipline-card.coming-soon {
+  background: var(--sand);
+  border: 6px dashed var(--warm-brown);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.subjects-discipline-card.coming-soon::before {
+  display: none;
+}
+
+.subjects-discipline-card.coming-soon:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Badges */
+.subjects-status-badge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--neon-lime);
+  color: var(--deep-brown);
+  padding: 0.5rem 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 10;
+}
+
+.subjects-coming-soon-badge {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: var(--neon-orange);
+  color: var(--off-white);
+  padding: 0.5rem 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: rotate(5deg);
+  z-index: 10;
+}
+
+.subjects-discipline-icon {
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  display: block;
+  filter: grayscale(0);
+  transition: filter 0.3s ease;
+}
+
+.subjects-discipline-card.coming-soon .subjects-discipline-icon {
+  filter: grayscale(1);
+}
+
+.subjects-discipline-card h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.subjects-discipline-description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin-bottom: auto;
+  color: var(--warm-brown);
+}
+
+.subjects-discipline-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 4px solid var(--sand);
+}
+
+.subjects-discipline-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subjects-stat-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.subjects-discipline-arrow {
+  width: 70px;
+  height: 70px;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  border: none;
+}
+
+.subjects-discipline-card.available:hover .subjects-discipline-arrow {
+  transform: translate(8px, -8px) rotate(15deg);
+}
+
+.subjects-discipline-card.available.istorie:hover .subjects-discipline-arrow {
+  background: var(--neon-pink);
+  color: var(--deep-brown);
+}
+
+.subjects-discipline-card.available.geografie:hover .subjects-discipline-arrow {
+  background: var(--neon-cyan);
+  color: var(--deep-brown);
+}
+
+.subjects-discipline-card.available.biologie:hover .subjects-discipline-arrow {
+  background: var(--neon-lime);
+  color: var(--deep-brown);
+}
+
+.subjects-discipline-card.available.matematica:hover .subjects-discipline-arrow {
+  background: var(--neon-blue);
+  color: var(--off-white);
+}
+
+.subjects-discipline-card.available.fizica:hover .subjects-discipline-arrow {
+  background: var(--neon-purple);
+  color: var(--off-white);
+}
+
+.subjects-discipline-card.available.chimie:hover .subjects-discipline-arrow {
+  background: var(--neon-orange);
+  color: var(--deep-brown);
+}
+
+/* CTA SECTION */
+.subjects-cta-section {
+  padding: 6rem 5%;
+  background: var(--cream);
+  text-align: center;
+}
+
+.subjects-cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subjects-cta-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.subjects-cta-description {
+  font-size: 1.25rem;
+  color: var(--warm-brown);
+  margin-bottom: 3rem;
+}
+
+.subjects-btn-primary {
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border: 6px solid var(--deep-brown);
+  padding: 1.5rem 4rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 0;
+}
+
+.subjects-btn-primary:hover {
+  background: var(--neon-pink);
+  color: var(--off-white);
+  border-color: var(--neon-pink);
+  transform: translate(-5px, -5px);
+  box-shadow: 5px 5px 0 var(--deep-brown);
+}
+
+.subjects-btn-primary:active {
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+
+/* FOOTER */
+.subjects-footer {
+  padding: 4rem 5%;
+  background: var(--deep-brown);
+  color: var(--off-white);
+  border-top: 6px solid var(--neon-pink);
+}
+
+.subjects-footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.subjects-footer-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.subjects-footer-links {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.subjects-footer-links a {
+  color: var(--off-white);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s ease;
+}
+
+.subjects-footer-links a:hover {
+  color: var(--neon-cyan);
+}
+
+.subjects-footer-copyright {
+  width: 100%;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  margin-top: 3rem;
+  padding-top: 3rem;
+  border-top: 3px solid rgba(255, 255, 255, 0.2);
+  opacity: 0.7;
+}
+
+/* ANIMATIONS */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.subjects-discipline-card {
+  animation: slideUp 0.5s ease backwards;
+}
+
+.subjects-discipline-card:nth-child(1) { animation-delay: 0.05s; }
+.subjects-discipline-card:nth-child(2) { animation-delay: 0.1s; }
+.subjects-discipline-card:nth-child(3) { animation-delay: 0.15s; }
+.subjects-discipline-card:nth-child(4) { animation-delay: 0.2s; }
+.subjects-discipline-card:nth-child(5) { animation-delay: 0.25s; }
+.subjects-discipline-card:nth-child(6) { animation-delay: 0.3s; }
+.subjects-discipline-card:nth-child(7) { animation-delay: 0.35s; }
+.subjects-discipline-card:nth-child(8) { animation-delay: 0.4s; }
+.subjects-discipline-card:nth-child(9) { animation-delay: 0.45s; }
+.subjects-discipline-card:nth-child(10) { animation-delay: 0.5s; }
+.subjects-discipline-card:nth-child(11) { animation-delay: 0.55s; }
+.subjects-discipline-card:nth-child(12) { animation-delay: 0.6s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .subjects-disciplines-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .subjects-nav {
+    padding: 1rem 5%;
+  }
+
+  .subjects-logo {
+    font-size: 1.5rem;
+  }
+
+  .subjects-nav-left {
+    gap: 1rem;
+  }
+
+  .subjects-btn-back {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  .subjects-hero {
+    padding: 7rem 5% 3rem;
+  }
+
+  .subjects-stats-row {
+    gap: 1.5rem;
+  }
+
+  .subjects-stat-value {
+    font-size: 1.5rem;
+  }
+
+  .subjects-disciplines-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .subjects-discipline-card {
+    padding: 2rem;
+    min-height: auto;
+  }
+
+  .subjects-footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* SMOOTH SCROLLING */
+html {
+  scroll-behavior: smooth;
+}
+
+/* FOCUS STYLES */
+*:focus-visible {
+  outline: 4px solid var(--neon-cyan);
+  outline-offset: 4px;
+}

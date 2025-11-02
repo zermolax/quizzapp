@@ -253,11 +253,10 @@ export function LandingPage({ onPlayNow }) {
             {comingSoonSubjects.map((subject) => (
               <div
                 key={subject.id}
-                className={`landing-subject-card ${getSubjectClassName(subject.slug)}`}
+                className={`landing-subject-card coming-soon ${getSubjectClassName(subject.slug)}`}
                 data-subject={getSubjectClassName(subject.slug)}
-                style={{ cursor: 'not-allowed', opacity: 0.9 }}
               >
-                <span className="landing-coming-soon">În Curând</span>
+                <div className="landing-coming-soon-badge">În Curând</div>
                 <span className="landing-subject-icon">{subject.icon}</span>
                 <h3>{subject.name}</h3>
                 <p className="landing-subject-description">
@@ -269,6 +268,18 @@ export function LandingPage({ onPlayNow }) {
                 </div>
               </div>
             ))}
+
+            {/* More subjects card */}
+            <div
+              onClick={() => navigate('/subjects')}
+              className="landing-subject-card more-card"
+            >
+              <span className="landing-more-icon">+</span>
+              <h3>Mai Multe</h3>
+              <p className="landing-subject-description">
+                Explorează mai multe discipline
+              </p>
+            </div>
           </div>
         )}
       </section>
