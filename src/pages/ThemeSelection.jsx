@@ -216,9 +216,9 @@ export function ThemeSelection() {
       </nav>
 
       {/* HERO SECTION - BOLD STYLE */}
-      <section className="py-16 sm:py-20 bg-cream dark:bg-off-white relative overflow-hidden">
+      <section className="py-16 sm:py-20 relative overflow-hidden" style={{ background: 'var(--sand)' }}>
         {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-15 pointer-events-none">
           <div className="absolute inset-0" style={{
             backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, currentColor 20px, currentColor 21px)'
           }}></div>

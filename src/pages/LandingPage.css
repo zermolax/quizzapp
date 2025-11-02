@@ -344,38 +344,16 @@
   background: var(--neon-pink);
 }
 
-.landing-subject-card:hover {
-  transform: translate(-8px, -8px);
+/* UNIFIED HOVER EFFECT: Pink tint + 3D shadow + hide left bar */
+.landing-subject-card:not(.coming-soon):not(.more-card):hover {
+  background: rgba(255, 0, 128, 0.12) !important;
+  box-shadow: 8px 8px 0 var(--warm-brown) !important;
+  border-color: var(--warm-brown) !important;
+  transform: translate(-2px, -2px);
 }
 
-.landing-subject-card.istorie:hover,
-.landing-subject-card[data-subject="istorie"]:hover {
-  box-shadow: 8px 8px 0 var(--neon-pink);
-  border-color: var(--neon-pink);
-}
-
-.landing-subject-card.geografie:hover,
-.landing-subject-card[data-subject="geografie"]:hover {
-  box-shadow: 8px 8px 0 var(--neon-cyan);
-  border-color: var(--neon-cyan);
-}
-
-.landing-subject-card.biologie:hover,
-.landing-subject-card[data-subject="biologie"]:hover {
-  box-shadow: 8px 8px 0 var(--neon-lime);
-  border-color: var(--neon-lime);
-}
-
-.landing-subject-card.romana:hover,
-.landing-subject-card[data-subject="romana"]:hover {
-  box-shadow: 8px 8px 0 var(--neon-orange);
-  border-color: var(--neon-orange);
-}
-
-.landing-subject-card.matematica:hover,
-.landing-subject-card[data-subject="matematica"]:hover {
-  box-shadow: 8px 8px 0 var(--neon-pink);
-  border-color: var(--neon-pink);
+.landing-subject-card:not(.coming-soon):not(.more-card):hover::before {
+  opacity: 0;
 }
 
 .landing-subject-icon {
@@ -439,38 +417,8 @@
   border: none;
 }
 
-.landing-subject-card:hover .landing-subject-arrow {
+.landing-subject-card:not(.coming-soon):not(.more-card):hover .landing-subject-arrow {
   transform: translate(8px, -8px) rotate(15deg);
-}
-
-.landing-subject-card.istorie:hover .landing-subject-arrow,
-.landing-subject-card[data-subject="istorie"]:hover .landing-subject-arrow {
-  background: var(--neon-pink);
-  color: var(--deep-brown);
-}
-
-.landing-subject-card.geografie:hover .landing-subject-arrow,
-.landing-subject-card[data-subject="geografie"]:hover .landing-subject-arrow {
-  background: var(--neon-cyan);
-  color: var(--deep-brown);
-}
-
-.landing-subject-card.biologie:hover .landing-subject-arrow,
-.landing-subject-card[data-subject="biologie"]:hover .landing-subject-arrow {
-  background: var(--neon-lime);
-  color: var(--deep-brown);
-}
-
-.landing-subject-card.romana:hover .landing-subject-arrow,
-.landing-subject-card[data-subject="romana"]:hover .landing-subject-arrow {
-  background: var(--neon-orange);
-  color: var(--deep-brown);
-}
-
-.landing-subject-card.matematica:hover .landing-subject-arrow,
-.landing-subject-card[data-subject="matematica"]:hover .landing-subject-arrow {
-  background: var(--neon-pink);
-  color: var(--deep-brown);
 }
 
 /* Coming soon badge */

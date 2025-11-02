@@ -29,27 +29,35 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
 
   return (
     <div
-      className="relative cursor-pointer flex flex-col"
+      className="relative cursor-pointer flex flex-col theme-card"
       style={{
         background: 'var(--cream)',
         border: '5px solid var(--warm-brown)',
         padding: '3rem',
         minHeight: '350px',
         transition: 'all 0.2s ease',
-        boxShadow: `0 0 0 0 ${neonColor}`,
+        boxShadow: `0 0 0 0 var(--warm-brown)`,
         animation: `fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${0.05 * (index + 1)}s backwards`
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `8px 8px 0 ${neonColor}`;
-        e.currentTarget.style.borderColor = neonColor;
+        // Unified hover effect: pink tint + 3D shadow + hide left bar
+        e.currentTarget.style.background = 'rgba(255, 0, 128, 0.12)';
+        e.currentTarget.style.boxShadow = `8px 8px 0 var(--warm-brown)`;
+        e.currentTarget.style.transform = 'translate(-2px, -2px)';
+        const leftBar = e.currentTarget.querySelector('.theme-card-accent');
+        if (leftBar) leftBar.style.opacity = '0';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 0 0 ${neonColor}`;
-        e.currentTarget.style.borderColor = 'var(--warm-brown)';
+        e.currentTarget.style.background = 'var(--cream)';
+        e.currentTarget.style.boxShadow = `0 0 0 0 var(--warm-brown)`;
+        e.currentTarget.style.transform = 'translate(0, 0)';
+        const leftBar = e.currentTarget.querySelector('.theme-card-accent');
+        if (leftBar) leftBar.style.opacity = '1';
       }}
     >
       {/* Vertical accent bar on left */}
       <div
+        className="theme-card-accent"
         style={{
           content: '',
           position: 'absolute',
@@ -57,7 +65,8 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
           left: 0,
           width: '12px',
           height: '100%',
-          background: neonColor
+          background: neonColor,
+          transition: 'opacity 0.2s ease'
         }}
       ></div>
 
@@ -116,17 +125,6 @@ export function ThemeCard({ theme, onSelectTheme, index = 0 }) {
           borderTop: '3px solid var(--sand)'
         }}
       >
-        <p
-          className="font-mono font-bold uppercase tracking-wider mb-3"
-          style={{
-            fontSize: '0.875rem',
-            color: 'var(--deep-brown)',
-            opacity: 0.7
-          }}
-        >
-          Select\u0103 Dificultatea:
-        </p>
-
         {/* Three difficulty buttons */}
         <div className="flex gap-2">
           <button

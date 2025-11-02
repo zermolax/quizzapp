@@ -309,63 +309,41 @@
   height: 10px;
 }
 
-/* Available cards */
-.subjects-discipline-card.available:hover {
-  transform: translate(-8px, -8px);
-}
-
+/* Available cards - color bars */
 .subjects-discipline-card.available.istorie::before {
   background: var(--neon-pink);
-}
-
-.subjects-discipline-card.available.istorie:hover {
-  box-shadow: 8px 8px 0 var(--neon-pink);
-  border-color: var(--neon-pink);
 }
 
 .subjects-discipline-card.available.geografie::before {
   background: var(--neon-cyan);
 }
 
-.subjects-discipline-card.available.geografie:hover {
-  box-shadow: 8px 8px 0 var(--neon-cyan);
-  border-color: var(--neon-cyan);
-}
-
 .subjects-discipline-card.available.biologie::before {
   background: var(--neon-lime);
-}
-
-.subjects-discipline-card.available.biologie:hover {
-  box-shadow: 8px 8px 0 var(--neon-lime);
-  border-color: var(--neon-lime);
 }
 
 .subjects-discipline-card.available.matematica::before {
   background: var(--neon-blue);
 }
 
-.subjects-discipline-card.available.matematica:hover {
-  box-shadow: 8px 8px 0 var(--neon-blue);
-  border-color: var(--neon-blue);
-}
-
 .subjects-discipline-card.available.fizica::before {
   background: var(--neon-purple);
-}
-
-.subjects-discipline-card.available.fizica:hover {
-  box-shadow: 8px 8px 0 var(--neon-purple);
-  border-color: var(--neon-purple);
 }
 
 .subjects-discipline-card.available.chimie::before {
   background: var(--neon-orange);
 }
 
-.subjects-discipline-card.available.chimie:hover {
-  box-shadow: 8px 8px 0 var(--neon-orange);
-  border-color: var(--neon-orange);
+/* UNIFIED HOVER EFFECT: Pink tint + 3D shadow + hide top bar */
+.subjects-discipline-card.available:hover {
+  background: rgba(255, 0, 128, 0.12) !important;
+  box-shadow: 8px 8px 0 var(--warm-brown) !important;
+  border-color: var(--warm-brown) !important;
+  transform: translate(-2px, -2px);
+}
+
+.subjects-discipline-card.available:hover::before {
+  opacity: 0;
 }
 
 /* Coming soon cards */
@@ -485,36 +463,6 @@
 
 .subjects-discipline-card.available:hover .subjects-discipline-arrow {
   transform: translate(8px, -8px) rotate(15deg);
-}
-
-.subjects-discipline-card.available.istorie:hover .subjects-discipline-arrow {
-  background: var(--neon-pink);
-  color: var(--deep-brown);
-}
-
-.subjects-discipline-card.available.geografie:hover .subjects-discipline-arrow {
-  background: var(--neon-cyan);
-  color: var(--deep-brown);
-}
-
-.subjects-discipline-card.available.biologie:hover .subjects-discipline-arrow {
-  background: var(--neon-lime);
-  color: var(--deep-brown);
-}
-
-.subjects-discipline-card.available.matematica:hover .subjects-discipline-arrow {
-  background: var(--neon-blue);
-  color: var(--off-white);
-}
-
-.subjects-discipline-card.available.fizica:hover .subjects-discipline-arrow {
-  background: var(--neon-purple);
-  color: var(--off-white);
-}
-
-.subjects-discipline-card.available.chimie:hover .subjects-discipline-arrow {
-  background: var(--neon-orange);
-  color: var(--deep-brown);
 }
 
 /* CTA SECTION */
