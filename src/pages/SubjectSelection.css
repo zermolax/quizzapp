@@ -305,8 +305,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 10px;
+  width: 12px;
+  height: 100%;
+  transition: opacity 0.2s ease;
 }
 
 /* Available cards - color bars */
@@ -334,7 +335,7 @@
   background: var(--neon-orange);
 }
 
-/* UNIFIED HOVER EFFECT: Pink tint + 3D shadow + hide top bar */
+/* UNIFIED HOVER EFFECT: Pink tint + 3D shadow + hide left bar */
 .subjects-discipline-card.available:hover {
   background: rgba(255, 0, 128, 0.12) !important;
   box-shadow: 8px 8px 0 var(--warm-brown) !important;
