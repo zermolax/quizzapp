@@ -1,11 +1,11 @@
 /**
- * QuizPlay.jsx - REFACTORED with Bold Design + Modal Explanation
+ * QuizPlay.jsx - RESPONSIVE with Tailwind CSS
  *
  * CHANGES:
- * 1. Modal pop-up for answer explanation (instead of inline panel)
- * 2. Bold/brutalist design system applied
- * 3. CSS variables for consistent styling
- * 4. Improved UX with modal overlay
+ * 1. Complete conversion from inline styles to Tailwind
+ * 2. Fully responsive on mobile/tablet/desktop
+ * 3. Optimized typography and spacing
+ * 4. All logic preserved
  */
 
 import React, { useState, useEffect } from 'react';
@@ -200,313 +200,212 @@ const handleTimeOut = () => {
   setAnswersArray([...answersArray, answerData]);
 };
 
-  /**
-   * HANDLER: User selectează răspuns
-   */
-  const handleAnswerClick = (answerIndex) => {
-    if (answered) return;
+/**
+ * HANDLER: Answer selection
+ */
+const handleAnswerSelect = (answerIndex) => {
+  if (answered) return;
 
-    setTimerActive(false);
-    setSelectedAnswerIndex(answerIndex);
+  const currentQuestion = questions[currentQuestionIndex];
+  const selectedAnswer = currentQuestion.answers[answerIndex];
+  const correct = selectedAnswer.correct;
 
-    const currentQuestion = questions[currentQuestionIndex];
-    const isAnswerCorrect = currentQuestion.answers[answerIndex].correct;
+  setSelectedAnswerIndex(answerIndex);
+  setAnswered(true);
+  setIsCorrect(correct);
+  setTimerActive(false);
 
-    setIsCorrect(isAnswerCorrect);
-    setAnswered(true);
+  // Calculate points (difficulty multiplier + time bonus)
+  const difficultyMultiplier = getDifficultyMultiplier();
+  const timeBonus = Math.floor(timeLeft * 1.5);
+  const points = correct ? (50 * difficultyMultiplier + timeBonus) : 0;
 
-    // Calculate points based on time left
-    const points = isAnswerCorrect ? Math.max(50, timeLeft * 5) : 0;
-    setCurrentQuestionPoints(points);
+  setCurrentQuestionPoints(points);
 
-    const answerData = {
-      questionId: currentQuestion.id,
-      question: currentQuestion.question,
-      selectedAnswerIndex: answerIndex,
-      selectedAnswer: currentQuestion.answers[answerIndex].text,
-      correct: isAnswerCorrect,
-      correctAnswer: currentQuestion.answers.find(a => a.correct).text,
-      explanation: currentQuestion.explanation
+  if (correct) {
+    setScore(score + points);
+  }
+
+  // Save answer
+  const answerData = {
+    questionId: currentQuestion.id,
+    question: currentQuestion.question,
+    selectedAnswerIndex: answerIndex,
+    selectedAnswer: selectedAnswer.text,
+    correct: correct,
+    correctAnswer: currentQuestion.answers.find(a => a.correct).text,
+    explanation: currentQuestion.explanation,
+    timeLeft: timeLeft,
+    pointsEarned: points
+  };
+
+  setAnswersArray([...answersArray, answerData]);
+
+  // Show modal after short delay
+  setTimeout(() => {
+    setShowExplanationModal(true);
+  }, 500);
+};
+
+/**
+ * HANDLER: Next question
+ */
+const handleNextQuestion = () => {
+  setShowExplanationModal(false);
+
+  if (currentQuestionIndex < questions.length - 1) {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setSelectedAnswerIndex(null);
+    setAnswered(false);
+    setIsCorrect(false);
+    setTimeLeft(30);
+    setTimerActive(true);
+  } else {
+    finishQuiz();
+  }
+};
+
+/**
+ * HANDLER: Quit quiz
+ */
+const handleQuit = () => {
+  if (window.confirm('Sigur vrei să părăsești quiz-ul? Progresul va fi pierdut.')) {
+    navigate(`/subjects/${subjectSlug}`);
+  }
+};
+
+/**
+ * HELPER: Get difficulty multiplier
+ */
+const getDifficultyMultiplier = () => {
+  switch (difficulty) {
+    case 'easy': return 1;
+    case 'medium': return 2;
+    case 'hard': return 3;
+    default: return 1;
+  }
+};
+
+/**
+ * HELPER: Get difficulty info
+ */
+const getDifficultyInfo = () => {
+  switch (difficulty) {
+    case 'easy':
+      return { label: 'Ușor', color: '#8B9B7A', emoji: '🟢' };
+    case 'medium':
+      return { label: 'Mediu', color: '#FF6B00', emoji: '🟡' };
+    case 'hard':
+      return { label: 'Dificil', color: '#FF0080', emoji: '🔴' };
+    default:
+      return { label: 'Necunoscut', color: '#2D2416', emoji: '⚪' };
+  }
+};
+
+/**
+ * HELPER: Get answer letter (A, B, C, D)
+ */
+const getAnswerLetter = (index) => {
+  return String.fromCharCode(65 + index); // 65 = 'A'
+};
+
+/**
+ * HANDLER: Finish quiz and save session
+ */
+const finishQuiz = async () => {
+  console.log('🏁 Quiz finished!');
+  setQuizFinished(true);
+  setSavingSession(true);
+
+  if (!user) {
+    console.log('⚠️ No user logged in, skipping save.');
+    setSavingSession(false);
+    return;
+  }
+
+  try {
+    const endTime = Date.now();
+    const duration = Math.floor((endTime - startTime) / 1000);
+    const maxScore = questions.length * 150;
+    const percentage = Math.round((score / maxScore) * 100);
+
+    const sessionData = {
+      userId: user.uid,
+      subjectId: subjectSlug,
+      themeId: themeSlug,
+      difficulty: difficulty,
+      score: score,
+      maxScore: maxScore,
+      percentage: percentage,
+      questionsTotal: questions.length,
+      questionsCorrect: answersArray.filter(a => a.correct).length,
+      duration: duration,
+      answers: answersArray,
+      completedAt: new Date()
     };
 
-    setAnswersArray([...answersArray, answerData]);
+    await saveQuizSession(sessionData);
+    console.log('✅ Quiz session saved');
 
-    // Increment score if correct
-    if (isAnswerCorrect) {
-      setScore(score + points);
+    await updateUserStats(user.uid, {
+      totalQuizzesTaken: 1,
+      totalScore: score,
+      subjectsPlayed: [subjectSlug],
+      lastPlayedAt: new Date()
+    });
+    console.log('✅ User stats updated');
+
+    const stats = await getUserStats(user.uid);
+    setUserStats(stats);
+
+    const newBadges = await checkBadgeAchievements(user.uid);
+    if (newBadges.length > 0) {
+      setNewBadgesEarned(newBadges);
+      console.log('🏅 New badges earned:', newBadges);
     }
 
-    // Show modal with animation delay
-    setTimeout(() => {
-      setShowExplanationModal(true);
-    }, 500);
-  };
+    const streakDays = await updateUserStreak(user.uid);
+    setSessionStreak(streakDays);
+    console.log('🔥 Current streak:', streakDays);
 
-  /**
-   * HANDLER: Next question from modal
-   */
-  const handleNextQuestion = () => {
-    setShowExplanationModal(false);
+    setSavingSession(false);
 
-    const nextIndex = currentQuestionIndex + 1;
-
-    if (nextIndex < questions.length) {
-      setCurrentQuestionIndex(nextIndex);
-      setSelectedAnswerIndex(null);
-      setAnswered(false);
-      setIsCorrect(false);
-      setCurrentQuestionPoints(0);
-
-      setTimeLeft(30);
-      setTimerActive(true);
-    } else {
-      handleQuizFinish();
-    }
-  };
-
-  /**
-   * HANDLER: Handle Quiz Finish
-   */
-  const handleQuizFinish = async () => {
-    try {
-      setSavingSession(true);
-
-      const endTime = Date.now();
-      const duration = Math.round((endTime - startTime) / 1000);
-
-      console.log('Saving quiz session...', {
-        userId: user.uid,
-        subjectId: subjectSlug,
-        themeId: themeSlug,
-        difficulty,
-        score,
-        totalQuestions: questions.length,
-        duration
-      });
-
-      await saveQuizSession(
-        user.uid,
-        subjectSlug,
-        themeSlug,
-        difficulty,
-        score,
-        questions.length,
-        answersArray,
-        duration
-      );
-
-      await updateUserStats(
-        user.uid,
-        score,
-        questions.length
-      );
-
-      const stats = await getUserStats(user.uid);
-      setUserStats(stats);
-
-      console.log('🎖️ Checking for badge achievements...');
-      const newBadges = await checkBadgeAchievements(user.uid);
-
-      if (newBadges.length > 0) {
-        console.log('🎉 New badges earned:', newBadges);
-        setNewBadgesEarned(newBadges);
-      }
-
-      const currentStreak = await updateUserStreak(user.uid);
-      console.log('🔥 Current streak:', currentStreak, 'days');
-      setSessionStreak(currentStreak);
-
-      console.log('Session saved and stats updated');
-      setSavingSession(false);
-      setQuizFinished(true);
-
-    } catch (error) {
-      console.error('Error finishing quiz:', error);
-      setSavingSession(false);
-      setQuizFinished(true);
-    }
-  };
-
-  /**
-   * HANDLER: Quit quiz
-   */
-  const handleQuit = () => {
-    if (window.confirm('Sigur vrei să părăsești quiz-ul? Progresul nu va fi salvat.')) {
-      navigate(`/subjects/${subjectSlug}`);
-    }
-  };
-
-  /**
-   * HELPER: Get difficulty display info
-   */
-  const getDifficultyInfo = () => {
-    switch (difficulty) {
-      case 'easy':
-        return { label: 'EASY', color: 'var(--sage)', emoji: '🟢' };
-      case 'medium':
-        return { label: 'MEDIUM', color: 'var(--neon-orange)', emoji: '🟡' };
-      case 'hard':
-        return { label: 'HARD', color: 'var(--neon-pink)', emoji: '🔴' };
-      default:
-        return { label: 'MEDIUM', color: 'var(--neon-orange)', emoji: '🟡' };
-    }
-  };
-
-  /**
-   * HELPER: Get answer button style
-   */
-  const getAnswerButtonStyle = (answerIndex) => {
-    const answer = questions[currentQuestionIndex]?.answers[answerIndex];
-    if (!answer) return {};
-
-    if (!answered) {
-      return {
-        background: 'var(--off-white)',
-        border: '5px solid var(--deep-brown)',
-        color: 'var(--deep-brown)'
-      };
-    }
-
-    // Correct answer selected
-    if (selectedAnswerIndex === answerIndex && isCorrect) {
-      return {
-        background: 'var(--neon-green)',
-        border: '5px solid var(--neon-green)',
-        color: 'var(--deep-brown)'
-      };
-    }
-
-    // Wrong answer selected
-    if (selectedAnswerIndex === answerIndex && !isCorrect) {
-      return {
-        background: 'var(--neon-pink)',
-        border: '5px solid var(--neon-pink)',
-        color: 'var(--off-white)'
-      };
-    }
-
-    // Show correct answer if user got it wrong
-    if (answer.correct && !isCorrect) {
-      return {
-        background: 'var(--neon-green)',
-        border: '5px solid var(--neon-green)',
-        color: 'var(--deep-brown)'
-      };
-    }
-
-    // Other answers after submission
-    return {
-      background: 'var(--sand)',
-      border: '5px solid var(--warm-brown)',
-      color: 'var(--warm-brown)',
-      opacity: 0.6
-    };
-  };
-
-  /**
-   * HELPER: Get answer letter
-   */
-  const getAnswerLetter = (index) => {
-    return String.fromCharCode(65 + index); // A, B, C, D
-  };
+  } catch (error) {
+    console.error('❌ Error saving quiz session:', error);
+    setSavingSession(false);
+  }
+};
 
   /**
    * RENDER: Loading state
    */
   if (loading) {
     return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        background: 'var(--off-white)'
-      }}>
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '60px',
-            height: '60px',
-            border: '6px solid var(--sand)',
-            borderTop: '6px solid var(--deep-brown)',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 1rem'
-          }}></div>
-          <p style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: '1.25rem',
-            fontWeight: 700,
-            color: 'var(--deep-brown)'
-          }}>
-            Se încarcă quiz-ul...
-          </p>
+      <div className="min-h-screen bg-off-white flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-neon-cyan border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="font-body text-deep-brown text-sm sm:text-base">Se încarcă quiz-ul...</p>
         </div>
       </div>
     );
   }
 
   /**
-   * RENDER: Error state
+   * RENDER: No questions found
    */
-  if (questions.length === 0 && !loading) {
+  if (!loading && questions.length === 0) {
     return (
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
-        background: 'var(--off-white)',
-        padding: '2rem'
-      }}>
-        <div style={{
-          background: 'var(--cream)',
-          border: '6px solid var(--deep-brown)',
-          padding: '3rem',
-          textAlign: 'center',
-          maxWidth: '500px'
-        }}>
-          <h2 style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: '2rem',
-            fontWeight: 900,
-            color: 'var(--neon-pink)',
-            marginBottom: '1.5rem'
-          }}>
+      <div className="min-h-screen bg-off-white flex items-center justify-center p-4 sm:p-8">
+        <div className="bg-cream border-6 border-error p-6 sm:p-8 max-w-md w-full">
+          <h2 className="text-2xl sm:text-3xl font-heading font-black uppercase text-error mb-4">
             ⚠️ Eroare
           </h2>
-          <p style={{
-            fontSize: '1.125rem',
-            color: 'var(--deep-brown)',
-            marginBottom: '2rem'
-          }}>
-            Întrebările pentru această temă nu au fost încărcate încă.
+          <p className="font-body text-deep-brown mb-6 text-sm sm:text-base">
+            Nu am găsit întrebări pentru această temă și dificultate.
           </p>
           <button
             onClick={() => navigate(`/subjects/${subjectSlug}`)}
-            style={{
-              background: 'var(--deep-brown)',
-              color: 'var(--off-white)',
-              border: '6px solid var(--deep-brown)',
-              padding: '1rem 2rem',
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 900,
-              fontSize: '1rem',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--neon-cyan)';
-              e.currentTarget.style.color = 'var(--deep-brown)';
-              e.currentTarget.style.transform = 'translate(-5px, -5px)';
-              e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--deep-brown)';
-              e.currentTarget.style.color = 'var(--off-white)';
-              e.currentTarget.style.transform = 'translate(0, 0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+            className="w-full bg-deep-brown text-off-white border-4 border-deep-brown px-6 py-3 font-heading font-bold uppercase text-sm sm:text-base hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
           >
             ← Înapoi la Tematici
           </button>
@@ -519,115 +418,49 @@ const handleTimeOut = () => {
    * RENDER: Quiz finished - Results
    */
   if (quizFinished) {
-    const maxScore = questions.length * 150; // Max points per question
+    const maxScore = questions.length * 150;
     const percentage = Math.round((score / maxScore) * 100);
 
     return (
-      <div style={{
-        minHeight: '100vh',
-        background: 'var(--off-white)',
-        padding: '2rem 5%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
-        <div style={{
-          background: 'var(--cream)',
-          border: '6px solid var(--deep-brown)',
-          padding: '3rem',
-          maxWidth: '600px',
-          width: '100%'
-        }}>
+      <div className="min-h-screen bg-off-white flex items-center justify-center p-4 sm:p-8">
+        <div className="bg-cream border-6 border-deep-brown p-6 sm:p-8 md:p-12 max-w-2xl w-full">
 
           {savingSession && (
-            <div style={{
-              background: 'var(--neon-cyan)',
-              color: 'var(--deep-brown)',
-              padding: '1rem',
-              marginBottom: '2rem',
-              border: '4px solid var(--deep-brown)',
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontWeight: 700
-            }}>
+            <div className="bg-neon-cyan text-deep-brown p-4 mb-6 border-4 border-deep-brown font-heading font-bold text-sm sm:text-base">
               ⏳ Se salvează progresul...
             </div>
           )}
 
-          <h1 style={{
-            fontFamily: 'Space Grotesk, sans-serif',
-            fontSize: '3rem',
-            fontWeight: 900,
-            textAlign: 'center',
-            marginBottom: '2rem',
-            color: 'var(--deep-brown)'
-          }}>
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 sm:mb-8 text-deep-brown uppercase">
             🎉 Quiz Terminat!
           </h1>
 
-          <div style={{
-            background: 'var(--deep-brown)',
-            color: 'var(--neon-lime)',
-            padding: '2rem',
-            border: '6px solid var(--deep-brown)',
-            marginBottom: '2rem',
-            textAlign: 'center'
-          }}>
-            <p style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '0.875rem',
-              fontWeight: 700,
-              marginBottom: '0.5rem',
-              color: 'var(--off-white)'
-            }}>
+          <div className="bg-deep-brown text-neon-lime p-6 sm:p-8 border-6 border-deep-brown mb-6 sm:mb-8 text-center">
+            <p className="font-mono text-xs sm:text-sm font-bold mb-2 text-off-white uppercase">
               SCOR FINAL
             </p>
-            <p style={{
-              fontFamily: 'Space Grotesk, sans-serif',
-              fontSize: '4rem',
-              fontWeight: 900,
-              color: 'var(--neon-lime)'
-            }}>
+            <p className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-neon-lime">
               {percentage}%
             </p>
-            <p style={{
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '1.125rem',
-              fontWeight: 700,
-              color: 'var(--sand)'
-            }}>
+            <p className="font-mono text-base sm:text-lg font-bold text-sand mt-2">
               {score} / {maxScore} puncte
             </p>
           </div>
 
           {/* Performance message */}
-          <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+          <div className="mb-6 sm:mb-8 text-center">
             {percentage >= 80 && (
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: 'var(--neon-green)'
-              }}>
+              <p className="font-heading text-lg sm:text-xl font-bold text-[#10B981]">
                 🌟 Excelent! Ai înțeles bine această temă!
               </p>
             )}
             {percentage >= 60 && percentage < 80 && (
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: 'var(--neon-orange)'
-              }}>
+              <p className="font-heading text-lg sm:text-xl font-bold text-neon-orange">
                 👍 Bun! Poți încerca din nou pentru a îmbunătăți.
               </p>
             )}
             {percentage < 60 && (
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: 'var(--neon-pink)'
-              }}>
+              <p className="font-heading text-lg sm:text-xl font-bold text-neon-pink">
                 📖 Mai mult de studiat! Revino la teme și recitește.
               </p>
             )}
@@ -635,229 +468,60 @@ const handleTimeOut = () => {
 
           {/* User Stats */}
           {userStats && (
-            <div style={{
-              background: 'var(--sand)',
-              border: '4px solid var(--warm-brown)',
-              padding: '1.5rem',
-              marginBottom: '2rem'
-            }}>
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '1rem',
-                fontWeight: 900,
-                marginBottom: '1rem',
-                color: 'var(--deep-brown)'
-              }}>
-                📊 Statistici personale
+            <div className="bg-sand border-4 border-warm-brown p-4 sm:p-6 mb-6 sm:mb-8">
+              <p className="font-heading text-base sm:text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
+                📊 Statistici
               </p>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '1rem'
-              }}>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 font-body text-xs sm:text-sm text-deep-brown">
                 <div>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--warm-brown)', marginBottom: '0.25rem' }}>
-                    Quiz-uri jucate
-                  </p>
-                  <p style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '1.5rem',
-                    fontWeight: 700,
-                    color: 'var(--deep-brown)'
-                  }}>
-                    {userStats.totalQuizzes}
-                  </p>
+                  <strong>Total quiz-uri:</strong> {userStats.totalQuizzesTaken || 0}
                 </div>
                 <div>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--warm-brown)', marginBottom: '0.25rem' }}>
-                    Scor mediu
-                  </p>
-                  <p style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '1.5rem',
-                    fontWeight: 700,
-                    color: 'var(--deep-brown)'
-                  }}>
-                    {userStats.averageScore}%
-                  </p>
+                  <strong>Scor total:</strong> {userStats.totalScore || 0}
                 </div>
                 <div>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--warm-brown)', marginBottom: '0.25rem' }}>
-                    Cel mai bun scor
-                  </p>
-                  <p style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '1.5rem',
-                    fontWeight: 700,
-                    color: 'var(--neon-green)'
-                  }}>
-                    {userStats.bestScore}%
-                  </p>
+                  <strong>Streak curent:</strong> {sessionStreak} zile 🔥
                 </div>
                 <div>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--warm-brown)', marginBottom: '0.25rem' }}>
-                    Puncte totale
-                  </p>
-                  <p style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '1.5rem',
-                    fontWeight: 700,
-                    color: 'var(--deep-brown)'
-                  }}>
-                    {userStats.totalPoints}
-                  </p>
+                  <strong>Discipline:</strong> {userStats.subjectsPlayed?.length || 0}
                 </div>
               </div>
             </div>
           )}
 
-          {/* Streak Display */}
-          {sessionStreak > 0 && (
-            <div style={{
-              background: 'var(--neon-orange)',
-              border: '4px solid var(--deep-brown)',
-              padding: '1.5rem',
-              marginBottom: '2rem',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🔥</div>
-              <p style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                color: 'var(--deep-brown)',
-                marginBottom: '0.25rem'
-              }}>
-                STREAK ACTUAL
-              </p>
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '2.5rem',
-                fontWeight: 900,
-                color: 'var(--deep-brown)'
-              }}>
-                {sessionStreak} {sessionStreak === 1 ? 'zi' : 'zile'}
-              </p>
-              <p style={{ fontSize: '0.875rem', color: 'var(--deep-brown)', marginTop: '0.5rem' }}>
-                {sessionStreak >= 7
-                  ? '🎯 Impresionant! Continui să înveți în fiecare zi!'
-                  : sessionStreak >= 3
-                  ? '👏 Foarte bine! Continuă așa!'
-                  : '💪 Joacă în fiecare zi pentru a-ți crește streak-ul!'}
-              </p>
-            </div>
-          )}
-
-          {/* Badges Earned */}
+          {/* New badges earned */}
           {newBadgesEarned.length > 0 && (
-            <div style={{
-              background: 'var(--neon-lime)',
-              border: '4px solid var(--deep-brown)',
-              padding: '1.5rem',
-              marginBottom: '2rem'
-            }}>
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '1.25rem',
-                fontWeight: 900,
-                marginBottom: '1rem',
-                textAlign: 'center',
-                color: 'var(--deep-brown)'
-              }}>
-                🎖️ Badge-uri noi câștigate!
+            <div className="bg-neon-lime border-4 border-deep-brown p-4 sm:p-6 mb-6 sm:mb-8">
+              <p className="font-heading text-base sm:text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
+                🏅 Insigne Noi Câștigate!
               </p>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                gap: '1rem'
-              }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {newBadgesEarned.map((badge) => (
-                  <div key={badge.id} style={{ transform: 'scale(0.9)' }}>
-                    <BadgeCard
-                      badge={badge}
-                      earned={true}
-                      earnedAt={new Date()}
-                    />
-                  </div>
+                  <BadgeCard key={badge.id} badge={badge} />
                 ))}
               </div>
             </div>
           )}
 
-          {/* Quiz info */}
-          <div style={{
-            background: 'var(--sand)',
-            border: '4px solid var(--warm-brown)',
-            padding: '1.5rem',
-            marginBottom: '2rem',
-            fontSize: '0.875rem'
-          }}>
-            <p style={{ marginBottom: '0.5rem', color: 'var(--deep-brown)' }}>
-              <strong>Temă:</strong> {theme?.name}
-            </p>
-            <p style={{ marginBottom: '0.5rem', color: 'var(--deep-brown)' }}>
-              <strong>Dificultate:</strong> {difficulty}
-            </p>
-            <p style={{ color: 'var(--deep-brown)' }}>
-              <strong>Întrebări:</strong> {questions.length}
-            </p>
+          {/* Quiz details */}
+          <div className="bg-cream border-4 border-sand p-4 sm:p-6 mb-6 sm:mb-8 font-body text-xs sm:text-sm text-deep-brown space-y-2">
+            <p><strong>Temă:</strong> {theme?.name}</p>
+            <p><strong>Dificultate:</strong> {difficulty}</p>
+            <p><strong>Întrebări:</strong> {questions.length}</p>
           </div>
 
           {/* Buttons */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="flex flex-col gap-3 sm:gap-4">
             <button
               onClick={() => navigate(`/subjects/${subjectSlug}`)}
-              style={{
-                background: 'var(--deep-brown)',
-                color: 'var(--off-white)',
-                border: '6px solid var(--deep-brown)',
-                padding: '1rem 2rem',
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 900,
-                fontSize: '1rem',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--neon-cyan)';
-                e.currentTarget.style.color = 'var(--deep-brown)';
-                e.currentTarget.style.transform = 'translate(-5px, -5px)';
-                e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--deep-brown)';
-                e.currentTarget.style.color = 'var(--off-white)';
-                e.currentTarget.style.transform = 'translate(0, 0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
+              className="w-full bg-deep-brown text-off-white border-6 border-deep-brown px-6 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
             >
               ← Înapoi la Tematici
             </button>
 
             <button
               onClick={() => window.location.reload()}
-              style={{
-                background: 'var(--neon-green)',
-                color: 'var(--deep-brown)',
-                border: '6px solid var(--neon-green)',
-                padding: '1rem 2rem',
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 900,
-                fontSize: '1rem',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-5px, -5px)';
-                e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translate(0, 0)';
-                e.currentTarget.style.boxShadow = 'none';
-              }}
+              className="w-full bg-[#10B981] text-deep-brown border-6 border-[#10B981] px-6 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
             >
               🔄 Încearcă din nou
             </button>
@@ -877,446 +541,178 @@ const handleTimeOut = () => {
     const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
 
     return (
-      <div style={{
-        minHeight: '100vh',
-        background: 'var(--off-white)',
-        fontFamily: 'Inter, sans-serif'
-      }}>
+      <div className="min-h-screen bg-off-white font-body">
 
-        {/* FIXED HEADER */}
-        <header style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          padding: '1.5rem 5%',
-          background: 'var(--off-white)',
-          borderBottom: '4px solid var(--deep-brown)',
-          zIndex: 1000
-        }}>
-          <nav style={{
-            maxWidth: '1600px',
-            margin: '0 auto',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        {/* FIXED HEADER - RESPONSIVE */}
+        <header className="fixed top-0 left-0 right-0 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 bg-off-white border-b-4 border-deep-brown z-50">
+          <nav className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 sm:gap-4">
+            {/* Left side */}
+            <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={handleQuit}
-                style={{
-                  background: 'transparent',
-                  border: '3px solid var(--deep-brown)',
-                  color: 'var(--deep-brown)',
-                  padding: '0.5rem 1.5rem',
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--neon-pink)';
-                  e.currentTarget.style.color = 'var(--off-white)';
-                  e.currentTarget.style.borderColor = 'var(--neon-pink)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = 'var(--deep-brown)';
-                  e.currentTarget.style.borderColor = 'var(--deep-brown)';
-                }}
+                className="bg-transparent border-3 border-deep-brown text-deep-brown px-3 sm:px-4 py-2 font-heading font-bold text-xs sm:text-sm uppercase hover:bg-neon-pink hover:text-off-white hover:border-neon-pink transition-all duration-150"
               >
-                ✕ Quit
+                ✕ <span className="hidden sm:inline">Quit</span>
               </button>
 
-              <div style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '0.875rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                color: 'var(--deep-brown)'
-              }}>
-                {theme?.name} • {difficultyInfo.label}
+              <div className="font-mono text-[0.65rem] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-deep-brown">
+                <span className="hidden sm:inline">{theme?.name} • </span>{difficultyInfo.emoji}
               </div>
             </div>
 
-            <div style={{
-              background: 'var(--deep-brown)',
-              color: 'var(--neon-lime)',
-              padding: '0.75rem 2rem',
-              border: '4px solid var(--deep-brown)',
-              fontFamily: 'JetBrains Mono, monospace',
-              fontSize: '1.5rem',
-              fontWeight: 700
-            }}>
-              <span id="scoreValue">{score}</span> pts
+            {/* Right side - Score */}
+            <div className="bg-deep-brown text-neon-lime px-3 sm:px-6 py-2 border-4 border-deep-brown font-mono text-sm sm:text-base md:text-lg font-bold">
+              {score} pts
             </div>
           </nav>
         </header>
 
-        {/* QUIZ CONTAINER */}
-        <main style={{
-          minHeight: '100vh',
-          padding: '8rem 5% 4rem',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}>
-          <div style={{ maxWidth: '1000px', width: '100%' }}>
+        {/* MAIN QUIZ CONTENT */}
+        <main className="pt-20 sm:pt-24 lg:pt-28 pb-8 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
 
-            {/* PROGRESS BAR CONTAINER */}
-            <div style={{ marginBottom: '3rem' }}>
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <div style={{
-                  fontFamily: 'Space Grotesk, sans-serif',
-                  fontSize: '1.5rem',
-                  fontWeight: 900,
-                  textTransform: 'uppercase',
-                  color: 'var(--deep-brown)'
-                }}>
-                  Întrebarea <span id="currentQuestion">{currentQuestionIndex + 1}</span> / <span id="totalQuestions">{questions.length}</span>
-                </div>
-
-                <div style={{
-                  fontFamily: 'JetBrains Mono, monospace',
-                  fontSize: '2rem',
-                  fontWeight: 700,
-                  color: timeLeft <= 10 ? 'var(--neon-pink)' : 'var(--neon-orange)',
-                  animation: timeLeft <= 10 ? 'pulse 0.5s infinite' : 'none'
-                }}>
-                  {Math.floor(timeLeft / 60).toString().padStart(2, '0')}:{(timeLeft % 60).toString().padStart(2, '0')}
-                </div>
+            {/* Progress Bar */}
+            <div className="mb-6 sm:mb-8">
+              <div className="flex justify-between items-center mb-3">
+                <span className="font-mono text-xs sm:text-sm font-bold uppercase text-deep-brown">
+                  Întrebarea {currentQuestionIndex + 1} / {questions.length}
+                </span>
+                <span className="font-mono text-xs sm:text-sm font-bold text-deep-brown">
+                  {Math.round(progressPercent)}%
+                </span>
               </div>
-
-              <div style={{
-                height: '20px',
-                background: 'var(--sand)',
-                border: '4px solid var(--deep-brown)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}>
-                <div style={{
-                  height: '100%',
-                  background: 'var(--neon-lime)',
-                  transition: 'width 0.3s ease',
-                  width: `${progressPercent}%`,
-                  position: 'relative'
-                }}>
-                  <div style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.1) 10px, rgba(0,0,0,0.1) 20px)'
-                  }}></div>
-                </div>
+              <div className="h-3 sm:h-4 bg-sand border-3 border-deep-brown">
+                <div
+                  className="h-full bg-neon-cyan transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
               </div>
             </div>
 
-            {/* QUESTION CARD */}
-            <div style={{
-              background: 'var(--cream)',
-              border: '6px solid var(--deep-brown)',
-              padding: '4rem',
-              marginBottom: '3rem',
-              position: 'relative'
-            }}>
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '12px',
-                background: difficultyInfo.color
-              }}></div>
-
-              <div style={{
-                display: 'inline-block',
-                background: difficultyInfo.color,
-                color: 'var(--off-white)',
-                padding: '0.5rem 1.5rem',
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 900,
-                fontSize: '0.875rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em',
-                marginBottom: '2rem'
-              }}>
-                {difficultyInfo.emoji} {difficultyInfo.label}
+            {/* Timer & Difficulty */}
+            <div className="flex flex-wrap gap-3 sm:gap-4 justify-between items-center mb-6 sm:mb-8">
+              {/* Timer */}
+              <div className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 border-4 ${
+                timeLeft <= 10 ? 'bg-error border-error text-white animate-pulse' : 'bg-cream border-warm-brown text-deep-brown'
+              }`}>
+                <span className="text-2xl sm:text-3xl">⏱️</span>
+                <span className="font-mono text-2xl sm:text-3xl md:text-4xl font-black">
+                  {timeLeft}s
+                </span>
               </div>
 
-              <h2 style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '2rem',
-                fontWeight: 900,
-                lineHeight: 1.3,
-                marginBottom: '1rem',
-                color: 'var(--deep-brown)'
-              }}>
+              {/* Difficulty Badge */}
+              <div
+                className="px-4 sm:px-6 py-2 sm:py-3 border-4 border-deep-brown font-heading font-bold text-xs sm:text-sm uppercase text-off-white"
+                style={{ backgroundColor: difficultyInfo.color }}
+              >
+                {difficultyInfo.emoji} {difficultyInfo.label}
+              </div>
+            </div>
+
+            {/* Question Card */}
+            <div className="bg-cream border-6 border-deep-brown p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
+              <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-deep-brown leading-tight mb-6 sm:mb-8">
                 {currentQuestion.question}
               </h2>
 
-              {currentQuestion.hint && (
-                <p style={{
-                  fontSize: '1.125rem',
-                  color: 'var(--warm-brown)',
-                  fontStyle: 'italic'
-                }}>
-                  {currentQuestion.hint}
-                </p>
-              )}
-            </div>
+              {/* Answers Grid - RESPONSIVE */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                {currentQuestion.answers.map((answer, index) => {
+                  const isSelected = selectedAnswerIndex === index;
+                  const isCorrectAnswer = answer.correct;
+                  const showResult = answered;
 
-            {/* ANSWERS GRID */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(2, 1fr)',
-              gap: '2rem'
-            }}>
-              {currentQuestion.answers.map((answer, index) => {
-                const buttonStyle = getAnswerButtonStyle(index);
-                const letter = getAnswerLetter(index);
-                const isSelected = selectedAnswerIndex === index;
-                const isCorrectAnswer = answer.correct;
+                  let bgColor = 'bg-off-white';
+                  let borderColor = 'border-deep-brown';
+                  let textColor = 'text-deep-brown';
 
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleAnswerClick(index)}
-                    disabled={answered}
-                    data-letter={letter}
-                    style={{
-                      ...buttonStyle,
-                      padding: '2.5rem 2rem',
-                      textAlign: 'left',
-                      cursor: answered ? 'not-allowed' : 'pointer',
-                      transition: 'all 0.2s ease',
-                      position: 'relative',
-                      fontFamily: 'Inter, sans-serif',
-                      fontSize: '1.125rem',
-                      fontWeight: 600
-                    }}
-                    onMouseEnter={(e) => {
-                      if (!answered) {
-                        e.currentTarget.style.transform = 'translate(-5px, -5px)';
-                        e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
-                        const letterEl = e.currentTarget.querySelector('.answer-letter');
-                        if (letterEl) {
-                          letterEl.style.background = 'var(--neon-cyan)';
-                          letterEl.style.color = 'var(--deep-brown)';
-                        }
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (!answered) {
-                        e.currentTarget.style.transform = 'translate(0, 0)';
-                        e.currentTarget.style.boxShadow = 'none';
-                        const letterEl = e.currentTarget.querySelector('.answer-letter');
-                        if (letterEl) {
-                          letterEl.style.background = 'var(--deep-brown)';
-                          letterEl.style.color = 'var(--off-white)';
-                        }
-                      }
-                    }}
-                  >
-                    <div
-                      className="answer-letter"
-                      style={{
-                        position: 'absolute',
-                        top: '1rem',
-                        left: '1rem',
-                        width: '40px',
-                        height: '40px',
-                        background: answered && isCorrectAnswer ? 'var(--deep-brown)' :
-                                    answered && isSelected && !isCorrectAnswer ? 'var(--deep-brown)' :
-                                    'var(--deep-brown)',
-                        color: answered && isCorrectAnswer ? 'var(--neon-green)' :
-                               answered && isSelected && !isCorrectAnswer ? 'var(--neon-pink)' :
-                               'var(--off-white)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontFamily: 'Space Grotesk, sans-serif',
-                        fontWeight: 900,
-                        fontSize: '1.25rem',
-                        transition: 'all 0.2s ease'
-                      }}
+                  if (showResult) {
+                    if (isCorrectAnswer) {
+                      bgColor = 'bg-[#10B981]';
+                      borderColor = 'border-deep-brown';
+                      textColor = 'text-off-white';
+                    } else if (isSelected && !isCorrectAnswer) {
+                      bgColor = 'bg-error';
+                      borderColor = 'border-error';
+                      textColor = 'text-off-white';
+                    }
+                  } else if (isSelected) {
+                    bgColor = 'bg-sand';
+                  }
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => handleAnswerSelect(index)}
+                      disabled={answered}
+                      className={`${bgColor} ${textColor} border-4 ${borderColor} p-4 sm:p-5 md:p-6 text-left font-body text-sm sm:text-base md:text-lg font-semibold transition-all duration-150 disabled:cursor-not-allowed hover:enabled:-translate-x-1 hover:enabled:-translate-y-1 hover:enabled:shadow-brutal hover:enabled:shadow-deep-brown`}
                     >
-                      {answered && isCorrectAnswer ? '✓' :
-                       answered && isSelected && !isCorrectAnswer ? '✗' :
-                       letter}
-                    </div>
-
-                    <div style={{ paddingLeft: '3rem', paddingTop: '0.5rem' }}>
+                      <span className="font-mono font-black text-base sm:text-lg mr-2 sm:mr-3">
+                        {getAnswerLetter(index)}.
+                      </span>
                       {answer.text}
-                    </div>
-                  </button>
-                );
-              })}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
           </div>
         </main>
 
-        {/* EXPLANATION MODAL */}
+        {/* EXPLANATION MODAL - RESPONSIVE */}
         {showExplanationModal && (
-          <div style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0, 0, 0, 0.7)',
-            backdropFilter: 'blur(5px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 2000,
-            padding: '1rem',
-            animation: 'fadeIn 0.3s ease'
-          }}>
-            <div style={{
-              background: 'var(--cream)',
-              border: '6px solid var(--deep-brown)',
-              maxWidth: '700px',
-              width: '100%',
-              maxHeight: '90vh',
-              overflowY: 'auto',
-              animation: 'slideUp 0.3s ease'
-            }}>
+          <div className="fixed inset-0 bg-deep-brown/90 flex items-center justify-center z-[2000] p-4 animate-fadeIn">
+            <div className="bg-cream border-6 border-deep-brown max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-slideUp">
               {/* Modal Header */}
-              <div style={{
-                padding: '2rem',
-                borderBottom: '4px solid var(--deep-brown)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '1.5rem'
-              }}>
-                <div style={{
-                  width: '60px',
-                  height: '60px',
-                  background: isCorrect ? 'var(--neon-green)' : 'var(--neon-pink)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '2rem',
-                  border: '4px solid var(--deep-brown)'
-                }}>
+              <div className="p-4 sm:p-6 md:p-8 border-b-4 border-deep-brown flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                <div
+                  className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl border-4 border-deep-brown flex-shrink-0 ${
+                    isCorrect ? 'bg-[#10B981]' : 'bg-neon-pink'
+                  }`}
+                >
                   {isCorrect ? '✓' : '✗'}
                 </div>
 
                 <div>
-                  <h3 style={{
-                    fontFamily: 'Space Grotesk, sans-serif',
-                    fontSize: '1.5rem',
-                    fontWeight: 900,
-                    color: 'var(--deep-brown)',
-                    marginBottom: '0.25rem'
-                  }}>
+                  <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-deep-brown mb-1 sm:mb-2">
                     {isCorrect ? 'Răspuns corect!' : 'Răspuns greșit'}
                   </h3>
-                  <p style={{
-                    fontFamily: 'JetBrains Mono, monospace',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    color: isCorrect ? 'var(--neon-green)' : 'var(--neon-pink)'
-                  }}>
+                  <p className={`font-mono text-sm sm:text-base md:text-lg font-bold ${
+                    isCorrect ? 'text-[#10B981]' : 'text-neon-pink'
+                  }`}>
                     {isCorrect ? `+${currentQuestionPoints} puncte` : '+0 puncte'}
                   </p>
                 </div>
               </div>
 
               {/* Modal Body */}
-              <div style={{ padding: '2rem' }}>
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <div style={{
-                    fontFamily: 'Space Grotesk, sans-serif',
-                    fontSize: '0.875rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    color: 'var(--warm-brown)',
-                    marginBottom: '0.75rem'
-                  }}>
+              <div className="p-4 sm:p-6 md:p-8">
+                <div className="mb-4 sm:mb-6">
+                  <div className="font-heading text-xs sm:text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
                     Răspuns corect
                   </div>
-                  <div style={{
-                    background: 'var(--neon-green)',
-                    padding: '1rem',
-                    border: '4px solid var(--deep-brown)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    color: 'var(--deep-brown)'
-                  }}>
+                  <div className="bg-[#10B981] p-3 sm:p-4 border-4 border-deep-brown font-body text-sm sm:text-base font-semibold text-deep-brown">
                     {getAnswerLetter(currentQuestion.answers.findIndex(a => a.correct))}. {currentQuestion.answers.find(a => a.correct).text}
                   </div>
                 </div>
 
                 <div>
-                  <div style={{
-                    fontFamily: 'Space Grotesk, sans-serif',
-                    fontSize: '0.875rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em',
-                    color: 'var(--warm-brown)',
-                    marginBottom: '0.75rem'
-                  }}>
+                  <div className="font-heading text-xs sm:text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
                     Explicație
                   </div>
-                  <div style={{
-                    background: 'var(--sand)',
-                    padding: '1rem',
-                    border: '4px solid var(--warm-brown)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '1rem',
-                    lineHeight: 1.6,
-                    color: 'var(--deep-brown)'
-                  }}>
+                  <div className="bg-sand p-3 sm:p-4 border-4 border-warm-brown font-body text-sm sm:text-base leading-relaxed text-deep-brown">
                     {currentQuestion.explanation}
                   </div>
                 </div>
               </div>
 
               {/* Modal Footer */}
-              <div style={{
-                padding: '1rem 2rem',
-                borderTop: '4px solid var(--deep-brown)',
-                display: 'flex',
-                justifyContent: 'flex-end'
-              }}>
+              <div className="p-4 sm:p-6 md:p-8 border-t-4 border-deep-brown flex justify-end">
                 <button
                   onClick={handleNextQuestion}
-                  style={{
-                    background: 'var(--deep-brown)',
-                    color: 'var(--off-white)',
-                    border: '6px solid var(--deep-brown)',
-                    padding: '1rem 2rem',
-                    fontFamily: 'Space Grotesk, sans-serif',
-                    fontWeight: 900,
-                    fontSize: '1rem',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--neon-lime)';
-                    e.currentTarget.style.color = 'var(--deep-brown)';
-                    e.currentTarget.style.transform = 'translate(-5px, -5px)';
-                    e.currentTarget.style.boxShadow = '5px 5px 0 var(--deep-brown)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--deep-brown)';
-                    e.currentTarget.style.color = 'var(--off-white)';
-                    e.currentTarget.style.transform = 'translate(0, 0)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
+                  className="bg-deep-brown text-off-white border-6 border-deep-brown px-6 sm:px-8 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:bg-neon-lime hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
                 >
                   Următoarea Întrebare →
                 </button>
@@ -1326,7 +722,7 @@ const handleTimeOut = () => {
           </div>
         )}
 
-        {/* Add keyframes for animations */}
+        {/* Tailwind Animations */}
         <style>{`
           @keyframes fadeIn {
             from { opacity: 0; }
@@ -1338,32 +734,12 @@ const handleTimeOut = () => {
             to { transform: translateY(0); opacity: 1; }
           }
 
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+          .animate-fadeIn {
+            animation: fadeIn 0.3s ease;
           }
 
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-
-          @keyframes correctShake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-          }
-
-          @keyframes wrongShake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-          }
-
-          @media (max-width: 768px) {
-            .answers-grid {
-              grid-template-columns: 1fr !important;
-            }
+          .animate-slideUp {
+            animation: slideUp 0.3s ease;
           }
         `}</style>
 

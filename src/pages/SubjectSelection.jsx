@@ -1,10 +1,14 @@
 /**
- * SubjectSelection.jsx - BOLD DESIGN Edition
+ * SubjectSelection.jsx - BOLD DESIGN Edition with ALL DISCIPLINES
  *
  * Pagina de selecție a materiei (Toate Disciplinele)
  * Prima oprire după login - user-ul alege materia
  *
- * NEW: Bold design with hero, stats, badges, and dark mode
+ * NEW: 
+ * - 4 carduri per row (desktop)
+ * - 8 discipline "Coming Soon" 
+ * - Card special "Sugerează Disciplină"
+ * - Total: 12 carduri (3 rows x 4 columns)
  */
 
 import { useState, useEffect } from 'react';
@@ -13,14 +17,92 @@ import { useAuth } from '../hooks/useAuth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
 
-// Neon colors for each subject
-const SUBJECT_COLORS = {
-  'istorie': '#FF0080',      // neon-pink
-  'geografie': '#00FFFF',    // neon-cyan
-  'biologie': '#CCFF00',     // neon-lime
-  'matematica': '#0066FF',   // neon-blue
-  'fizica': '#B026FF',       // neon-purple
-  'chimie': '#FF6B00',       // neon-orange
+/**
+ * DISCIPLINE COMING SOON - Static Data
+ * Acestea vor fi afișate cu design "coming soon"
+ */
+const COMING_SOON_DISCIPLINES = [
+  {
+    id: 'matematica',
+    name: 'Matematică',
+    icon: '🔢',
+    description: 'Algebră, geometrie, analiză. Dezvoltă gândirea logică prin probleme captivante.',
+    color: '#B026FF', // neon purple
+    themes: 8,
+    questions: 120
+  },
+  {
+    id: 'limba-romana',
+    name: 'Limba Română',
+    icon: '🗣️',
+    description: 'Gramatică, vocabular, autori clasici. Stăpânește limba română cu stil.',
+    color: '#0066FF', // neon blue
+    themes: 6,
+    questions: 90
+  },
+  {
+    id: 'fizica',
+    name: 'Fizică',
+    icon: '⚛️',
+    description: 'Mecanică, energie, unde. Descoperă legile care guvernează universul.',
+    color: '#00AAFF', // bright blue
+    themes: 9,
+    questions: 130
+  },
+  {
+    id: 'chimie',
+    name: 'Chimie',
+    icon: '🧪',
+    description: 'Elemente, reacții, molecule. Explorează lumea transformărilor chimice.',
+    color: '#00FF88', // turquoise green
+    themes: 7,
+    questions: 100
+  },
+  {
+    id: 'istoria-religiilor',
+    name: 'Istoria Religiilor',
+    icon: '⛪',
+    description: 'Credințe, ritualuri, doctrine. Înțelege diversitatea spirituală a lumii.',
+    color: '#FFD700', // gold
+    themes: 5,
+    questions: 75
+  },
+  {
+    id: 'istoria-artei',
+    name: 'Istoria Artei',
+    icon: '🎨',
+    description: 'Pictură, sculptură, arhitectură. Călătorește prin mișcările artistice.',
+    color: '#FF1493', // deep pink
+    themes: 6,
+    questions: 85
+  },
+  {
+    id: 'limba-engleza',
+    name: 'Limba Engleză',
+    icon: '🇬🇧',
+    description: 'Vocabular, gramatică, conversație. Vorbește engleza cu încredere.',
+    color: '#FF4500', // orange red
+    themes: 8,
+    questions: 110
+  },
+  {
+    id: 'limba-franceza',
+    name: 'Limba Franceză',
+    icon: '🇫🇷',
+    description: 'Vocabular, cultură, gramatică. Stăpânește limba lui Molière.',
+    color: '#8A2BE2', // blue violet
+    themes: 7,
+    questions: 95
+  }
+];
+
+/**
+ * Neon colors for active subjects (from Firestore)
+ */
+const ACTIVE_SUBJECT_COLORS = {
+  'istorie': '#FF0080',      // neon pink
+  'geografie': '#00FFFF',    // neon cyan
+  'biologie': '#CCFF00',     // neon lime
 };
 
 export function SubjectSelection() {
@@ -59,7 +141,7 @@ export function SubjectSelection() {
   };
 
   /**
-   * EFFECT: Fetch subjects from Firestore
+   * EFFECT: Fetch active subjects from Firestore
    */
   useEffect(() => {
     async function fetchSubjects() {
@@ -79,7 +161,7 @@ export function SubjectSelection() {
           ...doc.data()
         }));
 
-        // Sort în JavaScript (nu avem nevoie de index Firestore pentru 3 materii)
+        // Sort by order
         const sortedSubjects = subjectsData.sort((a, b) => a.order - b.order);
 
         setSubjects(sortedSubjects);
@@ -95,10 +177,17 @@ export function SubjectSelection() {
   }, []);
 
   /**
-   * HANDLER: Select subject
+   * HANDLER: Select active subject
    */
   const handleSelectSubject = (subjectSlug) => {
     navigate(`/subjects/${subjectSlug}`);
+  };
+
+  /**
+   * HANDLER: Suggest new discipline (mailto)
+   */
+  const handleSuggestDiscipline = () => {
+    window.location.href = 'mailto:perviat@gmail.com?subject=Sugestie%20Disciplină%20Nouă%20-%20QuizzFun&body=Bună!%0A%0AAș%20dori%20să%20sugerez%20adăugarea%20următoarei%20discipline:%0A%0A[Scrie%20aici%20sugestia%20ta]%0A%0AMulțumesc!';
   };
 
   /**
@@ -110,7 +199,7 @@ export function SubjectSelection() {
   };
 
   /**
-   * Calculate total stats from all subjects
+   * Calculate total stats from active subjects
    */
   const totalThemes = subjects.reduce((sum, s) => sum + (s.totalThemes || 0), 0);
   const totalQuestions = subjects.reduce((sum, s) => sum + (s.totalQuestions || 0), 0);
@@ -153,42 +242,24 @@ export function SubjectSelection() {
    * RENDER: Subject Selection Page
    */
   return (
-    <div className="min-h-screen" style={{ background: 'var(--off-white)' }}>
+    <div className="min-h-screen bg-off-white dark:bg-deep-brown">
 
       {/* NAVIGATION - BOLD STYLE */}
-      <nav className="fixed top-0 left-0 right-0 z-50" style={{ background: 'var(--off-white)', borderBottom: '4px solid var(--deep-brown)' }}>
+      <nav className="bg-off-white dark:bg-deep-brown border-b-4 border-deep-brown dark:border-off-white fixed top-0 left-0 right-0 z-50">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex justify-between items-center">
             {/* Left side with back button and logo */}
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="border-3 px-3 sm:px-4 py-2 font-heading font-bold uppercase text-xs sm:text-sm transition-all duration-150"
-                style={{
-                  background: 'transparent',
-                  border: '3px solid var(--deep-brown)',
-                  color: 'var(--deep-brown)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--deep-brown)';
-                  e.currentTarget.style.color = 'var(--off-white)';
-                  e.currentTarget.style.transform = 'translate(-3px, -3px)';
-                  e.currentTarget.style.boxShadow = '3px 3px 0 var(--warm-brown)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = 'var(--deep-brown)';
-                  e.currentTarget.style.transform = 'translate(0, 0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+                className="bg-transparent border-3 border-deep-brown dark:border-off-white text-deep-brown dark:text-off-white px-3 sm:px-4 py-2 font-heading font-bold uppercase text-xs sm:text-sm hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-warm-brown transition-all duration-150"
               >
                 ← Back
               </button>
 
               <h1
                 onClick={() => navigate('/')}
-                className="cursor-pointer font-heading font-black text-lg sm:text-2xl uppercase tracking-tight"
-                style={{ color: 'var(--deep-brown)' }}
+                className="cursor-pointer font-heading font-black text-lg sm:text-2xl uppercase tracking-tight text-deep-brown dark:text-off-white"
               >
                 Quizz<span className="text-neon-pink">Fun</span>
               </h1>
@@ -199,20 +270,7 @@ export function SubjectSelection() {
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="w-10 h-10 sm:w-12 sm:h-12 border-4 hover:rotate-12 flex items-center justify-center text-lg sm:text-xl transition-all duration-150"
-                style={{
-                  background: 'var(--deep-brown)',
-                  color: 'var(--off-white)',
-                  border: '4px solid var(--deep-brown)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--neon-cyan)';
-                  e.currentTarget.style.color = 'var(--deep-brown)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'var(--deep-brown)';
-                  e.currentTarget.style.color = 'var(--off-white)';
-                }}
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-lg sm:text-xl"
                 aria-label="Toggle dark mode"
                 title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
               >
@@ -222,12 +280,7 @@ export function SubjectSelection() {
               {/* Profile - hidden on small screens */}
               <button
                 onClick={() => navigate('/profile')}
-                className="hidden md:block border-4 px-4 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal transition-all duration-150"
-                style={{
-                  background: 'var(--deep-brown)',
-                  color: 'var(--off-white)',
-                  border: '4px solid var(--deep-brown)'
-                }}
+                className="hidden md:block bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-4 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
               >
                 Profil
               </button>
@@ -246,195 +299,253 @@ export function SubjectSelection() {
       </nav>
 
       {/* HERO SECTION - BOLD STYLE */}
-      <section className="py-16 sm:py-20 pt-24 sm:pt-32 relative overflow-hidden" style={{ background: 'var(--deep-brown)', color: 'var(--off-white)' }}>
+      <section className="py-16 sm:py-20 pt-24 sm:pt-32 bg-deep-brown dark:bg-off-white relative overflow-hidden">
         {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255, 255, 255, 0.03) 50px, rgba(255, 255, 255, 0.03) 51px)'
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 3px), repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 3px)'
           }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb */}
-          <div className="mb-6 font-mono text-xs sm:text-sm uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-            <a
-              onClick={() => navigate('/')}
-              className="cursor-pointer hover:text-neon-lime transition-colors"
-            >
-              Home
-            </a>
-            {' / '}
-            <span>Toate Disciplinele</span>
-          </div>
-
-          {/* Label */}
-          <div className="font-mono text-sm sm:text-base uppercase tracking-widest mb-4" style={{ color: 'var(--neon-lime)' }}>
-            // Explore All Subjects
-          </div>
-
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter">
-            Toate Disciplinele
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <span className="font-mono text-sm font-bold uppercase tracking-widest text-neon-cyan block mb-4">
+            // Toate Disciplinele
+          </span>
+          
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
+            <span className="block">Explorează</span>
+            <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">Cunoașterea</span>
           </h1>
-
-          {/* Description */}
-          <p className="text-lg sm:text-xl md:text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 leading-relaxed" style={{ opacity: 0.9 }}>
-            De la istorie la matematică, de la geografie la fizică. Alege domeniul care te pasionează și începe să înveți jucându-te.
+          
+          <p className="text-lg sm:text-xl font-body font-semibold max-w-3xl mx-auto text-off-white/90 dark:text-deep-brown/90 leading-relaxed mb-12">
+            12 domenii de explorat. Sute de provocări de depășit. Învățare prin joc.
           </p>
 
-          {/* Stats */}
-          <div className="flex flex-wrap gap-4 sm:gap-6">
-            <div className="flex items-center gap-4 border-4 p-4 sm:p-6" style={{ background: 'var(--warm-brown)', borderColor: 'var(--off-white)' }}>
-              <div className="text-4xl sm:text-5xl">📚</div>
-              <div className="flex flex-col">
-                <div className="font-mono text-3xl sm:text-4xl font-bold leading-none" style={{ color: 'var(--neon-lime)' }}>
-                  {subjects.length}
-                </div>
-                <div className="font-body text-xs sm:text-sm uppercase tracking-wider mt-1" style={{ opacity: 0.8 }}>
-                  Discipline
-                </div>
-              </div>
+          {/* Stats - Bold Style */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto">
+            <div className="text-center">
+              <p className="text-5xl sm:text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #00FFFF' }}>
+                {subjects.length}
+              </p>
+              <p className="text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
+                Active
+              </p>
             </div>
-
-            <div className="flex items-center gap-4 border-4 p-4 sm:p-6" style={{ background: 'var(--warm-brown)', borderColor: 'var(--off-white)' }}>
-              <div className="text-4xl sm:text-5xl">❓</div>
-              <div className="flex flex-col">
-                <div className="font-mono text-3xl sm:text-4xl font-bold leading-none" style={{ color: 'var(--neon-lime)' }}>
-                  {totalQuestions}+
-                </div>
-                <div className="font-body text-xs sm:text-sm uppercase tracking-wider mt-1" style={{ opacity: 0.8 }}>
-                  Întrebări
-                </div>
-              </div>
+            <div className="text-center">
+              <p className="text-5xl sm:text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #FF0080' }}>
+                {totalThemes}
+              </p>
+              <p className="text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
+                Tematici
+              </p>
             </div>
-
-            <div className="flex items-center gap-4 border-4 p-4 sm:p-6" style={{ background: 'var(--warm-brown)', borderColor: 'var(--off-white)' }}>
-              <div className="text-4xl sm:text-5xl">🎯</div>
-              <div className="flex flex-col">
-                <div className="font-mono text-3xl sm:text-4xl font-bold leading-none" style={{ color: 'var(--neon-lime)' }}>
-                  {totalThemes}
-                </div>
-                <div className="font-body text-xs sm:text-sm uppercase tracking-wider mt-1" style={{ opacity: 0.8 }}>
-                  Tematici
-                </div>
-              </div>
+            <div className="text-center">
+              <p className="text-5xl sm:text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #CCFF00' }}>
+                {totalQuestions}+
+              </p>
+              <p className="text-xs sm:text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
+                Întrebări
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* DISCIPLINES SECTION */}
-      <main className="py-12 sm:py-16" style={{ background: 'var(--off-white)' }}>
+      {/* DISCIPLINES GRID - 4 PER ROW */}
+      <section className="py-16 sm:py-20 bg-cream dark:bg-deep-brown">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section Header */}
-          <div className="mb-12 sm:mb-16">
-            <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest block mb-4" style={{ color: 'var(--neon-orange)' }}>
-              // Disponibile Acum
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black mb-4 uppercase leading-tight tracking-tighter" style={{ color: 'var(--deep-brown)' }}>
-              Discipline Active
-            </h2>
-            <p className="text-lg sm:text-xl font-body font-medium" style={{ color: 'var(--warm-brown)' }}>
-              Alege o disciplină și începe aventura educațională
-            </p>
-          </div>
+          
+          {/* Grid: 1 column mobile, 2 tablet, 4 desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            {/* ACTIVE SUBJECTS (from Firestore) */}
+            {subjects.map((subject, index) => {
+              const neonColor = ACTIVE_SUBJECT_COLORS[subject.slug] || '#FF0080';
 
-          {/* SUBJECTS GRID */}
-          {subjects.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="font-body text-lg" style={{ color: 'var(--warm-brown)' }}>
-                Nu există discipline disponibile momentan.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {subjects.map((subject, index) => {
-                const neonColor = SUBJECT_COLORS[subject.slug] || '#FF0080';
-                const isPopular = index === 0; // First subject is marked as popular
-                const isNew = index === 1; // Second subject is marked as new
-
-                return (
+              return (
+                <div
+                  key={subject.id}
+                  onClick={() => handleSelectSubject(subject.slug)}
+                  className="relative bg-cream dark:bg-warm-brown border-[5px] border-warm-brown dark:border-sand p-6 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:border-deep-brown hover:dark:border-off-white min-h-[280px] flex flex-col group"
+                  style={{
+                    boxShadow: `0 0 0 0 transparent`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `8px 8px 0 #2D2416`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = `0 0 0 0 transparent`;
+                  }}
+                >
+                  {/* Left accent bar (vertical neon) */}
                   <div
-                    key={subject.id}
-                    onClick={() => handleSelectSubject(subject.slug)}
-                    className="relative cursor-pointer flex flex-col"
-                    style={{
-                      background: 'var(--cream)',
-                      border: '6px solid var(--deep-brown)',
-                      padding: '3rem',
-                      minHeight: '400px',
-                      transition: 'all 0.2s ease',
-                      boxShadow: `0 0 0 0 ${neonColor}`,
-                      animation: `slideUp 0.5s ease ${0.05 * (index + 1)}s backwards`
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = `8px 8px 0 ${neonColor}`;
-                      e.currentTarget.style.borderColor = neonColor;
-                      e.currentTarget.style.transform = 'translate(-8px, -8px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = `0 0 0 0 ${neonColor}`;
-                      e.currentTarget.style.borderColor = 'var(--deep-brown)';
-                      e.currentTarget.style.transform = 'translate(0, 0)';
-                    }}
-                  >
-                    {/* Top accent bar */}
-                    <div
-                      className="absolute top-0 left-0 right-0"
-                      style={{
-                        height: '10px',
-                        background: neonColor
-                      }}
-                    ></div>
+                    className="absolute top-0 left-0 w-3 h-full transition-all duration-300 group-hover:w-full group-hover:opacity-10"
+                    style={{ backgroundColor: neonColor }}
+                  ></div>
 
-                    {/* Badge */}
-                    {isPopular && (
-                      <div className="absolute top-8 right-8 px-3 py-1.5 font-heading font-black text-xs uppercase tracking-wider" style={{ background: 'var(--neon-lime)', color: 'var(--deep-brown)' }}>
-                        🔥 Popular
-                      </div>
-                    )}
-                    {isNew && (
-                      <div className="absolute top-8 right-8 px-3 py-1.5 font-heading font-black text-xs uppercase tracking-wider" style={{ background: 'var(--neon-lime)', color: 'var(--deep-brown)' }}>
-                        ✨ Nou
-                      </div>
-                    )}
-
+                  {/* Header: Icon + Title (Horizontal Layout) */}
+                  <div className="flex items-center gap-3 mb-3 relative z-10">
                     {/* Icon */}
-                    <div className="text-7xl sm:text-8xl mb-6">
+                    <div className="text-5xl filter grayscale group-hover:grayscale-0 transition-all duration-300 flex-shrink-0">
                       {subject.icon}
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight leading-tight" style={{ color: 'var(--deep-brown)' }}>
+                    <h3 className="text-xl sm:text-2xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
                       {subject.name}
                     </h3>
+                  </div>
 
-                    {/* Description */}
-                    <p className="text-base sm:text-lg font-body mb-auto leading-relaxed" style={{ color: 'var(--warm-brown)' }}>
-                      {subject.description}
-                    </p>
+                  {/* Description - NO mb-auto to eliminate space */}
+                  <p className="text-sm sm:text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed relative z-10 mb-3">
+                    {subject.description}
+                  </p>
 
-                    {/* Meta */}
-                    <div className="mt-8 pt-6 flex justify-between items-center" style={{ borderTop: '4px solid var(--sand)' }}>
-                      <div className="flex flex-col gap-2">
-                        <div className="font-mono text-xs sm:text-sm font-bold uppercase" style={{ color: 'var(--deep-brown)' }}>
-                          {subject.totalThemes} Tematici
-                        </div>
-                        <div className="font-mono text-xs sm:text-sm font-bold uppercase" style={{ color: 'var(--deep-brown)' }}>
-                          {subject.totalQuestions} Întrebări
-                        </div>
-                      </div>
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center text-3xl sm:text-4xl font-black transition-transform" style={{ background: 'var(--deep-brown)', color: 'var(--off-white)' }}>
-                        →
-                      </div>
+                  {/* Meta - reduced spacing */}
+                  <div className="flex justify-between items-center pt-3 border-t-[3px] border-sand dark:border-warm-brown relative z-10 mt-auto">
+                    <span className="bg-warm-brown dark:bg-sand text-off-white dark:text-deep-brown px-2 py-1 font-mono text-xs font-bold uppercase">
+                      {subject.totalThemes} Teme
+                    </span>
+                    <div className="w-12 h-12 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-2xl font-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                      →
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
+
+            {/* COMING SOON DISCIPLINES */}
+            {COMING_SOON_DISCIPLINES.map((discipline) => (
+              <div
+                key={discipline.id}
+                className="relative bg-sand dark:bg-warm-brown border-[5px] border-dashed border-warm-brown dark:border-sand p-6 min-h-[280px] flex flex-col opacity-60 cursor-not-allowed"
+              >
+                {/* Coming Soon Badge */}
+                <div 
+                  className="absolute top-6 right-6 bg-[#FF6B00] text-off-white px-3 py-1.5 font-heading font-black text-xs uppercase tracking-widest z-10"
+                  style={{ transform: 'rotate(5deg)' }}
+                >
+                  Coming Soon
+                </div>
+
+                {/* Header: Icon + Title (Horizontal Layout) */}
+                <div className="flex items-center gap-3 mb-3 relative z-10">
+                  {/* Icon */}
+                  <div className="text-5xl filter grayscale flex-shrink-0">
+                    {discipline.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl sm:text-2xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
+                    {discipline.name}
+                  </h3>
+                </div>
+
+                {/* Description - NO mb-auto */}
+                <p className="text-sm sm:text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-3">
+                  {discipline.description}
+                </p>
+
+                {/* Meta */}
+                <div className="flex justify-between items-center pt-3 border-t-[3px] border-warm-brown dark:border-sand mt-auto">
+                  <span className="bg-warm-brown dark:bg-sand text-off-white dark:text-deep-brown px-2 py-1 font-mono text-xs font-bold uppercase">
+                    În curând
+                  </span>
+                  <div className="w-12 h-12 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-2xl font-black">
+                    →
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* SUGGEST DISCIPLINE CARD */}
+            <div
+              onClick={handleSuggestDiscipline}
+              className="relative bg-gradient-to-br from-[#39FF14] to-[#00FF88] border-[5px] border-deep-brown dark:border-off-white p-6 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[8px_8px_0_#2D2416] min-h-[280px] flex flex-col group"
+            >
+              {/* Header: Icon + Title (Horizontal Layout) */}
+              <div className="flex items-center gap-3 mb-3">
+                {/* Icon with pulse animation */}
+                <div className="text-5xl animate-pulse flex-shrink-0">
+                  💡
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-heading font-black uppercase tracking-tight text-deep-brown leading-tight">
+                  Sugerează Disciplină
+                </h3>
+              </div>
+
+              {/* Description - NO mb-auto */}
+              <p className="text-sm sm:text-base font-body text-deep-brown/80 leading-relaxed mb-3">
+                Ai o idee pentru o disciplină nouă? Trimite-ne sugestia ta și ajută-ne să extindem platforma!
+              </p>
+
+              {/* Meta */}
+              <div className="flex justify-between items-center pt-3 border-t-[3px] border-deep-brown mt-auto">
+                <span className="bg-deep-brown text-off-white px-2 py-1 font-mono text-xs font-bold uppercase">
+                  Contact
+                </span>
+                <div className="w-12 h-12 bg-deep-brown flex items-center justify-center text-off-white text-2xl font-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                  ✉️
+                </div>
+              </div>
             </div>
-          )}
+
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* FOOTER - BOLD STYLE */}
+      <footer className="bg-deep-brown dark:bg-off-white py-12 border-t-6 border-neon-pink">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="font-heading font-black text-xl uppercase text-off-white dark:text-deep-brown mb-4">
+                QUIZZFUN
+              </h3>
+              <p className="text-sm font-body text-off-white/80 dark:text-deep-brown/80">
+                Educație prin joc. Învață orice disciplină distractiv.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-heading font-bold uppercase tracking-wide text-off-white dark:text-deep-brown mb-3">Rapid Links</h4>
+              <ul className="space-y-2 text-sm font-body">
+                <li>
+                  <button
+                    onClick={() => navigate('/')}
+                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
+                  >
+                    Home
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => navigate('/profile')}
+                    className="text-off-white/80 dark:text-deep-brown/80 hover:text-neon-cyan transition-colors"
+                  >
+                    Profil
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-heading font-bold uppercase tracking-wide text-off-white dark:text-deep-brown mb-3">Contact</h4>
+              <p className="text-sm font-body text-off-white/80 dark:text-deep-brown/80">📧 perviat@gmail.com</p>
+            </div>
+          </div>
+
+          <hr className="border-3 border-off-white/20 dark:border-deep-brown/20 mb-6" />
+
+          <div className="text-center text-sm font-mono">
+            <p className="text-off-white/70 dark:text-deep-brown/70">
+              © 2025 QuizzFun — All Rights Reserved
+            </p>
+          </div>
+        </div>
+      </footer>
 
     </div>
   );

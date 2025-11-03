@@ -5,6 +5,7 @@
  * Flow: Landing → Click subject → Themes → Quiz (2 clickuri în loc de 3)
  *
  * NEW: Bold design with light/dark mode toggle
+ * UPDATED: Full-width hero pattern, vertical title layout, neon hover effects
  */
 
 import React, { useState, useEffect } from 'react';
@@ -162,26 +163,30 @@ export function LandingPage({ onPlayNow }) {
         </div>
       </nav>
 
-      {/* HERO SECTION - BOLD STYLE */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center relative">
-        {/* Background grid pattern */}
+      {/* HERO SECTION - BOLD STYLE WITH FULL-WIDTH PATTERN */}
+      <section className="relative overflow-hidden">
+        {/* Background grid pattern - FULL WIDTH */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute inset-0" style={{
             backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 3px), repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 3px)'
           }}></div>
         </div>
 
-        <div className="relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center relative z-10">
+          {/* Titlu principal - layout VERTICAL */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-off-white">
-            Învață <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">Jucându-te</span>
+            <span className="block">Învață</span>
+            <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">Jucându-te</span>
           </h1>
+          
           <p className="text-xl sm:text-2xl mb-8 font-body font-semibold max-w-3xl mx-auto text-deep-brown dark:text-off-white leading-relaxed">
             Quiz-uri bold. Cunoștințe reale. Competiție intensă.
           </p>
 
+          {/* Buton CTA - HOVER VERDE NEON #39FF14 */}
           <button
             onClick={user ? scrollToSubjects : onPlayNow}
-            className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-6 border-deep-brown dark:border-off-white px-10 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150 inline-flex items-center gap-3"
+            className="group bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-6 border-deep-brown dark:border-off-white px-10 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:bg-[#39FF14] hover:text-deep-brown hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150 inline-flex items-center gap-3"
           >
             {user ? 'Start Now' : '🚀 Începe Acum'}
             <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
@@ -250,7 +255,7 @@ export function LandingPage({ onPlayNow }) {
                   <div
                     key={subject.id}
                     onClick={() => handleSubjectClick(subject.slug)}
-                    className="bg-cream dark:bg-deep-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
+                    className="bg-off-white dark:bg-warm-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
                     style={{
                       boxShadow: `0 0 0 0 ${neonColor}`,
                     }}
@@ -302,10 +307,92 @@ export function LandingPage({ onPlayNow }) {
                 );
               })}
 
-              {/* MAI MULTE CARD - NEW! */}
+              {/* MATEMATICĂ CARD - COMING SOON */}
+              <div className="relative bg-sand dark:bg-warm-brown border-6 border-dashed border-warm-brown dark:border-sand p-8 min-h-[400px] flex flex-col opacity-60">
+                {/* Coming Soon Badge */}
+                <div 
+                  className="absolute top-8 right-8 bg-[#FF6B00] text-off-white px-4 py-2 font-heading font-black text-xs uppercase tracking-widest"
+                  style={{ transform: 'rotate(5deg)' }}
+                >
+                  Coming Soon
+                </div>
+
+                {/* Top accent bar */}
+                <div
+                  className="h-2 -mx-8 -mt-8 mb-6 bg-[#B026FF]"
+                ></div>
+
+                {/* Icon */}
+                <div className="text-7xl mb-6 filter grayscale">
+                  🔢
+                </div>
+
+                {/* Title */}
+                <h3 className="text-3xl sm:text-4xl font-heading font-black mb-4 uppercase tracking-tight text-deep-brown dark:text-off-white">
+                  Matematică
+                </h3>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg font-body mb-auto text-deep-brown/70 dark:text-off-white/70 leading-relaxed">
+                  Algebră, geometrie, analiză. Rezolvă probleme și dezvoltă gândirea logică.
+                </p>
+
+                {/* Meta */}
+                <div className="flex justify-between items-center mt-8 pt-6 border-t-3 border-deep-brown dark:border-off-white">
+                  <span className="font-mono text-sm font-bold uppercase text-deep-brown dark:text-off-white">
+                    În curând
+                  </span>
+                  <div className="w-16 h-16 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-3xl font-black">
+                    →
+                  </div>
+                </div>
+              </div>
+
+              {/* LIMBA ROMÂNĂ CARD - COMING SOON */}
+              <div className="relative bg-sand dark:bg-warm-brown border-6 border-dashed border-warm-brown dark:border-sand p-8 min-h-[400px] flex flex-col opacity-60">
+                {/* Coming Soon Badge */}
+                <div 
+                  className="absolute top-8 right-8 bg-[#FF6B00] text-off-white px-4 py-2 font-heading font-black text-xs uppercase tracking-widest"
+                  style={{ transform: 'rotate(5deg)' }}
+                >
+                  Coming Soon
+                </div>
+
+                {/* Top accent bar */}
+                <div
+                  className="h-2 -mx-8 -mt-8 mb-6 bg-[#0066FF]"
+                ></div>
+
+                {/* Icon */}
+                <div className="text-7xl mb-6 filter grayscale">
+                  🗣️
+                </div>
+
+                {/* Title */}
+                <h3 className="text-3xl sm:text-4xl font-heading font-black mb-4 uppercase tracking-tight text-deep-brown dark:text-off-white">
+                  Limba Română
+                </h3>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg font-body mb-auto text-deep-brown/70 dark:text-off-white/70 leading-relaxed">
+                  Gramatică, vocabular, autori clasici. Îmbunătățește-ți abilitățile lingvistice.
+                </p>
+
+                {/* Meta */}
+                <div className="flex justify-between items-center mt-8 pt-6 border-t-3 border-deep-brown dark:border-off-white">
+                  <span className="font-mono text-sm font-bold uppercase text-deep-brown dark:text-off-white">
+                    În curând
+                  </span>
+                  <div className="w-16 h-16 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-3xl font-black">
+                    →
+                  </div>
+                </div>
+              </div>
+
+              {/* MAI MULTE CARD */}
               <div
                 onClick={() => navigate('/subjects')}
-                className="bg-cream dark:bg-deep-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
+                className="bg-off-white dark:bg-warm-brown border-6 border-deep-brown dark:border-off-white p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 min-h-[400px] flex flex-col group"
                 style={{
                   boxShadow: `0 0 0 0 #FF6B00`,
                 }}
@@ -359,7 +446,7 @@ export function LandingPage({ onPlayNow }) {
         </div>
       </section>
 
-      {/* FEATURES SECTION - BOLD STYLE */}
+      {/* FEATURES SECTION - BOLD STYLE WITH INDIVIDUAL BROWN BORDERS */}
       <section className="py-20 bg-cream dark:bg-deep-brown">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
@@ -372,10 +459,10 @@ export function LandingPage({ onPlayNow }) {
             </h2>
           </div>
 
-          {/* Features Grid - Brutalist 2x2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 max-w-5xl mx-auto border-6 border-deep-brown dark:border-off-white">
+          {/* Features Grid - Brutalist 2x2 WITH BROWN BORDERS */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
             {/* Feature 1 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
+            <div className="bg-off-white dark:bg-warm-brown p-8 sm:p-12 border-4 border-[#8B5A3C] hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
               <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">🎯</div>
               <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Unlimited</h3>
               <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
@@ -384,7 +471,7 @@ export function LandingPage({ onPlayNow }) {
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
+            <div className="bg-off-white dark:bg-warm-brown p-8 sm:p-12 border-4 border-[#8B5A3C] hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
               <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">📊</div>
               <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Progress</h3>
               <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
@@ -393,7 +480,7 @@ export function LandingPage({ onPlayNow }) {
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
+            <div className="bg-off-white dark:bg-warm-brown p-8 sm:p-12 border-4 border-[#8B5A3C] hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
               <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">🏆</div>
               <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Rankings</h3>
               <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
@@ -402,7 +489,7 @@ export function LandingPage({ onPlayNow }) {
             </div>
 
             {/* Feature 4 */}
-            <div className="bg-cream dark:bg-deep-brown p-8 sm:p-12 border-3 border-deep-brown dark:border-off-white hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
+            <div className="bg-off-white dark:bg-warm-brown p-8 sm:p-12 border-4 border-[#8B5A3C] hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown transition-all duration-200 group">
               <div className="text-6xl mb-6 filter grayscale group-hover:grayscale-0 transition-all duration-300">⚡</div>
               <h3 className="text-2xl sm:text-3xl font-heading font-black mb-4 uppercase tracking-tight">Instant</h3>
               <p className="text-base sm:text-lg font-body opacity-80 leading-relaxed">
@@ -413,7 +500,7 @@ export function LandingPage({ onPlayNow }) {
         </div>
       </section>
 
-      {/* CTA FINAL - BOLD STYLE */}
+      {/* CTA FINAL - BOLD STYLE WITH BORDER + ARROW */}
       <section className="bg-deep-brown dark:bg-off-white py-20 text-center border-t-6 border-neon-pink">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
@@ -423,11 +510,13 @@ export function LandingPage({ onPlayNow }) {
             100% gratuit • Fără reclame • Distractiv • Educational
           </p>
 
+          {/* Buton CTA cu border hover + săgeată (ca Start Now) */}
           <button
             onClick={user ? scrollToSubjects : onPlayNow}
-            className="bg-off-white dark:bg-deep-brown text-deep-brown dark:text-off-white border-6 border-off-white dark:border-deep-brown px-12 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-off-white dark:hover:shadow-deep-brown transition-all duration-150 inline-flex items-center gap-3"
+            className="group bg-off-white dark:bg-deep-brown text-deep-brown dark:text-off-white border-6 border-off-white dark:border-deep-brown px-12 sm:px-16 py-5 font-heading font-black text-xl sm:text-2xl uppercase tracking-wide hover:bg-[#39FF14] hover:text-deep-brown hover:border-deep-brown hover:-translate-x-2 hover:-translate-y-2 hover:shadow-brutal-lg hover:shadow-off-white dark:hover:shadow-deep-brown transition-all duration-150 inline-flex items-center gap-3"
           >
             {user ? '📚 Alege Materia' : '🎯 Începe Acum'}
+            <span className="inline-block transition-transform group-hover:translate-x-2">→</span>
           </button>
         </div>
       </section>
