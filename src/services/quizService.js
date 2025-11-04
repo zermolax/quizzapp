@@ -264,3 +264,87 @@ export async function getUserStats(userId) {
     };
   }
 }
+
+/**
+ * TRIVIA MODE: Get random questions from ALL subjects and ALL themes
+ * @param {string} difficulty - Difficulty level (easy, medium, hard)
+ * @param {number} limitCount - Number of questions to return (default 12)
+ * @returns {Array} Array of random questions
+ */
+export async function getGlobalTriviaQuestions(difficulty, limitCount = 12) {
+  try {
+    console.log('🎲 Fetching GLOBAL trivia questions, difficulty:', difficulty);
+
+    const questionsRef = collection(db, 'questions');
+    const q = query(
+      questionsRef,
+      where('difficulty', '==', difficulty)
+    );
+
+    const snapshot = await getDocs(q);
+    console.log(`📦 Found ${snapshot.size} questions across all subjects`);
+
+    if (snapshot.empty) {
+      console.warn('⚠️ No questions found for this difficulty');
+      return [];
+    }
+
+    const allQuestions = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    // Shuffle and take first limitCount
+    const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, limitCount);
+
+    console.log(`✅ Returning ${shuffled.length} random trivia questions`);
+    return shuffled;
+
+  } catch (error) {
+    console.error('❌ Error fetching global trivia questions:', error);
+    throw error;
+  }
+}
+
+/**
+ * TRIVIA MODE: Get random questions from ALL themes within a specific subject
+ * @param {string} subjectId - Subject ID (slug)
+ * @param {string} difficulty - Difficulty level (easy, medium, hard)
+ * @param {number} limitCount - Number of questions to return (default 12)
+ * @returns {Array} Array of random questions
+ */
+export async function getSubjectTriviaQuestions(subjectId, difficulty, limitCount = 12) {
+  try {
+    console.log('🎲 Fetching SUBJECT trivia questions for:', subjectId, 'difficulty:', difficulty);
+
+    const questionsRef = collection(db, 'questions');
+    const q = query(
+      questionsRef,
+      where('subjectId', '==', subjectId),
+      where('difficulty', '==', difficulty)
+    );
+
+    const snapshot = await getDocs(q);
+    console.log(`📦 Found ${snapshot.size} questions for subject: ${subjectId}`);
+
+    if (snapshot.empty) {
+      console.warn('⚠️ No questions found for this subject and difficulty');
+      return [];
+    }
+
+    const allQuestions = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+
+    // Shuffle and take first limitCount
+    const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, limitCount);
+
+    console.log(`✅ Returning ${shuffled.length} random trivia questions for ${subjectId}`);
+    return shuffled;
+
+  } catch (error) {
+    console.error('❌ Error fetching subject trivia questions:', error);
+    throw error;
+  }
+}
