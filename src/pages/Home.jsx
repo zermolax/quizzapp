@@ -32,8 +32,8 @@ export function Home() {
     console.log('📢 Play now clicked, user:', user);
 
     if (user) {
-      console.log('✅ User is logged in, navigating to /subjects');
-      navigate('/subjects');
+      console.log('✅ User is logged in, navigating to /game-mode');
+      navigate('/game-mode');
     } else {
       console.log('❌ User not logged in, showing login modal');
       setShowLogin(true);
@@ -83,7 +83,7 @@ export default Home;
  * 10. setShowLogin(false)
  * 11. Re-render Home
  * 12. user exists && !showLogin → Render LandingPage (logged in)
- * 13. Now "Joacă acum" → navigate('/subjects')
+ * 13. Now "Joacă acum" → navigate('/game-mode') - TRIVIA MODE ENABLED!
  *
  * PERFECT! ✅
  */

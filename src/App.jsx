@@ -13,9 +13,12 @@ import { useAuth } from './hooks/useAuth';
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home'));
+const GameModeSelection = lazy(() => import('./pages/GameModeSelection'));
 const SubjectSelection = lazy(() => import('./pages/SubjectSelection'));
 const ThemeSelection = lazy(() => import('./pages/ThemeSelection'));
 const QuizPlay = lazy(() => import('./pages/QuizPlay'));
+const TriviaGlobal = lazy(() => import('./pages/TriviaGlobal'));
+const TriviaSubject = lazy(() => import('./pages/TriviaSubject'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
 const Privacy = lazy(() => import('./pages/Privacy'));
@@ -47,8 +50,15 @@ export default function App() {
             element={<Home />}
           />
 
-          {/* RUTA 2: Subjects - Multi-disciplinary routes (Protected) */}
-          {/* Step 1: Select Subject */}
+          {/* RUTA 2: Game Mode Selection (Protected) - NEW! */}
+          {/* Alege modul de joc: Clasic, Trivia Global, Trivia per Disciplină */}
+          <Route
+            path="/game-mode"
+            element={user ? <GameModeSelection /> : <Navigate to="/" replace />}
+          />
+
+          {/* RUTA 3: Subjects - Multi-disciplinary routes (Protected) */}
+          {/* Step 1: Select Subject (accesat din Mod Clasic) */}
           <Route
             path="/subjects"
             element={user ? <SubjectSelection /> : <Navigate to="/" replace />}
@@ -66,31 +76,44 @@ export default function App() {
             element={user ? <QuizPlay /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 3: Profile (Protected) */}
+          {/* RUTA 4: TRIVIA MODE ROUTES (Protected) */}
+          {/* Trivia Global - întrebări din toate disciplinele */}
+          <Route
+            path="/trivia/global"
+            element={user ? <TriviaGlobal /> : <Navigate to="/" replace />}
+          />
+
+          {/* Trivia per Disciplină - întrebări din toate tematicile unei discipline */}
+          <Route
+            path="/trivia/:subjectSlug"
+            element={user ? <TriviaSubject /> : <Navigate to="/" replace />}
+          />
+
+          {/* RUTA 5: Profile (Protected) */}
           <Route
             path="/profile"
             element={user ? <Profile /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 4: Leaderboard (Protected) */}
+          {/* RUTA 6: Leaderboard (Protected) */}
           <Route
             path="/leaderboard"
             element={user ? <Leaderboard /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 5: Privacy Policy (Public) */}
+          {/* RUTA 7: Privacy Policy (Public) */}
           <Route path="/privacy" element={<Privacy />} />
 
-          {/* RUTA 6: Terms of Service (Public) */}
+          {/* RUTA 8: Terms of Service (Public) */}
           <Route path="/terms" element={<Terms />} />
 
-          {/* LEGACY REDIRECT: /themes → /subjects */}
+          {/* LEGACY REDIRECT: /themes → /game-mode */}
           <Route
             path="/themes"
-            element={<Navigate to="/subjects" replace />}
+            element={<Navigate to="/game-mode" replace />}
           />
 
-          {/* RUTA 7: Catch-all (404) */}
+          {/* RUTA 9: Catch-all (404) */}
           <Route path="*" element={<Navigate to="/" replace />} />
 
         </Routes>
