@@ -332,7 +332,7 @@ const finishQuiz = async () => {
       <div className="min-h-screen bg-off-white flex items-center justify-center p-4">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-neon-cyan border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="font-body text-deep-brown text-sm sm:text-base">Se încarcă trivia...</p>
+          <p className="font-body text-deep-brown text-base">Se încarcă trivia...</p>
         </div>
       </div>
     );
@@ -345,15 +345,15 @@ const finishQuiz = async () => {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center p-4 sm:p-8">
         <div className="bg-cream border-6 border-error p-6 sm:p-8 max-w-md w-full">
-          <h2 className="text-2xl sm:text-3xl font-heading font-black uppercase text-error mb-4">
+          <h2 className="text-3xl font-heading font-black uppercase text-error mb-4">
             ⚠️ Eroare
           </h2>
-          <p className="font-body text-deep-brown mb-6 text-sm sm:text-base">
+          <p className="font-body text-deep-brown mb-6 text-base">
             Nu am găsit întrebări pentru această dificultate în trivia global.
           </p>
           <button
             onClick={() => navigate('/subjects')}
-            className="w-full bg-deep-brown text-off-white border-4 border-deep-brown px-6 py-3 font-heading font-bold uppercase text-sm sm:text-base hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+            className="w-full bg-deep-brown text-off-white border-4 border-deep-brown px-6 py-3 font-heading font-bold uppercase text-base hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
           >
             ← Înapoi
           </button>
@@ -374,7 +374,7 @@ const finishQuiz = async () => {
         <div className="bg-cream border-6 border-deep-brown p-6 sm:p-8 md:p-12 max-w-2xl w-full">
 
           {savingSession && (
-            <div className="bg-neon-cyan text-deep-brown p-4 mb-6 border-4 border-deep-brown font-heading font-bold text-sm sm:text-base">
+            <div className="bg-neon-cyan text-deep-brown p-4 mb-6 border-4 border-deep-brown font-heading font-bold text-base">
               ⏳ Se salvează progresul...
             </div>
           )}
@@ -385,18 +385,18 @@ const finishQuiz = async () => {
             </span>
           </div>
 
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 sm:mb-8 text-deep-brown uppercase">
+          <h1 className="font-heading text-5xl font-black text-center mb-6 sm:mb-8 text-deep-brown uppercase">
             🎉 Trivia Terminat!
           </h1>
 
           <div className="bg-deep-brown text-neon-lime p-6 sm:p-8 border-6 border-deep-brown mb-6 sm:mb-8 text-center">
-            <p className="font-mono text-xs sm:text-sm font-bold mb-2 text-off-white uppercase">
+            <p className="font-mono text-sm font-bold mb-2 text-off-white uppercase">
               SCOR FINAL
             </p>
-            <p className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-neon-lime">
+            <p className="font-heading text-7xl font-black text-neon-lime">
               {percentage}%
             </p>
-            <p className="font-mono text-base sm:text-lg font-bold text-sand mt-2">
+            <p className="font-mono text-lg font-bold text-sand mt-2">
               {score} / {maxScore} puncte
             </p>
           </div>
@@ -404,17 +404,17 @@ const finishQuiz = async () => {
           {/* Performance message */}
           <div className="mb-6 sm:mb-8 text-center">
             {percentage >= 80 && (
-              <p className="font-heading text-lg sm:text-xl font-bold text-[#10B981]">
+              <p className="font-heading text-xl font-bold text-[#10B981]">
                 🌟 Excelent! Cunoștințe impresionante!
               </p>
             )}
             {percentage >= 60 && percentage < 80 && (
-              <p className="font-heading text-lg sm:text-xl font-bold text-neon-orange">
+              <p className="font-heading text-xl font-bold text-neon-orange">
                 👍 Bun! Încearcă din nou pentru a îmbunătăți!
               </p>
             )}
             {percentage < 60 && (
-              <p className="font-heading text-lg sm:text-xl font-bold text-neon-pink">
+              <p className="font-heading text-xl font-bold text-neon-pink">
                 📖 Mai mult de învățat! Continuă să exersezi!
               </p>
             )}
@@ -423,10 +423,10 @@ const finishQuiz = async () => {
           {/* User Stats */}
           {userStats && (
             <div className="bg-sand border-4 border-warm-brown p-4 sm:p-6 mb-6 sm:mb-8">
-              <p className="font-heading text-base sm:text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
+              <p className="font-heading text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
                 📊 Statistici
               </p>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4 font-body text-xs sm:text-sm text-deep-brown">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 font-body text-sm text-deep-brown">
                 <div>
                   <strong>Total quiz-uri:</strong> {userStats.totalQuizzesTaken || 0}
                 </div>
@@ -446,7 +446,7 @@ const finishQuiz = async () => {
           {/* New badges earned */}
           {newBadgesEarned.length > 0 && (
             <div className="bg-neon-lime border-4 border-deep-brown p-4 sm:p-6 mb-6 sm:mb-8">
-              <p className="font-heading text-base sm:text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
+              <p className="font-heading text-lg font-black mb-3 sm:mb-4 text-deep-brown uppercase">
                 🏅 Insigne Noi Câștigate!
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -458,7 +458,7 @@ const finishQuiz = async () => {
           )}
 
           {/* Quiz details */}
-          <div className="bg-cream border-4 border-sand p-4 sm:p-6 mb-6 sm:mb-8 font-body text-xs sm:text-sm text-deep-brown space-y-2">
+          <div className="bg-cream border-4 border-sand p-4 sm:p-6 mb-6 sm:mb-8 font-body text-sm text-deep-brown space-y-2">
             <p><strong>Mod:</strong> Trivia Global (Toate Disciplinele)</p>
             <p><strong>Dificultate:</strong> {difficulty}</p>
             <p><strong>Întrebări:</strong> {questions.length}</p>
@@ -468,14 +468,14 @@ const finishQuiz = async () => {
           <div className="flex flex-col gap-3 sm:gap-4">
             <button
               onClick={() => navigate('/subjects')}
-              className="w-full bg-deep-brown text-off-white border-6 border-deep-brown px-6 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+              className="w-full bg-deep-brown text-off-white border-6 border-deep-brown px-6 py-3 sm:py-4 font-heading font-black text-base uppercase hover:bg-neon-cyan hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
             >
               ← Înapoi la Discipline
             </button>
 
             <button
               onClick={() => window.location.reload()}
-              className="w-full bg-[#10B981] text-deep-brown border-6 border-[#10B981] px-6 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+              className="w-full bg-[#10B981] text-deep-brown border-6 border-[#10B981] px-6 py-3 sm:py-4 font-heading font-black text-base uppercase hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
             >
               🔄 Încearcă din nou
             </button>
@@ -504,18 +504,18 @@ const finishQuiz = async () => {
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={handleQuit}
-                className="bg-transparent border-3 border-deep-brown text-deep-brown px-3 sm:px-4 py-2 font-heading font-bold text-xs sm:text-sm uppercase hover:bg-neon-pink hover:text-off-white hover:border-neon-pink transition-all duration-150"
+                className="bg-transparent border-3 border-deep-brown text-deep-brown px-3 sm:px-4 py-2 font-heading font-bold text-sm uppercase hover:bg-neon-pink hover:text-off-white hover:border-neon-pink transition-all duration-150"
               >
                 ✕ <span className="hidden sm:inline">Quit</span>
               </button>
 
-              <div className="font-mono text-[0.65rem] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-deep-brown">
+              <div className="font-mono text-sm font-bold uppercase tracking-wider text-deep-brown">
                 <span className="hidden sm:inline">🎲 TRIVIA GLOBAL • </span>{difficultyInfo.emoji}
               </div>
             </div>
 
             {/* Right side - Score */}
-            <div className="bg-deep-brown text-neon-lime px-3 sm:px-6 py-2 border-4 border-deep-brown font-mono text-sm sm:text-base md:text-lg font-bold">
+            <div className="bg-deep-brown text-neon-lime px-3 sm:px-6 py-2 border-4 border-deep-brown font-mono text-lg font-bold">
               {score} pts
             </div>
           </nav>
@@ -528,10 +528,10 @@ const finishQuiz = async () => {
             {/* Progress Bar */}
             <div className="mb-6 sm:mb-8">
               <div className="flex justify-between items-center mb-3">
-                <span className="font-mono text-xs sm:text-sm font-bold uppercase text-deep-brown">
+                <span className="font-mono text-sm font-bold uppercase text-deep-brown">
                   Întrebarea {currentQuestionIndex + 1} / {questions.length}
                 </span>
-                <span className="font-mono text-xs sm:text-sm font-bold text-deep-brown">
+                <span className="font-mono text-sm font-bold text-deep-brown">
                   {Math.round(progressPercent)}%
                 </span>
               </div>
@@ -549,15 +549,15 @@ const finishQuiz = async () => {
               <div className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 border-4 ${
                 timeLeft <= 10 ? 'bg-error border-error text-white animate-pulse' : 'bg-cream border-warm-brown text-deep-brown'
               }`}>
-                <span className="text-2xl sm:text-3xl">⏱️</span>
-                <span className="font-mono text-2xl sm:text-3xl md:text-4xl font-black">
+                <span className="text-3xl">⏱️</span>
+                <span className="font-mono text-4xl font-black">
                   {timeLeft}s
                 </span>
               </div>
 
               {/* Difficulty Badge */}
               <div
-                className="px-4 sm:px-6 py-2 sm:py-3 border-4 border-deep-brown font-heading font-bold text-xs sm:text-sm uppercase text-off-white"
+                className="px-4 sm:px-6 py-2 sm:py-3 border-4 border-deep-brown font-heading font-bold text-sm uppercase text-off-white"
                 style={{ backgroundColor: difficultyInfo.color }}
               >
                 {difficultyInfo.emoji} {difficultyInfo.label}
@@ -575,7 +575,7 @@ const finishQuiz = async () => {
 
             {/* Question Card */}
             <div className="bg-cream border-6 border-deep-brown p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
-              <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black text-deep-brown leading-tight mb-6 sm:mb-8">
+              <h2 className="font-heading text-4xl font-black text-deep-brown leading-tight mb-6 sm:mb-8">
                 {currentQuestion.question}
               </h2>
 
@@ -609,9 +609,9 @@ const finishQuiz = async () => {
                       key={index}
                       onClick={() => handleAnswerSelect(index)}
                       disabled={answered}
-                      className={`${bgColor} ${textColor} border-4 ${borderColor} p-4 sm:p-5 md:p-6 text-left font-body text-sm sm:text-base md:text-lg font-semibold transition-all duration-150 disabled:cursor-not-allowed hover:enabled:-translate-x-1 hover:enabled:-translate-y-1 hover:enabled:shadow-brutal hover:enabled:shadow-deep-brown`}
+                      className={`${bgColor} ${textColor} border-4 ${borderColor} p-4 sm:p-5 md:p-6 text-left font-body text-lg font-semibold transition-all duration-150 disabled:cursor-not-allowed hover:enabled:-translate-x-1 hover:enabled:-translate-y-1 hover:enabled:shadow-brutal hover:enabled:shadow-deep-brown`}
                     >
-                      <span className="font-mono font-black text-base sm:text-lg mr-2 sm:mr-3">
+                      <span className="font-mono font-black text-lg mr-2 sm:mr-3">
                         {getAnswerLetter(index)}.
                       </span>
                       {answer.text}
@@ -631,7 +631,7 @@ const finishQuiz = async () => {
               {/* Modal Header */}
               <div className="p-4 sm:p-6 md:p-8 border-b-4 border-deep-brown flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                 <div
-                  className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-2xl sm:text-3xl border-4 border-deep-brown flex-shrink-0 ${
+                  className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-3xl border-4 border-deep-brown flex-shrink-0 ${
                     isCorrect ? 'bg-[#10B981]' : 'bg-neon-pink'
                   }`}
                 >
@@ -639,10 +639,10 @@ const finishQuiz = async () => {
                 </div>
 
                 <div>
-                  <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-deep-brown mb-1 sm:mb-2">
+                  <h3 className="font-heading text-3xl font-black text-deep-brown mb-1 sm:mb-2">
                     {isCorrect ? 'Răspuns corect!' : 'Răspuns greșit'}
                   </h3>
-                  <p className={`font-mono text-sm sm:text-base md:text-lg font-bold ${
+                  <p className={`font-mono text-lg font-bold ${
                     isCorrect ? 'text-[#10B981]' : 'text-neon-pink'
                   }`}>
                     {isCorrect ? `+${currentQuestionPoints} puncte` : '+0 puncte'}
@@ -653,19 +653,19 @@ const finishQuiz = async () => {
               {/* Modal Body */}
               <div className="p-4 sm:p-6 md:p-8">
                 <div className="mb-4 sm:mb-6">
-                  <div className="font-heading text-xs sm:text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
+                  <div className="font-heading text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
                     Răspuns corect
                   </div>
-                  <div className="bg-[#10B981] p-3 sm:p-4 border-4 border-deep-brown font-body text-sm sm:text-base font-semibold text-deep-brown">
+                  <div className="bg-[#10B981] p-3 sm:p-4 border-4 border-deep-brown font-body text-base font-semibold text-deep-brown">
                     {getAnswerLetter(currentQuestion.answers.findIndex(a => a.correct))}. {currentQuestion.answers.find(a => a.correct).text}
                   </div>
                 </div>
 
                 <div>
-                  <div className="font-heading text-xs sm:text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
+                  <div className="font-heading text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
                     Explicație
                   </div>
-                  <div className="bg-sand p-3 sm:p-4 border-4 border-warm-brown font-body text-sm sm:text-base leading-relaxed text-deep-brown">
+                  <div className="bg-sand p-3 sm:p-4 border-4 border-warm-brown font-body text-base leading-relaxed text-deep-brown">
                     {currentQuestion.explanation}
                   </div>
                 </div>
@@ -675,7 +675,7 @@ const finishQuiz = async () => {
               <div className="p-4 sm:p-6 md:p-8 border-t-4 border-deep-brown flex justify-end">
                 <button
                   onClick={handleNextQuestion}
-                  className="bg-deep-brown text-off-white border-6 border-deep-brown px-6 sm:px-8 py-3 sm:py-4 font-heading font-black text-sm sm:text-base uppercase hover:bg-neon-lime hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+                  className="bg-deep-brown text-off-white border-6 border-deep-brown px-6 sm:px-8 py-3 sm:py-4 font-heading font-black text-base uppercase hover:bg-neon-lime hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
                 >
                   Următoarea Întrebare →
                 </button>
