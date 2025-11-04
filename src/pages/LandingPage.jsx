@@ -91,8 +91,8 @@ export function LandingPage({ onPlayNow }) {
       // User not logged in - show login modal
       if (onPlayNow) onPlayNow();
     } else {
-      // User logged in - go to themes
-      navigate(`/subjects/${subjectSlug}`);
+      // User logged in - go to game mode selection first
+      navigate('/game-mode');
     }
   };
 
@@ -133,13 +133,13 @@ export function LandingPage({ onPlayNow }) {
                   Profil
                 </button>
 
-                {/* Materii */}
+                {/* Joacă Acum - merge la game mode selection */}
                 <button
-                  onClick={scrollToSubjects}
-                  className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-3 sm:px-6 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
+                  onClick={() => navigate('/game-mode')}
+                  className="bg-neon-pink text-off-white border-4 border-neon-pink px-3 sm:px-6 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150 animate-pulse"
                 >
-                  <span className="hidden sm:inline">Materii</span>
-                  <span className="sm:hidden">📚</span>
+                  <span className="hidden sm:inline">Joacă Acum</span>
+                  <span className="sm:hidden">🎮</span>
                 </button>
 
                 {/* Logout */}
