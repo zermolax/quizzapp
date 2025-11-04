@@ -118,14 +118,14 @@ export function GameModeSelection() {
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="bg-transparent border-3 border-deep-brown dark:border-off-white text-deep-brown dark:text-off-white px-3 sm:px-4 py-2 font-heading font-bold uppercase text-xs sm:text-sm hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-warm-brown transition-all duration-150"
+                className="bg-transparent border-3 border-deep-brown dark:border-off-white text-deep-brown dark:text-off-white px-3 sm:px-4 py-2 font-heading font-bold uppercase text-sm hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-warm-brown transition-all duration-150"
               >
                 ← Back
               </button>
 
               <h1
                 onClick={() => navigate('/')}
-                className="cursor-pointer font-heading font-black text-lg sm:text-2xl uppercase tracking-tight text-deep-brown dark:text-off-white"
+                className="cursor-pointer font-heading font-black text-2xl uppercase tracking-tight text-deep-brown dark:text-off-white"
               >
                 Quizz<span className="text-neon-pink">Fun</span>
               </h1>
@@ -135,7 +135,7 @@ export function GameModeSelection() {
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-lg sm:text-xl"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-xl"
               >
                 <span>{isDarkMode ? '☀️' : '🌙'}</span>
               </button>
@@ -151,7 +151,7 @@ export function GameModeSelection() {
               {/* Logout */}
               <button
                 onClick={handleLogout}
-                className="bg-error text-white border-4 border-error px-3 sm:px-4 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-error transition-all duration-150"
+                className="bg-error text-white border-4 border-error px-3 sm:px-4 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-error transition-all duration-150"
               >
                 <span className="hidden sm:inline">Logout</span>
                 <span className="sm:hidden">🚪</span>
@@ -174,12 +174,12 @@ export function GameModeSelection() {
             // Alege Modul de Joc
           </span>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
+          <h1 className="text-7xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
             <span className="block">Cum Vrei Să</span>
             <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">Înveți?</span>
           </h1>
 
-          <p className="text-lg sm:text-xl font-body font-semibold max-w-3xl mx-auto text-off-white/90 dark:text-deep-brown/90 leading-relaxed">
+          <p className="text-xl font-body font-semibold max-w-3xl mx-auto text-off-white/90 dark:text-deep-brown/90 leading-relaxed">
             Alege modul de joc care ți se potrivește și pornește aventura cunoașterii!
           </p>
         </div>
@@ -197,7 +197,7 @@ export function GameModeSelection() {
               className="relative bg-cream dark:bg-warm-brown border-[6px] border-deep-brown dark:border-sand p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] min-h-[350px] flex flex-col group"
             >
               {/* Icon */}
-              <div className="text-6xl sm:text-7xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-300">
+              <div className="text-7xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-300">
                 📚
               </div>
 
@@ -207,12 +207,12 @@ export function GameModeSelection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl sm:text-3xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight mb-3">
+              <h3 className="text-3xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight mb-3">
                 Învață pe Tematici
               </h3>
 
               {/* Description */}
-              <p className="text-sm sm:text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-4">
+              <p className="text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-4">
                 Alege disciplină, temă și dificultate. Perfect pentru consolidarea cunoștințelor pe fiecare unitate de învățare.
               </p>
 
@@ -227,10 +227,11 @@ export function GameModeSelection() {
             {/* MOD 2: TRIVIA GLOBAL */}
             <div
               onClick={() => setShowTriviaGlobalModal(true)}
-              className="relative bg-gradient-to-br from-neon-pink via-neon-orange to-neon-cyan border-[6px] border-deep-brown p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] min-h-[350px] flex flex-col group"
+              className="relative border-[6px] border-deep-brown p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] min-h-[350px] flex flex-col group"
+              style={{ backgroundColor: '#6A4C93' }}
             >
               {/* Icon */}
-              <div className="text-6xl sm:text-7xl mb-4 animate-pulse">
+              <div className="text-7xl mb-4 animate-pulse">
                 🎲
               </div>
 
@@ -240,12 +241,12 @@ export function GameModeSelection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl sm:text-3xl font-heading font-black uppercase tracking-tight text-deep-brown leading-tight mb-3">
+              <h3 className="text-3xl font-heading font-black uppercase tracking-tight text-off-white leading-tight mb-3">
                 Provocare Totală
               </h3>
 
               {/* Description */}
-              <p className="text-sm sm:text-base font-body text-deep-brown/80 leading-relaxed mb-4">
+              <p className="text-base font-body text-off-white/90 leading-relaxed mb-4">
                 Întrebări surpriză din TOATE disciplinele! Testează-ți cunoștințele generale și descoperă cât de mult știi.
               </p>
 
@@ -263,7 +264,7 @@ export function GameModeSelection() {
               className="relative bg-cream dark:bg-warm-brown border-[6px] border-deep-brown dark:border-sand p-6 sm:p-8 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] min-h-[350px] flex flex-col group"
             >
               {/* Icon */}
-              <div className="text-6xl sm:text-7xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-300">
+              <div className="text-7xl mb-4 filter grayscale group-hover:grayscale-0 transition-all duration-300">
                 🧠
               </div>
 
@@ -273,12 +274,12 @@ export function GameModeSelection() {
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl sm:text-3xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight mb-3">
+              <h3 className="text-3xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight mb-3">
                 Specialist
               </h3>
 
               {/* Description */}
-              <p className="text-sm sm:text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-4">
+              <p className="text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-4">
                 Alege disciplina ta preferată și joacă cu întrebări random din toate tematicile. Devino expert!
               </p>
 
@@ -298,32 +299,32 @@ export function GameModeSelection() {
       {showTriviaGlobalModal && (
         <div className="fixed inset-0 bg-deep-brown/90 flex items-center justify-center z-[2000] p-4">
           <div className="bg-cream border-6 border-deep-brown max-w-lg w-full p-6 sm:p-8">
-            <h2 className="font-heading text-2xl sm:text-3xl font-black uppercase text-deep-brown mb-6">
+            <h2 className="font-heading text-3xl font-black uppercase text-deep-brown mb-6">
               🎲 Trivia Global
             </h2>
 
-            <p className="font-body text-sm sm:text-base text-deep-brown mb-6">
+            <p className="font-body text-base text-deep-brown mb-6">
               Alege dificultatea pentru quiz-ul tău:
             </p>
 
             <div className="space-y-3 mb-6">
               <button
                 onClick={() => handleStartTriviaGlobal('easy')}
-                className="w-full bg-[#8B9B7A] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-sm sm:text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+                className="w-full bg-[#8B9B7A] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
               >
                 🟢 Ușor
               </button>
 
               <button
                 onClick={() => handleStartTriviaGlobal('medium')}
-                className="w-full bg-[#FF6B00] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-sm sm:text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+                className="w-full bg-[#FF6B00] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
               >
                 🟡 Mediu
               </button>
 
               <button
                 onClick={() => handleStartTriviaGlobal('hard')}
-                className="w-full bg-[#FF0080] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-sm sm:text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+                className="w-full bg-[#FF0080] text-off-white border-4 border-deep-brown px-6 py-4 font-heading font-bold uppercase text-base hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
               >
                 🔴 Dificil
               </button>
@@ -343,11 +344,11 @@ export function GameModeSelection() {
       {showTriviaSubjectModal && (
         <div className="fixed inset-0 bg-deep-brown/90 flex items-center justify-center z-[2000] p-4 overflow-y-auto">
           <div className="bg-cream border-6 border-deep-brown max-w-2xl w-full p-6 sm:p-8 my-8">
-            <h2 className="font-heading text-2xl sm:text-3xl font-black uppercase text-deep-brown mb-6">
+            <h2 className="font-heading text-3xl font-black uppercase text-deep-brown mb-6">
               🧠 Trivia pe Disciplină
             </h2>
 
-            <p className="font-body text-sm sm:text-base text-deep-brown mb-4">
+            <p className="font-body text-base text-deep-brown mb-4">
               Alege dificultatea:
             </p>
 
@@ -385,7 +386,7 @@ export function GameModeSelection() {
               </button>
             </div>
 
-            <p className="font-body text-sm sm:text-base text-deep-brown mb-4">
+            <p className="font-body text-base text-deep-brown mb-4">
               Alege disciplina:
             </p>
 

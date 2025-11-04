@@ -169,14 +169,14 @@ export function ThemeSelection() {
             <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="bg-transparent border-3 border-deep-brown dark:border-off-white text-deep-brown dark:text-off-white px-3 sm:px-4 py-2 font-heading font-bold uppercase text-xs sm:text-sm hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-warm-brown transition-all duration-150"
+                className="bg-transparent border-3 border-deep-brown dark:border-off-white text-deep-brown dark:text-off-white px-3 sm:px-4 py-2 font-heading font-bold uppercase text-sm hover:bg-deep-brown hover:dark:bg-off-white hover:text-off-white hover:dark:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-warm-brown transition-all duration-150"
               >
                 ← Back
               </button>
 
               <h1
                 onClick={() => navigate('/')}
-                className="cursor-pointer font-heading font-black text-lg sm:text-2xl text-deep-brown dark:text-off-white uppercase tracking-tight"
+                className="cursor-pointer font-heading font-black text-2xl text-deep-brown dark:text-off-white uppercase tracking-tight"
               >
                 Quizz<span className="text-neon-pink">Fun</span>
               </h1>
@@ -187,7 +187,7 @@ export function ThemeSelection() {
               {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
-                className="w-10 h-10 sm:w-12 sm:h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-lg sm:text-xl"
+                className="w-10 h-10 sm:w-12 sm:h-12 bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white hover:bg-neon-cyan hover:dark:bg-neon-cyan hover:text-deep-brown transition-all duration-150 hover:rotate-12 flex items-center justify-center text-xl"
                 aria-label="Toggle dark mode"
                 title={isDarkMode ? 'Light Mode' : 'Dark Mode'}
               >
@@ -205,7 +205,7 @@ export function ThemeSelection() {
               {/* Logout */}
               <button
                 onClick={handleLogout}
-                className="bg-error text-white border-4 border-error px-3 sm:px-4 py-2 font-heading font-bold uppercase tracking-wide text-xs sm:text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-error transition-all duration-150"
+                className="bg-error text-white border-4 border-error px-3 sm:px-4 py-2 font-heading font-bold uppercase tracking-wide text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-error transition-all duration-150"
               >
                 <span className="hidden sm:inline">Logout</span>
                 <span className="sm:hidden">🚪</span>
@@ -226,7 +226,7 @@ export function ThemeSelection() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
-          <div className="mb-6 font-mono text-xs sm:text-sm text-warm-brown dark:text-deep-brown uppercase tracking-wider">
+          <div className="mb-6 font-mono text-sm text-warm-brown dark:text-deep-brown uppercase tracking-wider">
             <Link
               to="/"
               className="hover:text-neon-pink transition-colors"
@@ -245,17 +245,17 @@ export function ThemeSelection() {
           </div>
 
           {/* Subject Badge */}
-          <div className="inline-block bg-neon-pink text-off-white px-4 sm:px-6 py-2 sm:py-3 font-heading font-black text-sm sm:text-base uppercase tracking-wide mb-4 sm:mb-6 -rotate-2">
+          <div className="inline-block bg-neon-pink text-off-white px-4 sm:px-6 py-2 sm:py-3 font-heading font-black text-base uppercase tracking-wide mb-4 sm:mb-6 -rotate-2">
             {subject?.icon} {subject?.name}
           </div>
 
           {/* Title */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-deep-brown">
+          <h1 className="text-7xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-deep-brown">
             Explorează {subject?.name}
           </h1>
 
           {/* Description */}
-          <p className="text-lg sm:text-xl md:text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-deep-brown dark:text-warm-brown leading-relaxed">
+          <p className="text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-deep-brown dark:text-warm-brown leading-relaxed">
             {subject?.description}
           </p>
 
@@ -263,30 +263,30 @@ export function ThemeSelection() {
           <div className="flex flex-wrap gap-4 sm:gap-6">
             <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
               <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-3xl sm:text-4xl md:text-5xl font-bold leading-none text-neon-lime">
+              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
                 {themes.length}
               </div>
-              <div className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider mt-2 opacity-80">
+              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
                 Teme
               </div>
             </div>
 
             <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
               <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-3xl sm:text-4xl md:text-5xl font-bold leading-none text-neon-lime">
+              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
                 {subject?.totalQuestions || 0}
               </div>
-              <div className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider mt-2 opacity-80">
+              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
                 Întrebări
               </div>
             </div>
 
             <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
               <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-3xl sm:text-4xl md:text-5xl font-bold leading-none text-neon-lime">
+              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
                 3
               </div>
-              <div className="font-heading font-bold text-xs sm:text-sm uppercase tracking-wider mt-2 opacity-80">
+              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
                 Nivele
               </div>
             </div>
@@ -299,10 +299,10 @@ export function ThemeSelection() {
 
         {/* Section Header */}
         <div className="mb-12 sm:mb-16">
-          <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-widest text-neon-orange block mb-4">
+          <span className="font-mono text-sm font-bold uppercase tracking-widest text-neon-orange block mb-4">
             // Alege Tema Ta
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-black mb-4 uppercase leading-tight tracking-tighter text-deep-brown dark:text-off-white">
+          <h2 className="text-5xl font-heading font-black mb-4 uppercase leading-tight tracking-tighter text-deep-brown dark:text-off-white">
             Tematici Disponibile
           </h2>
         </div>
