@@ -177,10 +177,17 @@ export function SubjectSelection() {
   }, []);
 
   /**
-   * HANDLER: Select active subject
+   * HANDLER: Navigate to themes (Learning Mode)
    */
-  const handleSelectSubject = (subjectSlug) => {
+  const handleLearningMode = (subjectSlug) => {
     navigate(`/subjects/${subjectSlug}`);
+  };
+
+  /**
+   * HANDLER: Start Trivia for specific subject
+   */
+  const handleTriviaSubject = (subjectSlug, difficulty) => {
+    navigate(`/trivia/${subjectSlug}?difficulty=${difficulty}`);
   };
 
   /**
@@ -358,20 +365,19 @@ export function SubjectSelection() {
           {/* Grid: 1 column mobile, 2 tablet, 4 desktop */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {/* ACTIVE SUBJECTS (from Firestore) */}
+            {/* ACTIVE SUBJECTS (from Firestore) - UNIVERSAL CARDS */}
             {subjects.map((subject, index) => {
               const neonColor = ACTIVE_SUBJECT_COLORS[subject.slug] || '#FF0080';
 
               return (
                 <div
                   key={subject.id}
-                  onClick={() => handleSelectSubject(subject.slug)}
-                  className="relative bg-cream dark:bg-warm-brown border-[5px] border-warm-brown dark:border-sand p-6 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:border-deep-brown hover:dark:border-off-white min-h-[280px] flex flex-col group"
+                  className="relative bg-cream dark:bg-warm-brown border-[5px] border-warm-brown dark:border-sand p-6 transition-all duration-200 hover:-translate-x-1 hover:-translate-y-1 hover:border-deep-brown hover:dark:border-off-white min-h-[400px] flex flex-col group"
                   style={{
                     boxShadow: `0 0 0 0 transparent`,
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `8px 8px 0 #2D2416`;
+                    e.currentTarget.style.boxShadow = `6px 6px 0 #2D2416`;
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.boxShadow = `0 0 0 0 transparent`;
@@ -379,7 +385,7 @@ export function SubjectSelection() {
                 >
                   {/* Left accent bar (vertical neon) */}
                   <div
-                    className="absolute top-0 left-0 w-3 h-full transition-all duration-300 group-hover:w-full group-hover:opacity-10"
+                    className="absolute top-0 left-0 w-3 h-full transition-all duration-300 group-hover:w-5"
                     style={{ backgroundColor: neonColor }}
                   ></div>
 
@@ -391,24 +397,83 @@ export function SubjectSelection() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
+                    <h3 className="text-xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
                       {subject.name}
                     </h3>
                   </div>
 
-                  {/* Description - NO mb-auto to eliminate space */}
-                  <p className="text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed relative z-10 mb-3">
+                  {/* Description */}
+                  <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 leading-snug relative z-10 mb-4">
                     {subject.description}
                   </p>
 
-                  {/* Meta - reduced spacing */}
-                  <div className="flex justify-between items-center pt-3 border-t-[3px] border-sand dark:border-warm-brown relative z-10 mt-auto">
-                    <span className="bg-warm-brown dark:bg-sand text-off-white dark:text-deep-brown px-2 py-1 font-mono text-xs font-bold uppercase">
-                      {subject.totalThemes} Teme
-                    </span>
-                    <div className="w-12 h-12 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-2xl font-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                      →
+                  {/* TRIVIA MODE SECTION */}
+                  <div className="bg-sand/50 dark:bg-deep-brown/20 p-3 mb-3 border-2 border-warm-brown dark:border-sand relative z-10">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-heading font-bold text-xs uppercase text-deep-brown dark:text-off-white">
+                        🎲 Trivia Rapid
+                      </span>
+                      <span className="font-mono text-xs text-warm-brown dark:text-sand">
+                        12 întrebări
+                      </span>
                     </div>
+                    <div className="flex gap-2">
+                      {/* Easy Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTriviaSubject(subject.slug, 'easy');
+                        }}
+                        className="flex-1 bg-[#8B9B7A] text-off-white border-3 border-deep-brown px-3 py-2 font-heading font-bold uppercase text-xs hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+                        title="Easy - 12 întrebări aleatorii"
+                      >
+                        E
+                      </button>
+
+                      {/* Medium Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTriviaSubject(subject.slug, 'medium');
+                        }}
+                        className="flex-1 bg-[#FF6B00] text-off-white border-3 border-deep-brown px-3 py-2 font-heading font-bold uppercase text-xs hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+                        title="Medium - 12 întrebări aleatorii"
+                      >
+                        M
+                      </button>
+
+                      {/* Hard Button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleTriviaSubject(subject.slug, 'hard');
+                        }}
+                        className="flex-1 bg-[#FF0080] text-off-white border-3 border-deep-brown px-3 py-2 font-heading font-bold uppercase text-xs hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+                        title="Hard - 12 întrebări aleatorii"
+                      >
+                        H
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* LEARNING MODE SECTION */}
+                  <div className="relative z-10 mt-auto">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLearningMode(subject.slug);
+                      }}
+                      className="w-full bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-3 border-deep-brown dark:border-off-white px-4 py-3 font-heading font-bold uppercase text-sm hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150 flex items-center justify-between"
+                    >
+                      <span className="flex items-center gap-2">
+                        <span>📚</span>
+                        <span>Vezi Tematici</span>
+                      </span>
+                      <span className="text-lg">→</span>
+                    </button>
+                    <p className="text-xs font-mono text-warm-brown dark:text-sand text-center mt-1">
+                      {subject.totalThemes} teme • {subject.totalQuestions}+ întrebări
+                    </p>
                   </div>
                 </div>
               );
