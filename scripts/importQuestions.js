@@ -1,6 +1,6 @@
-// importQuestions.js
+// importQuestions.js - UPDATED with latest Firestore structure
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, writeBatch, doc } from 'firebase/firestore';
+import { getFirestore, collection, writeBatch, doc, setDoc } from 'firebase/firestore';
 import { readFileSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -23,13 +23,75 @@ const db = getFirestore(app);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+/**
+ * MAPPING: themeId → subjectId
+ * Actualizează această mapare când adaugi noi tematici/discipline
+ */
+const THEME_TO_SUBJECT_MAP = {
+  // ISTORIE
+  'wwi': 'istorie',
+  'ancient-greece': 'istorie',
+  'ancient-rome': 'istorie',
+  'middle-ages': 'istorie',
+  'renaissance': 'istorie',
+  'wwii': 'istorie',
+  'cold-war': 'istorie',
+  'french-revolution': 'istorie',
+  'roman-empire': 'istorie',
+  'medieval-europe': 'istorie',
+
+  // GEOGRAFIE
+  'european-capitals': 'geografie',
+  'world-geography': 'geografie',
+  'physical-geography': 'geografie',
+  'continents-oceans': 'geografie',
+  'countries-flags': 'geografie',
+
+  // BIOLOGIE
+  'cell-biology': 'biologie',
+  'human-body': 'biologie',
+  'ecosystems': 'biologie',
+  'genetics': 'biologie',
+  'evolution': 'biologie',
+
+  // Adaugă aici noi mapări pentru alte discipline
+};
+
+/**
+ * Validează structura unei întrebări
+ */
+function validateQuestion(question, file) {
+  const required = ['question', 'answers', 'difficulty', 'themeId', 'category', 'explanation'];
+  const missing = required.filter(field => !question[field]);
+
+  if (missing.length > 0) {
+    throw new Error(`Question in ${file} is missing required fields: ${missing.join(', ')}`);
+  }
+
+  if (!Array.isArray(question.answers) || question.answers.length !== 4) {
+    throw new Error(`Question "${question.question}" must have exactly 4 answers`);
+  }
+
+  const correctAnswers = question.answers.filter(a => a.correct === true);
+  if (correctAnswers.length !== 1) {
+    throw new Error(`Question "${question.question}" must have exactly 1 correct answer`);
+  }
+
+  if (!['easy', 'medium', 'hard'].includes(question.difficulty)) {
+    throw new Error(`Question "${question.question}" has invalid difficulty: ${question.difficulty}`);
+  }
+
+  return true;
+}
+
 async function importQuestions() {
   try {
     console.log('🚀 Starting questions import...\n');
 
     // Citește toate fișierele JSON din src/data/
-    const dataDir = join(__dirname, 'src', 'data');
-    const files = readdirSync(dataDir).filter(f => 
+    // IMPORTANT: Scriptul e în scripts/, deci urcăm un nivel înapoi
+    const dataDir = join(__dirname, '..', 'src', 'data');
+    const files = readdirSync(dataDir).filter(f =>
       f.startsWith('questions-') && f.endsWith('.json')
     );
 
@@ -42,6 +104,7 @@ async function importQuestions() {
 
     let totalImported = 0;
     let totalBatches = 0;
+    let totalSkipped = 0;
 
     for (const file of files) {
       const filePath = join(dataDir, file);
@@ -61,29 +124,67 @@ async function importQuestions() {
         const end = Math.min((i + 1) * batchSize, questions.length);
         const batchQuestions = questions.slice(start, end);
 
-        batchQuestions.forEach((question) => {
-          const docRef = doc(collection(db, 'questions'));
-          batch.set(docRef, {
-            ...question,
-            createdAt: new Date(),
-            updatedAt: new Date()
-          });
-        });
+        for (const question of batchQuestions) {
+          try {
+            // Validează întrebarea
+            validateQuestion(question, file);
+
+            // Obține subjectId din mapare
+            const subjectId = THEME_TO_SUBJECT_MAP[question.themeId];
+
+            if (!subjectId) {
+              console.warn(`   ⚠️  Skipping question "${question.question}" - no subject mapping for themeId: ${question.themeId}`);
+              totalSkipped++;
+              continue;
+            }
+
+            // Pregătește documentul pentru Firestore
+            const questionData = {
+              question: question.question,
+              answers: question.answers.map(a => ({
+                text: a.text,
+                correct: a.correct
+              })),
+              difficulty: question.difficulty,
+              category: question.category,
+              explanation: question.explanation,
+              themeId: question.themeId,
+              subjectId: subjectId,
+              order: question.order || 0,
+              createdAt: new Date(),
+              updatedAt: new Date()
+            };
+
+            // Dacă întrebarea are custom ID, folosește-l; altfel Firestore generează automat
+            if (question.id) {
+              const docRef = doc(db, 'questions', question.id);
+              batch.set(docRef, questionData);
+            } else {
+              const docRef = doc(collection(db, 'questions'));
+              batch.set(docRef, questionData);
+            }
+
+          } catch (validationError) {
+            console.error(`   ❌ Validation error: ${validationError.message}`);
+            totalSkipped++;
+          }
+        }
 
         await batch.commit();
         totalBatches++;
-        console.log(`   ✅ Batch ${i + 1}/${batches} committed (${batchQuestions.length} questions)`);
+        console.log(`   ✅ Batch ${i + 1}/${batches} committed (${batchQuestions.length - totalSkipped} questions)`);
       }
 
-      totalImported += questions.length;
-      console.log(`   ✅ Total from ${file}: ${questions.length} questions\n`);
+      totalImported += questions.length - totalSkipped;
+      console.log(`   ✅ Total from ${file}: ${questions.length} questions (${totalSkipped} skipped)\n`);
     }
 
     console.log(`\n🎉 SUCCESS!`);
     console.log(`   Total files: ${files.length}`);
     console.log(`   Total batches: ${totalBatches}`);
-    console.log(`   Total questions imported: ${totalImported}\n`);
-    
+    console.log(`   Total questions imported: ${totalImported}`);
+    console.log(`   Total questions skipped: ${totalSkipped}\n`);
+
     process.exit(0);
 
   } catch (error) {

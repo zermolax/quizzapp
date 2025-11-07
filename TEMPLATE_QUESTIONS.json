@@ -1,0 +1,47 @@
+[
+  {
+    "id": "tema-001",
+    "themeId": "tema-id-aici",
+    "difficulty": "easy",
+    "question": "Întrebarea ta aici?",
+    "answers": [
+      { "text": "Răspuns corect", "correct": true },
+      { "text": "Răspuns greșit 1", "correct": false },
+      { "text": "Răspuns greșit 2", "correct": false },
+      { "text": "Răspuns greșit 3", "correct": false }
+    ],
+    "explanation": "Explicația detaliată a răspunsului corect. Adaugă context, date importante, surse.",
+    "category": "Categoria întrebării",
+    "order": 1
+  },
+  {
+    "id": "tema-002",
+    "themeId": "tema-id-aici",
+    "difficulty": "medium",
+    "question": "Întrebarea ta aici?",
+    "answers": [
+      { "text": "Răspuns corect", "correct": true },
+      { "text": "Răspuns greșit 1", "correct": false },
+      { "text": "Răspuns greșit 2", "correct": false },
+      { "text": "Răspuns greșit 3", "correct": false }
+    ],
+    "explanation": "Explicația detaliată a răspunsului corect.",
+    "category": "Categoria întrebării",
+    "order": 2
+  },
+  {
+    "id": "tema-003",
+    "themeId": "tema-id-aici",
+    "difficulty": "hard",
+    "question": "Întrebarea ta aici?",
+    "answers": [
+      { "text": "Răspuns corect", "correct": true },
+      { "text": "Răspuns greșit 1", "correct": false },
+      { "text": "Răspuns greșit 2", "correct": false },
+      { "text": "Răspuns greșit 3", "correct": false }
+    ],
+    "explanation": "Explicația detaliată a răspunsului corect.",
+    "category": "Categoria întrebării",
+    "order": 3
+  }
+]
