@@ -16,6 +16,7 @@ import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { SUBJECTS_CONFIG, getActiveSubjects } from '../constants/subjects';
+import { logger } from '../utils/logger';
 
 export function useSubjects({ activeOnly = false } = {}) {
   const [subjects, setSubjects] = useState([]);
@@ -89,7 +90,7 @@ export function useSubjects({ activeOnly = false } = {}) {
         subjectCounters[subjectId].questionsCount += 1;
       });
 
-      console.log('📊 Subject Counters:', subjectCounters);
+      logger.debug('📊 Subject Counters:', subjectCounters);
 
       // 7. Merge static config with Firestore data + calculated counters
       const enrichedSubjects = baseConfig.map(config => {
@@ -114,11 +115,11 @@ export function useSubjects({ activeOnly = false } = {}) {
       // 8. Sort by order
       const sortedSubjects = enrichedSubjects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
-      console.log('✅ Enriched Subjects:', sortedSubjects);
+      logger.debug('✅ Enriched Subjects:', sortedSubjects);
 
       setSubjects(sortedSubjects);
     } catch (err) {
-      console.error('❌ Error in useSubjects:', err);
+      logger.error('❌ Error in useSubjects:', err);
       setError('Eroare la încărcarea disciplinelor. Te rugăm să încerci din nou.');
     } finally {
       setLoading(false);

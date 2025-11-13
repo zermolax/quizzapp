@@ -7,11 +7,10 @@
  * - Learning Mode: "Vezi Tematici" button pentru studiu structurat
  */
 
-import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useSubjects } from '../hooks/useSubjects';
-import { getSubjectBySlug } from '../constants/subjects';
+import { useTheme } from '../hooks/useTheme';
 
 /**
  * Neon colors for active subjects (from Firestore)
@@ -24,39 +23,9 @@ const ACTIVE_SUBJECT_COLORS = {
 
 export function SubjectSelection() {
   const { subjects, loading, error } = useSubjects({ activeOnly: true });
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDark: isDarkMode, toggle: toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
-  // Debug: Log subjects data
-  console.log('🔍 SubjectSelection - subjects:', subjects);
-
-  /**
-   * Load theme from localStorage
-   */
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
-  /**
-   * Toggle dark mode
-   */
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   /**
    * HANDLER: Navigate to themes (Learning Mode)

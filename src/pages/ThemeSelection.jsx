@@ -7,51 +7,20 @@
  * NEW: Bold design with improved hero section
  */
 
-import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useSubject } from '../hooks/useSubjects';
 import { useThemes } from '../hooks/useThemes';
+import { useTheme } from '../hooks/useTheme';
 import { ThemeCard } from '../components/cards/ThemeCard';
 
 export function ThemeSelection() {
   const { subjectSlug } = useParams(); // Extract subject from URL
   const { subject, loading: loadingSubject, error: errorSubject } = useSubject(subjectSlug);
   const { themes, loading: loadingThemes, error: errorThemes } = useThemes(subjectSlug);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDark: isDarkMode, toggle: toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-
-  // Debug: Log subject data
-  console.log('🔍 ThemeSelection - subject:', subject);
-  console.log('🔍 ThemeSelection - themes:', themes);
-
-  /**
-   * Load theme from localStorage
-   */
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setIsDarkMode(true);
-      document.documentElement.classList.add('dark');
-    }
-  }, []);
-
-  /**
-   * Toggle dark mode
-   */
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-
-    if (newMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   /**
    * HANDLER: Select theme and difficulty
