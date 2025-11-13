@@ -42,14 +42,17 @@ export function useThemes(subjectSlug) {
 
         // 2. Fetch questions for this subject
         const questionsRef = collection(db, 'questions');
+
+        console.log('🔍 Querying questions for subjectId:', subjectSlug);
+
+        // Try without isPublished filter first to see if questions exist
         const questionsQuery = query(
           questionsRef,
-          where('subjectId', '==', subjectSlug),
-          where('isPublished', '==', true)
+          where('subjectId', '==', subjectSlug)
         );
         const questionsSnapshot = await getDocs(questionsQuery);
 
-        console.log('🔍 Questions found:', questionsSnapshot.docs.length);
+        console.log('🔍 Questions found (without isPublished filter):', questionsSnapshot.docs.length);
         if (questionsSnapshot.docs.length > 0) {
           const sampleQuestion = questionsSnapshot.docs[0].data();
           console.log('🔍 Sample question:', sampleQuestion);

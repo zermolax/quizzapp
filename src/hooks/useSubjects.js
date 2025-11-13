@@ -52,7 +52,8 @@ export function useSubjects({ activeOnly = false } = {}) {
 
       // 5. Fetch ALL questions to calculate question counters
       const questionsRef = collection(db, 'questions');
-      const questionsQuery = query(questionsRef, where('isPublished', '==', true));
+      // Remove isPublished filter since questions might not have this field
+      const questionsQuery = query(questionsRef);
       const questionsSnapshot = await getDocs(questionsQuery);
 
       // 6. Calculate counters per subject
