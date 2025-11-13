@@ -218,7 +218,10 @@ export function LandingPage({ onPlayNow }) {
               <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
                 Istorie
               </h3>
-              <p className="text-sm font-mono text-deep-brown/60 dark:text-off-white/60 mb-4">
+              <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-3">
+                5 teme disponibile
+              </p>
+              <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-4">
                 Învață despre trecut
               </p>
               <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
@@ -235,7 +238,10 @@ export function LandingPage({ onPlayNow }) {
               <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
                 Biologie
               </h3>
-              <p className="text-sm font-mono text-deep-brown/60 dark:text-off-white/60 mb-4">
+              <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-3">
+                4 teme disponibile
+              </p>
+              <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-4">
                 Descoperă viața
               </p>
               <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
@@ -263,7 +269,7 @@ export function LandingPage({ onPlayNow }) {
         </section>
 
         {/* ===== SECTION 2: SPECIALIST ===== */}
-        <section className="bg-cream dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
+        <section className="bg-off-white dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
           <div className="flex items-start gap-4 mb-6">
             <div className="text-6xl">🎯</div>
             <div>
@@ -278,19 +284,32 @@ export function LandingPage({ onPlayNow }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Popular subjects */}
-            {popularSubjects.map((subject) => (
-              <div
-                key={subject.id}
-                className="bg-off-white dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6"
-              >
-                {/* Header */}
-                <div className="text-5xl mb-3">{subject.icon}</div>
-                <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
-                  {subject.name}
-                </h3>
-                <p className="text-sm font-mono text-deep-brown/60 dark:text-off-white/60 mb-4">
-                  {subject.totalThemes || 0} teme disponibile
-                </p>
+            {popularSubjects.map((subject) => {
+              // Get description based on subject slug
+              const getDescription = (slug) => {
+                switch(slug) {
+                  case 'istorie': return 'Testează cunoștințele istorice';
+                  case 'geografie': return 'Explorează lumea și Geografia';
+                  default: return 'Testează-ți cunoștințele';
+                }
+              };
+
+              return (
+                <div
+                  key={subject.id}
+                  className="bg-cream dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6"
+                >
+                  {/* Header */}
+                  <div className="text-5xl mb-3">{subject.icon}</div>
+                  <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
+                    {subject.name}
+                  </h3>
+                  <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-3">
+                    {getDescription(subject.slug)}
+                  </p>
+                  <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-4">
+                    {subject.totalThemes || 0} teme disponibile
+                  </p>
 
                 {/* Difficulty buttons */}
                 <div className="flex gap-2">
@@ -317,7 +336,8 @@ export function LandingPage({ onPlayNow }) {
                   </button>
                 </div>
               </div>
-            ))}
+            );
+            })}
 
             {/* "Mai Multe" card */}
             <button
