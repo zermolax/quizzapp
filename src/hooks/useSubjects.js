@@ -2,7 +2,11 @@
  * useSubjects.js - Custom Hook pentru gestionarea disciplinelor
  *
  * Combină datele statice din SUBJECTS_CONFIG cu datele dinamice din Firestore.
- * Returnează subjects cu metadate complete + counters actualizate.
+ * Returnează subjects cu metadate complete + counters actualizate în timp real.
+ *
+ * Counters calculate automat din Firestore:
+ * - themesCount: număr teme publicate per disciplină
+ * - questionsCount: număr întrebări publicate per disciplină
  *
  * Usage:
  * const { subjects, loading, error, refreshSubjects } = useSubjects();
@@ -41,13 +45,20 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 4. Fetch ALL themes to calculate counters dynamically
+      // 4. Fetch ALL themes to calculate theme counters
       const themesRef = collection(db, 'themes');
       const themesQuery = query(themesRef, where('isPublished', '==', true));
       const themesSnapshot = await getDocs(themesQuery);
 
-      // 5. Calculate counters per subject
+      // 5. Fetch ALL questions to calculate question counters
+      const questionsRef = collection(db, 'questions');
+      const questionsQuery = query(questionsRef, where('isPublished', '==', true));
+      const questionsSnapshot = await getDocs(questionsQuery);
+
+      // 6. Calculate counters per subject
       const subjectCounters = {};
+
+      // Count themes per subject
       themesSnapshot.docs.forEach(doc => {
         const theme = doc.data();
         const subjectId = theme.subjectId || 'istorie'; // Default to 'istorie' for legacy data
@@ -60,10 +71,24 @@ export function useSubjects({ activeOnly = false } = {}) {
         }
 
         subjectCounters[subjectId].themesCount += 1;
-        subjectCounters[subjectId].questionsCount += (theme.totalQuestions || 0);
       });
 
-      // 6. Merge static config with Firestore data + calculated counters
+      // Count questions per subject
+      questionsSnapshot.docs.forEach(doc => {
+        const question = doc.data();
+        const subjectId = question.subjectId || 'istorie'; // Default to 'istorie' for legacy data
+
+        if (!subjectCounters[subjectId]) {
+          subjectCounters[subjectId] = {
+            themesCount: 0,
+            questionsCount: 0,
+          };
+        }
+
+        subjectCounters[subjectId].questionsCount += 1;
+      });
+
+      // 7. Merge static config with Firestore data + calculated counters
       const enrichedSubjects = baseConfig.map(config => {
         const firestoreSubject = firestoreData[config.id] || firestoreData[config.slug];
         const counters = subjectCounters[config.id] || subjectCounters[config.slug] || {};
@@ -71,7 +96,7 @@ export function useSubjects({ activeOnly = false } = {}) {
         return {
           ...config, // Static metadata (icon, descriptions, color)
           ...firestoreSubject, // Firestore data (if exists)
-          // Use calculated counters (always up-to-date)
+          // Use calculated counters (always up-to-date from Firestore)
           themesCount: counters.themesCount || 0,
           questionsCount: counters.questionsCount || 0,
           totalThemes: counters.themesCount || 0, // Backward compatibility
@@ -83,7 +108,7 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 7. Sort by order
+      // 8. Sort by order
       const sortedSubjects = enrichedSubjects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
       setSubjects(sortedSubjects);
