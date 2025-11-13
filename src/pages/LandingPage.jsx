@@ -195,7 +195,7 @@ export function LandingPage({ onPlayNow }) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
 
         {/* ===== SECTION 1: MODUL EDUCAȚIONAL (LEARNING MODE) ===== */}
-        <section className="bg-cream dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
+        <section className="bg-sand dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
           <div className="flex items-start gap-4 mb-6">
             <div className="text-6xl">📚</div>
             <div>
@@ -208,17 +208,62 @@ export function LandingPage({ onPlayNow }) {
             </div>
           </div>
 
-          <button
-            onClick={handleExploreSubjects}
-            className="w-full md:w-auto bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-6 border-deep-brown dark:border-off-white px-12 py-6 font-heading font-black text-xl uppercase hover:bg-neon-lime hover:text-deep-brown hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 inline-flex items-center gap-4"
-          >
-            Explorează Discipline
-            <span className="text-3xl">→</span>
-          </button>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Istorie */}
+            <button
+              onClick={() => navigate('/subjects/istorie')}
+              className="bg-cream dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left"
+            >
+              <div className="text-5xl mb-3">🏛️</div>
+              <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
+                Istorie
+              </h3>
+              <p className="text-sm font-mono text-deep-brown/60 dark:text-off-white/60 mb-4">
+                Învață despre trecut
+              </p>
+              <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
+                Începe lecția <span className="text-2xl">→</span>
+              </div>
+            </button>
+
+            {/* Biologie */}
+            <button
+              onClick={() => navigate('/subjects/biologie')}
+              className="bg-cream dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left"
+            >
+              <div className="text-5xl mb-3">🧬</div>
+              <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
+                Biologie
+              </h3>
+              <p className="text-sm font-mono text-deep-brown/60 dark:text-off-white/60 mb-4">
+                Descoperă viața
+              </p>
+              <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
+                Începe lecția <span className="text-2xl">→</span>
+              </div>
+            </button>
+
+            {/* "Mai Multe" card */}
+            <button
+              onClick={handleExploreSubjects}
+              className="bg-neon-lime text-deep-brown border-4 border-deep-brown p-6 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left"
+            >
+              <div className="text-5xl mb-3">➕</div>
+              <h3 className="text-2xl font-heading font-black uppercase mb-2">
+                Mai Multe
+              </h3>
+              <p className="text-sm font-body mb-4">
+                Explorează toate disciplinele disponibile
+              </p>
+              <div className="flex items-center gap-2 text-lg font-heading font-bold">
+                Vezi toate <span className="text-2xl">→</span>
+              </div>
+            </button>
+          </div>
         </section>
 
         {/* ===== SECTION 2: SPECIALIST ===== */}
-        <section className="bg-sand dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
+        <section className="bg-cream dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
           <div className="flex items-start gap-4 mb-6">
             <div className="text-6xl">🎯</div>
             <div>
@@ -236,7 +281,7 @@ export function LandingPage({ onPlayNow }) {
             {popularSubjects.map((subject) => (
               <div
                 key={subject.id}
-                className="bg-sand dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6"
+                className="bg-off-white dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6"
               >
                 {/* Header */}
                 <div className="text-5xl mb-3">{subject.icon}</div>
@@ -294,7 +339,7 @@ export function LandingPage({ onPlayNow }) {
         </section>
 
         {/* ===== SECTION 3: TRIVIA ===== */}
-        <section className="bg-off-white dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
+        <section className="bg-sand dark:bg-warm-brown border-6 border-deep-brown dark:border-sand p-8 md:p-12">
           <div className="flex items-start gap-4 mb-6">
             <div className="text-6xl">🎲</div>
             <div>
@@ -307,35 +352,56 @@ export function LandingPage({ onPlayNow }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Easy */}
             <button
               onClick={() => handleTriviaGlobal('easy')}
-              className="bg-[#8B9B7A] text-off-white border-6 border-deep-brown p-6 font-heading font-black text-xl uppercase hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150"
+              className="relative bg-[#8B9B7A] text-off-white border-4 border-deep-brown p-8 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left group overflow-hidden"
             >
-              <div className="text-4xl mb-2">🟢</div>
-              <div>EASY</div>
-              <div className="text-sm font-body font-normal mt-2">12 întrebări</div>
+              <div className="text-6xl mb-4">🟢</div>
+              <h3 className="text-3xl font-heading font-black uppercase mb-3">EASY</h3>
+              <p className="text-sm font-body mb-4 leading-relaxed">
+                Pentru începători. Întrebări accesibile din toate materiile.
+              </p>
+              <div className="flex items-center gap-2 text-base font-heading font-bold">
+                Începe testul
+                <span className="text-2xl inline-block transition-transform group-hover:translate-x-2 duration-300">→</span>
+              </div>
+              <div className="absolute top-2 right-2 text-xs font-mono opacity-50">12 întrebări</div>
             </button>
 
             {/* Medium */}
             <button
               onClick={() => handleTriviaGlobal('medium')}
-              className="bg-[#FF6B00] text-off-white border-6 border-deep-brown p-6 font-heading font-black text-xl uppercase hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150"
+              className="relative bg-[#FF6B00] text-off-white border-4 border-deep-brown p-8 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left group overflow-hidden"
             >
-              <div className="text-4xl mb-2">🟡</div>
-              <div>MEDIUM</div>
-              <div className="text-sm font-body font-normal mt-2">12 întrebări</div>
+              <div className="text-6xl mb-4">🟡</div>
+              <h3 className="text-3xl font-heading font-black uppercase mb-3">MEDIUM</h3>
+              <p className="text-sm font-body mb-4 leading-relaxed">
+                Provocare moderată. Demonstrează-ți cunoștințele!
+              </p>
+              <div className="flex items-center gap-2 text-base font-heading font-bold">
+                Acceptă provocarea
+                <span className="text-2xl inline-block transition-transform group-hover:translate-x-2 duration-300">→</span>
+              </div>
+              <div className="absolute top-2 right-2 text-xs font-mono opacity-50">12 întrebări</div>
             </button>
 
             {/* Hard */}
             <button
               onClick={() => handleTriviaGlobal('hard')}
-              className="bg-[#FF0080] text-off-white border-6 border-deep-brown p-6 font-heading font-black text-xl uppercase hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150"
+              className="relative bg-[#FF0080] text-off-white border-4 border-deep-brown p-8 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left group overflow-hidden"
             >
-              <div className="text-4xl mb-2">🔴</div>
-              <div>HARD</div>
-              <div className="text-sm font-body font-normal mt-2">12 întrebări</div>
+              <div className="text-6xl mb-4">🔴</div>
+              <h3 className="text-3xl font-heading font-black uppercase mb-3">HARD</h3>
+              <p className="text-sm font-body mb-4 leading-relaxed">
+                Doar pentru experți. Vrei să fii cel mai bun?
+              </p>
+              <div className="flex items-center gap-2 text-base font-heading font-bold">
+                Îndrăznește!
+                <span className="text-2xl inline-block transition-transform group-hover:translate-x-2 duration-300">→</span>
+              </div>
+              <div className="absolute top-2 right-2 text-xs font-mono opacity-50">12 întrebări</div>
             </button>
           </div>
         </section>
