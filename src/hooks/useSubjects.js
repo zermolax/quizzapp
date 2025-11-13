@@ -41,16 +41,41 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 4. Merge static config with Firestore data
+      // 4. Fetch ALL themes to calculate counters dynamically
+      const themesRef = collection(db, 'themes');
+      const themesQuery = query(themesRef, where('isPublished', '==', true));
+      const themesSnapshot = await getDocs(themesQuery);
+
+      // 5. Calculate counters per subject
+      const subjectCounters = {};
+      themesSnapshot.docs.forEach(doc => {
+        const theme = doc.data();
+        const subjectId = theme.subjectId || 'istorie'; // Default to 'istorie' for legacy data
+
+        if (!subjectCounters[subjectId]) {
+          subjectCounters[subjectId] = {
+            themesCount: 0,
+            questionsCount: 0,
+          };
+        }
+
+        subjectCounters[subjectId].themesCount += 1;
+        subjectCounters[subjectId].questionsCount += (theme.totalQuestions || 0);
+      });
+
+      // 6. Merge static config with Firestore data + calculated counters
       const enrichedSubjects = baseConfig.map(config => {
         const firestoreSubject = firestoreData[config.id] || firestoreData[config.slug];
+        const counters = subjectCounters[config.id] || subjectCounters[config.slug] || {};
 
         return {
           ...config, // Static metadata (icon, descriptions, color)
-          ...firestoreSubject, // Firestore data (totalThemes, totalQuestions)
-          // Ensure these fields exist
-          themesCount: firestoreSubject?.totalThemes || 0,
-          questionsCount: firestoreSubject?.totalQuestions || 0,
+          ...firestoreSubject, // Firestore data (if exists)
+          // Use calculated counters (always up-to-date)
+          themesCount: counters.themesCount || 0,
+          questionsCount: counters.questionsCount || 0,
+          totalThemes: counters.themesCount || 0, // Backward compatibility
+          totalQuestions: counters.questionsCount || 0, // Backward compatibility
           // Keep original config values for fallback
           icon: config.icon,
           color: config.color,
@@ -58,7 +83,7 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 5. Sort by order
+      // 7. Sort by order
       const sortedSubjects = enrichedSubjects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
       setSubjects(sortedSubjects);
