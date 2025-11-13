@@ -1,24 +1,25 @@
 /**
- * LandingPage.jsx - REDESIGNED v3
+ * LandingPage.jsx - REDESIGNED v4
  *
  * NEW STRUCTURE - 3 sections:
- * 1. 🎲 TRIVIA UNIVERSAL - Quick play buttons [E][M][H]
- * 2. 🎯 TRIVIA SPECIALIST - Popular subjects + "Mai Multe"
- * 3. 📚 LEARNING MODE - Browse all subjects → themes
+ * 1. 📚 MODUL EDUCAȚIONAL - Learning mode with SubjectCard components
+ * 2. 🎯 SPECIALIST - Trivia per subject with SubjectCard components
+ * 3. 🎲 TRIVIA - Global trivia mode
+ *
+ * REFACTORED: Uses SubjectCard components and useSubjects hook
  */
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../services/firebase';
+import { useSubjects } from '../hooks/useSubjects';
+import { SubjectCard } from '../components/cards/SubjectCard';
 
 export function LandingPage({ onPlayNow }) {
 
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const [subjects, setSubjects] = useState([]);
-  const [loadingSubjects, setLoadingSubjects] = useState(true);
+  const { subjects, loading: loadingSubjects } = useSubjects({ activeOnly: true });
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   /**
@@ -49,37 +50,11 @@ export function LandingPage({ onPlayNow }) {
   };
 
   /**
-   * Fetch subjects from Firestore
+   * Get featured subjects for each section
    */
-  useEffect(() => {
-    async function fetchSubjects() {
-      try {
-        const subjectsRef = collection(db, 'subjects');
-        const q = query(subjectsRef, where('isPublished', '==', true));
-        const snapshot = await getDocs(q);
-        const subjectsData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        const sorted = subjectsData.sort((a, b) => a.order - b.order);
-        setSubjects(sorted);
-      } catch (err) {
-        console.error('Error fetching subjects:', err);
-      } finally {
-        setLoadingSubjects(false);
-      }
-    }
-    fetchSubjects();
-  }, []);
-
-  /**
-   * Get popular subjects (static for now: Istorie + Geografie)
-   */
-  const getPopularSubjects = () => {
-    const istorie = subjects.find(s => s.slug === 'istorie');
-    const geografie = subjects.find(s => s.slug === 'geografie');
-    return [istorie, geografie].filter(Boolean);
-  };
+  const istorie = subjects.find(s => s.slug === 'istorie');
+  const biologie = subjects.find(s => s.slug === 'biologie');
+  const popularSubjects = [istorie, subjects.find(s => s.slug === 'geografie')].filter(Boolean);
 
   /**
    * Handle trivia global start
@@ -113,8 +88,6 @@ export function LandingPage({ onPlayNow }) {
       navigate('/subjects');
     }
   };
-
-  const popularSubjects = getPopularSubjects();
 
   return (
     <div className="min-h-screen bg-cream dark:bg-deep-brown transition-colors duration-200">
@@ -210,44 +183,26 @@ export function LandingPage({ onPlayNow }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Istorie */}
-            <button
-              onClick={() => navigate('/subjects/istorie')}
-              className="bg-cream dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left"
-            >
-              <div className="text-5xl mb-3">🏛️</div>
-              <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
-                Istorie
-              </h3>
-              <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-3">
-                5 teme disponibile
-              </p>
-              <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-4">
-                Învață despre trecut
-              </p>
-              <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
-                Începe lecția <span className="text-2xl">→</span>
-              </div>
-            </button>
+            {istorie && (
+              <SubjectCard
+                subject={istorie}
+                variant="educational"
+                onSelect={(slug) => navigate(`/subjects/${slug}`)}
+                showThemeCount={true}
+                showDescription={true}
+              />
+            )}
 
             {/* Biologie */}
-            <button
-              onClick={() => navigate('/subjects/biologie')}
-              className="bg-cream dark:bg-warm-brown border-4 border-warm-brown dark:border-sand p-6 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416] transition-all duration-150 text-left"
-            >
-              <div className="text-5xl mb-3">🧬</div>
-              <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
-                Biologie
-              </h3>
-              <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-3">
-                4 teme disponibile
-              </p>
-              <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-4">
-                Descoperă viața
-              </p>
-              <div className="flex items-center gap-2 text-lg font-heading font-bold text-deep-brown dark:text-off-white">
-                Începe lecția <span className="text-2xl">→</span>
-              </div>
-            </button>
+            {biologie && (
+              <SubjectCard
+                subject={biologie}
+                variant="educational"
+                onSelect={(slug) => navigate(`/subjects/${slug}`)}
+                showThemeCount={true}
+                showDescription={true}
+              />
+            )}
 
             {/* "Mai Multe" card */}
             <button

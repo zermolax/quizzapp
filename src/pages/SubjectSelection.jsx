@@ -10,8 +10,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../services/firebase';
+import { useSubjects } from '../hooks/useSubjects';
+import { getSubjectBySlug } from '../constants/subjects';
 
 /**
  * Neon colors for active subjects (from Firestore)
@@ -23,9 +23,7 @@ const ACTIVE_SUBJECT_COLORS = {
 };
 
 export function SubjectSelection() {
-  const [subjects, setSubjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { subjects, loading, error } = useSubjects({ activeOnly: true });
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -58,42 +56,6 @@ export function SubjectSelection() {
   };
 
   /**
-   * EFFECT: Fetch active subjects from Firestore
-   */
-  useEffect(() => {
-    async function fetchSubjects() {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const subjectsRef = collection(db, 'subjects');
-        const q = query(
-          subjectsRef,
-          where('isPublished', '==', true)
-        );
-
-        const snapshot = await getDocs(q);
-        const subjectsData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-
-        // Sort by order
-        const sortedSubjects = subjectsData.sort((a, b) => a.order - b.order);
-
-        setSubjects(sortedSubjects);
-      } catch (err) {
-        console.error('Eroare fetch subjects:', err);
-        setError('Eroare la încărcarea materiilor. Te rugăm să încerci din nou.');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchSubjects();
-  }, []);
-
-  /**
    * HANDLER: Navigate to themes (Learning Mode)
    */
   const handleLearningMode = (subjectSlug) => {
@@ -118,8 +80,8 @@ export function SubjectSelection() {
   /**
    * Calculate total stats from active subjects
    */
-  const totalThemes = subjects.reduce((sum, s) => sum + (s.totalThemes || 0), 0);
-  const totalQuestions = subjects.reduce((sum, s) => sum + (s.totalQuestions || 0), 0);
+  const totalThemes = subjects.reduce((sum, s) => sum + (s.themesCount || s.totalThemes || 0), 0);
+  const totalQuestions = subjects.reduce((sum, s) => sum + (s.questionsCount || s.totalQuestions || 0), 0);
 
   /**
    * RENDER: Loading state
@@ -314,7 +276,7 @@ export function SubjectSelection() {
 
                   {/* Description */}
                   <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 leading-snug relative z-10 mb-4">
-                    {subject.description}
+                    {subject.descriptions?.specialist || subject.descriptions?.educational || subject.description || ''}
                   </p>
 
                   {/* TRIVIA MODE SECTION */}
@@ -382,7 +344,7 @@ export function SubjectSelection() {
                       <span className="text-lg">→</span>
                     </button>
                     <p className="text-xs font-mono text-warm-brown dark:text-sand text-center mt-1">
-                      {subject.totalThemes} teme • {subject.totalQuestions}+ întrebări
+                      {subject.themesCount || subject.totalThemes || 0} teme • {subject.questionsCount || subject.totalQuestions || 0}+ întrebări
                     </p>
                   </div>
                 </div>

@@ -10,16 +10,17 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
-import ThemeCard from '../components/ThemeCard';
+import { useSubject } from '../hooks/useSubjects';
+import { ThemeCard } from '../components/cards/ThemeCard';
 
 export function ThemeSelection() {
   const { subjectSlug } = useParams(); // Extract subject from URL
-  const [subject, setSubject] = useState(null);
+  const { subject, loading: loadingSubject, error: errorSubject } = useSubject(subjectSlug);
   const [themes, setThemes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loadingThemes, setLoadingThemes] = useState(true);
+  const [errorThemes, setErrorThemes] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
@@ -52,28 +53,15 @@ export function ThemeSelection() {
   };
 
   /**
-   * EFFECT: Fetch subject info and themes from Firestore
+   * EFFECT: Fetch themes for this subject from Firestore
    */
   useEffect(() => {
-    async function fetchData() {
+    async function fetchThemes() {
       try {
-        setLoading(true);
-        setError(null);
+        setLoadingThemes(true);
+        setErrorThemes(null);
 
-        // 1. Fetch subject info
-        const subjectDocRef = doc(db, 'subjects', subjectSlug);
-        const subjectDoc = await getDoc(subjectDocRef);
-
-        if (!subjectDoc.exists()) {
-          setError(`Materia "${subjectSlug}" nu există.`);
-          setLoading(false);
-          return;
-        }
-
-        const subjectData = { id: subjectDoc.id, ...subjectDoc.data() };
-        setSubject(subjectData);
-
-        // 2. Fetch themes for this subject
+        // Fetch themes for this subject
         const themesRef = collection(db, 'themes');
         const q = query(
           themesRef,
@@ -84,6 +72,7 @@ export function ThemeSelection() {
         const snapshot = await getDocs(q);
         const themesData = snapshot.docs.map(doc => ({
           id: doc.id,
+          slug: doc.id, // Ensure slug exists for ThemeCard
           ...doc.data()
         }));
 
@@ -94,14 +83,14 @@ export function ThemeSelection() {
 
       } catch (err) {
         console.error('Eroare fetch themes:', err);
-        setError('Eroare la încărcarea tematicilor. Te rugăm să încerci din nou.');
+        setErrorThemes('Eroare la încărcarea tematicilor. Te rugăm să încerci din nou.');
       } finally {
-        setLoading(false);
+        setLoadingThemes(false);
       }
     }
 
     if (subjectSlug) {
-      fetchData();
+      fetchThemes();
     }
   }, [subjectSlug]);
 
@@ -122,6 +111,12 @@ export function ThemeSelection() {
   };
 
   /**
+   * Combined loading and error states
+   */
+  const loading = loadingSubject || loadingThemes;
+  const error = errorSubject || errorThemes;
+
+  /**
    * RENDER: Loading state
    */
   if (loading) {
@@ -138,12 +133,14 @@ export function ThemeSelection() {
   /**
    * RENDER: Error state
    */
-  if (error) {
+  if (error || !subject) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-cream dark:bg-deep-brown">
         <div className="bg-off-white dark:bg-warm-brown p-8 border-6 border-error text-center max-w-md">
           <h2 className="text-3xl font-heading font-black uppercase text-error mb-4">⚠️ Eroare</h2>
-          <p className="font-body text-deep-brown dark:text-off-white mb-6">{error}</p>
+          <p className="font-body text-deep-brown dark:text-off-white mb-6">
+            {error || `Materia "${subjectSlug}" nu există.`}
+          </p>
           <button
             onClick={() => navigate('/')}
             className="bg-deep-brown dark:bg-off-white text-off-white dark:text-deep-brown border-4 border-deep-brown dark:border-off-white px-6 py-3 font-heading font-bold uppercase tracking-wide hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown dark:hover:shadow-off-white transition-all duration-150"
@@ -256,7 +253,7 @@ export function ThemeSelection() {
 
           {/* Description */}
           <p className="text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-deep-brown dark:text-warm-brown leading-relaxed">
-            {subject?.description}
+            {subject?.descriptions?.educational || subject?.description || 'Învață și testează-ți cunoștințele'}
           </p>
 
           {/* Stats */}
@@ -274,7 +271,7 @@ export function ThemeSelection() {
             <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
               <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
               <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
-                {subject?.totalQuestions || 0}
+                {subject?.questionsCount || subject?.totalQuestions || 0}
               </div>
               <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
                 Întrebări
@@ -322,12 +319,14 @@ export function ThemeSelection() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {themes.map((theme, index) => (
+            {themes.map((theme) => (
               <ThemeCard
                 key={theme.id}
                 theme={theme}
-                index={index}
-                onSelectTheme={(themeSlug, difficulty) => handleSelectTheme(themeSlug, difficulty)}
+                onSelect={(themeSlug, difficulty) => handleSelectTheme(themeSlug, difficulty)}
+                showQuestionCount={true}
+                showDescription={true}
+                showDifficultyButtons={true}
               />
             ))}
 
