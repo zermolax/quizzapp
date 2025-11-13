@@ -39,6 +39,36 @@ const subjects = [
     isPublished: true,
     order: 3,
   },
+  {
+    id: 'matematica',
+    slug: 'matematica',
+    name: 'Matematică',
+    icon: '🔢',
+    description: 'Rezolvă probleme și înțelege logica matematică',
+    color: '#6A4C93',
+    isPublished: true,
+    order: 4,
+  },
+  {
+    id: 'fizica',
+    slug: 'fizica',
+    name: 'Fizică',
+    icon: '⚛️',
+    description: 'Înțelege legile universului și ale naturii',
+    color: '#F77F00',
+    isPublished: true,
+    order: 5,
+  },
+  {
+    id: 'chimie',
+    slug: 'chimie',
+    name: 'Chimie',
+    icon: '🧪',
+    description: 'Experimentează cu reacții și molecule',
+    color: '#FCBF49',
+    isPublished: true,
+    order: 6,
+  },
 ];
 
 async function createSubjects() {

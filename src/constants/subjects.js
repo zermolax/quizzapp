@@ -62,7 +62,7 @@ export const SUBJECTS_CONFIG = [
       specialist: 'Testează logica matematică',
       short: 'Numerele și logica',
     },
-    isActive: false, // Coming soon
+    isActive: true,
     order: 4,
   },
   {
@@ -76,7 +76,7 @@ export const SUBJECTS_CONFIG = [
       specialist: 'Testează cunoștințele de fizică',
       short: 'Legile naturii',
     },
-    isActive: false, // Coming soon
+    isActive: true,
     order: 5,
   },
   {
@@ -90,7 +90,7 @@ export const SUBJECTS_CONFIG = [
       specialist: 'Testează cunoștințele de chimie',
       short: 'Reacții și molecule',
     },
-    isActive: false, // Coming soon
+    isActive: true,
     order: 6,
   },
 ];
