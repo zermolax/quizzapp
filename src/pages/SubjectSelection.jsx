@@ -1,14 +1,10 @@
 /**
- * SubjectSelection.jsx - BOLD DESIGN Edition with ALL DISCIPLINES
+ * SubjectSelection.jsx - Universal Subject Cards
  *
- * Pagina de selecție a materiei (Toate Disciplinele)
- * Prima oprire după login - user-ul alege materia
- *
- * NEW: 
- * - 4 carduri per row (desktop)
- * - 8 discipline "Coming Soon" 
- * - Card special "Sugerează Disciplină"
- * - Total: 12 carduri (3 rows x 4 columns)
+ * Pagina de selecție a materiei cu carduri universale
+ * Fiecare card conține:
+ * - Trivia Mode: [E][M][H] buttons pentru quiz rapid
+ * - Learning Mode: "Vezi Tematici" button pentru studiu structurat
  */
 
 import { useState, useEffect } from 'react';
@@ -16,85 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
-
-/**
- * DISCIPLINE COMING SOON - Static Data
- * Acestea vor fi afișate cu design "coming soon"
- */
-const COMING_SOON_DISCIPLINES = [
-  {
-    id: 'matematica',
-    name: 'Matematică',
-    icon: '🔢',
-    description: 'Algebră, geometrie, analiză. Dezvoltă gândirea logică prin probleme captivante.',
-    color: '#B026FF', // neon purple
-    themes: 8,
-    questions: 120
-  },
-  {
-    id: 'limba-romana',
-    name: 'Limba Română',
-    icon: '🗣️',
-    description: 'Gramatică, vocabular, autori clasici. Stăpânește limba română cu stil.',
-    color: '#0066FF', // neon blue
-    themes: 6,
-    questions: 90
-  },
-  {
-    id: 'fizica',
-    name: 'Fizică',
-    icon: '⚛️',
-    description: 'Mecanică, energie, unde. Descoperă legile care guvernează universul.',
-    color: '#00AAFF', // bright blue
-    themes: 9,
-    questions: 130
-  },
-  {
-    id: 'chimie',
-    name: 'Chimie',
-    icon: '🧪',
-    description: 'Elemente, reacții, molecule. Explorează lumea transformărilor chimice.',
-    color: '#00FF88', // turquoise green
-    themes: 7,
-    questions: 100
-  },
-  {
-    id: 'istoria-religiilor',
-    name: 'Istoria Religiilor',
-    icon: '⛪',
-    description: 'Credințe, ritualuri, doctrine. Înțelege diversitatea spirituală a lumii.',
-    color: '#FFD700', // gold
-    themes: 5,
-    questions: 75
-  },
-  {
-    id: 'istoria-artei',
-    name: 'Istoria Artei',
-    icon: '🎨',
-    description: 'Pictură, sculptură, arhitectură. Călătorește prin mișcările artistice.',
-    color: '#FF1493', // deep pink
-    themes: 6,
-    questions: 85
-  },
-  {
-    id: 'limba-engleza',
-    name: 'Limba Engleză',
-    icon: '🇬🇧',
-    description: 'Vocabular, gramatică, conversație. Vorbește engleza cu încredere.',
-    color: '#FF4500', // orange red
-    themes: 8,
-    questions: 110
-  },
-  {
-    id: 'limba-franceza',
-    name: 'Limba Franceză',
-    icon: '🇫🇷',
-    description: 'Vocabular, cultură, gramatică. Stăpânește limba lui Molière.',
-    color: '#8A2BE2', // blue violet
-    themes: 7,
-    questions: 95
-  }
-];
 
 /**
  * Neon colors for active subjects (from Firestore)
@@ -188,13 +105,6 @@ export function SubjectSelection() {
    */
   const handleTriviaSubject = (subjectSlug, difficulty) => {
     navigate(`/trivia/${subjectSlug}?difficulty=${difficulty}`);
-  };
-
-  /**
-   * HANDLER: Suggest new discipline (mailto)
-   */
-  const handleSuggestDiscipline = () => {
-    window.location.href = 'mailto:perviat@gmail.com?subject=Sugestie%20Disciplină%20Nouă%20-%20QuizzFun&body=Bună!%0A%0AAș%20dori%20să%20sugerez%20adăugarea%20următoarei%20discipline:%0A%0A[Scrie%20aici%20sugestia%20ta]%0A%0AMulțumesc!';
   };
 
   /**
@@ -325,7 +235,7 @@ export function SubjectSelection() {
           </h1>
           
           <p className="text-xl font-body font-semibold max-w-3xl mx-auto text-off-white/90 dark:text-deep-brown/90 leading-relaxed mb-12">
-            12 domenii de explorat. Sute de provocări de depășit. Învățare prin joc.
+            {subjects.length} {subjects.length === 1 ? 'disciplină' : 'discipline'} disponibile. Sute de provocări de depășit. Învățare prin joc.
           </p>
 
           {/* Stats - Bold Style */}
@@ -478,84 +388,6 @@ export function SubjectSelection() {
                 </div>
               );
             })}
-
-            {/* COMING SOON DISCIPLINES */}
-            {COMING_SOON_DISCIPLINES.map((discipline) => (
-              <div
-                key={discipline.id}
-                className="relative bg-sand dark:bg-warm-brown border-[5px] border-dashed border-warm-brown dark:border-sand p-6 min-h-[280px] flex flex-col opacity-60 cursor-not-allowed"
-              >
-                {/* Coming Soon Badge */}
-                <div 
-                  className="absolute top-6 right-6 bg-[#FF6B00] text-off-white px-3 py-1.5 font-heading font-black text-xs uppercase tracking-widest z-10"
-                  style={{ transform: 'rotate(5deg)' }}
-                >
-                  Coming Soon
-                </div>
-
-                {/* Header: Icon + Title (Horizontal Layout) */}
-                <div className="flex items-center gap-3 mb-3 relative z-10">
-                  {/* Icon */}
-                  <div className="text-5xl filter grayscale flex-shrink-0">
-                    {discipline.icon}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
-                    {discipline.name}
-                  </h3>
-                </div>
-
-                {/* Description - NO mb-auto */}
-                <p className="text-base font-body text-deep-brown/70 dark:text-off-white/70 leading-relaxed mb-3">
-                  {discipline.description}
-                </p>
-
-                {/* Meta */}
-                <div className="flex justify-between items-center pt-3 border-t-[3px] border-warm-brown dark:border-sand mt-auto">
-                  <span className="bg-warm-brown dark:bg-sand text-off-white dark:text-deep-brown px-2 py-1 font-mono text-xs font-bold uppercase">
-                    În curând
-                  </span>
-                  <div className="w-12 h-12 bg-deep-brown dark:bg-off-white flex items-center justify-center text-off-white dark:text-deep-brown text-2xl font-black">
-                    →
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* SUGGEST DISCIPLINE CARD */}
-            <div
-              onClick={handleSuggestDiscipline}
-              className="relative bg-gradient-to-br from-[#39FF14] to-[#00FF88] border-[5px] border-deep-brown dark:border-off-white p-6 cursor-pointer transition-all duration-200 hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[8px_8px_0_#2D2416] min-h-[280px] flex flex-col group"
-            >
-              {/* Header: Icon + Title (Horizontal Layout) */}
-              <div className="flex items-center gap-3 mb-3">
-                {/* Icon with pulse animation */}
-                <div className="text-5xl animate-pulse flex-shrink-0">
-                  💡
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl font-heading font-black uppercase tracking-tight text-deep-brown leading-tight">
-                  Sugerează Disciplină
-                </h3>
-              </div>
-
-              {/* Description - NO mb-auto */}
-              <p className="text-base font-body text-deep-brown/80 leading-relaxed mb-3">
-                Ai o idee pentru o disciplină nouă? Trimite-ne sugestia ta și ajută-ne să extindem platforma!
-              </p>
-
-              {/* Meta */}
-              <div className="flex justify-between items-center pt-3 border-t-[3px] border-deep-brown mt-auto">
-                <span className="bg-deep-brown text-off-white px-2 py-1 font-mono text-xs font-bold uppercase">
-                  Contact
-                </span>
-                <div className="w-12 h-12 bg-deep-brown flex items-center justify-center text-off-white text-2xl font-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
-                  ✉️
-                </div>
-              </div>
-            </div>
 
           </div>
         </div>
