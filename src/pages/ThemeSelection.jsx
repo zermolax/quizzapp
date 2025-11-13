@@ -10,20 +10,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../services/firebase';
 import { useSubject } from '../hooks/useSubjects';
+import { useThemes } from '../hooks/useThemes';
 import { ThemeCard } from '../components/cards/ThemeCard';
 
 export function ThemeSelection() {
   const { subjectSlug } = useParams(); // Extract subject from URL
   const { subject, loading: loadingSubject, error: errorSubject } = useSubject(subjectSlug);
-  const [themes, setThemes] = useState([]);
-  const [loadingThemes, setLoadingThemes] = useState(true);
-  const [errorThemes, setErrorThemes] = useState(null);
+  const { themes, loading: loadingThemes, error: errorThemes } = useThemes(subjectSlug);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  // Debug: Log subject data
+  console.log('🔍 ThemeSelection - subject:', subject);
+  console.log('🔍 ThemeSelection - themes:', themes);
 
   /**
    * Load theme from localStorage
@@ -51,48 +52,6 @@ export function ThemeSelection() {
       localStorage.setItem('theme', 'light');
     }
   };
-
-  /**
-   * EFFECT: Fetch themes for this subject from Firestore
-   */
-  useEffect(() => {
-    async function fetchThemes() {
-      try {
-        setLoadingThemes(true);
-        setErrorThemes(null);
-
-        // Fetch themes for this subject
-        const themesRef = collection(db, 'themes');
-        const q = query(
-          themesRef,
-          where('subjectId', '==', subjectSlug),
-          where('isPublished', '==', true)
-        );
-
-        const snapshot = await getDocs(q);
-        const themesData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          slug: doc.id, // Ensure slug exists for ThemeCard
-          ...doc.data()
-        }));
-
-        // Sort în JavaScript (5-10 themes per subject, nu necesită index Firestore)
-        const sortedThemes = themesData.sort((a, b) => a.order - b.order);
-
-        setThemes(sortedThemes);
-
-      } catch (err) {
-        console.error('Eroare fetch themes:', err);
-        setErrorThemes('Eroare la încărcarea tematicilor. Te rugăm să încerci din nou.');
-      } finally {
-        setLoadingThemes(false);
-      }
-    }
-
-    if (subjectSlug) {
-      fetchThemes();
-    }
-  }, [subjectSlug]);
 
   /**
    * HANDLER: Select theme and difficulty

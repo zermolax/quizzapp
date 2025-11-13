@@ -28,6 +28,9 @@ export function SubjectSelection() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
+  // Debug: Log subjects data
+  console.log('🔍 SubjectSelection - subjects:', subjects);
+
   /**
    * Load theme from localStorage
    */

@@ -88,6 +88,8 @@ export function useSubjects({ activeOnly = false } = {}) {
         subjectCounters[subjectId].questionsCount += 1;
       });
 
+      console.log('📊 Subject Counters:', subjectCounters);
+
       // 7. Merge static config with Firestore data + calculated counters
       const enrichedSubjects = baseConfig.map(config => {
         const firestoreSubject = firestoreData[config.id] || firestoreData[config.slug];
@@ -110,6 +112,8 @@ export function useSubjects({ activeOnly = false } = {}) {
 
       // 8. Sort by order
       const sortedSubjects = enrichedSubjects.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+      console.log('✅ Enriched Subjects:', sortedSubjects);
 
       setSubjects(sortedSubjects);
     } catch (err) {
