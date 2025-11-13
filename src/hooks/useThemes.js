@@ -49,11 +49,19 @@ export function useThemes(subjectSlug) {
         );
         const questionsSnapshot = await getDocs(questionsQuery);
 
+        console.log('🔍 Questions found:', questionsSnapshot.docs.length);
+        if (questionsSnapshot.docs.length > 0) {
+          const sampleQuestion = questionsSnapshot.docs[0].data();
+          console.log('🔍 Sample question:', sampleQuestion);
+        }
+
         // 3. Calculate question counters per theme
         const themeCounters = {};
         questionsSnapshot.docs.forEach(doc => {
           const question = doc.data();
           const themeId = question.themeId;
+
+          console.log('🔍 Question themeId:', themeId, 'for question:', question.question?.substring(0, 50));
 
           if (themeId) {
             if (!themeCounters[themeId]) {
