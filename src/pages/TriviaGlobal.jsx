@@ -162,10 +162,8 @@ const handleAnswerSelect = (answerIndex) => {
   setIsCorrect(correct);
   setTimerActive(false);
 
-  // Calculate points (difficulty multiplier + time bonus)
-  const difficultyMultiplier = getDifficultyMultiplier();
-  const timeBonus = Math.floor(timeLeft * 1.5);
-  const points = correct ? (50 * difficultyMultiplier + timeBonus) : 0;
+  // Calculate points (new system: 10/30/50 - no time bonus)
+  const points = correct ? getDifficultyPoints() : 0;
 
   setCurrentQuestionPoints(points);
 
@@ -222,14 +220,14 @@ const handleQuit = () => {
 };
 
 /**
- * HELPER: Get difficulty multiplier
+ * HELPER: Get difficulty points (new system: 10/30/50)
  */
-const getDifficultyMultiplier = () => {
+const getDifficultyPoints = () => {
   switch (difficulty) {
-    case 'easy': return 1;
-    case 'medium': return 2;
-    case 'hard': return 3;
-    default: return 1;
+    case 'easy': return 10;
+    case 'medium': return 30;
+    case 'hard': return 50;
+    default: return 10;
   }
 };
 
@@ -273,7 +271,7 @@ const finishQuiz = async () => {
   try {
     const endTime = Date.now();
     const duration = Math.floor((endTime - startTime) / 1000);
-    const maxScore = questions.length * 150;
+    const maxScore = questions.length * getDifficultyPoints();
     const percentage = Math.round((score / maxScore) * 100);
 
     const sessionData = {
@@ -366,7 +364,7 @@ const finishQuiz = async () => {
    * RENDER: Quiz finished - Results
    */
   if (quizFinished) {
-    const maxScore = questions.length * 150;
+    const maxScore = questions.length * getDifficultyPoints();
     const percentage = Math.round((score / maxScore) * 100);
 
     return (
@@ -403,7 +401,14 @@ const finishQuiz = async () => {
 
           {/* Performance message */}
           <div className="mb-6 sm:mb-8 text-center">
-            {percentage >= 80 && (
+            {percentage === 100 && (
+              <p className="font-heading text-xl font-bold text-[#10B981]">
+                🌟 {difficulty === 'hard'
+                  ? 'Felicitări! Ești pregătit pentru tema următoare!'
+                  : 'Felicitari! Ai știut tot! Acum încearcă nivelul următor!'}
+              </p>
+            )}
+            {percentage >= 80 && percentage < 100 && (
               <p className="font-heading text-xl font-bold text-[#10B981]">
                 🌟 Excelent! Cunoștințe impresionante!
               </p>
