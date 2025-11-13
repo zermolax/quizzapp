@@ -1,0 +1,322 @@
+[
+  {
+    "id": "bio-u1-easy-001",
+    "question": "Cum se numește știința care studiază viața în toate formele ei?",
+    "answers": [
+      { "text": "Chimie", "correct": false },
+      { "text": "Fizică", "correct": false },
+      { "text": "Biologie", "correct": true },
+      { "text": "Geografie", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Definiții",
+    "explanation": "Biologia este ramura științelor naturii care se ocupă cu studiul organismelor vii, de la cele mai simple, precum bacteriile, până la cele mai complexe, ca plantele și animalele. Numele său provine din cuvintele grecești \"bios\" (viață) și \"logos\" (știință).",
+    "order": 1
+  },
+  {
+    "id": "bio-u1-easy-002",
+    "question": "Încăperea special amenajată pentru efectuarea lecțiilor de biologie, dotată cu mobilier și aparate specifice, se numește:",
+    "answers": [
+      { "text": "Sală de sport", "correct": false },
+      { "text": "Bibliotecă", "correct": false },
+      { "text": "Sală de clasă obișnuită", "correct": false },
+      { "text": "Laborator de biologie", "correct": true }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Spații de lucru",
+    "explanation": "Laboratorul de biologie este un spațiu dedicat studiului practic al viețuitoarelor. Acesta conține instrumente, substanțe și materiale biologice necesare pentru realizarea observațiilor și a experimentelor.",
+    "order": 2
+  },
+  {
+    "id": "bio-u1-easy-003",
+    "question": "Ce instrument optic este folosit pentru a observa organisme sau structuri care nu pot fi văzute cu ochiul liber, cum ar fi bacteriile?",
+    "answers": [
+      { "text": "Telescopul", "correct": false },
+      { "text": "Microscopul", "correct": true },
+      { "text": "Lupa", "correct": false },
+      { "text": "Binoclul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Instrumente optice",
+    "explanation": "Microscopul este un instrument esențial în biologie care folosește un sistem de lentile pentru a mări foarte mult imaginea unor probe biologice. Acesta permite vizualizarea detaliilor celulare și a microorganismelor.",
+    "order": 3
+  },
+  {
+    "id": "bio-u1-easy-004",
+    "question": "Care este principalul rol al balanței într-un laborator de biologie?",
+    "answers": [
+      { "text": "Măsurarea temperaturii", "correct": false },
+      { "text": "Măsurarea lungimii", "correct": false },
+      { "text": "Cântărirea (măsurarea masei) substanțelor", "correct": true },
+      { "text": "Măsurarea timpului", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Instrumente de măsură",
+    "explanation": "Balanța este un aparat de măsură folosit pentru a determina cu precizie masa (greutatea) unor substanțe solide sau a unor materiale biologice. Acest proces este adesea necesar în pregătirea experimentelor.",
+    "order": 4
+  },
+  {
+    "id": "bio-u1-easy-005",
+    "question": "Ce echipament de protecție este obligatoriu pentru elevi în timpul lucrărilor practice din laboratorul de biologie?",
+    "answers": [
+      { "text": "Șorț de bucătărie", "correct": false },
+      { "text": "Halat alb", "correct": true },
+      { "text": "Costum de sport", "correct": false },
+      { "text": "Pelerină de ploaie", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Echipament de protecție",
+    "explanation": "Purtarea halatului alb în laborator este o regulă de protecție esențială. Acesta protejează hainele de eventuale pete de la substanțe sau materiale biologice și contribuie la menținerea unui mediu de lucru curat.",
+    "order": 5
+  },
+  {
+    "id": "bio-u1-easy-006",
+    "question": "Metoda prin care descoperim aspectul exterior al organismelor, componentele sau modul lor de funcționare, folosindu-ne simțurile, se numește:",
+    "answers": [
+      { "text": "Experiment", "correct": false },
+      { "text": "Observație", "correct": true },
+      { "text": "Ipoteză", "correct": false },
+      { "text": "Clasificare", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Metode de investigare",
+    "explanation": "Observația este cea mai veche și fundamentală metodă de cercetare a lumii vii. Aceasta poate fi realizată cu ochiul liber sau cu ajutorul unor instrumente precum lupa sau microscopul.",
+    "order": 6
+  },
+  {
+    "id": "bio-u1-easy-007",
+    "question": "Ramura biologiei care studiază legăturile dintre organisme și mediul lor de viață se numește:",
+    "answers": [
+      { "text": "Botanică", "correct": false },
+      { "text": "Zoologie", "correct": false },
+      { "text": "Ecologie", "correct": true },
+      { "text": "Anatomie", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Ramuri ale biologiei",
+    "explanation": "Ecologia este știința care cercetează interacțiunile dintre viețuitoare, precum și relațiile dintre acestea și factorii lipsiți de viață (apă, aer, sol) din mediul înconjurător.",
+    "order": 7
+  },
+  {
+    "id": "bio-u1-easy-008",
+    "question": "Ce instrument este folosit pentru a măsura temperatura apei, aerului sau solului?",
+    "answers": [
+      { "text": "Termometrul", "correct": true },
+      { "text": "Higrometrul", "correct": false },
+      { "text": "Pluviometrul", "correct": false },
+      { "text": "Anemometrul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Instrumente de măsură",
+    "explanation": "Termometrul este instrumentul specific pentru măsurarea temperaturii. În investigațiile biologice, este esențial pentru a determina condițiile de mediu în care trăiesc organismele.",
+    "order": 8
+  },
+  {
+    "id": "bio-u1-easy-009",
+    "question": "Totalitatea elementelor fără viață de pe un anumit teritoriu (apă, aer, sol, lumină, temperatură) formează:",
+    "answers": [
+      { "text": "Biocenoza", "correct": false },
+      { "text": "Biotopul", "correct": true },
+      { "text": "Ecosistemul", "correct": false },
+      { "text": "Biosfera", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Noțiuni de ecologie",
+    "explanation": "Biotopul reprezintă cadrul natural, componenta nevie a unui ecosistem. El asigură condițiile de mediu necesare pentru supraviețuirea organismelor vii (biocenoza) care populează acel teritoriu.",
+    "order": 9
+  },
+  {
+    "id": "bio-u1-easy-010",
+    "question": "Totalitatea organismelor vii (plante, animale, microorganisme) care trăiesc pe un anumit teritoriu reprezintă:",
+    "answers": [
+      { "text": "Biotopul", "correct": false },
+      { "text": "Populația", "correct": false },
+      { "text": "Biocenoza", "correct": true },
+      { "text": "Specia", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Noțiuni de ecologie",
+    "explanation": "Biocenoza, sau comunitatea de viețuitoare, reprezintă componenta vie a unui ecosistem. Între organismele care formează biocenoza se stabilesc diverse relații, cum ar fi cele de hrănire.",
+    "order": 10
+  },
+  {
+    "id": "bio-u1-easy-011",
+    "question": "Ce instrument este utilizat pentru a măsura cantitatea de apă căzută din precipitații (ploaie)?",
+    "answers": [
+      { "text": "Anemometrul", "correct": false },
+      { "text": "Termometrul", "correct": false },
+      { "text": "Pluviometrul", "correct": true },
+      { "text": "Barometrul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Instrumente de investigare",
+    "explanation": "Pluviometrul este un instrument meteorologic folosit pentru a colecta și măsura cantitatea de precipitații lichide căzute într-un anumit interval de timp. Este util în studiul condițiilor abiotice ale unui ecosistem.",
+    "order": 11
+  },
+  {
+    "id": "bio-u1-easy-012",
+    "question": "Ce nume poartă vasul de sticlă, cilindric și alungit, folosit frecvent în experimente pentru a încălzi sau amesteca volume mici de lichide?",
+    "answers": [
+      { "text": "Paharul Berzelius", "correct": false },
+      { "text": "Eprubeta", "correct": true },
+      { "text": "Balonul cotat", "correct": false },
+      { "text": "Pipeta", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Vase de laborator",
+    "explanation": "Eprubeta este unul dintre cele mai comune articole de sticlărie de laborator. Datorită formei sale, permite manipularea ușoară și observarea reacțiilor chimice sau biologice în cantități mici de substanță.",
+    "order": 12
+  },
+  {
+    "id": "bio-u1-easy-013",
+    "question": "Ce este un mulaj, folosit ca material didactic în laboratorul de biologie?",
+    "answers": [
+      { "text": "Un animal conservat în formol", "correct": false },
+      { "text": "Un material care reproduce alcătuirea unui organism", "correct": true },
+      { "text": "Un preparat microscopic permanent", "correct": false },
+      { "text": "O planșă desenată", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Materiale didactice",
+    "explanation": "Mulajul este o copie tridimensională, realizată din ipsos, plastic sau alte materiale, care redă fidel forma și structura unui organism sau a unei părți din acesta. Este util pentru studiul anatomiei fără a folosi organisme reale.",
+    "order": 13
+  },
+  {
+    "id": "bio-u1-easy-014",
+    "question": "Ce instrument optic, mai simplu decât microscopul, se folosește pentru a mări și observa detalii precum semințe mici sau insecte?",
+    "answers": [
+      { "text": "Ochelarii", "correct": false },
+      { "text": "Lupa", "correct": true },
+      { "text": "Telescopul", "correct": false },
+      { "text": "Oglinda", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Instrumente optice",
+    "explanation": "Lupa este un instrument optic format dintr-o singură lentilă convergentă. Ea oferă o imagine mărită a obiectelor și este utilă pentru primele observații ale detaliilor care nu sunt vizibile clar cu ochiul liber.",
+    "order": 14
+  },
+  {
+    "id": "bio-u1-easy-015",
+    "question": "Unitatea fundamentală formată din biotop și biocenoză, strâns legate între ele, se numește:",
+    "answers": [
+      { "text": "Planetă", "correct": false },
+      { "text": "Ecosistem", "correct": true },
+      { "text": "Regiune", "correct": false },
+      { "text": "Continent", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Noțiuni de ecologie",
+    "explanation": "Ecosistemul reprezintă ansamblul format din totalitatea organismelor vii (biocenoza) și mediul lor de viață neînsuflețit (biotopul). Între aceste două componente există un permanent schimb de materie și energie.",
+    "order": 15
+  },
+  {
+    "id": "bio-u1-easy-016",
+    "question": "Ce instrument măsoară viteza vântului?",
+    "answers": [
+      { "text": "Pluviometrul", "correct": false },
+      { "text": "Termometrul", "correct": false },
+      { "text": "Anemometrul", "correct": true },
+      { "text": "Higrometrul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Instrumente de investigare",
+    "explanation": "Anemometrul este un instrument folosit în meteorologie și în studiile de mediu pentru a măsura viteza curenților de aer. Vântul este un factor abiotic important care influențează viața plantelor și animalelor.",
+    "order": 16
+  },
+  {
+    "id": "bio-u1-easy-017",
+    "question": "Ce sunt preparatele microscopice permanente, păstrate în laborator?",
+    "answers": [
+      { "text": "Fotografii ale unor celule", "correct": false },
+      { "text": "Desene realizate de elevi", "correct": false },
+      { "text": "Lame de sticlă cu fragmente biologice conservate", "correct": true },
+      { "text": "Recipiente cu insecte", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Materiale didactice",
+    "explanation": "Un preparat microscopic permanent este o lamă de sticlă pe care a fost fixat, colorat și conservat un fragment foarte subțire de țesut biologic. Acesta poate fi studiat la microscop oricând, fără a se degrada.",
+    "order": 17
+  },
+  {
+    "id": "bio-u1-easy-018",
+    "question": "Ce este terariul, întâlnit uneori în laboratorul de biologie?",
+    "answers": [
+      { "text": "Un vas pentru creșterea peștilor", "correct": false },
+      { "text": "O colivie pentru păsări", "correct": false },
+      { "text": "Un spațiu amenajat pentru creșterea animalelor mici de uscat", "correct": true },
+      { "text": "Un ierbar pentru plante uscate", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "laboratorul-de-biologie",
+    "category": "Laboratorul de biologie",
+    "explanation": "Terariul este un recipient, de obicei din sticlă, în care se creează un mediu artificial pentru a crește și observa animale mici terestre, precum șopârle, insecte sau broaște țestoase de uscat.",
+    "order": 18
+  },
+  {
+    "id": "bio-u1-easy-019",
+    "question": "Ce fel de informații trebuie notate într-un carnet de teren în timpul unei observații în natură?",
+    "answers": [
+      { "text": "Doar ceea ce pare interesant", "correct": false },
+      { "text": "Doar desene, fără text", "correct": false },
+      { "text": "Cu exactitate ceea ce se vede, inclusiv data și locul", "correct": true },
+      { "text": "Doar părerile personale despre peisaj", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Metode de investigare",
+    "explanation": "Rigoarea este esențială în observațiile științifice. Într-un carnet de teren trebuie notat cu precizie tot ceea ce se observă (specii, comportamente, condiții de mediu), alături de data, ora și locația exactă.",
+    "order": 19
+  },
+  {
+    "id": "bio-u1-easy-020",
+    "question": "Naturalistul român considerat fondatorul biospeologiei (studiul vieții din peșteri) este:",
+    "answers": [
+      { "text": "Grigore Antipa", "correct": false },
+      { "text": "Emil Racoviță", "correct": true },
+      { "text": "Victor Babeș", "correct": false },
+      { "text": "Ioan Cantacuzino", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "biologie",
+    "themeId": "metode-si-investigare",
+    "category": "Personalități",
+    "explanation": "Emil Racoviță a fost un savant român de renume mondial. În urma participării la expediția antarctică \"Belgica\", el s-a dedicat studiului viețuitoarelor din peșteri, fondând o nouă ramură a biologiei, numită biospeologie.",
+    "order": 20
+  }
+]

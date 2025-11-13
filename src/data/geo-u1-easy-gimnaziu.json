@@ -1,0 +1,482 @@
+[
+  {
+    "id": "geo-v-u1-easy-001",
+    "question": "Cum se numește spațiul ocupat de corpurile cosmice, un termen asemănător cu cel de Univers?",
+    "answers": [
+      { "text": "Biosferă", "correct": false },
+      { "text": "Cosmos", "correct": true },
+      { "text": "Litosferă", "correct": false },
+      { "text": "Pedosferă", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Termenul de Cosmos este adesea folosit ca sinonim pentru Univers și desemnează spațiul infinit și corpurile cosmice pe care acesta le cuprinde.",
+    "order": 1
+  },
+  {
+    "id": "geo-v-u1-easy-002",
+    "question": "Ce tip de corp cosmic este Soarele, având în vedere că emite energie și lumină proprie?",
+    "answers": [
+      { "text": "Satelit", "correct": false },
+      { "text": "Planetă gazoasă", "correct": false },
+      { "text": "Stea", "correct": true },
+      { "text": "Cometă", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Soarele este o stea de mărime mijlocie, care generează energie prin reacții nucleare, motiv pentru care emite lumină și căldură, fiind centrul Sistemului Solar.",
+    "order": 2
+  },
+  {
+    "id": "geo-v-u1-easy-003",
+    "question": "În ce galaxie se află Sistemul Solar, din care face parte și planeta noastră, Terra?",
+    "answers": [
+      { "text": "Galaxia Andromeda", "correct": false },
+      { "text": "Calea Lactee", "correct": true },
+      { "text": "Triunghiul", "correct": false },
+      { "text": "Ursa Mare", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Galaxia noastră este denumită Calea Lactee. O galaxie este o grupare imensă de stele, planete, gaze și praf cosmic care se mișcă împreună în spațiu.",
+    "order": 3
+  },
+  {
+    "id": "geo-v-u1-easy-004",
+    "question": "Care este forma corpului geometric cu care se aseamănă cel mai bine planeta Pământ?",
+    "answers": [
+      { "text": "Cerc", "correct": false },
+      { "text": "Sferă", "correct": true },
+      { "text": "Pătrat", "correct": false },
+      { "text": "Piramidă", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Pământul are o formă aproape sferică (geoidă), fiind puțin turtit la poli și bombat la Ecuator ca urmare a mișcării de rotație.",
+    "order": 4
+  },
+  {
+    "id": "geo-v-u1-easy-005",
+    "question": "Ce reprezintă o planetă în Sistemul Solar?",
+    "answers": [
+      { "text": "O stea care emite lumină proprie", "correct": false },
+      { "text": "O grupare de comete", "correct": false },
+      { "text": "Un corp cosmic care se rotește în jurul unei stele", "correct": true },
+      { "text": "Un fragment de rocă de mari dimensiuni", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Planeta este un corp cosmic care orbitează în jurul unei stele, având suficientă masă pentru a fi rotunjit sub acțiunea propriei gravitații și pentru a-și fi curățat vecinătatea orbitală.",
+    "order": 5
+  },
+  {
+    "id": "geo-v-u1-easy-006",
+    "question": "Care este cea mai mare planetă din Sistemul Solar?",
+    "answers": [
+      { "text": "Terra", "correct": false },
+      { "text": "Saturn", "correct": false },
+      { "text": "Neptun", "correct": false },
+      { "text": "Jupiter", "correct": true }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Jupiter, urmat de Saturn, este cea mai mare planetă din Sistemul Solar, fiind o planetă gazoasă. Terra este o planetă de mărime medie în comparație cu celelalte opt.",
+    "order": 6
+  },
+  {
+    "id": "geo-v-u1-easy-007",
+    "question": "Ce denumire poartă mișcarea Pământului în jurul propriei axe, realizată în 24 de ore?",
+    "answers": [
+      { "text": "Mişcarea de revoluție", "correct": false },
+      { "text": "Mişcarea de rotație", "correct": true },
+      { "text": "Precesia", "correct": false },
+      { "text": "Nutarea", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Mișcarea de rotație se realizează în 24 de ore (o zi), de la vest la est, și determină succesiunea zilelor și a nopților.",
+    "order": 7
+  },
+  {
+    "id": "geo-v-u1-easy-008",
+    "question": "Care este principala consecință a mișcării de rotație a Pământului?",
+    "answers": [
+      { "text": "Formarea anotimpurilor", "correct": false },
+      { "text": "Succesiunea zilelor și a nopților", "correct": true },
+      { "text": "Durata inegală a zilelor și nopților", "correct": false },
+      { "text": "Formarea zonelor de căldură", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Înțelegere",
+    "explanation": "Mișcarea de rotație, efectuată în 24 de ore, determină expunerea succesivă a suprafeței Terrei la Soare, rezultând alternanța zi-noapte.",
+    "order": 8
+  },
+  {
+    "id": "geo-v-u1-easy-009",
+    "question": "Care este principala consecință a mișcării de revoluție a Pământului în jurul Soarelui?",
+    "answers": [
+      { "text": "Formarea anotimpurilor", "correct": true },
+      { "text": "Devierea curenților oceanici", "correct": false },
+      { "text": "Succesiunea zi/noapte", "correct": false },
+      { "text": "Formarea banchizei", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Înțelegere",
+    "explanation": "Mișcarea de revoluție (aproximativ 365 de zile), împreună cu înclinarea axei Pământului, determină succesiunea anuală a celor patru anotimpuri.",
+    "order": 9
+  },
+  {
+    "id": "geo-v-u1-easy-010",
+    "question": "Cum se numește reprezentarea micșorată, selectivă și convențională a suprafeței Pământului pe un plan?",
+    "answers": [
+      { "text": "Globul geografic", "correct": false },
+      { "text": "Planiglobul", "correct": false },
+      { "text": "Harta", "correct": true },
+      { "text": "Satelitul artificial", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Harta este o reprezentare în plan, la o anumită scară, care folosește semne convenționale și o selecție de elemente pentru a reda realitatea geografică.",
+    "order": 10
+  },
+  {
+    "id": "geo-v-u1-easy-011",
+    "question": "Care este linia imaginară trasată pe suprafața Pământului, la distanță egală față de Polul Nord și Polul Sud?",
+    "answers": [
+      { "text": "Primul Meridian", "correct": false },
+      { "text": "Tropicul Racului", "correct": false },
+      { "text": "Ecuatorul", "correct": true },
+      { "text": "Axa Pământului", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Ecuatorul este un cerc imaginar care împarte Pământul în două emisfere (nordică și sudică) și servește ca referință de 0° pentru măsurarea latitudinii.",
+    "order": 11
+  },
+  {
+    "id": "geo-v-u1-easy-012",
+    "question": "Cum se numește rețeaua de linii imaginare de pe glob care unesc Polul Nord cu Polul Sud?",
+    "answers": [
+      { "text": "Paralele", "correct": false },
+      { "text": "Emisfere", "correct": false },
+      { "text": "Meridiane", "correct": true },
+      { "text": "Tropice", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Meridianele sunt semicercuri imaginare care unesc cei doi poli și servesc ca referință pentru măsurarea longitudinii. Primul Meridian (Greenwich) este considerat 0°.",
+    "order": 12
+  },
+  {
+    "id": "geo-v-u1-easy-013",
+    "question": "Ce denumire poartă reprezentarea în plan a formei sferice a Pământului?",
+    "answers": [
+      { "text": "Globul geografic", "correct": false },
+      { "text": "Planiglobul", "correct": true },
+      { "text": "Harta topografică", "correct": false },
+      { "text": "Legendă", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Planiglobul redă întreaga suprafață sferică a Pământului proiectată pe un plan, fiind o hartă care reprezintă toate elementele globului geografic.",
+    "order": 13
+  },
+  {
+    "id": "geo-v-u1-easy-014",
+    "question": "Care este corpul cosmic care se rotește în jurul Pământului și care nu are lumină proprie?",
+    "answers": [
+      { "text": "Soarele", "correct": false },
+      { "text": "Marte", "correct": false },
+      { "text": "Luna", "correct": true },
+      { "text": "Steaua Polară", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Luna este satelitul natural al Pământului, un corp solid care reflectă lumina primită de la Soare și se rotește în jurul planetei noastre.",
+    "order": 14
+  },
+  {
+    "id": "geo-v-u1-easy-015",
+    "question": "Care este valoarea aproximativă a lungimii cercului Ecuatorului?",
+    "answers": [
+      { "text": "6 368 km", "correct": false },
+      { "text": "40 075 km", "correct": true },
+      { "text": "10 000 km", "correct": false },
+      { "text": "40 010 km", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Lungimea Ecuatorului, cel mai mare cerc trasat pe glob, este de aproximativ 40 075 km. Această dimensiune este una dintre cele principale ale Pământului.",
+    "order": 15
+  },
+  {
+    "id": "geo-v-u1-easy-016",
+    "question": "Cum se numește învelișul gazos, format din aer și particule, care îmbracă planeta Pământ?",
+    "answers": [
+      { "text": "Litosferă", "correct": false },
+      { "text": "Hidrosferă", "correct": false },
+      { "text": "Antroposferă", "correct": false },
+      { "text": "Atmosferă", "correct": true }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Atmosfera este 'sfera de aer' a Pământului, alcătuită în principal din azot și oxigen. Are rol de protecție împotriva radiațiilor solare dăunătoare și menține căldura.",
+    "order": 16
+  },
+  {
+    "id": "geo-v-u1-easy-017",
+    "question": "Care este învelișul format din totalitatea apelor de pe Pământ?",
+    "answers": [
+      { "text": "Biosfera", "correct": false },
+      { "text": "Hidrosfera", "correct": true },
+      { "text": "Litosfera", "correct": false },
+      { "text": "Atmosfera", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Hidrosfera, 'sfera de apă', cuprinde oceanele, mările, apele continentale și apa din atmosferă. Este o componentă esențială a mediului geografic.",
+    "order": 17
+  },
+  {
+    "id": "geo-v-u1-easy-018",
+    "question": "Cum se numește învelișul 'viu' al planetei Pământ, format din totalitatea plantelor și animalelor?",
+    "answers": [
+      { "text": "Pedosfera", "correct": false },
+      { "text": "Antroposfera", "correct": false },
+      { "text": "Biosfera", "correct": true },
+      { "text": "Mezosfera", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Biosfera este alcătuită din totalitatea viețuitoarelor de pe Terra. Procesul de fotosinteză, realizat de plante, stă la baza existenței și dezvoltării acesteia.",
+    "order": 18
+  },
+  {
+    "id": "geo-v-u1-easy-019",
+    "question": "Care este stratul exterior solid (pietros) al Pământului, fragmentat în plăci tectonice?",
+    "answers": [
+      { "text": "Astenosfera", "correct": false },
+      { "text": "Mezosfera", "correct": false },
+      { "text": "Litosfera", "correct": true },
+      { "text": "Nucleul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Litosfera, 'sfera de piatră', reprezintă scoarța solidă a Pământului și cuprinde minerale, roci și forme de relief, fiind cea mai externă sferă internă.",
+    "order": 19
+  },
+  {
+    "id": "geo-v-u1-easy-020",
+    "question": "Cum se numește punctul fix de pe bolta cerească, care ajută la orientarea pe timpul nopții în emisfera nordică?",
+    "answers": [
+      { "text": "Venus", "correct": false },
+      { "text": "Steaua Polară", "correct": true },
+      { "text": "Soarele", "correct": false },
+      { "text": "Luna", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Steaua Polară este punctul în jurul căruia bolta cerească pare să se rotească. Ea indică direcția Nord, fiind un reper esențial pentru orientare în emisfera nordică.",
+    "order": 20
+  },
+  {
+    "id": "geo-v-u1-easy-021",
+    "question": "Ce denumire poartă mișcarea Pământului în jurul Soarelui, realizată în aproximativ 365 de zile?",
+    "answers": [
+      { "text": "Mişcarea de revoluție", "correct": true },
+      { "text": "Mişcarea de rotație", "correct": false },
+      { "text": "Mişcarea de precesie", "correct": false },
+      { "text": "Mişcarea aparentă a Soarelui", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Mișcarea de revoluție este deplasarea Pământului pe orbita sa eliptică în jurul Soarelui. Împreună cu înclinarea axei, aceasta cauzează anotimpurile și durata inegală a zilei/nopții.",
+    "order": 21
+  },
+  {
+    "id": "geo-v-u1-easy-022",
+    "question": "Care este principala componentă a atmosferei Pământului, necesară vieții?",
+    "answers": [
+      { "text": "Dioxidul de carbon", "correct": false },
+      { "text": "Vaporii de apă", "correct": false },
+      { "text": "Oxigenul", "correct": true },
+      { "text": "Azotul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Oxigenul este esențial pentru respirația viețuitoarelor și se regăsește în atmosfera Pământului în proporție de aproximativ 21%, fiind al doilea gaz ca pondere, după azot (78%).",
+    "order": 22
+  },
+  {
+    "id": "geo-v-u1-easy-023",
+    "question": "În ce emisferă se află Tropicul Racului (Tropicul de Nord)?",
+    "answers": [
+      { "text": "Emisfera sudică", "correct": false },
+      { "text": "Emisfera estică", "correct": false },
+      { "text": "Emisfera nordică", "correct": true },
+      { "text": "Emisfera vestică", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Tropicul Racului, sau Tropicul de Nord, este o paralelă importantă situată la 23°27' latitudine nordică, în timp ce Tropicul Capricornului se află în emisfera sudică.",
+    "order": 23
+  },
+  {
+    "id": "geo-v-u1-easy-024",
+    "question": "Cum se numește linia imaginară care servește ca referință de 0° pentru măsurarea longitudinii pe glob?",
+    "answers": [
+      { "text": "Ecuatorul", "correct": false },
+      { "text": "Cercul Polar", "correct": false },
+      { "text": "Primul Meridian (Greenwich)", "correct": true },
+      { "text": "Tropicul", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Cunoaștere",
+    "explanation": "Primul Meridian (Meridianul de 0°), care trece prin Greenwich, împarte Pământul în emisfera vestică și emisfera estică și este utilizat ca punct de plecare pentru măsurarea longitudinii.",
+    "order": 24
+  },
+  {
+    "id": "geo-v-u1-easy-025",
+    "question": "Care sunt corpurile cosmice din Sistemul Solar care nu au sateliți naturali?",
+    "answers": [
+      { "text": "Jupiter și Saturn", "correct": false },
+      { "text": "Mercur și Venus", "correct": true },
+      { "text": "Terra și Marte", "correct": false },
+      { "text": "Uranus și Neptun", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Dintre cele opt planete, doar Mercur și Venus nu posedă sateliți naturali. Marte are doi, iar cele patru planete gazoase (Jupiter, Saturn, Uranus, Neptun) au fiecare numeroși sateliți.",
+    "order": 25
+  },
+  {
+    "id": "geo-v-u1-easy-026",
+    "question": "Ce denumire poartă grupurile vizibile de stele și alte corpuri cosmice de pe bolta cerească, ce par a fi apropiate?",
+    "answers": [
+      { "text": "Galaxii", "correct": false },
+      { "text": "Sisteme planetare", "correct": false },
+      { "text": "Constelații", "correct": true },
+      { "text": "Meteoriți", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Constelațiile sunt grupări de corpuri cosmice care, deși par apropiate pe bolta cerească, în realitate se află la distanțe diferite, fiind doar o grupare aparentă.",
+    "order": 26
+  },
+  {
+    "id": "geo-v-u1-easy-027",
+    "question": "Ce reprezintă, pe o hartă, mărimea care reflectă de câte ori a fost micșorată suprafața reprezentată faţă de cea din realitate?",
+    "answers": [
+      { "text": "Legenda", "correct": false },
+      { "text": "Scara de proporție", "correct": true },
+      { "text": "Coordonatele geografice", "correct": false },
+      { "text": "Rețeaua hidrografică", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Definiții",
+    "explanation": "Scara de proporție indică raportul de micșorare între o distanță de pe hartă și distanța corespunzătoare din teren. Ea poate fi exprimată numeric sau grafic.",
+    "order": 27
+  },
+  {
+    "id": "geo-v-u1-easy-028",
+    "question": "Care este satelitul natural al planetei Terra?",
+    "answers": [
+      { "text": "Io", "correct": false },
+      { "text": "Marte", "correct": false },
+      { "text": "Luna", "correct": true },
+      { "text": "Titan", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Luna este satelitul natural al Pământului, care se rotește în jurul acestuia și determină fenomenul mareelor prin atracția gravitațională exercitată asupra hidrosferei.",
+    "order": 28
+  },
+  {
+    "id": "geo-v-u1-easy-029",
+    "question": "Ce mișcare a Pământului creează impresia deplasării Soarelui pe bolta cerească, de la est la vest (răsărit la apus)?",
+    "answers": [
+      { "text": "Mișcarea de revoluție", "correct": false },
+      { "text": "Mișcarea de rotație", "correct": true },
+      { "text": "Mișcarea de precesie", "correct": false },
+      { "text": "Mișcarea Soarelui", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Înțelegere",
+    "explanation": "Mișcarea aparentă a Soarelui pe bolta cerească este o consecință directă a mișcării reale de rotație a Pământului, care se realizează de la vest la est.",
+    "order": 29
+  },
+  {
+    "id": "geo-v-u1-easy-030",
+    "question": "Care este valoarea aproximativă a razei medii a Pământului?",
+    "answers": [
+      { "text": "40 000 km", "correct": false },
+      { "text": "6 368 km", "correct": true },
+      { "text": "10 898 m", "correct": false },
+      { "text": "1 200 km", "correct": false }
+    ],
+    "difficulty": "easy",
+    "subjectId": "geografie",
+    "themeId": "terra-o-planeta-a-universului",
+    "category": "Fapte de bază",
+    "explanation": "Raza medie a Pământului, calculată ca medie a razei ecuatoriale și a celei polare, este de aproximativ 6 368 km. Aceasta este o dimensiune importantă a planetei.",
+    "order": 30
+  }
+]

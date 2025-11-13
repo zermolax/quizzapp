@@ -27,7 +27,7 @@ import { getDatabase } from 'firebase/database';
  * Sunt "publice" (vor fi vizibile și în code pe client), nu conțin parole
  * De aceea e OK să fie în cod - nu sunt sensitive
  */
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAfOpufH_Je0IhQhRyX_RSWPDcP6FgL8mA",
   authDomain: "quizzapp-e45dc.firebaseapp.com",
   projectId: "quizzapp-e45dc",
