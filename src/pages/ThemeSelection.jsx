@@ -149,43 +149,20 @@ export function ThemeSelection() {
           }}></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Breadcrumb */}
-          <div className="mb-6 font-mono text-sm text-off-white/70 dark:text-deep-brown/70 uppercase tracking-wider">
-            <Link
-              to="/"
-              className="hover:text-neon-pink transition-colors"
-            >
-              Home
-            </Link>
-            {' / '}
-            <Link
-              to="/"
-              className="hover:text-neon-pink transition-colors"
-            >
-              Discipline
-            </Link>
-            {' / '}
-            <span className="text-off-white dark:text-deep-brown font-bold">{subject?.name}</span>
-          </div>
-
-          {/* Subject Badge */}
-          <div className="inline-block bg-neon-pink text-off-white px-4 sm:px-6 py-2 sm:py-3 font-heading font-black text-base uppercase tracking-wide mb-4 sm:mb-6 -rotate-2">
-            {subject?.icon} {subject?.name}
-          </div>
-
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           {/* Title */}
-          <h1 className="text-7xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
-            Explorează {subject?.name}
+          <h1 className="text-7xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
+            <span className="block">Explorează</span>
+            <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">{subject?.name}</span>
           </h1>
 
           {/* Description */}
-          <p className="text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-off-white/90 dark:text-deep-brown/90 leading-relaxed">
+          <p className="text-xl font-body font-semibold max-w-3xl mx-auto text-off-white/90 dark:text-deep-brown/90 leading-relaxed mb-12">
             {subject?.descriptions?.educational || subject?.description || 'Învață și testează-ți cunoștințele'}
           </p>
 
           {/* Stats - Bold Style (matching SubjectSelection) */}
-          <div className="flex flex-wrap gap-6 sm:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto">
             <div className="text-center">
               <p className="text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #FF0080' }}>
                 {themes.length}
