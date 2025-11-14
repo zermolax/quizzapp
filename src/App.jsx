@@ -1,15 +1,29 @@
 /**
- * App.jsx - OPTIMIZED VERSION with Code Splitting
+ * App.jsx - OPTIMIZED VERSION with Code Splitting + React Query
  *
  * OPTIMIZATIONS:
  * - Lazy loading for all route components
  * - Suspense fallback for loading states
  * - Reduced initial bundle size
+ * - React Query caching for instant navigation (Part B of B+C optimization)
  */
 
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAuth } from './hooks/useAuth';
+
+// Create QueryClient with caching configuration
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes - data stays fresh
+      cacheTime: 30 * 60 * 1000, // 30 minutes - data stays in cache
+      refetchOnWindowFocus: false, // Don't refetch on window focus
+      retry: 1, // Retry failed requests once
+    },
+  },
+});
 
 // Lazy load all page components
 const Home = lazy(() => import('./pages/Home'));
@@ -40,9 +54,10 @@ export default function App() {
   }
 
   return (
-    <Router>
-      <Suspense fallback={<LoadingSpinner />}>
-        <Routes>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
 
           {/* RUTA 1: Home - Landing Page */}
           <Route
@@ -119,5 +134,6 @@ export default function App() {
         </Routes>
       </Suspense>
     </Router>
+    </QueryClientProvider>
   );
 }
