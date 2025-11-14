@@ -59,44 +59,59 @@ export function ThemeCard({
         {theme.name}
       </h3>
 
-      {/* Question Count */}
+      {/* STATS SECTION - PROMINENT */}
       {showQuestionCount && (
-        <p className="text-xs font-mono text-deep-brown/50 dark:text-off-white/50 mb-3">
-          {theme.questionsCount || theme.totalQuestions || 0} întrebări
-        </p>
+        <div className="text-center py-4 mb-3 relative z-10">
+          <div className="flex items-center justify-center">
+            <div className="text-center">
+              <p className="text-3xl font-mono font-black text-deep-brown dark:text-off-white"
+                 style={{ textShadow: '2px 2px 0 #C8FF00' }}>
+                {theme.questionsCount || theme.totalQuestions || 0}+
+              </p>
+              <p className="text-xs font-heading font-bold uppercase tracking-wide text-deep-brown/70 dark:text-off-white/70 mt-1">
+                Întrebări
+              </p>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Description */}
       {showDescription && theme.description && (
-        <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-4">
+        <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-2">
           {theme.description}
         </p>
       )}
 
-      {/* Difficulty Buttons */}
+      {/* DIFFICULTY MODE SECTION */}
       {showDifficultyButtons && (
-        <div className="flex gap-2">
-          <button
-            onClick={(e) => handleDifficultySelect(e, 'easy')}
-            className="flex-1 bg-[#8B9B7A] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-            title="Easy - 10 puncte per întrebare"
-          >
-            E
-          </button>
-          <button
-            onClick={(e) => handleDifficultySelect(e, 'medium')}
-            className="flex-1 bg-[#FF6B00] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-            title="Medium - 30 puncte per întrebare"
-          >
-            M
-          </button>
-          <button
-            onClick={(e) => handleDifficultySelect(e, 'hard')}
-            className="flex-1 bg-[#FF0080] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-            title="Hard - 50 puncte per întrebare"
-          >
-            H
-          </button>
+        <div className="bg-sand/50 dark:bg-deep-brown/20 p-3 mb-2 border-2 border-warm-brown dark:border-sand relative z-10">
+          <p className="font-heading font-bold text-xs uppercase text-deep-brown dark:text-off-white text-center mb-2">
+            Trei nivele de dificultate
+          </p>
+          <div className="flex gap-2">
+            <button
+              onClick={(e) => handleDifficultySelect(e, 'easy')}
+              className="flex-1 bg-[#8B9B7A] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+              title="Easy - 10 puncte per întrebare"
+            >
+              E
+            </button>
+            <button
+              onClick={(e) => handleDifficultySelect(e, 'medium')}
+              className="flex-1 bg-[#FF6B00] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+              title="Medium - 30 puncte per întrebare"
+            >
+              M
+            </button>
+            <button
+              onClick={(e) => handleDifficultySelect(e, 'hard')}
+              className="flex-1 bg-[#FF0080] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
+              title="Hard - 50 puncte per întrebare"
+            >
+              H
+            </button>
+          </div>
         </div>
       )}
     </div>

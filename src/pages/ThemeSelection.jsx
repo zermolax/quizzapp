@@ -141,17 +141,17 @@ export function ThemeSelection() {
       </nav>
 
       {/* HERO SECTION - BOLD STYLE */}
-      <section className="py-16 sm:py-20 bg-cream dark:bg-off-white relative overflow-hidden">
+      <section className="py-16 sm:py-20 bg-deep-brown dark:bg-off-white relative overflow-hidden">
         {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, currentColor 20px, currentColor 21px)'
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, currentColor 2px, currentColor 3px), repeating-linear-gradient(90deg, transparent, transparent 2px, currentColor 2px, currentColor 3px)'
           }}></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
-          <div className="mb-6 font-mono text-sm text-warm-brown dark:text-deep-brown uppercase tracking-wider">
+          <div className="mb-6 font-mono text-sm text-off-white/70 dark:text-deep-brown/70 uppercase tracking-wider">
             <Link
               to="/"
               className="hover:text-neon-pink transition-colors"
@@ -166,7 +166,7 @@ export function ThemeSelection() {
               Discipline
             </Link>
             {' / '}
-            <span className="text-deep-brown dark:text-warm-brown font-bold">{subject?.name}</span>
+            <span className="text-off-white dark:text-deep-brown font-bold">{subject?.name}</span>
           </div>
 
           {/* Subject Badge */}
@@ -175,45 +175,42 @@ export function ThemeSelection() {
           </div>
 
           {/* Title */}
-          <h1 className="text-7xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter text-deep-brown dark:text-deep-brown">
+          <h1 className="text-7xl font-heading font-black mb-4 sm:mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
             Explorează {subject?.name}
           </h1>
 
           {/* Description */}
-          <p className="text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-deep-brown dark:text-warm-brown leading-relaxed">
+          <p className="text-2xl font-body font-semibold max-w-3xl mb-8 sm:mb-12 text-off-white/90 dark:text-deep-brown/90 leading-relaxed">
             {subject?.descriptions?.educational || subject?.description || 'Învață și testează-ți cunoștințele'}
           </p>
 
-          {/* Stats */}
-          <div className="flex flex-wrap gap-4 sm:gap-6">
-            <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
-              <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
+          {/* Stats - Bold Style (matching SubjectSelection) */}
+          <div className="flex flex-wrap gap-6 sm:gap-8">
+            <div className="text-center">
+              <p className="text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #FF0080' }}>
                 {themes.length}
-              </div>
-              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
+              </p>
+              <p className="text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
                 Teme
-              </div>
+              </p>
             </div>
 
-            <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
-              <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
-                {subject?.questionsCount || subject?.totalQuestions || 0}
-              </div>
-              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
+            <div className="text-center">
+              <p className="text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #CCFF00' }}>
+                {subject?.questionsCount || subject?.totalQuestions || 0}+
+              </p>
+              <p className="text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
                 Întrebări
-              </div>
+              </p>
             </div>
 
-            <div className="bg-deep-brown dark:bg-warm-brown text-off-white p-4 sm:p-6 border-4 border-deep-brown dark:border-warm-brown relative">
-              <div className="absolute top-1.5 left-1.5 right-0 bottom-0 border-4 border-warm-brown dark:border-sand -z-10"></div>
-              <div className="font-mono text-5xl font-bold leading-none text-neon-lime">
+            <div className="text-center">
+              <p className="text-6xl font-mono font-bold text-off-white dark:text-deep-brown" style={{ textShadow: '3px 3px 0 #00FFFF' }}>
                 3
-              </div>
-              <div className="font-heading font-bold text-sm uppercase tracking-wider mt-2 opacity-80">
+              </p>
+              <p className="text-sm font-heading font-bold uppercase tracking-widest mt-2 text-off-white/80 dark:text-deep-brown/80">
                 Nivele
-              </div>
+              </p>
             </div>
           </div>
         </div>
