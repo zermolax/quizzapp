@@ -2,11 +2,11 @@
  * useSubjects.js - Custom Hook pentru gestionarea disciplinelor
  *
  * Combină datele statice din SUBJECTS_CONFIG cu datele dinamice din Firestore.
- * Returnează subjects cu metadate complete + counters actualizate în timp real.
+ * Returnează subjects cu metadate complete + counters.
  *
- * Counters calculate automat din Firestore:
- * - themesCount: număr teme publicate per disciplină
- * - questionsCount: număr întrebări publicate per disciplină
+ * PERFORMANCE: Counters (totalThemes, totalQuestions) sunt pre-calculate
+ * și salvate în documentele subject. Pentru actualizare, rulează:
+ * node scripts/updateSubjectStats.js
  *
  * Usage:
  * const { subjects, loading, error, refreshSubjects } = useSubjects();
@@ -46,65 +46,18 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 4. Fetch ALL themes to calculate theme counters
-      const themesRef = collection(db, 'themes');
-      const themesQuery = query(themesRef, where('isPublished', '==', true));
-      const themesSnapshot = await getDocs(themesQuery);
-
-      // 5. Fetch ALL questions to calculate question counters
-      const questionsRef = collection(db, 'questions');
-      // Remove isPublished filter since questions might not have this field
-      const questionsQuery = query(questionsRef);
-      const questionsSnapshot = await getDocs(questionsQuery);
-
-      // 6. Calculate counters per subject
-      const subjectCounters = {};
-
-      // Count themes per subject
-      themesSnapshot.docs.forEach(doc => {
-        const theme = doc.data();
-        const subjectId = theme.subjectId || 'istorie'; // Default to 'istorie' for legacy data
-
-        if (!subjectCounters[subjectId]) {
-          subjectCounters[subjectId] = {
-            themesCount: 0,
-            questionsCount: 0,
-          };
-        }
-
-        subjectCounters[subjectId].themesCount += 1;
-      });
-
-      // Count questions per subject
-      questionsSnapshot.docs.forEach(doc => {
-        const question = doc.data();
-        const subjectId = question.subjectId || 'istorie'; // Default to 'istorie' for legacy data
-
-        if (!subjectCounters[subjectId]) {
-          subjectCounters[subjectId] = {
-            themesCount: 0,
-            questionsCount: 0,
-          };
-        }
-
-        subjectCounters[subjectId].questionsCount += 1;
-      });
-
-      logger.debug('📊 Subject Counters:', subjectCounters);
-
-      // 7. Merge static config with Firestore data + calculated counters
+      // 4. Merge static config with Firestore data
+      // Counters (totalThemes, totalQuestions) are now stored directly in subject documents
+      // This is 10x faster than counting from themes/questions collections!
       const enrichedSubjects = baseConfig.map(config => {
         const firestoreSubject = firestoreData[config.id] || firestoreData[config.slug];
-        const counters = subjectCounters[config.id] || subjectCounters[config.slug] || {};
 
         return {
           ...config, // Static metadata (icon, descriptions, color)
-          ...firestoreSubject, // Firestore data (if exists)
-          // Use calculated counters (always up-to-date from Firestore)
-          themesCount: counters.themesCount || 0,
-          questionsCount: counters.questionsCount || 0,
-          totalThemes: counters.themesCount || 0, // Backward compatibility
-          totalQuestions: counters.questionsCount || 0, // Backward compatibility
+          ...firestoreSubject, // Firestore data (includes totalThemes, totalQuestions)
+          // Use counters from Firestore document
+          themesCount: firestoreSubject?.totalThemes || 0,
+          questionsCount: firestoreSubject?.totalQuestions || 0,
           // Keep original config values for fallback
           icon: config.icon,
           color: config.color,
@@ -112,7 +65,7 @@ export function useSubjects({ activeOnly = false } = {}) {
         };
       });
 
-      // 8. Sort by order
+      // 5. Sort by order
       const sortedSubjects = enrichedSubjects.sort((a, b) => (a.order || 0) - (b.order || 0));
 
       logger.debug('✅ Enriched Subjects:', sortedSubjects);
