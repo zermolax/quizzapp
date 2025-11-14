@@ -22,7 +22,6 @@ import {
   getDoc
 } from 'firebase/firestore';
 import { db } from './firebase';
-import themesData from '../data/themes.json';
 
 /**
  * FUNCTION 1: Get Global Leaderboard
@@ -177,7 +176,19 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
     });
     
     const leaderboardData = await Promise.all(leaderboardPromises);
-    
+
+    // Fetch theme name from Firestore
+    let themeName = 'Unknown';
+    try {
+      const themeRef = doc(db, 'themes', themeId);
+      const themeDoc = await getDoc(themeRef);
+      if (themeDoc.exists()) {
+        themeName = themeDoc.data().name || 'Unknown';
+      }
+    } catch (err) {
+      console.error('Error fetching theme name:', err);
+    }
+
     // Filter nulls and sort by totalPoints
     const sortedLeaderboard = leaderboardData
       .filter(item => item !== null)
@@ -189,17 +200,15 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
         if (rank === 1) medal = '🥇';
         else if (rank === 2) medal = '🥈';
         else if (rank === 3) medal = '🥉';
-        
-        const theme = themesData.find(t => t.id === themeId);
-        
+
         return {
           rank,
           ...item,
-          themeName: theme?.name || 'Unknown',
+          themeName,
           medal
         };
       });
-    
+
     return sortedLeaderboard;
 
   } catch (error) {
