@@ -43,21 +43,37 @@ export function ThemeCard({
       onClick={handleCardClick}
       className={`
         bg-cream dark:bg-warm-brown
-        border-4 border-warm-brown dark:border-sand
+        border-[5px] border-warm-brown dark:border-sand
         p-6
         ${!showDifficultyButtons ? 'cursor-pointer hover:-translate-x-2 hover:-translate-y-2 hover:shadow-[10px_10px_0_#2D2416]' : ''}
-        transition-all duration-150
+        transition-all duration-200
+        hover:-translate-x-1 hover:-translate-y-1 hover:border-deep-brown hover:dark:border-off-white
+        hover:shadow-[6px_6px_0_#2D2416]
         text-left
+        min-h-[400px]
+        flex flex-col
         ${className}
       `.trim()}
     >
-      {/* Icon */}
-      <div className="text-5xl mb-3">{theme.icon}</div>
+      {/* Header: Icon + Title (Horizontal Layout - matching SubjectCard) */}
+      <div className="flex items-center gap-3 mb-3 relative z-10">
+        {/* Icon */}
+        <div className="text-5xl flex-shrink-0">
+          {theme.icon}
+        </div>
 
-      {/* Title */}
-      <h3 className="text-2xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
-        {theme.name}
-      </h3>
+        {/* Title */}
+        <h3 className="text-xl font-heading font-black uppercase tracking-tight text-deep-brown dark:text-off-white leading-tight">
+          {theme.name}
+        </h3>
+      </div>
+
+      {/* Description */}
+      {showDescription && theme.description && (
+        <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 leading-snug relative z-10 mb-3">
+          {theme.description}
+        </p>
+      )}
 
       {/* STATS SECTION - PROMINENT */}
       {showQuestionCount && (
@@ -76,42 +92,30 @@ export function ThemeCard({
         </div>
       )}
 
-      {/* Description */}
-      {showDescription && theme.description && (
-        <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 mb-2">
-          {theme.description}
-        </p>
-      )}
-
-      {/* DIFFICULTY MODE SECTION */}
+      {/* DIFFICULTY BUTTONS SECTION - VERTICAL LAYOUT */}
       {showDifficultyButtons && (
-        <div className="bg-sand/50 dark:bg-deep-brown/20 p-3 mb-2 border-2 border-warm-brown dark:border-sand relative z-10">
-          <p className="font-heading font-bold text-xs uppercase text-deep-brown dark:text-off-white text-center mb-2">
-            Trei nivele de dificultate
-          </p>
-          <div className="flex gap-2">
-            <button
-              onClick={(e) => handleDifficultySelect(e, 'easy')}
-              className="flex-1 bg-[#8B9B7A] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-              title="Easy - 10 puncte per întrebare"
-            >
-              E
-            </button>
-            <button
-              onClick={(e) => handleDifficultySelect(e, 'medium')}
-              className="flex-1 bg-[#FF6B00] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-              title="Medium - 30 puncte per întrebare"
-            >
-              M
-            </button>
-            <button
-              onClick={(e) => handleDifficultySelect(e, 'hard')}
-              className="flex-1 bg-[#FF0080] text-off-white border-2 border-deep-brown py-2 px-3 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-              title="Hard - 50 puncte per întrebare"
-            >
-              H
-            </button>
-          </div>
+        <div className="flex flex-col gap-2 mt-auto">
+          <button
+            onClick={(e) => handleDifficultySelect(e, 'easy')}
+            className="w-full bg-[#8B9B7A] text-off-white border-3 border-deep-brown py-3 px-4 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+            title="Easy - 10 puncte per întrebare"
+          >
+            Easy
+          </button>
+          <button
+            onClick={(e) => handleDifficultySelect(e, 'medium')}
+            className="w-full bg-[#FF6B00] text-off-white border-3 border-deep-brown py-3 px-4 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+            title="Medium - 30 puncte per întrebare"
+          >
+            Medium
+          </button>
+          <button
+            onClick={(e) => handleDifficultySelect(e, 'hard')}
+            className="w-full bg-[#FF0080] text-off-white border-3 border-deep-brown py-3 px-4 font-heading font-bold text-sm uppercase hover:-translate-y-1 hover:shadow-[0_4px_0_#2D2416] transition-all duration-150"
+            title="Hard - 50 puncte per întrebare"
+          >
+            Hard
+          </button>
         </div>
       )}
     </div>
