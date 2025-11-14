@@ -247,20 +247,38 @@ export function SubjectSelection() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 leading-snug relative z-10 mb-4">
+                  <p className="text-sm font-body text-deep-brown/70 dark:text-off-white/70 leading-snug relative z-10 mb-3">
                     {subject.descriptions?.specialist || subject.descriptions?.educational || subject.description || ''}
                   </p>
 
-                  {/* TRIVIA MODE SECTION */}
-                  <div className="bg-sand/50 dark:bg-deep-brown/20 p-3 mb-3 border-2 border-warm-brown dark:border-sand relative z-10">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-heading font-bold text-xs uppercase text-deep-brown dark:text-off-white">
-                        🎲 Trivia Rapid
-                      </span>
-                      <span className="font-mono text-xs text-warm-brown dark:text-sand">
-                        12 întrebări
-                      </span>
+                  {/* STATS SECTION - PROMINENT */}
+                  <div className="text-center py-4 mb-3 relative z-10">
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="text-center">
+                        <p className="text-3xl font-mono font-black text-deep-brown dark:text-off-white" style={{ textShadow: `2px 2px 0 ${neonColor}` }}>
+                          {subject.themesCount || subject.totalThemes || 0}
+                        </p>
+                        <p className="text-xs font-heading font-bold uppercase tracking-wide text-deep-brown/70 dark:text-off-white/70 mt-1">
+                          Teme
+                        </p>
+                      </div>
+                      <div className="text-4xl text-deep-brown/30 dark:text-off-white/30">•</div>
+                      <div className="text-center">
+                        <p className="text-3xl font-mono font-black text-deep-brown dark:text-off-white" style={{ textShadow: `2px 2px 0 ${neonColor}` }}>
+                          {subject.questionsCount || subject.totalQuestions || 0}+
+                        </p>
+                        <p className="text-xs font-heading font-bold uppercase tracking-wide text-deep-brown/70 dark:text-off-white/70 mt-1">
+                          Întrebări
+                        </p>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* TRIVIA MODE SECTION */}
+                  <div className="bg-sand/50 dark:bg-deep-brown/20 p-3 mb-2 border-2 border-warm-brown dark:border-sand relative z-10">
+                    <p className="font-heading font-bold text-xs uppercase text-deep-brown dark:text-off-white text-center mb-2">
+                      Trei nivele de dificultate
+                    </p>
                     <div className="flex gap-2">
                       {/* Easy Button */}
                       <button
@@ -315,9 +333,6 @@ export function SubjectSelection() {
                       </span>
                       <span className="text-lg">→</span>
                     </button>
-                    <p className="text-xs font-mono text-warm-brown dark:text-sand text-center mt-1">
-                      {subject.themesCount || subject.totalThemes || 0} teme • {subject.questionsCount || subject.totalQuestions || 0}+ întrebări
-                    </p>
                   </div>
                 </div>
               );
