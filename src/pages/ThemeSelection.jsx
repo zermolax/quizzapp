@@ -23,6 +23,25 @@ export function ThemeSelection() {
   const { user, logout } = useAuth();
 
   /**
+   * Adaugă articolul hotărât la numele disciplinei
+   */
+  const getSubjectNameWithArticle = (name) => {
+    if (!name) return '';
+    // Pentru "Educație X" → "Educația X"
+    if (name.startsWith('Educație')) return name.replace('Educație', 'Educația');
+    // Pentru "Limba X" → rămâne "Limba X" (are deja articol)
+    if (name.startsWith('Limba')) return name;
+    // Pentru cuvinte care se termină în "ie" → "ia"
+    if (name.endsWith('ie')) return name.slice(0, -2) + 'ia';
+    // Pentru cuvinte care se termină în "e" → "a"
+    if (name.endsWith('e')) return name.slice(0, -1) + 'a';
+    // Pentru cuvinte care se termină în "ă" → "a"
+    if (name.endsWith('ă')) return name.slice(0, -1) + 'a';
+    // Default (ex: TIC rămâne TIC)
+    return name;
+  };
+
+  /**
    * HANDLER: Select theme and difficulty
    */
   const handleSelectTheme = (themeSlug, difficulty) => {
@@ -153,7 +172,7 @@ export function ThemeSelection() {
           {/* Title */}
           <h1 className="text-7xl font-heading font-black mb-6 uppercase leading-tight tracking-tighter text-off-white dark:text-deep-brown">
             <span className="block">Explorează</span>
-            <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">{subject?.name}</span>
+            <span className="inline-block bg-neon-pink text-off-white px-2 md:px-4 -rotate-2">{getSubjectNameWithArticle(subject?.name)}</span>
           </h1>
 
           {/* Description */}
