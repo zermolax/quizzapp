@@ -11,13 +11,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { db } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
 import {
   getThemeLeaderboard,
   getLeaderboardWithUserHighlight,
   getUserGlobalRank
 } from '../services/leaderboardService';
-import themesData from '../data/themes.json';
 
 /**
  * COMPONENT: Leaderboard
@@ -32,6 +33,33 @@ export function Leaderboard() {
   const [userRank, setUserRank] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [themes, setThemes] = useState([]);
+
+  /**
+   * EFFECT: Fetch themes for tabs
+   */
+  useEffect(() => {
+    const fetchThemes = async () => {
+      try {
+        const themesRef = collection(db, 'themes');
+        const q = query(
+          themesRef,
+          where('isPublished', '==', true),
+          limit(5)
+        );
+        const snapshot = await getDocs(q);
+        const themesData = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setThemes(themesData);
+      } catch (err) {
+        console.error('Error fetching themes:', err);
+      }
+    };
+
+    fetchThemes();
+  }, []);
 
   /**
    * EFFECT: Load leaderboard data
@@ -447,7 +475,7 @@ export function Leaderboard() {
             </button>
 
             {/* Theme Tabs */}
-            {themesData.slice(0, 5).map((theme) => (
+            {themes.map((theme) => (
               <button
                 key={theme.id}
                 onClick={() => setActiveTab(theme.id)}
