@@ -12,15 +12,6 @@ import { useAuth } from '../hooks/useAuth';
 import { useSubjects } from '../hooks/useSubjects';
 import { useTheme } from '../hooks/useTheme';
 
-/**
- * Neon colors for active subjects (from Firestore)
- */
-const ACTIVE_SUBJECT_COLORS = {
-  'istorie': '#FF0080',      // neon pink
-  'geografie': '#00FFFF',    // neon cyan
-  'biologie': '#CCFF00',     // neon lime
-};
-
 export function SubjectSelection() {
   const { subjects, loading, error } = useSubjects({ activeOnly: true });
   const { isDark: isDarkMode, toggle: toggleDarkMode } = useTheme();
@@ -211,7 +202,7 @@ export function SubjectSelection() {
             
             {/* ACTIVE SUBJECTS (from Firestore) - UNIVERSAL CARDS */}
             {subjects.map((subject, index) => {
-              const neonColor = ACTIVE_SUBJECT_COLORS[subject.slug] || '#FF0080';
+              const neonColor = subject.neonColor || subject.color || '#FF0080';
 
               return (
                 <div

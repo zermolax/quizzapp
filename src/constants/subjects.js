@@ -15,6 +15,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Limba Română',
     icon: '📚',
     color: '#E63946',
+    neonColor: '#FF0080', // neon pink
     descriptions: {
       educational: 'Învață limba română',
       specialist: 'Testează cunoștințele de limba română',
@@ -29,6 +30,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Matematică',
     icon: '🔢',
     color: '#6A4C93',
+    neonColor: '#9D4EDD', // neon purple
     descriptions: {
       educational: 'Rezolvă probleme',
       specialist: 'Testează logica matematică',
@@ -43,6 +45,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Istorie',
     icon: '🏛️',
     color: '#8B4513',
+    neonColor: '#FF0080', // neon pink
     descriptions: {
       educational: 'Învață despre trecut',
       specialist: 'Testează cunoștințele istorice',
@@ -57,6 +60,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Geografie',
     icon: '🌍',
     color: '#1982C4',
+    neonColor: '#00FFFF', // neon cyan
     descriptions: {
       educational: 'Descoperă lumea',
       specialist: 'Explorează lumea și Geografia',
@@ -71,6 +75,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Biologie',
     icon: '🧬',
     color: '#06A77D',
+    neonColor: '#CCFF00', // neon lime
     descriptions: {
       educational: 'Descoperă viața',
       specialist: 'Explorează biologia',
@@ -85,6 +90,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Fizică',
     icon: '⚛️',
     color: '#F77F00',
+    neonColor: '#FF6B00', // neon orange
     descriptions: {
       educational: 'Înțelege universul',
       specialist: 'Testează cunoștințele de fizică',
@@ -99,6 +105,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Chimie',
     icon: '🧪',
     color: '#FCBF49',
+    neonColor: '#FFD60A', // neon yellow
     descriptions: {
       educational: 'Experimentează',
       specialist: 'Testează cunoștințele de chimie',
@@ -113,6 +120,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Limba Engleză',
     icon: '🇬🇧',
     color: '#DC143C',
+    neonColor: '#FF0040', // neon red
     descriptions: {
       educational: 'Învață engleza',
       specialist: 'Testează cunoștințele de engleză',
@@ -127,6 +135,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Limba Franceză',
     icon: '🇫🇷',
     color: '#002395',
+    neonColor: '#0066FF', // neon blue
     descriptions: {
       educational: 'Învață franceza',
       specialist: 'Testează cunoștințele de franceză',
@@ -141,6 +150,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Educație Plastică',
     icon: '🎨',
     color: '#FF1493',
+    neonColor: '#FF10F0', // neon magenta
     descriptions: {
       educational: 'Descoperă arta',
       specialist: 'Testează cunoștințele despre artă',
@@ -155,6 +165,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Educație Muzicală',
     icon: '🎵',
     color: '#9370DB',
+    neonColor: '#BF40BF', // neon violet
     descriptions: {
       educational: 'Învață muzica',
       specialist: 'Testează cunoștințele muzicale',
@@ -169,6 +180,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Educație Fizică',
     icon: '⚽',
     color: '#32CD32',
+    neonColor: '#39FF14', // neon green
     descriptions: {
       educational: 'Mișcare și sport',
       specialist: 'Testează cunoștințele sportive',
@@ -183,6 +195,7 @@ export const SUBJECTS_CONFIG = [
     name: 'TIC',
     icon: '💻',
     color: '#4169E1',
+    neonColor: '#00D9FF', // neon sky blue
     descriptions: {
       educational: 'Tehnologie și informatică',
       specialist: 'Testează cunoștințele digitale',
@@ -197,6 +210,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Religie',
     icon: '✝️',
     color: '#FFD700',
+    neonColor: '#FFEA00', // neon gold
     descriptions: {
       educational: 'Învață despre credință',
       specialist: 'Testează cunoștințele religioase',
@@ -211,6 +225,7 @@ export const SUBJECTS_CONFIG = [
     name: 'Educație Socială',
     icon: '🤝',
     color: '#FF6347',
+    neonColor: '#FF5F00', // neon coral
     descriptions: {
       educational: 'Relații și societate',
       specialist: 'Testează cunoștințele sociale',
