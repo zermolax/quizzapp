@@ -22,6 +22,7 @@ import {
   getDoc
 } from 'firebase/firestore';
 import { db } from './firebase';
+import logger from '../utils/logger';
 
 /**
  * FUNCTION 1: Get Global Leaderboard
@@ -46,7 +47,7 @@ import { db } from './firebase';
  * 
  * EXEMPLU:
  * const leaderboard = await getGlobalLeaderboard(100);
- * console.log(leaderboard[0].email); // Top user
+ * logger.info(leaderboard[0].email); // Top user
  */
 export async function getGlobalLeaderboard(limitCount = 100) {
   try {
@@ -85,7 +86,7 @@ export async function getGlobalLeaderboard(limitCount = 100) {
     return leaderboard;
 
   } catch (error) {
-    console.error('Error getting global leaderboard:', error);
+    logger.error('Error getting global leaderboard:', error);
     throw error;
   }
 }
@@ -170,7 +171,7 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
           totalPoints: userData.totalPoints
         };
       } catch (err) {
-        console.error('Error fetching user info:', err);
+        logger.error('Error fetching user info:', err);
         return null;
       }
     });
@@ -186,7 +187,7 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
         themeName = themeDoc.data().name || 'Unknown';
       }
     } catch (err) {
-      console.error('Error fetching theme name:', err);
+      logger.error('Error fetching theme name:', err);
     }
 
     // Filter nulls and sort by totalPoints
@@ -212,7 +213,7 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
     return sortedLeaderboard;
 
   } catch (error) {
-    console.error('Error getting theme leaderboard:', error);
+    logger.error('Error getting theme leaderboard:', error);
     throw error;
   }
 }
@@ -233,7 +234,7 @@ export async function getThemeLeaderboard(themeId, limitCount = 50) {
  * 
  * EXEMPLU:
  * const myRank = await getUserGlobalRank(user.uid);
- * console.log(`Ești pe locul ${myRank.rank} din ${myRank.totalUsers}`);
+ * logger.info(`Ești pe locul ${myRank.rank} din ${myRank.totalUsers}`);
  */
 export async function getUserGlobalRank(userId) {
   try {
@@ -276,7 +277,7 @@ export async function getUserGlobalRank(userId) {
     };
 
   } catch (error) {
-    console.error('Error getting user rank:', error);
+    logger.error('Error getting user rank:', error);
     throw error;
   }
 }
@@ -313,7 +314,7 @@ export async function getUserThemeRank(userId, themeId) {
     };
 
   } catch (error) {
-    console.error('Error getting user theme rank:', error);
+    logger.error('Error getting user theme rank:', error);
     throw error;
   }
 }
@@ -363,7 +364,7 @@ export async function getLeaderboardWithUserHighlight(userId, limitCount = 100) 
     return [...globalLeaderboard, userCard];
 
   } catch (error) {
-    console.error('Error getting leaderboard with user highlight:', error);
+    logger.error('Error getting leaderboard with user highlight:', error);
     throw error;
   }
 }

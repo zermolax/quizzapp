@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import logger from '../utils/logger';
 
 export function GameModeSelection() {
   const [subjects, setSubjects] = useState([]);
@@ -67,7 +68,7 @@ export function GameModeSelection() {
         const sortedSubjects = subjectsData.sort((a, b) => a.order - b.order);
         setSubjects(sortedSubjects);
       } catch (err) {
-        console.error('Eroare fetch subjects:', err);
+        logger.error('Eroare fetch subjects:', err);
       } finally {
         setLoading(false);
       }

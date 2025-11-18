@@ -22,6 +22,7 @@ import {
   limit
 } from 'firebase/firestore';
 import { db } from './firebase';
+import logger from '../utils/logger';
 
 /**
  * FUNCTION 1: Get User Profile
@@ -44,7 +45,7 @@ import { db } from './firebase';
  * 
  * EXEMPLU:
  * const profile = await getUserProfile(user.uid);
- * console.log(profile.email, profile.stats.averageScore);
+ * logger.info(profile.email, profile.stats.averageScore);
  */
 export async function getUserProfile(userId) {
   try {
@@ -52,7 +53,7 @@ export async function getUserProfile(userId) {
     const userDoc = await getDoc(userRef);
 
     if (!userDoc.exists()) {
-      console.log('User not found');
+      logger.info('User not found');
       return null;
     }
 
@@ -72,7 +73,7 @@ export async function getUserProfile(userId) {
     };
 
   } catch (error) {
-    console.error('Error getting user profile:', error);
+    logger.error('Error getting user profile:', error);
     throw error;
   }
 }
@@ -151,7 +152,7 @@ export async function getProgressBySubject(userId) {
     return progressArray.sort((a, b) => b.totalQuizzes - a.totalQuizzes);
 
   } catch (error) {
-    console.error('Error getting progress by subject:', error);
+    logger.error('Error getting progress by subject:', error);
     throw error;
   }
 }
@@ -182,7 +183,7 @@ export async function getProgressBySubject(userId) {
  * 
  * EXEMPLU:
  * const progress = await getProgressByTheme(user.uid);
- * progress.forEach(p => console.log(p.themeName, p.averageScore));
+ * progress.forEach(p => logger.info(p.themeName, p.averageScore));
  */
 export async function getProgressByTheme(userId) {
   try {
@@ -263,7 +264,7 @@ export async function getProgressByTheme(userId) {
     return progressArray.sort((a, b) => b.totalQuizzes - a.totalQuizzes);
 
   } catch (error) {
-    console.error('Error getting progress by theme:', error);
+    logger.error('Error getting progress by theme:', error);
     throw error;
   }
 }
@@ -292,7 +293,7 @@ export async function getProgressByTheme(userId) {
  * 
  * EXEMPLU:
  * const history = await getQuizHistory(user.uid, 10);
- * history.forEach(h => console.log(h.themeName, h.percentage));
+ * history.forEach(h => logger.info(h.themeName, h.percentage));
  */
 export async function getQuizHistory(userId, limitCount = 10) {
   try {
@@ -345,7 +346,7 @@ export async function getQuizHistory(userId, limitCount = 10) {
     return history;
 
   } catch (error) {
-    console.error('Error getting quiz history:', error);
+    logger.error('Error getting quiz history:', error);
     throw error;
   }
 }

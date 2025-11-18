@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
+import logger from '../utils/logger';
 import {
   getThemeLeaderboard,
   getLeaderboardWithUserHighlight,
@@ -54,7 +55,7 @@ export function Leaderboard() {
         }));
         setThemes(themesData);
       } catch (err) {
-        console.error('Error fetching themes:', err);
+        logger.error('Error fetching themes:', err);
       }
     };
 
@@ -82,7 +83,7 @@ export function Leaderboard() {
         }
 
       } catch (err) {
-        console.error('Error loading leaderboard:', err);
+        logger.error('Error loading leaderboard:', err);
         setError('Error loading leaderboard');
       } finally {
         setLoading(false);

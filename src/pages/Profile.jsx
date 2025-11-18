@@ -22,6 +22,7 @@ import {
 } from '../services/profileService';
 import { getAllBadges, getUserBadges, getCurrentStreak } from '../services/badgeService';
 import { BadgeCard } from '../components/BadgeCard';
+import logger from '../utils/logger';
 
 /**
  * COMPONENT: Profile
@@ -69,7 +70,7 @@ export function Profile() {
         setCurrentStreak(streak);
 
       } catch (err) {
-        console.error('Error loading profile:', err);
+        logger.error('Error loading profile:', err);
         setError('Error loading profile data');
       } finally {
         setLoading(false);

@@ -10,6 +10,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import LoginModal from '../components/auth/LoginModal';
 import { LandingPage } from './LandingPage';
+import logger from '../utils/logger';
 
 export function Home() {
   
@@ -22,33 +23,33 @@ export function Home() {
    */
   useEffect(() => {
     if (user && showLogin) {
-      console.log('🟢 User detected, hiding login modal');
+      logger.info('🟢 User detected, hiding login modal');
       setShowLogin(false);
     }
   }, [user, showLogin]);
 
   // Funcție pentru "Joacă acum" button
   const handlePlayNow = () => {
-    console.log('📢 Play now clicked, user:', user);
+    logger.info('📢 Play now clicked, user:', user);
 
     if (user) {
-      console.log('✅ User is logged in, navigating to /game-mode');
+      logger.info('✅ User is logged in, navigating to /game-mode');
       navigate('/game-mode');
     } else {
-      console.log('❌ User not logged in, showing login modal');
+      logger.info('❌ User not logged in, showing login modal');
       setShowLogin(true);
     }
   };
 
   // Dacă showLogin e true, arată LoginModal
   if (showLogin && !user) {
-    console.log('🔵 Rendering LoginModal');
+    logger.info('🔵 Rendering LoginModal');
     return <LoginModal />;
   }
 
   // Dacă user e logat, arată LandingPage cu custom handlePlayNow
   if (user) {
-    console.log('🟢 Rendering LandingPage (user logged in)');
+    logger.info('🟢 Rendering LandingPage (user logged in)');
     return <LandingPage onPlayNow={handlePlayNow} />;
   }
 
@@ -62,7 +63,7 @@ export function Home() {
   }
 
   // Default: Arată LandingPage cu handlePlayNow (care va deschide login)
-  console.log('⚪ Rendering LandingPage (user not logged in)');
+  logger.info('⚪ Rendering LandingPage (user not logged in)');
   return <LandingPage onPlayNow={handlePlayNow} />;
 }
 

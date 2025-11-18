@@ -3,25 +3,26 @@
  */
 
 import { db } from './firebase';
-import { 
-  collection, 
-  query, 
-  where, 
-  getDocs, 
+import {
+  collection,
+  query,
+  where,
+  getDocs,
   limit,
   addDoc,
   doc,
   updateDoc,
   increment,
-  serverTimestamp 
+  serverTimestamp
 } from 'firebase/firestore';
+import logger from '../utils/logger';
 
 /**
  * Fetch questions by theme and difficulty
  */
 export async function fetchQuestionsByTheme(themeId, difficulty = null) {
   try {
-    console.log('📚 Fetching questions for themeId:', themeId, 'difficulty:', difficulty);
+    logger.info('📚 Fetching questions for themeId:', themeId, 'difficulty:', difficulty);
 
     const questionsRef = collection(db, 'questions');
 
@@ -41,10 +42,10 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
 
     const querySnapshot = await getDocs(q);
 
-    console.log('📦 Found questions:', querySnapshot.size);
+    logger.info('📦 Found questions:', querySnapshot.size);
 
     if (querySnapshot.empty) {
-      console.warn('⚠️ No questions found');
+      logger.warn('⚠️ No questions found');
       return [];
     }
 
@@ -53,11 +54,11 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
       ...doc.data()
     }));
 
-    console.log('✅ Loaded questions:', questions.length);
+    logger.info('✅ Loaded questions:', questions.length);
     return questions;
 
   } catch (error) {
-    console.error('❌ Error fetching questions:', error);
+    logger.error('❌ Error fetching questions:', error);
     throw error;
   }
 }
@@ -68,7 +69,7 @@ export async function fetchQuestionsByTheme(themeId, difficulty = null) {
  */
 export async function getQuestionsByTheme(subjectId, themeId, limitCount = 100) {
   try {
-    console.log('📚 Fetching questions for subjectId:', subjectId, 'themeId:', themeId);
+    logger.info('📚 Fetching questions for subjectId:', subjectId, 'themeId:', themeId);
 
     const questionsRef = collection(db, 'questions');
 
@@ -80,10 +81,10 @@ export async function getQuestionsByTheme(subjectId, themeId, limitCount = 100) 
 
     const querySnapshot = await getDocs(q);
 
-    console.log('📦 Found questions:', querySnapshot.size);
+    logger.info('📦 Found questions:', querySnapshot.size);
 
     if (querySnapshot.empty) {
-      console.warn('⚠️ No questions found');
+      logger.warn('⚠️ No questions found');
       return [];
     }
 
@@ -92,11 +93,11 @@ export async function getQuestionsByTheme(subjectId, themeId, limitCount = 100) 
       ...doc.data()
     }));
 
-    console.log('✅ Loaded questions:', questions.length);
+    logger.info('✅ Loaded questions:', questions.length);
     return questions;
 
   } catch (error) {
-    console.error('❌ Error fetching questions:', error);
+    logger.error('❌ Error fetching questions:', error);
     throw error;
   }
 }
@@ -120,7 +121,7 @@ export async function getQuestionsByDifficulty(difficulty, limitCount = 10) {
     }));
     
   } catch (error) {
-    console.error('❌ Error loading questions:', error);
+    logger.error('❌ Error loading questions:', error);
     throw error;
   }
 }
@@ -173,12 +174,12 @@ export async function saveQuizSession(userId, subjectId, themeId, difficulty, sc
       createdAt: serverTimestamp()
     });
 
-    console.log('✅ Quiz session saved:', docRef.id);
+    logger.info('✅ Quiz session saved:', docRef.id);
 
     return docRef.id;
 
   } catch (error) {
-    console.error('❌ Error saving quiz session:', error);
+    logger.error('❌ Error saving quiz session:', error);
     throw error;
   }
 }
@@ -202,10 +203,10 @@ export async function updateUserStats(userId, score, totalQuestions) {
       'stats.lastQuizDate': serverTimestamp()
     });
 
-    console.log('✅ User stats updated');
+    logger.info('✅ User stats updated');
 
   } catch (error) {
-    console.error('❌ Error updating stats:', error);
+    logger.error('❌ Error updating stats:', error);
   }
 }
 
@@ -255,7 +256,7 @@ export async function getUserStats(userId) {
     };
 
   } catch (error) {
-    console.error('❌ Error getting user stats:', error);
+    logger.error('❌ Error getting user stats:', error);
     return {
       totalQuizzes: 0,
       totalPoints: 0,
@@ -273,7 +274,7 @@ export async function getUserStats(userId) {
  */
 export async function getGlobalTriviaQuestions(difficulty, limitCount = 12) {
   try {
-    console.log('🎲 Fetching GLOBAL trivia questions, difficulty:', difficulty);
+    logger.info('🎲 Fetching GLOBAL trivia questions, difficulty:', difficulty);
 
     const questionsRef = collection(db, 'questions');
     const q = query(
@@ -282,10 +283,10 @@ export async function getGlobalTriviaQuestions(difficulty, limitCount = 12) {
     );
 
     const snapshot = await getDocs(q);
-    console.log(`📦 Found ${snapshot.size} questions across all subjects`);
+    logger.info(`📦 Found ${snapshot.size} questions across all subjects`);
 
     if (snapshot.empty) {
-      console.warn('⚠️ No questions found for this difficulty');
+      logger.warn('⚠️ No questions found for this difficulty');
       return [];
     }
 
@@ -297,11 +298,11 @@ export async function getGlobalTriviaQuestions(difficulty, limitCount = 12) {
     // Shuffle and take first limitCount
     const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, limitCount);
 
-    console.log(`✅ Returning ${shuffled.length} random trivia questions`);
+    logger.info(`✅ Returning ${shuffled.length} random trivia questions`);
     return shuffled;
 
   } catch (error) {
-    console.error('❌ Error fetching global trivia questions:', error);
+    logger.error('❌ Error fetching global trivia questions:', error);
     throw error;
   }
 }
@@ -315,7 +316,7 @@ export async function getGlobalTriviaQuestions(difficulty, limitCount = 12) {
  */
 export async function getSubjectTriviaQuestions(subjectId, difficulty, limitCount = 12) {
   try {
-    console.log('🎲 Fetching SUBJECT trivia questions for:', subjectId, 'difficulty:', difficulty);
+    logger.info('🎲 Fetching SUBJECT trivia questions for:', subjectId, 'difficulty:', difficulty);
 
     const questionsRef = collection(db, 'questions');
     const q = query(
@@ -325,10 +326,10 @@ export async function getSubjectTriviaQuestions(subjectId, difficulty, limitCoun
     );
 
     const snapshot = await getDocs(q);
-    console.log(`📦 Found ${snapshot.size} questions for subject: ${subjectId}`);
+    logger.info(`📦 Found ${snapshot.size} questions for subject: ${subjectId}`);
 
     if (snapshot.empty) {
-      console.warn('⚠️ No questions found for this subject and difficulty');
+      logger.warn('⚠️ No questions found for this subject and difficulty');
       return [];
     }
 
@@ -340,11 +341,11 @@ export async function getSubjectTriviaQuestions(subjectId, difficulty, limitCoun
     // Shuffle and take first limitCount
     const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, limitCount);
 
-    console.log(`✅ Returning ${shuffled.length} random trivia questions for ${subjectId}`);
+    logger.info(`✅ Returning ${shuffled.length} random trivia questions for ${subjectId}`);
     return shuffled;
 
   } catch (error) {
-    console.error('❌ Error fetching subject trivia questions:', error);
+    logger.error('❌ Error fetching subject trivia questions:', error);
     throw error;
   }
 }

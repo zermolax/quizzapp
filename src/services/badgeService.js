@@ -17,6 +17,7 @@ import {
   limit
 } from 'firebase/firestore';
 import { db } from './firebase';
+import logger from '../utils/logger';
 
 /**
  * Get all badge definitions from Firestore
@@ -33,7 +34,7 @@ export async function getAllBadges() {
 
     return badges;
   } catch (error) {
-    console.error('Error fetching badges:', error);
+    logger.error('Error fetching badges:', error);
     return [];
   }
 }
@@ -52,7 +53,7 @@ export async function getUserBadges(userId) {
 
     return userBadgesDoc.data().badges || [];
   } catch (error) {
-    console.error('Error fetching user badges:', error);
+    logger.error('Error fetching user badges:', error);
     return [];
   }
 }
@@ -86,10 +87,10 @@ export async function awardBadge(userId, badgeId) {
       updatedAt: new Date()
     });
 
-    console.log(`✅ Badge awarded: ${badgeId} to user ${userId}`);
+    logger.info(`✅ Badge awarded: ${badgeId} to user ${userId}`);
     return true;
   } catch (error) {
-    console.error('Error awarding badge:', error);
+    logger.error('Error awarding badge:', error);
     return false;
   }
 }
@@ -194,7 +195,7 @@ export async function checkBadgeAchievements(userId) {
 
     return newBadges;
   } catch (error) {
-    console.error('Error checking badge achievements:', error);
+    logger.error('Error checking badge achievements:', error);
     return [];
   }
 }
@@ -251,7 +252,7 @@ export async function getCurrentStreak(userId) {
 
     return streak;
   } catch (error) {
-    console.error('Error calculating streak:', error);
+    logger.error('Error calculating streak:', error);
     return 0;
   }
 }
@@ -271,7 +272,7 @@ export async function updateUserStreak(userId) {
 
     return currentStreak;
   } catch (error) {
-    console.error('Error updating streak:', error);
+    logger.error('Error updating streak:', error);
     return 0;
   }
 }

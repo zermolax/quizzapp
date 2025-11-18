@@ -14,6 +14,7 @@ import { checkBadgeAchievements, updateUserStreak } from '../services/badgeServi
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { getPointsForDifficulty, getDifficultyInfo as getDifficultyConfig } from '../constants/scoring';
+import logger from '../utils/logger';
 
 /**
  * COMPONENT: TriviaSubject
@@ -71,27 +72,27 @@ useEffect(() => {
   const loadTriviaQuestions = async () => {
     try {
       setLoading(true);
-      console.log('🎲 Loading SUBJECT TRIVIA questions for:', subjectSlug, 'difficulty:', difficulty);
+      logger.info('🎲 Loading SUBJECT TRIVIA questions for:', subjectSlug, 'difficulty:', difficulty);
 
       // 1. Fetch subject info
       const subjectDocRef = doc(db, 'subjects', subjectSlug);
       const subjectDoc = await getDoc(subjectDocRef);
 
       if (!subjectDoc.exists()) {
-        console.error('❌ Subject not found!');
+        logger.error('❌ Subject not found!');
         setLoading(false);
         return;
       }
 
       const subjectData = { id: subjectDoc.id, ...subjectDoc.data() };
       setSubject(subjectData);
-      console.log('✅ Subject loaded:', subjectData.name);
+      logger.info('✅ Subject loaded:', subjectData.name);
 
       // 2. Get random questions from ALL themes of this subject
       const triviaQuestions = await getSubjectTriviaQuestions(subjectSlug, difficulty, 12);
 
       if (!triviaQuestions || triviaQuestions.length === 0) {
-        console.error('❌ No trivia questions found for this subject!');
+        logger.error('❌ No trivia questions found for this subject!');
         setLoading(false);
         return;
       }
@@ -99,14 +100,14 @@ useEffect(() => {
       // Shuffle answers for each question
       const questionsWithShuffledAnswers = triviaQuestions.map(q => shuffleAnswers(q));
 
-      console.log(`✅ Loaded ${questionsWithShuffledAnswers.length} trivia questions for ${subjectSlug}`);
+      logger.info(`✅ Loaded ${questionsWithShuffledAnswers.length} trivia questions for ${subjectSlug}`);
       setQuestions(questionsWithShuffledAnswers);
 
       setStartTime(Date.now());
       setLoading(false);
 
     } catch (error) {
-      console.error('❌ Error loading trivia questions:', error);
+      logger.error('❌ Error loading trivia questions:', error);
       setLoading(false);
     }
   };
@@ -143,7 +144,7 @@ useEffect(() => {
 const handleTimeOut = () => {
   if (answered) return;
 
-  console.log('⏰ Time out!');
+  logger.info('⏰ Time out!');
 
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -250,12 +251,12 @@ const getAnswerLetter = (index) => {
  * HANDLER: Finish quiz and save session
  */
 const finishQuiz = async () => {
-  console.log('🏁 Trivia finished!');
+  logger.info('🏁 Trivia finished!');
   setQuizFinished(true);
   setSavingSession(true);
 
   if (!user) {
-    console.log('⚠️ No user logged in, skipping save.');
+    logger.info('⚠️ No user logged in, skipping save.');
     setSavingSession(false);
     return;
   }
@@ -283,7 +284,7 @@ const finishQuiz = async () => {
     };
 
     await saveQuizSession(sessionData);
-    console.log('✅ Trivia session saved');
+    logger.info('✅ Trivia session saved');
 
     await updateUserStats(user.uid, {
       totalQuizzesTaken: 1,
@@ -291,7 +292,7 @@ const finishQuiz = async () => {
       subjectsPlayed: [subjectSlug],
       lastPlayedAt: new Date()
     });
-    console.log('✅ User stats updated');
+    logger.info('✅ User stats updated');
 
     const stats = await getUserStats(user.uid);
     setUserStats(stats);
@@ -299,17 +300,17 @@ const finishQuiz = async () => {
     const newBadges = await checkBadgeAchievements(user.uid);
     if (newBadges.length > 0) {
       setNewBadgesEarned(newBadges);
-      console.log('🏅 New badges earned:', newBadges);
+      logger.info('🏅 New badges earned:', newBadges);
     }
 
     const streakDays = await updateUserStreak(user.uid);
     setSessionStreak(streakDays);
-    console.log('🔥 Current streak:', streakDays);
+    logger.info('🔥 Current streak:', streakDays);
 
     setSavingSession(false);
 
   } catch (error) {
-    console.error('❌ Error saving trivia session:', error);
+    logger.error('❌ Error saving trivia session:', error);
     setSavingSession(false);
   }
 };
