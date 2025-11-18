@@ -2,89 +2,62 @@
  * createSubjects.js
  *
  * Script pentru crearea subjects în Firestore
- * Folosește datele din SUBJECTS_CONFIG
+ * Folosește datele din SUBJECTS_CONFIG (single source of truth)
+ *
+ * Usage: node scripts/createSubjects.js
  */
 
 import { db } from '../src/services/firebase.js';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
+import { SUBJECTS_CONFIG } from '../src/constants/subjects.js';
 
-const subjects = [
-  {
-    id: 'istorie',
-    slug: 'istorie',
-    name: 'Istorie',
-    icon: '🏛️',
-    description: 'Învață despre evenimente istorice importante',
-    color: '#E63946',
-    isPublished: true,
-    order: 1,
-  },
-  {
-    id: 'biologie',
-    slug: 'biologie',
-    name: 'Biologie',
-    icon: '🧬',
-    description: 'Descoperă lumea vieții și a organismelor',
-    color: '#06A77D',
-    isPublished: true,
-    order: 2,
-  },
-  {
-    id: 'geografie',
-    slug: 'geografie',
-    name: 'Geografie',
-    icon: '🌍',
-    description: 'Explorează planeta și locurile ei',
-    color: '#1982C4',
-    isPublished: true,
-    order: 3,
-  },
-  {
-    id: 'matematica',
-    slug: 'matematica',
-    name: 'Matematică',
-    icon: '🔢',
-    description: 'Rezolvă probleme și înțelege logica matematică',
-    color: '#6A4C93',
-    isPublished: true,
-    order: 4,
-  },
-  {
-    id: 'fizica',
-    slug: 'fizica',
-    name: 'Fizică',
-    icon: '⚛️',
-    description: 'Înțelege legile universului și ale naturii',
-    color: '#F77F00',
-    isPublished: true,
-    order: 5,
-  },
-  {
-    id: 'chimie',
-    slug: 'chimie',
-    name: 'Chimie',
-    icon: '🧪',
-    description: 'Experimentează cu reacții și molecule',
-    color: '#FCBF49',
-    isPublished: true,
-    order: 6,
-  },
-];
+// Transform SUBJECTS_CONFIG to Firestore format
+const subjects = SUBJECTS_CONFIG.map(subject => ({
+  id: subject.id,
+  slug: subject.slug,
+  name: subject.name,
+  icon: subject.icon,
+  description: subject.descriptions.educational,
+  color: subject.color,
+  neonColor: subject.neonColor,
+  isPublished: subject.isActive,
+  order: subject.order,
+  totalThemes: 0,
+  totalQuestions: 0,
+}));
 
 async function createSubjects() {
   console.log('🚀 Creare subjects în Firestore...\n');
+  console.log(`📦 Loaded ${subjects.length} subjects from SUBJECTS_CONFIG\n`);
 
   try {
+    let created = 0;
+    let updated = 0;
+
     for (const subject of subjects) {
       const subjectRef = doc(db, 'subjects', subject.id);
 
-      await setDoc(subjectRef, subject, { merge: true });
+      await setDoc(subjectRef, {
+        ...subject,
+        updatedAt: new Date(),
+      }, { merge: true });
+
       console.log(`✅ ${subject.name} (${subject.id})`);
+      console.log(`   Icon: ${subject.icon} | Color: ${subject.color} | Neon: ${subject.neonColor}`);
+      console.log(`   Published: ${subject.isPublished} | Order: ${subject.order}\n`);
+
+      created++;
     }
 
-    console.log('\n✨ SUCCESS! Subjects created in Firestore\n');
+    console.log(`\n✨ SUCCESS! ${created} subjects created/updated in Firestore`);
+    console.log('\n📊 Summary:');
+    console.log(`   Total subjects: ${subjects.length}`);
+    console.log(`   Active (isPublished): ${subjects.filter(s => s.isPublished).length}`);
+    console.log(`   Draft: ${subjects.filter(s => !s.isPublished).length}`);
+    console.log('\n💡 Next step: Import themes and questions\n');
   } catch (error) {
     console.error('❌ Error creating subjects:', error);
+    console.error('Stack:', error.stack);
     process.exit(1);
   }
 
