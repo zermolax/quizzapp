@@ -13,6 +13,7 @@ import { saveQuizSession, updateUserStats, getSubjectTriviaQuestions, getUserSta
 import { checkBadgeAchievements, updateUserStreak } from '../services/badgeService';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { getPointsForDifficulty, getDifficultyInfo as getDifficultyConfig } from '../constants/scoring';
 
 /**
  * COMPONENT: TriviaSubject
@@ -181,7 +182,7 @@ const handleAnswerSelect = (answerIndex) => {
   setTimerActive(false);
 
   // Calculate points (new system: 10/30/50 - no time bonus)
-  const points = correct ? getDifficultyPoints() : 0;
+  const points = correct ? getPointsForDifficulty(difficulty) : 0;
 
   setCurrentQuestionPoints(points);
 
@@ -237,33 +238,6 @@ const handleQuit = () => {
   }
 };
 
-/**
- * HELPER: Get difficulty points (new system: 10/30/50)
- */
-const getDifficultyPoints = () => {
-  switch (difficulty) {
-    case 'easy': return 10;
-    case 'medium': return 30;
-    case 'hard': return 50;
-    default: return 10;
-  }
-};
-
-/**
- * HELPER: Get difficulty info
- */
-const getDifficultyInfo = () => {
-  switch (difficulty) {
-    case 'easy':
-      return { label: 'Ușor', color: '#8B9B7A', emoji: '🟢' };
-    case 'medium':
-      return { label: 'Mediu', color: '#FF6B00', emoji: '🟡' };
-    case 'hard':
-      return { label: 'Dificil', color: '#FF0080', emoji: '🔴' };
-    default:
-      return { label: 'Necunoscut', color: '#2D2416', emoji: '⚪' };
-  }
-};
 
 /**
  * HELPER: Get answer letter (A, B, C, D)
@@ -289,7 +263,7 @@ const finishQuiz = async () => {
   try {
     const endTime = Date.now();
     const duration = Math.floor((endTime - startTime) / 1000);
-    const maxScore = questions.length * getDifficultyPoints();
+    const maxScore = questions.length * getPointsForDifficulty(difficulty);
     const percentage = Math.round((score / maxScore) * 100);
 
     const sessionData = {
@@ -382,7 +356,7 @@ const finishQuiz = async () => {
    * RENDER: Quiz finished - Results
    */
   if (quizFinished) {
-    const maxScore = questions.length * getDifficultyPoints();
+    const maxScore = questions.length * getPointsForDifficulty(difficulty);
     const percentage = Math.round((score / maxScore) * 100);
 
     return (
@@ -515,7 +489,7 @@ const finishQuiz = async () => {
    */
   if (questions.length > 0) {
     const currentQuestion = questions[currentQuestionIndex];
-    const difficultyInfo = getDifficultyInfo();
+    const difficultyInfo = getDifficultyConfig(difficulty);
     const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
 
     return (
