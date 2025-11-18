@@ -1,0 +1,842 @@
+[
+  {
+    "id": "istorie-u1-medium-001",
+    "question": "De ce este importantă studierea istoriei, conform Notei de prezentare a programei școlare?",
+    "answers": [
+      {
+        "text": "Deoarece oferă fapte istorice direct accesibile elevilor de gimnaziu.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că asigură un echilibru între aspectele cognitive și cele atitudinal-valorice, contribuind la formarea cetățeniei democratice.",
+        "correct": true
+      },
+      {
+        "text": "Exclusiv pentru că dezvoltă lucrul cu elemente abstracte (modele interpretative).",
+        "correct": false
+      },
+      {
+        "text": "Pentru a stimula formarea de stereotipii și xenofobie.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Studierea istoriei contribuie la dezvoltarea gândirii critice, a multiculturalității și a multiperspectivității, fiind esențială pentru dobândirea competențelor civice și sociale necesare unei societăți democratice.",
+    "order": 31
+  },
+  {
+    "id": "istorie-u1-medium-002",
+    "question": "Care este rolul științelor auxiliare, precum arheologia, în cercetarea istorică?",
+    "answers": [
+      {
+        "text": "Descoperirea și studierea amănunțită a anumitor izvoare istorice (nescrise sau scrise pe materiale dure), sprijinind cunoașterea trecutului.",
+        "correct": true
+      },
+      {
+        "text": "Studierea exclusivă a războaielor și a armelor antice.",
+        "correct": false
+      },
+      {
+        "text": "Realizarea de hărți geografice moderne.",
+        "correct": false
+      },
+      {
+        "text": "Analiza doar a documentelor din arhive.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Științele auxiliare (arheologia, numismatica, epigrafia, cartografia) sprijină cercetarea istorică prin metode specializate, ajutând la descoperirea și interpretarea izvoarelor istorice.",
+    "order": 32
+  },
+  {
+    "id": "istorie-u1-medium-003",
+    "question": "De ce sunt considerate hărțile istorice izvoare istorice importante?",
+    "answers": [
+      {
+        "text": "Pentru că arată doar teritoriile ocupate de popoarele migratoare.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că prezintă doar drumurile comerciale din Antichitate.",
+        "correct": false
+      },
+      {
+        "text": "Deoarece ajută la înțelegerea și localizarea în spațiu a evenimentelor și proceselor istorice.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă sunt realizate numai de geografi.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Hărțile istorice sunt izvoare nescrise care ne ajută să înțelegem spațiul istoric, arătând evoluția teritorială a statelor, locația bătăliilor, așezările umane sau direcțiile de migrație.",
+    "order": 33
+  },
+  {
+    "id": "istorie-u1-medium-004",
+    "question": "Cum se calculează secolul (veacul) căruia îi aparține un an din Era după Hristos (d.Hr.)?",
+    "answers": [
+      {
+        "text": "Prin adunarea a 100 de ani la primele două cifre ale anului.",
+        "correct": false
+      },
+      {
+        "text": "Prin înmulțirea cu zece a primelor două cifre ale anului.",
+        "correct": false
+      },
+      {
+        "text": "Prin adunarea unei unități la primele două cifre ale anului, sau la prima cifră, dacă anul are trei cifre.",
+        "correct": true
+      },
+      {
+        "text": "Prin scăderea unei unități din ultimele două cifre ale anului.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Pentru a afla secolul unui an (d.Hr.), se adaugă 1 la primele două cifre (ex: 1945 d.Hr. = 19 + 1 = sec. al XX-lea) sau la prima cifră, dacă anul are trei cifre (ex: 602 d.Hr. = 6 + 1 = sec. al VII-lea).",
+    "order": 34
+  },
+  {
+    "id": "istorie-u1-medium-005",
+    "question": "De ce, în Era înainte de Hristos (î.Hr.), evenimentele sunt datate în ordine descrescătoare?",
+    "answers": [
+      {
+        "text": "Deoarece istoricii nu dețineau cronologii clare pentru acea perioadă.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că datarea se face numărând anii înapoi, de la anul 1 (nașterea lui Iisus Hristos) spre trecut.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă durata epocilor istorice nu era egală.",
+        "correct": false
+      },
+      {
+        "text": "Din cauza faptului că numerele romane erau folosite doar crescător.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Anul 1 este reperul comun al celor două ere istorice. Datarea în Era înainte de Hristos se realizează scăzând numărul de ani față de acest reper, de aceea ordinea este descrescătoare.",
+    "order": 35
+  },
+  {
+    "id": "istorie-u1-medium-006",
+    "question": "De ce este necesar ca istoricii să stabilească o relație de cauzalitate (cauze și consecințe) între faptele din trecut?",
+    "answers": [
+      {
+        "text": "Pentru a putea compara doar evenimentele militare.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a explica de ce s-au petrecut faptele respective și cum au influențat acestea viața oamenilor de atunci și din prezent.",
+        "correct": true
+      },
+      {
+        "text": "Pentru a împărți istoria în epoci distincte.",
+        "correct": false
+      },
+      {
+        "text": "Doar pentru a crea o cronologie detaliată a evenimentelor.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Identificarea relațiilor de cauzalitate este o operațiune esențială a gândirii critice în istorie. Ea ne ajută să înțelegem mecanismele care au dus la schimbări în viața comunităților umane.",
+    "order": 36
+  },
+  {
+    "id": "istorie-u1-medium-007",
+    "question": "Care este motivul pentru care epocile istorice (Preistoria, Antichitatea, Evul Mediu, Epoca Modernă, Epoca Contemporană) nu au o durată egală?",
+    "answers": [
+      {
+        "text": "Ele sunt delimitate în funcție de evoluția societății omenești și de schimbările majore (ex: inventarea scrierii, căderea unui imperiu).",
+        "correct": true
+      },
+      {
+        "text": "Sunt stabilite de la un mileniu la altul.",
+        "correct": false
+      },
+      {
+        "text": "Istoricii nu au reușit să le calculeze durata exactă.",
+        "correct": false
+      },
+      {
+        "text": "Durata lor depinde de perioada de domnie a unui singur conducător.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Periodizarea se bazează pe evenimente sau procese majore, care marchează transformări importante în structura socială, politică, economică sau culturală a umanității, nu pe intervale de timp fixe.",
+    "order": 37
+  },
+  {
+    "id": "istorie-u1-medium-008",
+    "question": "Ce ar putea reprezenta, pentru oamenii din viitor, obiectele tale folosite în prezent, dacă ar fi incluse într-o 'capsulă a timpului'?",
+    "answers": [
+      {
+        "text": "Izvoare istorice nescrise (materiale).",
+        "correct": true
+      },
+      {
+        "text": "Manuscris al unei opere literare.",
+        "correct": false
+      },
+      {
+        "text": "Un plan de lecție.",
+        "correct": false
+      },
+      {
+        "text": "O hartă din Epoca Antică.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "O capsulă a timpului conține obiecte, documente sau înregistrări care oferă informații despre modul nostru de viață. Pentru viitor, acestea devin surse istorice nescrise.",
+    "order": 38
+  },
+  {
+    "id": "istorie-u1-medium-009",
+    "question": "Cum se explică, din perspectiva istoriei, faptul că viața din zilele noastre este rezultatul întregii istorii umane?",
+    "answers": [
+      {
+        "text": "Deoarece cele mai vechi izvoare istorice sunt mai valoroase.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că toate faptele și acțiunile din trecut au avut consecințe care au influențat evoluția societății până în prezent.",
+        "correct": true
+      },
+      {
+        "text": "Doar prin utilizarea termenilor de specialitate.",
+        "correct": false
+      },
+      {
+        "text": "Exclusiv prin observarea stelelor și a cerului.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Fiecare eveniment sau proces din trecut a generat consecințe care au modelat societatea și cultura, influențând modul de viață al generațiilor următoare, inclusiv pe al nostru.",
+    "order": 39
+  },
+  {
+    "id": "istorie-u1-medium-010",
+    "question": "De ce studiază istoria toate aspectele vieții oamenilor: social, politic, economic, cultural, religios?",
+    "answers": [
+      {
+        "text": "Deoarece doar aspectul politic este cel mai important în trecut.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a putea înțelege complexitatea vieții umane și a relațiilor dintre comunități și indivizi.",
+        "correct": true
+      },
+      {
+        "text": "Pentru că cele mai multe izvoare istorice sunt religioase.",
+        "correct": false
+      },
+      {
+        "text": "Fiindcă istoria se ocupă doar cu studierea războaielor.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Istoria nu se limitează la un singur domeniu, ci analizează viața umană în ansamblu. Toate aceste aspecte sunt interdependente și influențează evoluția societății.",
+    "order": 40
+  },
+  {
+    "id": "istorie-u1-medium-011",
+    "question": "Ce reprezintă, din perspectiva istoriei, construcția Catedralei Notre Dame din Paris (începută în secolul al XII-lea)?",
+    "answers": [
+      {
+        "text": "Un proces istoric, deoarece a durat o perioadă lungă de timp.",
+        "correct": false
+      },
+      {
+        "text": "Un eveniment istoric, deoarece a avut o dată de începere cunoscută.",
+        "correct": false
+      },
+      {
+        "text": "Un proces istoric, ca parte a dezvoltării arhitecturii gotice, dar și un eveniment, prin momentul începerii construcției.",
+        "correct": true
+      },
+      {
+        "text": "Doar o legendă medievală.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Începerea construcției Catedralei este un eveniment, având o dată precisă. În schimb, evoluția arhitecturii gotice sau realizarea propriu-zisă a construcției pe durata a mai multor secole reprezintă un proces istoric.",
+    "order": 41
+  },
+  {
+    "id": "istorie-u1-medium-012",
+    "question": "Cum se scrie cu cifre romane secolul al XIX-lea?",
+    "answers": [
+      {
+        "text": "XX",
+        "correct": false
+      },
+      {
+        "text": "XVIII",
+        "correct": false
+      },
+      {
+        "text": "XIX",
+        "correct": true
+      },
+      {
+        "text": "XIV",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Sistemul de numerotare roman utilizează șapte litere (I=1, V=5, X=10, L=50, C=100, D=500, M=1000). Secolul al XIX-lea se scrie XIX (10 + (10 - 1) = 19).",
+    "order": 42
+  },
+  {
+    "id": "istorie-u1-medium-013",
+    "question": "De ce este necesară periodizarea istoriei?",
+    "answers": [
+      {
+        "text": "Pentru a ignora evenimentele minore.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a simplifica înțelegerea și a studia mai ușor marile etape de dezvoltare a societății umane.",
+        "correct": true
+      },
+      {
+        "text": "Doar pentru a clasifica izvoarele istorice.",
+        "correct": false
+      },
+      {
+        "text": "Fiindcă permite datarea crescătoare a tuturor evenimentelor.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Periodizarea este esențială pentru a organiza și a structura cantitatea uriașă de informații istorice, grupând-o în perioade distincte, caracterizate prin trăsături comune.",
+    "order": 43
+  },
+  {
+    "id": "istorie-u1-medium-014",
+    "question": "Care este diferența principală dintre o axă a timpului (sau friză cronologică) și o hartă istorică?",
+    "answers": [
+      {
+        "text": "Axa timpului ilustrează doar evenimente, iar harta istorică doar procese.",
+        "correct": false
+      },
+      {
+        "text": "Axa timpului reprezintă ordonarea în timp a faptelor, iar harta istorică le localizează în spațiu.",
+        "correct": true
+      },
+      {
+        "text": "Axa timpului utilizează cifre romane, iar harta istorică cifre arabe.",
+        "correct": false
+      },
+      {
+        "text": "Harta istorică este un izvor scris, iar axa timpului este un izvor nescris.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Comparație",
+    "explanation": "Axa timpului (sau friza cronologică) este un instrument care ilustrează dimensiunea temporală (succesiunea) evenimentelor, în timp ce harta istorică ilustrează dimensiunea spațială (locul) în care s-au desfășurat acestea.",
+    "order": 44
+  },
+  {
+    "id": "istorie-u1-medium-015",
+    "question": "Ce informații despre trecut ar putea oferi un document (izvor scris) descoperit într-o arhivă?",
+    "answers": [
+      {
+        "text": "Forma și materialul din care a fost realizată o unealtă din piatră.",
+        "correct": false
+      },
+      {
+        "text": "Locul și data la care a fost semnat un tratat de pace, numele celor implicați și prevederile acestuia.",
+        "correct": true
+      },
+      {
+        "text": "Aspectul fizic al unui zeu roman.",
+        "correct": false
+      },
+      {
+        "text": "Valoarea exactă a unei monede antice.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Documentele (acte, scrisori, tratate, cronici) sunt izvoare scrise care oferă informații detaliate despre aspecte politice, sociale, economice, legislative sau culturale ale vremii în care au fost realizate.",
+    "order": 45
+  },
+  {
+    "id": "istorie-u1-medium-016",
+    "question": "Care este diferența dintre un secol și un mileniu?",
+    "answers": [
+      {
+        "text": "Secolul este o perioadă de 100 de ani, iar mileniul de 1000 de ani.",
+        "correct": true
+      },
+      {
+        "text": "Secolul se calculează descrescător, iar mileniul crescător.",
+        "correct": false
+      },
+      {
+        "text": "Secolul este o epocă istorică, iar mileniul este o eră istorică.",
+        "correct": false
+      },
+      {
+        "text": "Secolul se scrie cu cifre romane, iar mileniul cu cifre arabe.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Comparație",
+    "explanation": "Secolul și mileniul sunt unități de măsură a timpului, nu epoci istorice. Mileniul este o perioadă de 1000 de ani, de zece ori mai lungă decât un secol.",
+    "order": 46
+  },
+  {
+    "id": "istorie-u1-medium-017",
+    "question": "De ce este considerată inscripția de pe o stelă un izvor istoric nescris, chiar dacă textul este scris?",
+    "answers": [
+      {
+        "text": "Deoarece stela este un obiect arheologic (material), iar textul inscripționat este parte integrantă a acestuia, studiat de epigrafie.",
+        "correct": true
+      },
+      {
+        "text": "Pentru că nu este un document tipărit.",
+        "correct": false
+      },
+      {
+        "text": "Deoarece este scrisă într-o limbă moartă (latina).",
+        "correct": false
+      },
+      {
+        "text": "Fiindcă nu poate fi citită de oricine.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Izvoarele nescrise sunt obiecte materiale. Stela, fiind un bloc de piatră cu inscripție, este un artefact care, deși conține text, este clasificat ca izvor nescris (material) studiat de epigrafie.",
+    "order": 47
+  },
+  {
+    "id": "istorie-u1-medium-018",
+    "question": "Anul 525 î.Hr. face parte din ce secol și din ce mileniu?",
+    "answers": [
+      {
+        "text": "Secolul al V-lea î.Hr., Mileniul I î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "Secolul al VI-lea î.Hr., Mileniul I î.Hr.",
+        "correct": true
+      },
+      {
+        "text": "Secolul al V-lea d.Hr., Mileniul I d.Hr.",
+        "correct": false
+      },
+      {
+        "text": "Secolul al VI-lea î.Hr., Mileniul II î.Hr.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Anul 525 î.Hr. se încadrează în secolul al VI-lea î.Hr. (5 + 1 = 6), deoarece anii dinaintea Erei Creștine se calculează crescător, iar mileniul al I-lea î.Hr. cuprinde anii 1000 î.Hr. – 1 î.Hr.",
+    "order": 48
+  },
+  {
+    "id": "istorie-u1-medium-019",
+    "question": "Cum a influențat descoperirea fosilelor (urmelor) străvechi modul în care este studiată Preistoria?",
+    "answers": [
+      {
+        "text": "A permis datarea evenimentelor doar în ordine crescătoare.",
+        "correct": false
+      },
+      {
+        "text": "A oferit dovezi despre existența hominizilor, baza cunoașterii acestei epoci lipsite de izvoare scrise.",
+        "correct": true
+      },
+      {
+        "text": "A contribuit doar la dezvoltarea cartografiei.",
+        "correct": false
+      },
+      {
+        "text": "A impus studierea Preistoriei doar în muzee.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Preistoria, fiind perioada de dinaintea inventării scrierii, nu are izvoare scrise. Prin urmare, descoperirea și studierea fosilelor de către arheologi este vitală pentru a reconstitui evoluția umanității din acea etapă.",
+    "order": 49
+  },
+  {
+    "id": "istorie-u1-medium-020",
+    "question": "De ce este necesară o axă a timpului (friza cronologică) în studierea istoriei?",
+    "answers": [
+      {
+        "text": "Pentru a stabili numai locul în care s-a desfășurat un fapt istoric.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a înțelege și a ordona vizual evenimentele și procesele istorice pe o durată mare de timp.",
+        "correct": true
+      },
+      {
+        "text": "Pentru a ilustra doar evoluția Imperiului Roman.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a compara sursele scrise cu cele nescrise.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Axa timpului este un instrument util care ilustrează cronologia și periodizarea istoriei. Prin aceasta, elevii pot vizualiza succesiunea evenimentelor și durata epocilor istorice.",
+    "order": 50
+  },
+  {
+    "id": "istorie-u1-medium-021",
+    "question": "Care este secolul care precede (este înainte de) secolul al XIV-lea?",
+    "answers": [
+      {
+        "text": "Secolul al XV-lea",
+        "correct": false
+      },
+      {
+        "text": "Secolul al XIII-lea",
+        "correct": true
+      },
+      {
+        "text": "Secolul al XVII-lea",
+        "correct": false
+      },
+      {
+        "text": "Secolul al XII-lea",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Timpul istoric",
+    "explanation": "Secolele se succed în ordine crescătoare. Secolul al XIV-lea (1301-1400) este precedat de secolul al XIII-lea (1201-1300) și urmat de secolul al XV-lea (1401-1500).",
+    "order": 51
+  },
+  {
+    "id": "istorie-u1-medium-022",
+    "question": "De ce ar putea o hartă militară (izvor istoric) să fie utilă în studierea unui eveniment istoric, cum ar fi Bătălia de la Maraton?",
+    "answers": [
+      {
+        "text": "Pentru că ilustrează doar aspecte din viața cotidiană a soldaților.",
+        "correct": false
+      },
+      {
+        "text": "Deoarece arată locul și modul de desfășurare a luptei, pozițiile armatelor și direcțiile de atac.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă poate fi studiată doar de numismatică.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că arată doar granițele statelor vecine.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "O hartă militară (o formă de hartă istorică) este realizată cu scopul de a ilustra aspecte legate de conflictele armate, ajutând la înțelegerea strategiei și a desfășurării evenimentelor militare.",
+    "order": 52
+  },
+  {
+    "id": "istorie-u1-medium-023",
+    "question": "Ce informații despre trecut poate oferi un vas din ceramică pictată (izvor nescris)?",
+    "answers": [
+      {
+        "text": "Doar detalii despre credința religioasă a egiptenilor.",
+        "correct": false
+      },
+      {
+        "text": "Informații despre ocupațiile, obiceiurile sau arta poporului care l-a realizat, dar nu o dată exactă.",
+        "correct": true
+      },
+      {
+        "text": "Numele conducătorilor unui stat antic.",
+        "correct": false
+      },
+      {
+        "text": "Legea principală a unui stat.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Obiectele materiale (izvoare nescrise) oferă informații despre cultura materială, meșteșuguri, artă, aspecte din viața cotidiană și uneori credințe. Rareori oferă o datare exactă, aceasta fiind stabilită de arheologi.",
+    "order": 53
+  },
+  {
+    "id": "istorie-u1-medium-024",
+    "question": "Ce este un 'sit arheologic' și de ce este important pentru studierea istoriei?",
+    "answers": [
+      {
+        "text": "O bibliotecă unde se păstrează documentele medievale.",
+        "correct": false
+      },
+      {
+        "text": "Locul unde arheologii își desfășoară activitatea și de unde scot la lumină izvoare istorice nescrise (artefacte).",
+        "correct": true
+      },
+      {
+        "text": "Un loc unde se studiază doar numismatica.",
+        "correct": false
+      },
+      {
+        "text": "O hartă din Epoca Antică care arată așezările umane.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Definiții",
+    "explanation": "Siturile arheologice sunt esențiale deoarece stratificarea pământului indică vechimea obiectelor descoperite. Obiectele de la adâncime sunt mai vechi decât cele de la suprafață, ajutând la datarea acestora.",
+    "order": 54
+  },
+  {
+    "id": "istorie-u1-medium-025",
+    "question": "Cum se scrie cu cifre romane secolul al VIII-lea?",
+    "answers": [
+      {
+        "text": "VII",
+        "correct": false
+      },
+      {
+        "text": "IX",
+        "correct": false
+      },
+      {
+        "text": "VIII",
+        "correct": true
+      },
+      {
+        "text": "VI",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Cifrele romane se formează prin adunarea valorilor. VIII este 5 + 1 + 1 + 1 = 8. Secolul al VIII-lea este perioada cuprinsă între anii 701-800 d.Hr.",
+    "order": 55
+  },
+  {
+    "id": "istorie-u1-medium-026",
+    "question": "De ce este necesară utilizarea unei legende pentru citirea unei hărți istorice?",
+    "answers": [
+      {
+        "text": "Pentru a ignora detaliile nesemnificative.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că hărțile istorice conțin doar denumiri de state.",
+        "correct": false
+      },
+      {
+        "text": "Deoarece explică simbolurile și culorile folosite, ajutând la interpretarea corectă a informațiilor ilustrate în spațiul istoric.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă este un document scris separat de hartă.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Legenda hărții este cheia pentru a descifra informațiile cartografice, oferind semnificația simbolurilor, culorilor și a celorlalte semne convenționale folosite pentru a reprezenta elemente istorice.",
+    "order": 56
+  },
+  {
+    "id": "istorie-u1-medium-027",
+    "question": "Cum se explică faptul că istoria studiază și problemele mai largi ale cetățeniei democratice?",
+    "answers": [
+      {
+        "text": "Deoarece istoria este strict o disciplină teoretică.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că dezvoltarea competențelor atitudinal-valorice și civice este un scop al disciplinei, corelat cu studiul evoluției sistemelor politice.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă disciplinele din aria curriculară 'Om și societate' sunt complet independente.",
+        "correct": false
+      },
+      {
+        "text": "Doar prin memorarea definițiilor conceptelor politice.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Disciplina Istorie, alături de celelalte din aria 'Om și societate', contribuie la formarea profilului de absolvent. Studiul sistemelor politice și al diversității socio-culturale sprijină manifestarea comportamentului civic.",
+    "order": 57
+  },
+  {
+    "id": "istorie-u1-medium-028",
+    "question": "Cum se scrie cu cifre romane secolul al III-lea î.Hr.?",
+    "answers": [
+      {
+        "text": "IV î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "III î.Hr.",
+        "correct": true
+      },
+      {
+        "text": "II î.Hr.",
+        "correct": false
+      },
+      {
+        "text": "V î.Hr.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Secolul al III-lea se scrie III. Datarea înainte de Hristos se indică prin 'î.Hr.'. Secolul al III-lea î.Hr. cuprinde anii 300 î.Hr. – 201 î.Hr.",
+    "order": 58
+  },
+  {
+    "id": "istorie-u1-medium-029",
+    "question": "De ce căutarea și selectarea informațiilor (datelor) este o etapă importantă în realizarea unui proiect de grup despre o temă istorică?",
+    "answers": [
+      {
+        "text": "Deoarece planul proiectului se realizează la finalul activității.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că asigură corectitudinea informațiilor ce vor fi incluse în produsul final și evită utilizarea unor informații neverificate.",
+        "correct": true
+      },
+      {
+        "text": "Fiindcă doar imaginile selectate sunt importante.",
+        "correct": false
+      },
+      {
+        "text": "Pentru a lucra doar individual, fără cooperare.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "O investigație istorică necesită rigoare. Căutarea și selectarea informațiilor din surse credibile este o etapă esențială pentru a realiza un proiect corect, evitând greșelile sau dezinformarea.",
+    "order": 59
+  },
+  {
+    "id": "istorie-u1-medium-030",
+    "question": "Ce ar putea reprezenta, în istorie, o frescă (izvor nescris) descoperită pe peretele unui templu antic?",
+    "answers": [
+      {
+        "text": "O informație despre un război din Epoca Modernă.",
+        "correct": false
+      },
+      {
+        "text": "O ilustrare a aspectelor din viața cotidiană sau a credințelor religioase ale poporului respectiv.",
+        "correct": true
+      },
+      {
+        "text": "Un text scris cu alfabetul latin.",
+        "correct": false
+      },
+      {
+        "text": "Un studiu al relațiilor dintre două state vecine.",
+        "correct": false
+      }
+    ],
+    "difficulty": "medium",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Fresca este o pictură murală, adesea utilizată în temple pentru a ilustra scene mitologice, religioase sau din viața cotidiană. Ca izvor nescris, oferă informații despre arta și cultura poporului care a realizat-o.",
+    "order": 60
+  }
+]

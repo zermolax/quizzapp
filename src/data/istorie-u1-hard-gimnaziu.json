@@ -1,0 +1,422 @@
+[
+  {
+    "id": "istorie-u1-hard-001",
+    "question": "Evaluează rolul disciplinei Istorie în formarea cetățeanului democratic, pornind de la finalitățile prevăzute în programa școlară (combaterea naționalismului, stereotipiilor, xenofobiei, stimularea multiculturalității).",
+    "answers": [
+      {
+        "text": "Istoria oferă cunoștințe factologice, dar nu influențează formarea atitudinilor civice, deoarece se concentrează pe trecut.",
+        "correct": false
+      },
+      {
+        "text": "Studiul istoriei dezvoltă mecanisme intelectuale critice care, prin înțelegerea diversității socio-culturale și a multiperspectivității, previn formarea de prejudecăți și susțin valorile democratice.",
+        "correct": true
+      },
+      {
+        "text": "Rolul istoriei se limitează la dezvoltarea gândirii critice, fără impact asupra relațiilor interetnice sau a toleranței.",
+        "correct": false
+      },
+      {
+        "text": "Istoria este singura disciplină școlară care contribuie la formarea comportamentului civic.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Istoria nu este doar o înșiruire de fapte, ci și o disciplină atitudinală. Prin analiza critică a trecutului și prin înțelegerea cauzelor conflictelor, istoria contribuie la dezvoltarea toleranței și la asumarea multiculturalității, aspecte fundamentale ale cetățeniei democratice.",
+    "order": 61
+  },
+  {
+    "id": "istorie-u1-hard-002",
+    "question": "Argumentează de ce este esențial ca istoricii să utilizeze surse variate (scrise, nescrise, multimedia) în procesul de reconstituire a trecutului.",
+    "answers": [
+      {
+        "text": "Utilizarea surselor variate este necesară doar pentru a extinde spațiul de informare al elevilor.",
+        "correct": false
+      },
+      {
+        "text": "Fiecare tip de sursă oferă o perspectivă incompletă și parțială asupra realității istorice. Combinarea lor permite o viziune mai complexă, echilibrată și mai apropiată de adevăr.",
+        "correct": true
+      },
+      {
+        "text": "Sursele nescrise sunt mai importante decât cele scrise, deoarece sunt mai vechi.",
+        "correct": false
+      },
+      {
+        "text": "Doar sursele scrise (documentele) sunt considerate izvoare istorice de încredere.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Argumentare",
+    "explanation": "Diversitatea surselor este crucială pentru a evita viziunea unilaterală și a asigura o reconstituire cât mai obiectivă a trecutului. Izvoarele se completează reciproc, oferind informații din domenii diferite (politic, economic, cultural, social).",
+    "order": 62
+  },
+  {
+    "id": "istorie-u1-hard-003",
+    "question": "Evaluează care dintre următoarele domenii de cunoaștere (reconstituirea trecutului, elemente de cultură și civilizație, relațiile sociale și statul) oferă resurse prioritare pentru formarea competenței generale 'Manifestarea comportamentului civic' (Comp. Gen. 3) și de ce?",
+    "answers": [
+      {
+        "text": "Domeniul 'Reconstituirea trecutului', deoarece oferă instrumente minime de înțelegere a istoriei.",
+        "correct": false
+      },
+      {
+        "text": "Domeniul 'Elemente de cultură și civilizație', deoarece are ponderea cea mai mare în clasa a V-a (70%).",
+        "correct": false
+      },
+      {
+        "text": "Domeniul 'Relațiile sociale și statul', deoarece abordează organizarea societății, libertatea, proprietatea și politica, teme direct legate de comportamentul civic și valorile democratice.",
+        "correct": true
+      },
+      {
+        "text": "Toate domeniile contribuie în mod egal la această competență, fără nicio diferență de prioritate.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Deși toate domeniile contribuie, 'Relațiile sociale și statul' se concentrează pe evoluția instituțiilor, a relațiilor de putere, drepturilor și libertăților, care sunt subiecte de bază pentru înțelegerea și exersarea comportamentului civic.",
+    "order": 63
+  },
+  {
+    "id": "istorie-u1-hard-004",
+    "question": "Compară și contrastează modul de datare al unui eveniment din anul 2350 î.Hr. cu cel al unui eveniment din anul 1475 d.Hr. din perspectiva cronologiei istorice.",
+    "answers": [
+      {
+        "text": "Ambele evenimente sunt datate în ordine crescătoare, pornind de la anul 1.",
+        "correct": false
+      },
+      {
+        "text": "Evenimentul din 2350 î.Hr. este datat descrescător (spre anul 1), în timp ce cel din 1475 d.Hr. este datat crescător (de la anul 1 spre prezent), ambele având ca reper anul 1 al Erei Creștine.",
+        "correct": true
+      },
+      {
+        "text": "Evenimentul din 2350 î.Hr. se încadrează în Mileniul al III-lea î.Hr., iar cel din 1475 d.Hr. în Mileniul al II-lea d.Hr.",
+        "correct": false
+      },
+      {
+        "text": "Ambele date necesită doar cunoașterea secolului, mileniul nefiind relevant.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Comparație",
+    "explanation": "Cronologia se raportează la anul 1. Anii î.Hr. se numără înapoi (descrescător), iar anii d.Hr. se numără înainte (crescător). Ambele date se calculează folosind același sistem de măsurare a timpului istoric.",
+    "order": 64
+  },
+  {
+    "id": "istorie-u1-hard-005",
+    "question": "Ce ar trebui să includă, în mod obligatoriu, o \"Fișă de observare a comportamentului tău\" la disciplina Istorie pentru a reflecta obiectivele pedagogice moderne?",
+    "answers": [
+      {
+        "text": "Doar numărul de sarcini finalizate corect și nota obținută la evaluarea finală.",
+        "correct": false
+      },
+      {
+        "text": "Aprecieri asupra progresului elevului în domenii precum interesul, cooperarea în grup, respectarea instrucțiunilor și perseverența, reflectând dimensiunea atitudinal-valorică.",
+        "correct": true
+      },
+      {
+        "text": "O descriere detaliată a evenimentelor istorice învățate în unitate.",
+        "correct": false
+      },
+      {
+        "text": "Exclusiv lista de termeni de specialitate definiți corect.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Evaluarea modernă (complementară/alternativă) urmărește progresul elevului în domenii atitudinal-valorice (colaborare, inițiativă, respect), care nu pot fi măsurate prin metode tradiționale (teste scrise). Fișa de observare este un instrument al acestei evaluări.",
+    "order": 65
+  },
+  {
+    "id": "istorie-u1-hard-006",
+    "question": "Explică de ce competența de a 'Utiliza critic și reflexiv limbajul de specialitate și sursele istorice' este plasată pe locul 2 în lista competențelor generale.",
+    "answers": [
+      {
+        "text": "Pentru că este mai puțin importantă decât primele două.",
+        "correct": false
+      },
+      {
+        "text": "Deoarece logica disciplinei impune ca, după înțelegerea coordonatelor de timp și spațiu, elevul să dobândească instrumentele de bază (limbaj și surse) pentru a analiza faptele istorice.",
+        "correct": true
+      },
+      {
+        "text": "Deoarece este mai ușor de evaluat prin metode complementare.",
+        "correct": false
+      },
+      {
+        "text": "Pentru că vizează doar aspectul cultural al istoriei, nu și pe cel politic.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Competențele generale sunt ierarhizate logic. După ce elevul înțelege unde (spațiu) și când (timp) se petrec faptele, trebuie să dobândească abilitățile de a lucra cu 'materia primă' a istoriei (sursele) și cu vocabularul specific (limbajul de specialitate).",
+    "order": 66
+  },
+  {
+    "id": "istorie-u1-hard-007",
+    "question": "Dacă arheologia descoperă un vas de ceramică, iar epigrafia descifrează o inscripție pe o stelă, evaluează care dintre ele oferă informații mai bogate despre aspectele politice ale statului antic respectiv.",
+    "answers": [
+      {
+        "text": "Vasul de ceramică, deoarece arată meșteșugurile și economia, care influențau politica.",
+        "correct": false
+      },
+      {
+        "text": "Stela cu inscripție (izvor scris), deoarece textele sale pot conține hotărâri, legi, nume de conducători sau relatări despre organizarea statală, informații mai clare decât cele oferite de un artefact.",
+        "correct": true
+      },
+      {
+        "text": "Ambele oferă informații egale, pentru că sunt studiate de științe auxiliare diferite.",
+        "correct": false
+      },
+      {
+        "text": "Niciuna, deoarece ambele sunt izvoare nescrise (materiale).",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Izvoarele scrise (inscripțiile, documentele) sunt, de regulă, mai directe și mai bogate în detalii factuale despre evenimente politice, legi sau conducători, în timp ce obiectele (vase, unelte) oferă informații indirecte despre cultură și viața cotidiană.",
+    "order": 67
+  },
+  {
+    "id": "istorie-u1-hard-008",
+    "question": "Argumentează de ce capacitatea de a 'extrage mesaje dintr-o sursă istorică' (competență specifică V-a) este o premisă pentru a 'utiliza gândirea critică în analiza surselor de informare' (competență specifică VI-a).",
+    "answers": [
+      {
+        "text": "Extragerea mesajelor este o sarcină de memorare, fără legătură cu gândirea critică.",
+        "correct": false
+      },
+      {
+        "text": "Gândirea critică presupune analiza, comparația și evaluarea surselor. Aceste operațiuni nu pot fi realizate fără competența de bază de a identifica și a extrage informația esențială din sursă.",
+        "correct": true
+      },
+      {
+        "text": "Competențele din clasa a V-a și a VI-a se referă la domenii de conținut diferite.",
+        "correct": false
+      },
+      {
+        "text": "Extragerea mesajelor se referă doar la sursele scrise, iar gândirea critică la cele nescrise.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Argumentare",
+    "explanation": "Programele școlare sunt construite pe principiul progresului în învățare. Abilitățile de bază (recunoaștere, extragere) sunt formate în clasa a V-a, pentru a servi ca fundament celor superioare (analiză, sinteză, evaluare) din clasele următoare.",
+    "order": 68
+  },
+  {
+    "id": "istorie-u1-hard-009",
+    "question": "Ce impact ar avea, asupra înțelegerii trecutului, dispariția științelor auxiliare ale istoriei (arheologie, numismatică, epigrafie)?",
+    "answers": [
+      {
+        "text": "Nu ar exista niciun impact, deoarece istoricii se pot baza doar pe izvoarele scrise din arhive.",
+        "correct": false
+      },
+      {
+        "text": "Studiul Preistoriei ar fi aproape imposibil de realizat, iar informațiile din Antichitate și Evul Mediu, provenite din surse materiale, ar fi greu de interpretat, limitând serios reconstituirea trecutului.",
+        "correct": true
+      },
+      {
+        "text": "S-ar pierde doar informațiile legate de hărțile istorice.",
+        "correct": false
+      },
+      {
+        "text": "Ar fi afectată doar datarea evenimentelor din Era după Hristos.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Științele auxiliare sunt cruciale pentru interpretarea izvoarelor nescrise (artefacte) și a celor scrise pe materiale dure (inscripții). Fără ele, o mare parte din informațiile despre perioadele lipsite de documente scrise (Preistoria) s-ar pierde.",
+    "order": 69
+  },
+  {
+    "id": "istorie-u1-hard-010",
+    "question": "Evaluează dacă Epoca Medievală (Evul Mediu) este un eveniment sau un proces istoric și argumentează-ți răspunsul.",
+    "answers": [
+      {
+        "text": "Este un eveniment, deoarece are o dată de început precisă (476 d.Hr.).",
+        "correct": false
+      },
+      {
+        "text": "Este un proces istoric, deoarece reprezintă o perioadă îndelungată (aproximativ 1000 de ani) în care au avut loc numeroase schimbări majore în plan social, politic și cultural, nu un fapt izolat.",
+        "correct": true
+      },
+      {
+        "text": "Este un eveniment, deoarece nu se poate încadra pe o axă a timpului.",
+        "correct": false
+      },
+      {
+        "text": "Este un proces, dar se referă exclusiv la istoria României.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Epoca Medievală, ca parte a periodizării, este un proces. Deși are un reper de început (căderea Imperiului Roman de Apus, un eveniment), esența ei constă în ansamblul de transformări care s-au desfășurat pe parcursul celor zece secole de existență.",
+    "order": 70
+  },
+  {
+    "id": "istorie-u1-hard-011",
+    "question": "Conform planului-cadru, disciplina Istorie are o alocare de o oră/săptămână în clasele a VI-a și a VII-a și 2 ore/săptămână în clasele a V-a și a VIII-a. Argumentează de ce orele sunt repartizate inegal pe parcursul ciclului gimnazial.",
+    "answers": [
+      {
+        "text": "Repartizarea inegală se datorează faptului că programa școlară este prea vastă și nu poate fi acoperită în timp util.",
+        "correct": false
+      },
+      {
+        "text": "În clasa a V-a, Istoria se predă pe 2 ore pentru a le oferi elevilor (veniți de la ciclul primar) timpul necesar de a se familiariza cu vocabularul și tehnicile specifice (alfabetul istoriei), iar în clasa a VIII-a pentru a aprofunda Istoria Românilor.",
+        "correct": true
+      },
+      {
+        "text": "Doar Istoria Românilor (clasa a VIII-a) necesită mai mult timp de studiu.",
+        "correct": false
+      },
+      {
+        "text": "Este o decizie bazată pe tradiția școlii românești, fără o motivație pedagogică clară.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Argumentare",
+    "explanation": "Motivația pedagogică este cea mai importantă. Competențele de bază, numite 'alfabetul istoriei', sunt consolidate în clasa a V-a. În clasa a VIII-a, Istoria Românilor are nevoie de mai multe ore pentru a asigura o acoperire consistentă a conținutului înainte de Evaluarea Națională.",
+    "order": 71
+  },
+  {
+    "id": "istorie-u1-hard-012",
+    "question": "Dacă un istoric descoperă un sit arheologic în care găsește unelte din piatră (Epoca Pietrei) și monede din bronz (Epoca Metalelor), cum poate explica acest fenomen și care este atitudinea lui față de izvoarele descoperite?",
+    "answers": [
+      {
+        "text": "Fenomenul indică faptul că populația a utilizat ambele tipuri de obiecte în aceeași perioadă, iar istoricul ar trebui să ignore monedele, fiind mai noi.",
+        "correct": false
+      },
+      {
+        "text": "Fenomenul ar putea indica faptul că meșteșugarii continuau să utilizeze uneltele din piatră chiar și după inventarea metalurgiei, iar istoricul trebuie să mânuiască și să depoziteze cu grijă toate obiectele pentru a nu fi deteriorate.",
+        "correct": true
+      },
+      {
+        "text": "Arheologul trebuie să folosească doar cronologia pentru a explica fenomenul, fără a lua în considerare contextul arheologic.",
+        "correct": false
+      },
+      {
+        "text": "Monedele și uneltele sunt din epoci diferite, iar situl arheologic nu poate oferi informații clare despre trecut.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "În Preistorie, trecerea de la piatră la metal nu a fost bruscă. Oamenii au continuat să utilizeze unelte din piatră chiar și după inventarea metalurgiei. Atitudinea față de izvoare impune grija și responsabilitatea pentru conservarea lor ca mărturii ale trecutului.",
+    "order": 72
+  },
+  {
+    "id": "istorie-u1-hard-013",
+    "question": "Evaluează rolul lui Octavian Augustus (27 î.Hr. – 14 d.Hr.), împărat roman, în contextul cronologiei istorice (î.Hr. vs. d.Hr.) a Imperiului Roman.",
+    "answers": [
+      {
+        "text": "Domnia lui Octavian Augustus este integral plasată în Era înainte de Hristos.",
+        "correct": false
+      },
+      {
+        "text": "Domnia sa se întinde pe ambele ere (î.Hr. și d.Hr.), fiind un reper cronologic care leagă cele două perioade ale istoriei, el fiind primul împărat al Imperiului Roman.",
+        "correct": true
+      },
+      {
+        "text": "El a domnit exclusiv în Era după Hristos, deoarece a fost un conducător important.",
+        "correct": false
+      },
+      {
+        "text": "Octavian Augustus a inventat cronologia, iar domnia sa marchează Anul 1 al Erei Creștine.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Evaluare",
+    "explanation": "Domnia lui Octavian Augustus (27 î.Hr. – 14 d.Hr.) acoperă perioada de dinainte și de după reperul Anul 1 (nașterea lui Iisus Hristos), reprezentând un moment de cotitură în istoria Imperiului Roman și în cronologia universală.",
+    "order": 73
+  },
+  {
+    "id": "istorie-u1-hard-014",
+    "question": "Cum se poate aplica, în studierea istoriei, competența de a 'Folosi autonom și responsabil instrumentele necesare educației permanente' (Comp. Gen. 4)?",
+    "answers": [
+      {
+        "text": "Prin memorarea tuturor informațiilor din manual și a anilor de domnie ai conducătorilor.",
+        "correct": false
+      },
+      {
+        "text": "Prin utilizarea autonomă a resurselor multimedia (Internet) și a tehnicilor de învățare (fișe, proiecte) pentru a dobândi cunoștințe noi și a rezolva sarcini de lucru complexe.",
+        "correct": true
+      },
+      {
+        "text": "Doar prin vizitarea muzeelor și a bibliotecilor.",
+        "correct": false
+      },
+      {
+        "text": "Exclusiv prin completarea tabelelor cronologice.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Aplicare",
+    "explanation": "Această competență vizează autonomia elevului în învățare. Ea implică nu doar achiziția de cunoștințe, ci și dezvoltarea abilităților de a căuta, selecta și utiliza informații din diverse surse pentru a învăța pe tot parcursul vieții.",
+    "order": 74
+  },
+  {
+    "id": "istorie-u1-hard-015",
+    "question": "De ce se consideră că inventarea scrierii (circa 3500 î.Hr.) este evenimentul care marchează trecerea de la Preistorie la Antichitate?",
+    "answers": [
+      {
+        "text": "Deoarece scrierea a fost inventată exclusiv în Europa.",
+        "correct": false
+      },
+      {
+        "text": "Fiindcă apariția scrierii a permis înregistrarea faptelor, asigurând istoricului acces la izvoare scrise detaliate, necesare pentru o cunoaștere mai exactă a trecutului.",
+        "correct": true
+      },
+      {
+        "text": "Pentru că, în Antichitate, oamenii foloseau doar izvoare nescrise.",
+        "correct": false
+      },
+      {
+        "text": "Inventarea scrierii este un proces, nu un eveniment care marchează o schimbare majoră.",
+        "correct": false
+      }
+    ],
+    "difficulty": "hard",
+    "subjectId": "istorie",
+    "themeId": "alfabetul-istoriei",
+    "category": "Analiză",
+    "explanation": "Inventarea scrierii reprezintă un reper cronologic deosebit de important. Acesta le-a permis oamenilor să transmită informațiile în timp și spațiu, oferind istoricilor surse scrise care atestă existența statelor, a legilor, a evenimentelor politice și a credințelor religioase.",
+    "order": 75
+  }
+]
