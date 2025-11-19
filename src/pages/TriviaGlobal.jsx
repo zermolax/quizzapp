@@ -9,10 +9,15 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { BadgeCard } from '../components/BadgeCard';
+import { BadgeUnlockModal } from '../components/BadgeUnlockModal';
+import { StreakDisplay } from '../components/StreakDisplay';
+import { SoundToggle } from '../components/SoundToggle';
 import { saveQuizSession, updateUserStats, getGlobalTriviaQuestions, getUserStats } from '../services/quizService';
 import { checkBadgeAchievements, updateUserStreak } from '../services/badgeService';
 import { getPointsForDifficulty, getDifficultyInfo as getDifficultyConfig } from '../constants/scoring';
 import logger from '../utils/logger';
+import { celebratePerfectScore, celebrateQuizComplete, celebrateStreak } from '../utils/confetti';
+import { playCorrect, playWrong, playPerfect } from '../utils/sounds';
 
 /**
  * COMPONENT: TriviaGlobal
@@ -44,6 +49,7 @@ export function TriviaGlobal() {
   const [savingSession, setSavingSession] = useState(false);
   const [newBadgesEarned, setNewBadgesEarned] = useState([]);
   const [sessionStreak, setSessionStreak] = useState(0);
+  const [currentBadgeToShow, setCurrentBadgeToShow] = useState(null);
 
   const [timeLeft, setTimeLeft] = useState(30);
   const [timerActive, setTimerActive] = useState(true);
@@ -164,6 +170,13 @@ const handleAnswerSelect = (answerIndex) => {
   setIsCorrect(correct);
   setTimerActive(false);
 
+  // Play sound effect
+  if (correct) {
+    playCorrect();
+  } else {
+    playWrong();
+  }
+
   // Calculate points (new system: 10/30/50 - no time bonus)
   const points = correct ? getPointsForDifficulty(difficulty) : 0;
 
@@ -283,11 +296,18 @@ const finishQuiz = async () => {
     if (newBadges.length > 0) {
       setNewBadgesEarned(newBadges);
       logger.info('🏅 New badges earned:', newBadges);
+      // Show first badge modal
+      setCurrentBadgeToShow(newBadges[0]);
     }
 
     const streakDays = await updateUserStreak(user.uid);
     setSessionStreak(streakDays);
     logger.info('🔥 Current streak:', streakDays);
+
+    // Celebrate streak milestones
+    if (streakDays >= 30 || streakDays === 7 || streakDays === 3) {
+      celebrateStreak(streakDays);
+    }
 
     setSavingSession(false);
 
@@ -341,6 +361,18 @@ const finishQuiz = async () => {
   if (quizFinished) {
     const maxScore = questions.length * getPointsForDifficulty(difficulty);
     const percentage = Math.round((score / maxScore) * 100);
+
+    // Celebrate perfect score
+    if (percentage === 100) {
+      setTimeout(() => {
+        celebratePerfectScore();
+        playPerfect();
+      }, 500);
+    } else {
+      setTimeout(() => {
+        celebrateQuizComplete(percentage);
+      }, 500);
+    }
 
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center p-4 sm:p-8">
@@ -413,8 +445,10 @@ const finishQuiz = async () => {
                 <div>
                   <strong>Scor total:</strong> {userStats.totalScore || 0}
                 </div>
-                <div>
-                  <strong>Streak curent:</strong> {sessionStreak} zile 🔥
+                <div className="col-span-2 flex justify-center">
+                  {sessionStreak > 0 && (
+                    <StreakDisplay days={sessionStreak} size="small" />
+                  )}
                 </div>
                 <div>
                   <strong>Discipline:</strong> {userStats.subjectsPlayed?.length || 0}
@@ -685,6 +719,22 @@ const finishQuiz = async () => {
             animation: slideUp 0.3s ease;
           }
         `}</style>
+
+        {/* Badge Unlock Modal */}
+        {currentBadgeToShow && (
+          <BadgeUnlockModal
+            badge={currentBadgeToShow}
+            onClose={() => {
+              // Show next badge if available
+              const currentIndex = newBadgesEarned.findIndex(b => b.id === currentBadgeToShow.id);
+              if (currentIndex < newBadgesEarned.length - 1) {
+                setCurrentBadgeToShow(newBadgesEarned[currentIndex + 1]);
+              } else {
+                setCurrentBadgeToShow(null);
+              }
+            }}
+          />
+        )}
 
       </div>
     );
