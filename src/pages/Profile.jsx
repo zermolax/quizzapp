@@ -22,6 +22,7 @@ import {
 } from '../services/profileService';
 import { getAllBadges, getUserBadges, getCurrentStreak } from '../services/badgeService';
 import { BadgeCard } from '../components/BadgeCard';
+import { StreakDisplay } from '../components/StreakDisplay';
 import logger from '../utils/logger';
 
 /**
@@ -600,12 +601,16 @@ export function Profile() {
               </p>
             </div>
 
-            {/* Stat 5: Current Streak */}
+            {/* Stat 5: Current Streak - Enhanced with StreakDisplay */}
             <div style={{
               background: 'var(--neon-orange)',
               border: '4px solid var(--deep-brown)',
               padding: '1.5rem',
-              position: 'relative'
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}>
               <div style={{
                 position: 'absolute',
@@ -620,34 +625,54 @@ export function Profile() {
                 fontSize: '0.75rem',
                 textTransform: 'uppercase',
                 color: 'var(--deep-brown)',
-                marginBottom: '0.5rem',
+                marginBottom: '1rem',
                 fontWeight: 700
               }}>
                 Streak curent
               </p>
-              <p style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontSize: '3rem',
-                fontWeight: 900,
-                color: 'var(--deep-brown)',
-                lineHeight: 1,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem'
-              }}>
-                🔥 {currentStreak}
-              </p>
-              <p style={{
-                fontFamily: 'JetBrains Mono, monospace',
-                fontSize: '0.75rem',
-                color: 'var(--deep-brown)',
-                marginTop: '0.5rem'
-              }}>
-                {currentStreak === 1 ? 'zi' : 'zile'}
-              </p>
+              <StreakDisplay days={currentStreak} size="large" showLabel={true} />
             </div>
           </div>
         </div>
+
+        {/* SECTION 2.5: FEATURED STREAK (if > 7 days) - Standalone Section */}
+        {currentStreak >= 7 && (
+          <div style={{
+            background: 'linear-gradient(135deg, var(--neon-orange), var(--neon-pink))',
+            border: '6px solid var(--deep-brown)',
+            padding: '3rem 2.5rem',
+            marginBottom: '2rem',
+            position: 'relative',
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontSize: '2rem',
+              fontWeight: 900,
+              textTransform: 'uppercase',
+              color: 'var(--deep-brown)',
+              marginBottom: '2rem',
+              letterSpacing: '-0.02em'
+            }}>
+              {currentStreak >= 30 ? '🏆 Legendary Streak!' : '🔥 Streak Impressionant!'}
+            </h2>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <StreakDisplay days={currentStreak} size="large" showLabel={true} />
+            </div>
+            <p style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '1.125rem',
+              color: 'var(--deep-brown)',
+              marginTop: '1.5rem',
+              fontWeight: 600
+            }}>
+              {currentStreak >= 30
+                ? 'Incredibil! Continui să înveți în fiecare zi! 💪'
+                : 'Foarte bine! Continuă să exersezi zilnic! 💪'
+              }
+            </p>
+          </div>
+        )}
 
         {/* SECTION 3: BADGES */}
         <div style={{
