@@ -49,7 +49,7 @@ export function DailyChallengePlay() {
 
       if (existingChallenge?.completed) {
         // Already completed, redirect to leaderboard
-        navigate('/daily-leaderboard');
+        navigate('/leaderboard?tab=daily');
         return;
       }
 
@@ -172,8 +172,8 @@ export function DailyChallengePlay() {
       // Check badge achievements
       await checkBadgeAchievements(user.uid);
 
-      // Navigate to leaderboard
-      navigate('/daily-leaderboard');
+      // Navigate to leaderboard with daily tab active
+      navigate('/leaderboard?tab=daily');
 
     } catch (error) {
       console.error('Error finishing daily challenge:', error);
@@ -263,6 +263,13 @@ export function DailyChallengePlay() {
     );
   }
 
+  // Quit handler
+  function handleQuit() {
+    if (window.confirm('Sigur vrei să părăsești Daily Challenge? Progresul va fi pierdut.')) {
+      navigate('/');
+    }
+  }
+
   // Main quiz interface
   const currentQuestion = questions[currentQuestionIndex];
 
@@ -280,7 +287,9 @@ export function DailyChallengePlay() {
       onNextQuestion={handleNextQuestion}
       styleMode="brutalist"
       header={{
-        subject: '🌟 Provocare Zilnică'
+        onQuit: handleQuit,
+        subject: 'Provocare Zilnică',
+        difficulty: 'mediu'
       }}
       points={{
         earned: currentQuestionPoints

@@ -40,7 +40,6 @@ const Terms = lazy(() => import('./pages/Terms'));
 
 // Challenge pages
 const DailyChallengePlay = lazy(() => import('./pages/DailyChallengePlay'));
-const DailyLeaderboard = lazy(() => import('./pages/DailyLeaderboard'));
 const ChallengePlay = lazy(() => import('./pages/ChallengePlay'));
 
 // Loading component
@@ -127,13 +126,7 @@ export default function App() {
             element={user ? <DailyChallengePlay /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 8: Daily Leaderboard (Protected) */}
-          <Route
-            path="/daily-leaderboard"
-            element={user ? <DailyLeaderboard /> : <Navigate to="/" replace />}
-          />
-
-          {/* RUTA 9: 1v1 Challenge Play (Public with auth check inside) */}
+          {/* RUTA 8: 1v1 Challenge Play (Public with auth check inside) */}
           <Route
             path="/challenge/:challengeId"
             element={<ChallengePlay />}

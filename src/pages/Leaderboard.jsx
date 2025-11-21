@@ -10,7 +10,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
@@ -19,6 +19,13 @@ import {
   getLeaderboardWithUserHighlight,
   getUserGlobalRank
 } from '../services/leaderboardService';
+import {
+  getTodayDateString,
+  getDailyLeaderboard,
+  getUserDailyChallenge,
+  getUserDailyRank,
+  getUserDailyStats
+} from '../services/dailyChallengeService';
 
 /**
  * COMPONENT: Leaderboard
@@ -27,13 +34,20 @@ export function Leaderboard() {
 
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [searchParams] = useSearchParams();
 
-  const [activeTab, setActiveTab] = useState('global');
+  // Check if we should start on daily tab
+  const initialTab = searchParams.get('tab') || 'global';
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [leaderboard, setLeaderboard] = useState([]);
   const [userRank, setUserRank] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [themes, setThemes] = useState([]);
+
+  // Daily Challenge specific state
+  const [dailyUserChallenge, setDailyUserChallenge] = useState(null);
+  const [dailyUserStats, setDailyUserStats] = useState(null);
 
   /**
    * EFFECT: Fetch themes for tabs
@@ -76,6 +90,27 @@ export function Leaderboard() {
 
           const rank = await getUserGlobalRank(user.uid);
           setUserRank(rank);
+        } else if (activeTab === 'daily') {
+          // Load Daily Challenge leaderboard
+          const today = getTodayDateString();
+          const lb = await getDailyLeaderboard(today);
+          setLeaderboard(lb);
+
+          // Load user's challenge
+          const challenge = await getUserDailyChallenge(user.uid, today);
+          setDailyUserChallenge(challenge);
+
+          // Load user's rank
+          if (challenge?.completed) {
+            const rank = await getUserDailyRank(user.uid, today);
+            setUserRank(rank);
+          } else {
+            setUserRank(null);
+          }
+
+          // Load user's stats
+          const stats = await getUserDailyStats(user.uid);
+          setDailyUserStats(stats);
         } else {
           const lb = await getThemeLeaderboard(activeTab, 50);
           setLeaderboard(lb);
@@ -320,7 +355,7 @@ export function Leaderboard() {
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
 
         {/* USER RANK CARD */}
-        {activeTab === 'global' && userRank && (
+        {(activeTab === 'global' || activeTab === 'daily') && userRank && (
           <div style={{
             background: 'var(--neon-lime)',
             border: '6px solid var(--deep-brown)',
@@ -472,6 +507,35 @@ export function Leaderboard() {
               }}
             >
               🌍 Global
+            </button>
+
+            {/* Daily Challenge Tab */}
+            <button
+              onClick={() => setActiveTab('daily')}
+              style={{
+                background: activeTab === 'daily' ? 'var(--neon-orange)' : 'transparent',
+                color: activeTab === 'daily' ? 'var(--off-white)' : 'var(--deep-brown)',
+                border: `4px solid ${activeTab === 'daily' ? 'var(--neon-orange)' : 'var(--deep-brown)'}`,
+                padding: '0.75rem 1.5rem',
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: 700,
+                fontSize: '0.875rem',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                if (activeTab !== 'daily') {
+                  e.currentTarget.style.background = 'var(--sand)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== 'daily') {
+                  e.currentTarget.style.background = 'transparent';
+                }
+              }}
+            >
+              🌟 Daily Challenge
             </button>
 
             {/* Theme Tabs */}

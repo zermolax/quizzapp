@@ -209,6 +209,13 @@ export function ChallengePlay() {
     );
   }
 
+  // Quit handler
+  function handleQuit() {
+    if (window.confirm('Sigur vrei să părăsești Challenge-ul? Progresul va fi pierdut.')) {
+      navigate('/');
+    }
+  }
+
   // Show results if already completed
   if (showResults) {
     return <ChallengeResults challengeId={challengeId} />;
@@ -231,7 +238,9 @@ export function ChallengePlay() {
       onNextQuestion={handleNextQuestion}
       styleMode="tailwind"
       header={{
-        subject: `⚔️ Challenge de la ${challenge.createdBy.displayName}`
+        onQuit: handleQuit,
+        subject: `Challenge de la ${challenge.createdBy.displayName}`,
+        difficulty: challenge.difficulty || 'mediu'
       }}
       points={{
         earned: currentQuestionPoints
