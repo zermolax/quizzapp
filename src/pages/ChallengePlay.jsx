@@ -3,6 +3,7 @@
  *
  * Page pentru a juca un 1v1 Challenge
  * Accessed via /challenge/:challengeId
+ * REFACTORED to use unified QuizInterface component + FIXED validation bug
  */
 
 import React, { useState, useEffect } from 'react';
@@ -16,6 +17,7 @@ import {
 } from '../services/challengeService';
 import { checkBadgeAchievements } from '../services/badgeService';
 import ChallengeResults from '../components/challenges/ChallengeResults';
+import { QuizInterface } from '../components/quiz/QuizInterface';
 
 export function ChallengePlay() {
   const { challengeId } = useParams();
@@ -35,6 +37,7 @@ export function ChallengePlay() {
   const [showExplanation, setShowExplanation] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
   const [showResults, setShowResults] = useState(false);
+  const [currentQuestionPoints, setCurrentQuestionPoints] = useState(0);
 
   useEffect(() => {
     if (!authLoading) {
@@ -114,12 +117,16 @@ export function ChallengePlay() {
     if (selectedAnswer === null) return;
 
     const currentQuestion = questions[currentQuestionIndex];
-    const isCorrect = currentQuestion.answers[selectedAnswer].isCorrect;
+    const selectedAnswerObj = currentQuestion.answers[selectedAnswer];
+
+    // FIXED: Use 'correct' property instead of 'isCorrect' (same as QuizPlay.jsx)
+    const isCorrect = Boolean(selectedAnswerObj.correct);
     const points = isCorrect ? 10 : 0;
 
     setScore(score + points);
     setIsAnswered(true);
     setShowExplanation(true);
+    setCurrentQuestionPoints(points);
 
     setAnswers([
       ...answers,
@@ -133,22 +140,16 @@ export function ChallengePlay() {
   }
 
   function handleNextQuestion() {
+    // Close explanation modal first
+    setShowExplanation(false);
+
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
       setIsAnswered(false);
-      setShowExplanation(false);
+      setCurrentQuestionPoints(0);
     } else {
       handleFinishQuiz();
-    }
-  }
-
-  function handleSkipExplanation() {
-    setShowExplanation(false);
-    if (!isAnswered) {
-      handleSubmitAnswer();
-    } else {
-      handleNextQuestion();
     }
   }
 
@@ -213,148 +214,31 @@ export function ChallengePlay() {
     return <ChallengeResults challengeId={challengeId} />;
   }
 
-  // Quiz play screen
+  // Main quiz interface
   const currentQuestion = questions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-50 py-8 px-4">
-      <div className="max-w-3xl mx-auto">
-        {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">⚔️</span>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800">Challenge</h1>
-                <p className="text-sm text-gray-600">
-                  From {challenge.createdBy.displayName}
-                </p>
-              </div>
-            </div>
-
-            <div className="text-right">
-              <div className="text-3xl font-bold text-purple-600">{score}</div>
-              <div className="text-xs text-gray-500">points</div>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-300 rounded-full"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <div className="flex justify-between mt-2 text-sm text-gray-600">
-            <span>Question {currentQuestionIndex + 1}/{questions.length}</span>
-            <span>{Math.round(progress)}% Complete</span>
-          </div>
-        </div>
-
-        {/* Question */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            {currentQuestion.question}
-          </h2>
-
-          {/* Answers */}
-          <div className="space-y-3">
-            {currentQuestion.answers.map((answer, index) => {
-              let bgColor = 'bg-gray-50 hover:bg-gray-100';
-              let borderColor = 'border-gray-200';
-              let textColor = 'text-gray-800';
-
-              if (isAnswered) {
-                if (answer.isCorrect) {
-                  bgColor = 'bg-green-100';
-                  borderColor = 'border-green-500';
-                  textColor = 'text-green-800';
-                } else if (selectedAnswer === index) {
-                  bgColor = 'bg-red-100';
-                  borderColor = 'border-red-500';
-                  textColor = 'text-red-800';
-                }
-              } else if (selectedAnswer === index) {
-                bgColor = 'bg-purple-100';
-                borderColor = 'border-purple-500';
-                textColor = 'text-purple-800';
-              }
-
-              return (
-                <button
-                  key={index}
-                  onClick={() => handleAnswerSelect(index)}
-                  disabled={isAnswered}
-                  className={`
-                    w-full text-left p-4 rounded-xl border-2 transition-all
-                    ${bgColor} ${borderColor} ${textColor}
-                    ${!isAnswered && 'hover:scale-102 hover:shadow-md'}
-                    ${isAnswered && 'cursor-default'}
-                  `}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">{answer.text}</span>
-                    {isAnswered && answer.isCorrect && (
-                      <span className="text-green-600 text-xl">✓</span>
-                    )}
-                    {isAnswered && !answer.isCorrect && selectedAnswer === index && (
-                      <span className="text-red-600 text-xl">✗</span>
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Explanation */}
-          {isAnswered && showExplanation && currentQuestion.explanation && (
-            <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-xl">
-              <h3 className="font-semibold text-blue-900 mb-2">💡 Explanation</h3>
-              <p className="text-blue-800 text-sm">{currentQuestion.explanation}</p>
-            </div>
-          )}
-        </div>
-
-        {/* Action buttons */}
-        <div className="flex gap-4">
-          {!isAnswered ? (
-            <>
-              <button
-                onClick={handleSubmitAnswer}
-                disabled={selectedAnswer === null}
-                className={`
-                  flex-1 py-4 rounded-xl font-bold text-lg transition-all
-                  ${selectedAnswer !== null
-                    ? 'bg-gradient-to-r from-purple-500 to-indigo-600 text-white hover:shadow-lg transform hover:scale-105'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  }
-                `}
-              >
-                Submit Answer
-              </button>
-
-              {currentQuestion.explanation && (
-                <button
-                  onClick={handleSkipExplanation}
-                  className="px-6 py-4 bg-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-300 transition"
-                >
-                  Skip ⏭️
-                </button>
-              )}
-            </>
-          ) : (
-            <button
-              onClick={handleNextQuestion}
-              className="flex-1 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-xl font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all"
-            >
-              {currentQuestionIndex < questions.length - 1 ? 'Next Question →' : 'Finish & See Results 🏆'}
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+    <QuizInterface
+      question={currentQuestion}
+      currentQuestionIndex={currentQuestionIndex}
+      totalQuestions={questions.length}
+      score={score}
+      selectedAnswer={selectedAnswer}
+      isAnswered={isAnswered}
+      showExplanation={showExplanation}
+      onAnswerSelect={handleAnswerSelect}
+      onSubmitAnswer={handleSubmitAnswer}
+      onNextQuestion={handleNextQuestion}
+      styleMode="tailwind"
+      header={{
+        subject: `⚔️ Challenge de la ${challenge.createdBy.displayName}`
+      }}
+      points={{
+        earned: currentQuestionPoints
+      }}
+      submitButtonText="Trimite Răspuns"
+      nextButtonText={currentQuestionIndex < questions.length - 1 ? 'Întrebarea Următoare' : 'Finalizează & Vezi Rezultate 🏆'}
+    />
   );
 }
 

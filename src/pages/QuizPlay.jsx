@@ -1,11 +1,10 @@
 /**
- * QuizPlay.jsx - RESPONSIVE with Tailwind CSS
+ * QuizPlay.jsx - REFACTORED to use unified QuizInterface component
  *
  * CHANGES:
- * 1. Complete conversion from inline styles to Tailwind
- * 2. Fully responsive on mobile/tablet/desktop
- * 3. Optimized typography and spacing
- * 4. All logic preserved
+ * 1. Uses QuizInterface component for quiz UI
+ * 2. Business logic preserved (timer, scoring, saving)
+ * 3. Results screen separate (not in QuizInterface)
  */
 
 import React, { useState, useEffect } from 'react';
@@ -16,6 +15,7 @@ import { saveQuizSession, updateUserStats, getQuestionsByTheme, getUserStats } f
 import { checkBadgeAchievements, updateUserStreak } from '../services/badgeService';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../services/firebase';
+import { QuizInterface } from '../components/quiz/QuizInterface';
 
 /**
  * COMPONENT: QuizPlay
@@ -540,215 +540,35 @@ const finishQuiz = async () => {
   /**
    * RENDER: Quiz in progress
    */
-  if (questions.length > 0) {
+  if (questions.length > 0 && !quizFinished) {
     const currentQuestion = questions[currentQuestionIndex];
     const difficultyInfo = getDifficultyInfo();
-    const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
 
     return (
-      <div className="min-h-screen bg-off-white font-body">
-
-        {/* FIXED HEADER - RESPONSIVE */}
-        <header className="fixed top-0 left-0 right-0 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6 bg-off-white border-b-4 border-deep-brown z-50">
-          <nav className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 sm:gap-4">
-            {/* Left side */}
-            <div className="flex items-center gap-2 sm:gap-4">
-              <button
-                onClick={handleQuit}
-                className="bg-transparent border-3 border-deep-brown text-deep-brown px-3 sm:px-4 py-2 font-heading font-bold text-sm uppercase hover:bg-neon-pink hover:text-off-white hover:border-neon-pink transition-all duration-150"
-              >
-                ✕ <span className="hidden sm:inline">Quit</span>
-              </button>
-
-              <div className="font-mono text-sm font-bold uppercase tracking-wider text-deep-brown">
-                <span className="hidden sm:inline">{theme?.name} • </span>{difficultyInfo.emoji}
-              </div>
-            </div>
-
-            {/* Right side - Score */}
-            <div className="bg-deep-brown text-neon-lime px-3 sm:px-6 py-2 border-4 border-deep-brown font-mono text-lg font-bold">
-              {score} pts
-            </div>
-          </nav>
-        </header>
-
-        {/* MAIN QUIZ CONTENT */}
-        <main className="pt-20 sm:pt-24 lg:pt-28 pb-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-
-            {/* Progress Bar */}
-            <div className="mb-6 sm:mb-8">
-              <div className="flex justify-between items-center mb-3">
-                <span className="font-mono text-sm font-bold uppercase text-deep-brown">
-                  Întrebarea {currentQuestionIndex + 1} / {questions.length}
-                </span>
-                <span className="font-mono text-sm font-bold text-deep-brown">
-                  {Math.round(progressPercent)}%
-                </span>
-              </div>
-              <div className="h-3 sm:h-4 bg-sand border-3 border-deep-brown">
-                <div
-                  className="h-full bg-neon-cyan transition-all duration-300"
-                  style={{ width: `${progressPercent}%` }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Timer & Difficulty */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 justify-between items-center mb-6 sm:mb-8">
-              {/* Timer */}
-              <div className={`flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 border-4 ${
-                timeLeft <= 10 ? 'bg-error border-error text-white animate-pulse' : 'bg-cream border-warm-brown text-deep-brown'
-              }`}>
-                <span className="text-3xl">⏱️</span>
-                <span className="font-mono text-4xl font-black">
-                  {timeLeft}s
-                </span>
-              </div>
-
-              {/* Difficulty Badge */}
-              <div
-                className="px-4 sm:px-6 py-2 sm:py-3 border-4 border-deep-brown font-heading font-bold text-sm uppercase text-off-white"
-                style={{ backgroundColor: difficultyInfo.color }}
-              >
-                {difficultyInfo.emoji} {difficultyInfo.label}
-              </div>
-            </div>
-
-            {/* Question Card */}
-            <div className="bg-cream border-6 border-deep-brown p-6 sm:p-8 md:p-12 mb-6 sm:mb-8">
-              <h2 className="font-heading text-4xl font-black text-deep-brown leading-tight mb-6 sm:mb-8">
-                {currentQuestion.question}
-              </h2>
-
-              {/* Answers Grid - RESPONSIVE */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-                {currentQuestion.answers.map((answer, index) => {
-                  const isSelected = selectedAnswerIndex === index;
-                  const isCorrectAnswer = answer.correct;
-                  const showResult = answered;
-
-                  let bgColor = 'bg-off-white';
-                  let borderColor = 'border-deep-brown';
-                  let textColor = 'text-deep-brown';
-
-                  if (showResult) {
-                    if (isCorrectAnswer) {
-                      bgColor = 'bg-[#10B981]';
-                      borderColor = 'border-deep-brown';
-                      textColor = 'text-off-white';
-                    } else if (isSelected && !isCorrectAnswer) {
-                      bgColor = 'bg-error';
-                      borderColor = 'border-error';
-                      textColor = 'text-off-white';
-                    }
-                  } else if (isSelected) {
-                    bgColor = 'bg-sand';
-                  }
-
-                  return (
-                    <button
-                      key={index}
-                      onClick={() => handleAnswerSelect(index)}
-                      disabled={answered}
-                      className={`${bgColor} ${textColor} border-4 ${borderColor} p-4 sm:p-5 md:p-6 text-left font-body text-lg font-semibold transition-all duration-150 disabled:cursor-not-allowed hover:enabled:-translate-x-1 hover:enabled:-translate-y-1 hover:enabled:shadow-brutal hover:enabled:shadow-deep-brown`}
-                    >
-                      <span className="font-mono font-black text-lg mr-2 sm:mr-3">
-                        {getAnswerLetter(index)}.
-                      </span>
-                      {answer.text}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-          </div>
-        </main>
-
-        {/* EXPLANATION MODAL - RESPONSIVE */}
-        {showExplanationModal && (
-          <div className="fixed inset-0 bg-deep-brown/90 flex items-center justify-center z-[2000] p-4 animate-fadeIn">
-            <div className="bg-cream border-6 border-deep-brown max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-slideUp">
-              {/* Modal Header */}
-              <div className="p-4 sm:p-6 md:p-8 border-b-4 border-deep-brown flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                <div
-                  className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center text-3xl border-4 border-deep-brown flex-shrink-0 ${
-                    isCorrect ? 'bg-[#10B981]' : 'bg-neon-pink'
-                  }`}
-                >
-                  {isCorrect ? '✓' : '✗'}
-                </div>
-
-                <div>
-                  <h3 className="font-heading text-3xl font-black text-deep-brown mb-1 sm:mb-2">
-                    {isCorrect ? 'Răspuns corect!' : 'Răspuns greșit'}
-                  </h3>
-                  <p className={`font-mono text-lg font-bold ${
-                    isCorrect ? 'text-[#10B981]' : 'text-neon-pink'
-                  }`}>
-                    {isCorrect ? `+${currentQuestionPoints} puncte` : '+0 puncte'}
-                  </p>
-                </div>
-              </div>
-
-              {/* Modal Body */}
-              <div className="p-4 sm:p-6 md:p-8">
-                <div className="mb-4 sm:mb-6">
-                  <div className="font-heading text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
-                    Răspuns corect
-                  </div>
-                  <div className="bg-[#10B981] p-3 sm:p-4 border-4 border-deep-brown font-body text-base font-semibold text-deep-brown">
-                    {getAnswerLetter(currentQuestion.answers.findIndex(a => a.correct))}. {currentQuestion.answers.find(a => a.correct).text}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="font-heading text-sm font-bold uppercase tracking-wide text-warm-brown mb-2 sm:mb-3">
-                    Explicație
-                  </div>
-                  <div className="bg-sand p-3 sm:p-4 border-4 border-warm-brown font-body text-base leading-relaxed text-deep-brown">
-                    {currentQuestion.explanation}
-                  </div>
-                </div>
-              </div>
-
-              {/* Modal Footer */}
-              <div className="p-4 sm:p-6 md:p-8 border-t-4 border-deep-brown flex justify-end">
-                <button
-                  onClick={handleNextQuestion}
-                  className="bg-deep-brown text-off-white border-6 border-deep-brown px-6 sm:px-8 py-3 sm:py-4 font-heading font-black text-base uppercase hover:bg-neon-lime hover:text-deep-brown hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-deep-brown transition-all duration-150"
-                >
-                  Următoarea Întrebare →
-                </button>
-              </div>
-
-            </div>
-          </div>
-        )}
-
-        {/* Tailwind Animations */}
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-
-          @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-          }
-
-          .animate-fadeIn {
-            animation: fadeIn 0.3s ease;
-          }
-
-          .animate-slideUp {
-            animation: slideUp 0.3s ease;
-          }
-        `}</style>
-
-      </div>
+      <QuizInterface
+        question={currentQuestion}
+        currentQuestionIndex={currentQuestionIndex}
+        totalQuestions={questions.length}
+        score={score}
+        selectedAnswer={selectedAnswerIndex}
+        isAnswered={answered}
+        showExplanation={showExplanationModal}
+        onAnswerSelect={handleAnswerSelect}
+        onSubmitAnswer={() => {}} // Not needed - handleAnswerSelect already handles submission
+        onNextQuestion={handleNextQuestion}
+        styleMode="tailwind"
+        header={{
+          timeLeft: timeLeft,
+          onQuit: handleQuit,
+          difficulty: difficulty,
+          subject: theme?.name
+        }}
+        points={{
+          earned: currentQuestionPoints
+        }}
+        submitButtonText="Trimite Răspuns"
+        nextButtonText="Următoarea Întrebare"
+      />
     );
   }
 
