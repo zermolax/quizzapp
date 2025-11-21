@@ -3,6 +3,7 @@
  *
  * Page pentru a juca Daily Challenge
  * Similar cu QuizPlay dar cu întrebări deterministe și 2x points
+ * REDESIGNED with Bold/Brutalist design + Română
  */
 
 import React, { useState, useEffect } from 'react';
@@ -55,22 +56,32 @@ export function DailyChallengePlay() {
       const dailyQuestions = await generateDailyQuestions(today, 12);
 
       if (dailyQuestions.length < 12) {
-        alert('Not enough questions available for today\'s challenge');
+        alert('Nu există suficiente întrebări pentru provocarea zilnică');
         navigate('/');
         return;
       }
 
-      // Shuffle answers for each question
-      const questionsWithShuffledAnswers = dailyQuestions.map(q => ({
-        ...q,
-        answers: shuffleArray([...q.answers])
-      }));
+      // Shuffle answers for each question + NORMALIZE isCorrect to boolean
+      const questionsWithShuffledAnswers = dailyQuestions.map(q => {
+        // Normalize answers: ensure isCorrect is boolean
+        const normalizedAnswers = (q.answers || []).map(a => ({
+          ...a,
+          isCorrect: Boolean(a.isCorrect === true || a.isCorrect === 'true')
+        }));
+
+        console.log('✅ Normalized answers for:', q.question, normalizedAnswers);
+
+        return {
+          ...q,
+          answers: shuffleArray(normalizedAnswers)
+        };
+      });
 
       setQuestions(questionsWithShuffledAnswers);
 
     } catch (error) {
       console.error('Error loading daily challenge:', error);
-      alert('Failed to load daily challenge');
+      alert('Eroare la încărcarea provocării zilnice');
       navigate('/');
     } finally {
       setLoading(false);
@@ -96,7 +107,14 @@ export function DailyChallengePlay() {
     if (selectedAnswer === null) return;
 
     const currentQuestion = questions[currentQuestionIndex];
-    const isCorrect = currentQuestion.answers[selectedAnswer].isCorrect;
+    const selectedAnswerObj = currentQuestion.answers[selectedAnswer];
+    const isCorrect = Boolean(selectedAnswerObj.isCorrect);
+
+    console.log('📝 Answer submitted:', {
+      selectedAnswer,
+      selectedAnswerObj,
+      isCorrect
+    });
 
     // Calculate points (2x multiplier for daily challenge)
     const points = isCorrect ? 20 : 0; // 10 * 2
@@ -162,16 +180,38 @@ export function DailyChallengePlay() {
 
     } catch (error) {
       console.error('Error finishing daily challenge:', error);
-      alert('Failed to save results');
+      alert('Eroare la salvarea rezultatelor');
     }
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-orange-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading today's challenge...</p>
+      <div style={{
+        minHeight: '100vh',
+        background: 'var(--cream)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '4rem',
+            height: '4rem',
+            border: '6px solid var(--deep-brown)',
+            borderTop: '6px solid var(--neon-orange)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 1rem'
+          }}></div>
+          <p style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.25rem',
+            fontWeight: 700,
+            color: 'var(--deep-brown)'
+          }}>
+            Se încarcă provocarea zilnică...
+          </p>
         </div>
       </div>
     );
@@ -179,14 +219,38 @@ export function DailyChallengePlay() {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-gray-600 text-lg">No questions available</p>
+      <div style={{
+        minHeight: '100vh',
+        background: 'var(--cream)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.25rem',
+            color: 'var(--warm-brown)',
+            marginBottom: '1.5rem'
+          }}>
+            Nu există întrebări disponibile
+          </p>
           <button
             onClick={() => navigate('/')}
-            className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
+            style={{
+              background: 'var(--neon-orange)',
+              color: 'var(--deep-brown)',
+              border: '4px solid var(--deep-brown)',
+              padding: '0.75rem 2rem',
+              fontFamily: 'Space Grotesk, sans-serif',
+              fontWeight: 700,
+              fontSize: '1rem',
+              cursor: 'pointer',
+              textTransform: 'uppercase'
+            }}
           >
-            Go Home
+            Acasă
           </button>
         </div>
       </div>
@@ -197,66 +261,152 @@ export function DailyChallengePlay() {
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50 py-8 px-4">
-      <div className="max-w-3xl mx-auto">
+    <div style={{
+      minHeight: '100vh',
+      background: 'var(--cream)',
+      padding: '2rem 5%'
+    }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
         {/* Header */}
-        <div className="bg-white rounded-2xl shadow-lg p-6 mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">🌟</span>
+        <div style={{
+          background: 'var(--sand)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2rem',
+          marginBottom: '2rem'
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: '1.5rem'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <span style={{ fontSize: '2.5rem' }}>🌟</span>
               <div>
-                <h1 className="text-2xl font-bold text-gray-800">Daily Challenge</h1>
-                <p className="text-sm text-gray-600">2x Points • Resets at midnight</p>
+                <h1 style={{
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontSize: '2rem',
+                  fontWeight: 900,
+                  color: 'var(--deep-brown)',
+                  textTransform: 'uppercase',
+                  margin: 0
+                }}>
+                  Provocare Zilnică
+                </h1>
+                <p style={{
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '0.875rem',
+                  color: 'var(--warm-brown)',
+                  margin: '0.25rem 0 0'
+                }}>
+                  2x Puncte • Se resetează la miezul nopții
+                </p>
               </div>
             </div>
 
-            <div className="text-right">
-              <div className="text-3xl font-bold text-orange-600">{score}</div>
-              <div className="text-xs text-gray-500">points</div>
+            <div style={{ textAlign: 'right' }}>
+              <div style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '2.5rem',
+                fontWeight: 900,
+                color: 'var(--neon-orange)'
+              }}>
+                {score}
+              </div>
+              <div style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '0.75rem',
+                color: 'var(--warm-brown)',
+                textTransform: 'uppercase'
+              }}>
+                puncte
+              </div>
             </div>
           </div>
 
           {/* Progress bar */}
-          <div className="relative h-3 bg-gray-200 rounded-full overflow-hidden">
-            <div
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-orange-400 to-amber-500 transition-all duration-300 rounded-full"
-              style={{ width: `${progress}%` }}
-            />
+          <div style={{
+            position: 'relative',
+            height: '1.5rem',
+            background: 'var(--cream)',
+            border: '3px solid var(--deep-brown)'
+          }}>
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              height: '100%',
+              background: 'var(--neon-orange)',
+              width: `${progress}%`,
+              transition: 'width 0.3s ease'
+            }} />
+            <div style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.75rem',
+              fontWeight: 700,
+              color: 'var(--deep-brown)',
+              zIndex: 10
+            }}>
+              {currentQuestionIndex + 1}/{questions.length}
+            </div>
           </div>
 
-          <div className="flex justify-between mt-2 text-sm text-gray-600">
-            <span>Question {currentQuestionIndex + 1}/{questions.length}</span>
-            <span>{Math.round(progress)}% Complete</span>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginTop: '0.5rem',
+            fontFamily: 'Inter, sans-serif',
+            fontSize: '0.875rem',
+            color: 'var(--warm-brown)'
+          }}>
+            <span>Întrebarea {currentQuestionIndex + 1}/{questions.length}</span>
+            <span>{Math.round(progress)}% Completat</span>
           </div>
         </div>
 
         {/* Question */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
+        <div style={{
+          background: 'var(--off-white)',
+          border: '6px solid var(--deep-brown)',
+          padding: '2.5rem',
+          marginBottom: '2rem'
+        }}>
+          <h2 style={{
+            fontFamily: 'Space Grotesk, sans-serif',
+            fontSize: '1.75rem',
+            fontWeight: 700,
+            color: 'var(--deep-brown)',
+            marginBottom: '2rem',
+            lineHeight: 1.4
+          }}>
             {currentQuestion.question}
           </h2>
 
           {/* Answers */}
-          <div className="space-y-3">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {currentQuestion.answers.map((answer, index) => {
-              let bgColor = 'bg-gray-50 hover:bg-gray-100';
-              let borderColor = 'border-gray-200';
-              let textColor = 'text-gray-800';
+              let bgColor = 'var(--sand)';
+              let borderColor = 'var(--warm-brown)';
+              let textColor = 'var(--deep-brown)';
 
               if (isAnswered) {
-                if (answer.isCorrect) {
-                  bgColor = 'bg-green-100';
-                  borderColor = 'border-green-500';
-                  textColor = 'text-green-800';
+                if (answer.isCorrect === true) {
+                  bgColor = 'var(--neon-green)';
+                  borderColor = 'var(--deep-brown)';
+                  textColor = 'var(--deep-brown)';
                 } else if (selectedAnswer === index) {
-                  bgColor = 'bg-red-100';
-                  borderColor = 'border-red-500';
-                  textColor = 'text-red-800';
+                  bgColor = 'var(--neon-pink)';
+                  borderColor = 'var(--deep-brown)';
+                  textColor = 'var(--deep-brown)';
                 }
               } else if (selectedAnswer === index) {
-                bgColor = 'bg-orange-100';
-                borderColor = 'border-orange-500';
-                textColor = 'text-orange-800';
+                bgColor = 'var(--neon-orange)';
+                borderColor = 'var(--deep-brown)';
+                textColor = 'var(--deep-brown)';
               }
 
               return (
@@ -264,20 +414,41 @@ export function DailyChallengePlay() {
                   key={index}
                   onClick={() => handleAnswerSelect(index)}
                   disabled={isAnswered}
-                  className={`
-                    w-full text-left p-4 rounded-xl border-2 transition-all
-                    ${bgColor} ${borderColor} ${textColor}
-                    ${!isAnswered && 'hover:scale-102 hover:shadow-md'}
-                    ${isAnswered && 'cursor-default'}
-                  `}
+                  style={{
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: '1.25rem',
+                    background: bgColor,
+                    border: `4px solid ${borderColor}`,
+                    color: textColor,
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '1.125rem',
+                    fontWeight: 600,
+                    cursor: isAnswered ? 'default' : 'pointer',
+                    transition: 'all 0.15s ease',
+                    transform: !isAnswered && selectedAnswer !== index ? 'none' : 'translateX(0)',
+                    boxShadow: !isAnswered && selectedAnswer === index ? '4px 4px 0 var(--deep-brown)' : 'none'
+                  }}
+                  onMouseEnter={e => {
+                    if (!isAnswered) {
+                      e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                      e.currentTarget.style.boxShadow = '6px 6px 0 var(--deep-brown)';
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isAnswered) {
+                      e.currentTarget.style.transform = 'translate(0, 0)';
+                      e.currentTarget.style.boxShadow = selectedAnswer === index ? '4px 4px 0 var(--deep-brown)' : 'none';
+                    }
+                  }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium">{answer.text}</span>
-                    {isAnswered && answer.isCorrect && (
-                      <span className="text-green-600 text-xl">✓</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span>{answer.text}</span>
+                    {isAnswered && answer.isCorrect === true && (
+                      <span style={{ fontSize: '1.5rem' }}>✓</span>
                     )}
-                    {isAnswered && !answer.isCorrect && selectedAnswer === index && (
-                      <span className="text-red-600 text-xl">✗</span>
+                    {isAnswered && answer.isCorrect !== true && selectedAnswer === index && (
+                      <span style={{ fontSize: '1.5rem' }}>✗</span>
                     )}
                   </div>
                 </button>
@@ -287,50 +458,133 @@ export function DailyChallengePlay() {
 
           {/* Explanation */}
           {isAnswered && showExplanation && currentQuestion.explanation && (
-            <div className="mt-6 p-4 bg-blue-50 border-2 border-blue-200 rounded-xl">
-              <h3 className="font-semibold text-blue-900 mb-2">💡 Explanation</h3>
-              <p className="text-blue-800 text-sm">{currentQuestion.explanation}</p>
+            <div style={{
+              marginTop: '2rem',
+              padding: '1.5rem',
+              background: 'var(--neon-cyan)',
+              border: '4px solid var(--deep-brown)'
+            }}>
+              <h3 style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: 700,
+                color: 'var(--deep-brown)',
+                marginBottom: '0.75rem',
+                textTransform: 'uppercase'
+              }}>
+                💡 Explicație
+              </h3>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '1rem',
+                color: 'var(--deep-brown)',
+                lineHeight: 1.6,
+                margin: 0
+              }}>
+                {currentQuestion.explanation}
+              </p>
             </div>
           )}
         </div>
 
         {/* Action buttons */}
-        <div className="flex gap-4">
+        <div style={{ display: 'flex', gap: '1rem' }}>
           {!isAnswered ? (
             <>
               <button
                 onClick={handleSubmitAnswer}
                 disabled={selectedAnswer === null}
-                className={`
-                  flex-1 py-4 rounded-xl font-bold text-lg transition-all
-                  ${selectedAnswer !== null
-                    ? 'bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:shadow-lg transform hover:scale-105'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                style={{
+                  flex: 1,
+                  padding: '1.25rem',
+                  background: selectedAnswer !== null ? 'var(--neon-orange)' : 'var(--warm-brown)',
+                  color: 'var(--deep-brown)',
+                  border: '4px solid var(--deep-brown)',
+                  fontFamily: 'Space Grotesk, sans-serif',
+                  fontWeight: 900,
+                  fontSize: '1.125rem',
+                  textTransform: 'uppercase',
+                  cursor: selectedAnswer !== null ? 'pointer' : 'not-allowed',
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={e => {
+                  if (selectedAnswer !== null) {
+                    e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                    e.currentTarget.style.boxShadow = '6px 6px 0 var(--deep-brown)';
                   }
-                `}
+                }}
+                onMouseLeave={e => {
+                  if (selectedAnswer !== null) {
+                    e.currentTarget.style.transform = 'translate(0, 0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
+                }}
               >
-                Submit Answer
+                Trimite Răspuns
               </button>
 
               {currentQuestion.explanation && (
                 <button
                   onClick={handleSkipExplanation}
-                  className="px-6 py-4 bg-gray-200 text-gray-700 rounded-xl font-medium hover:bg-gray-300 transition"
+                  style={{
+                    padding: '1.25rem 2rem',
+                    background: 'var(--sand)',
+                    color: 'var(--deep-brown)',
+                    border: '4px solid var(--warm-brown)',
+                    fontFamily: 'Space Grotesk, sans-serif',
+                    fontWeight: 700,
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.background = 'var(--warm-brown)';
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.background = 'var(--sand)';
+                  }}
                 >
-                  Skip ⏭️
+                  Omite ⏭️
                 </button>
               )}
             </>
           ) : (
             <button
               onClick={handleNextQuestion}
-              className="flex-1 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-xl font-bold text-lg hover:shadow-lg transform hover:scale-105 transition-all"
+              style={{
+                flex: 1,
+                padding: '1.25rem',
+                background: 'var(--neon-green)',
+                color: 'var(--deep-brown)',
+                border: '4px solid var(--deep-brown)',
+                fontFamily: 'Space Grotesk, sans-serif',
+                fontWeight: 900,
+                fontSize: '1.125rem',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '6px 6px 0 var(--deep-brown)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'translate(0, 0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
-              {currentQuestionIndex < questions.length - 1 ? 'Next Question →' : 'Finish & See Results 🏆'}
+              {currentQuestionIndex < questions.length - 1 ? 'Întrebarea Următoare →' : 'Finalizează & Vezi Rezultate 🏆'}
             </button>
           )}
         </div>
       </div>
+
+      {/* Add keyframes for spin animation */}
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
