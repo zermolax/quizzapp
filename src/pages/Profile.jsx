@@ -22,6 +22,7 @@ import {
 } from '../services/profileService';
 import { getAllBadges, getUserBadges, getCurrentStreak } from '../services/badgeService';
 import { BadgeCard } from '../components/BadgeCard';
+import { ChallengeHistory } from '../components/challenges/ChallengeHistory';
 
 /**
  * COMPONENT: Profile
@@ -1323,6 +1324,11 @@ export function Profile() {
               </table>
             </div>
           )}
+        </div>
+
+        {/* ===== CHALLENGE HISTORY ===== */}
+        <div style={{ marginTop: '3rem' }}>
+          <ChallengeHistory />
         </div>
 
       </div>

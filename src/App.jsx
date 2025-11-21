@@ -38,6 +38,11 @@ const Leaderboard = lazy(() => import('./pages/Leaderboard'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 
+// Challenge pages
+const DailyChallengePlay = lazy(() => import('./pages/DailyChallengePlay'));
+const DailyLeaderboard = lazy(() => import('./pages/DailyLeaderboard'));
+const ChallengePlay = lazy(() => import('./pages/ChallengePlay'));
+
 // Loading component
 const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -116,10 +121,28 @@ export default function App() {
             element={user ? <Leaderboard /> : <Navigate to="/" replace />}
           />
 
-          {/* RUTA 7: Privacy Policy (Public) */}
+          {/* RUTA 7: Daily Challenge (Protected) */}
+          <Route
+            path="/daily-challenge"
+            element={user ? <DailyChallengePlay /> : <Navigate to="/" replace />}
+          />
+
+          {/* RUTA 8: Daily Leaderboard (Protected) */}
+          <Route
+            path="/daily-leaderboard"
+            element={user ? <DailyLeaderboard /> : <Navigate to="/" replace />}
+          />
+
+          {/* RUTA 9: 1v1 Challenge Play (Public with auth check inside) */}
+          <Route
+            path="/challenge/:challengeId"
+            element={<ChallengePlay />}
+          />
+
+          {/* RUTA 10: Privacy Policy (Public) */}
           <Route path="/privacy" element={<Privacy />} />
 
-          {/* RUTA 8: Terms of Service (Public) */}
+          {/* RUTA 11: Terms of Service (Public) */}
           <Route path="/terms" element={<Terms />} />
 
           {/* LEGACY REDIRECT: /themes → /game-mode */}

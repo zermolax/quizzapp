@@ -14,6 +14,9 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useSubjects } from '../hooks/useSubjects';
 import { SubjectCard } from '../components/cards/SubjectCard';
+import { DailyChallengeCard } from '../components/challenges/DailyChallengeCard';
+import { DailyChallengeModal } from '../components/challenges/DailyChallengeModal';
+import { CreateChallengeModal } from '../components/challenges/CreateChallengeModal';
 
 export function LandingPage({ onPlayNow }) {
 
@@ -21,6 +24,7 @@ export function LandingPage({ onPlayNow }) {
   const { user, logout } = useAuth();
   const { subjects, loading: loadingSubjects } = useSubjects({ activeOnly: true });
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showCreateChallenge, setShowCreateChallenge] = useState(false);
 
   /**
    * Load theme from localStorage
@@ -116,6 +120,15 @@ export function LandingPage({ onPlayNow }) {
 
             {user ? (
               <>
+                {/* Challenge Button */}
+                <button
+                  onClick={() => setShowCreateChallenge(true)}
+                  className="hidden md:block bg-purple-600 text-white border-4 border-deep-brown px-4 py-2 font-heading font-bold uppercase text-sm hover:-translate-x-1 hover:-translate-y-1 hover:shadow-brutal hover:shadow-purple-600 transition-all duration-150"
+                  title="Challenge a Friend"
+                >
+                  ⚔️ 1v1
+                </button>
+
                 {/* Profile */}
                 <button
                   onClick={() => navigate('/profile')}
@@ -381,7 +394,73 @@ export function LandingPage({ onPlayNow }) {
           </div>
         </section>
 
+        {/* ===== SECTION 4: CHALLENGES ===== */}
+        {user && (
+          <section className="bg-gradient-to-br from-orange-100 to-purple-100 dark:from-purple-900 dark:to-indigo-900 border-6 border-deep-brown dark:border-sand p-8 md:p-12">
+            <div className="flex items-start gap-4 mb-6">
+              <div className="text-6xl">🏆</div>
+              <div>
+                <h2 className="text-4xl font-heading font-black uppercase text-deep-brown dark:text-off-white mb-2">
+                  Challenges
+                </h2>
+                <p className="text-lg font-body text-deep-brown/70 dark:text-off-white/70">
+                  Competiții zilnice și provocări cu prietenii
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Daily Challenge Card */}
+              <DailyChallengeCard />
+
+              {/* Create 1v1 Challenge Card */}
+              <div
+                onClick={() => setShowCreateChallenge(true)}
+                className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl p-6 text-white shadow-lg cursor-pointer transform hover:scale-105 transition-all duration-300 hover:shadow-2xl relative overflow-hidden"
+              >
+                {/* Animated background */}
+                <div className="absolute inset-0 bg-white/10 animate-pulse"></div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <span className="text-3xl">⚔️</span>
+                      <h3 className="text-xl font-bold">1v1 Challenge</h3>
+                    </div>
+                  </div>
+
+                  <p className="text-lg font-semibold mb-1">
+                    Challenge a Friend
+                  </p>
+                  <p className="text-white/90 text-sm mb-4">
+                    Create a custom quiz and share the link with up to 10 friends
+                  </p>
+
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-sm font-medium">
+                      <span>Create Challenge</span>
+                      <span className="animate-bounce">→</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
       </main>
+
+      {/* MODALS */}
+      {user && (
+        <>
+          <DailyChallengeModal />
+          <CreateChallengeModal
+            isOpen={showCreateChallenge}
+            onClose={() => setShowCreateChallenge(false)}
+          />
+        </>
+      )}
 
       {/* FOOTER */}
       <footer className="bg-deep-brown dark:bg-off-white py-12 border-t-6 border-neon-pink mt-20">
