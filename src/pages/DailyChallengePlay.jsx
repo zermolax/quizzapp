@@ -61,19 +61,15 @@ export function DailyChallengePlay() {
         return;
       }
 
-      // Shuffle answers for each question + NORMALIZE isCorrect to boolean
+      // Shuffle answers for each question
+      // NOTE: Using 'correct' property (same as QuizPlay.jsx)
       const questionsWithShuffledAnswers = dailyQuestions.map(q => {
-        // Normalize answers: ensure isCorrect is boolean
-        const normalizedAnswers = (q.answers || []).map(a => ({
-          ...a,
-          isCorrect: Boolean(a.isCorrect === true || a.isCorrect === 'true')
-        }));
-
-        console.log('✅ Normalized answers for:', q.question, normalizedAnswers);
+        console.log('✅ Question:', q.question);
+        console.log('📝 Answers:', q.answers);
 
         return {
           ...q,
-          answers: shuffleArray(normalizedAnswers)
+          answers: shuffleArray([...q.answers])
         };
       });
 
@@ -108,11 +104,14 @@ export function DailyChallengePlay() {
 
     const currentQuestion = questions[currentQuestionIndex];
     const selectedAnswerObj = currentQuestion.answers[selectedAnswer];
-    const isCorrect = Boolean(selectedAnswerObj.isCorrect);
+
+    // Use 'correct' property (same as QuizPlay.jsx)
+    const isCorrect = Boolean(selectedAnswerObj.correct);
 
     console.log('📝 Answer submitted:', {
       selectedAnswer,
       selectedAnswerObj,
+      correct: selectedAnswerObj.correct,
       isCorrect
     });
 
@@ -394,7 +393,8 @@ export function DailyChallengePlay() {
               let textColor = 'var(--deep-brown)';
 
               if (isAnswered) {
-                if (answer.isCorrect === true) {
+                // Use 'correct' property (same as QuizPlay.jsx)
+                if (answer.correct === true) {
                   bgColor = 'var(--neon-green)';
                   borderColor = 'var(--deep-brown)';
                   textColor = 'var(--deep-brown)';
@@ -444,10 +444,10 @@ export function DailyChallengePlay() {
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span>{answer.text}</span>
-                    {isAnswered && answer.isCorrect === true && (
+                    {isAnswered && answer.correct === true && (
                       <span style={{ fontSize: '1.5rem' }}>✓</span>
                     )}
-                    {isAnswered && answer.isCorrect !== true && selectedAnswer === index && (
+                    {isAnswered && answer.correct !== true && selectedAnswer === index && (
                       <span style={{ fontSize: '1.5rem' }}>✗</span>
                     )}
                   </div>
